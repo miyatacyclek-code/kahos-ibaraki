@@ -256,6 +256,9 @@ section.view.on{display:block;animation:fade .25s}
 .install button{margin-left:auto;flex:none;background:var(--ink);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
 .install .x{background:none;color:var(--muted);padding:4px;margin-left:0}
 .credit{position:absolute;left:10px;top:8px;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:999px}
+.gphoto{position:relative;margin:-18px -16px 14px;height:190px;overflow:hidden;border-radius:16px 16px 0 0;border-bottom:2px solid var(--ink)}
+.gphoto img{width:100%;height:100%;object-fit:cover}
+.gphoto .credit{top:auto;bottom:8px}
 /* sheet */
 .sheet-bg{position:fixed;inset:0;background:rgba(20,24,34,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
 .sheet-bg.on{display:flex}
@@ -473,6 +476,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     </div>
 
     <div class="gch" id="g-hitachinaka">
+      <div class="gphoto"><img src="photos/nakaminato.jpg" alt="Nakaminato Fish Market" loading="lazy"><span class="credit">📷 Kaho</span></div>
       <div class="lab">Area 2 · Hitachinaka</div><h3 class="big">Nakaminato Fish Market</h3><div class="tag2">Where locals go for the freshest seafood</div>
       <span class="acc">🚃 Train OK</span>
       <p>A busy fish market by the port, full of energy. Shop staff shout to sell fresh fish, crabs, oysters and shellfish — real Japan, not a tourist show.</p>
@@ -499,6 +503,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     </div>
 
     <div class="gch" id="g-daigo">
+      <div class="gphoto"><img src="photos/fukuroda.jpg" alt="Fukuroda Falls" loading="lazy"><span class="credit">📷 Kaho</span></div>
       <div class="lab">Area 4 · Daigo</div><h3 class="big">Fukuroda Falls</h3><div class="tag2">One of Japan's three most beautiful waterfalls</div>
       <span class="acc">🚃🚌 Train + bus/taxi</span>
       <p>120 m tall and 73 m wide, the water falls down the rock in four steps — so it's called “Yodo no Taki,” the Four-Times Falls. A famous old poet said you must visit in all four seasons to see its true beauty.</p>
@@ -515,6 +520,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     </div>
 
     <div class="gch" id="g-tsukuba">
+      <div class="gphoto"><img src="photos/tsukubasan.jpg" alt="Tsukubasan Shrine" loading="lazy"><span class="credit">📷 Kaho</span></div>
       <div class="lab">Area 5 · Tsukuba</div><h3 class="big">Mt. Tsukuba Hike + Onsen</h3><div class="tag2">Climb in the morning, soak in the afternoon</div>
       <span class="acc">🚃🚌 Train + bus/taxi</span>
       <p>Mt. Tsukuba (877 m) is Ibaraki's famous twin-peaked mountain — Nantai-san and Nyotai-san. It's a sacred mountain, and on a clear day you can see the whole Kanto plain, even Tokyo far away.</p>
@@ -619,7 +625,7 @@ const SPOTS=[
  {id:"seaside",photo:"photos/seaside-nemophila.jpg",name:"Hitachi Seaside Park",area:"Hitachinaka",lat:36.40,lon:140.59,months:[4,5,10],season:"Spring & Autumn",theme:["#3b6fd4","#a9c4f5"],shape:"hills",love:5,crowd:5,
   short:"Hills turn sky-blue with nemophila in spring, and fluffy red kochia in autumn.",kaho:"Yes, it's really this blue. No filter, I promise!",
   best:"Nemophila: late April–mid May · Kochia: October",tip:"Go right at opening time. Golden Week (early May) is SO crowded.",access:"JR Joban Line to Katsuta, then bus"},
- {id:"fukuroda",name:"Fukuroda Falls",area:"Daigo",lat:36.765,lon:140.408,months:[1,2,10,11],season:"Autumn & Winter",theme:["#2f7a8a","#b7e0e4"],shape:"falls",love:5,crowd:3,
+ {id:"fukuroda",photo:"photos/fukuroda.jpg",name:"Fukuroda Falls",area:"Daigo",lat:36.765,lon:140.408,months:[1,2,10,11],season:"Autumn & Winter",theme:["#2f7a8a","#b7e0e4"],shape:"falls",love:5,crowd:3,
   short:"A huge four-tier waterfall. Red leaves in autumn — and it can freeze in deep winter.",kaho:"Legend says you must see it in all 4 seasons. I'm still working on it 😅",
   best:"Autumn leaves: mid–late November · Frozen: cold years, Jan–Feb",tip:"Eat the apple pie and salt-grilled ayu fish on the way.",access:"JR Suigun Line to Fukuroda, then bus"},
  {id:"kairakuen",name:"Kairakuen Garden",area:"Mito",lat:36.373,lon:140.453,months:[2,3],season:"Late winter",theme:["#c84a7a","#f6cfe0"],shape:"blossom",love:4,crowd:3,
@@ -628,7 +634,7 @@ const SPOTS=[
  {id:"oarai",name:"Oarai Isosaki Shrine",area:"Oarai",lat:36.316,lon:140.597,months:[1,12],season:"All year",allYear:true,theme:["#d4532f","#ffd8b8"],shape:"torii",love:5,crowd:2,
   short:"A torii gate standing on rocks in the Pacific. Magic at sunrise.",kaho:"Woke up at 5am for this. Worth it. Then slept in the car 😴",
   best:"Sunrise, any season · New Year's sunrise is special",tip:"Go to Nakaminato fish market for lunch after.",access:"Oarai Kashima Line to Oarai, then bus"},
- {id:"tsukuba",name:"Mount Tsukuba",area:"Tsukuba",lat:36.225,lon:140.107,months:[4,5,10,11],season:"Spring & Autumn",theme:["#3c7d5a","#cbe8d4"],shape:"mountain",love:4,crowd:3,
+ {id:"tsukuba",photo:"photos/tsukubasan.jpg",name:"Mount Tsukuba",area:"Tsukuba",lat:36.225,lon:140.107,months:[4,5,10,11],season:"Spring & Autumn",theme:["#3c7d5a","#cbe8d4"],shape:"mountain",love:4,crowd:3,
   short:"Twin-peaked sacred mountain. Easy hike or cable car, huge views over the Kanto plain.",kaho:"Hike up, then go to an onsen. Best day ever! ♨️",
   best:"Autumn leaves in November · clear winter days for views",tip:"Hike up, cable car down. Your knees will thank you.",access:"Tsukuba Express from Akihabara, then shuttle bus"},
  {id:"ryujin",name:"Ryujin Suspension Bridge",area:"Hitachiota",lat:36.67,lon:140.53,months:[4,5,11],season:"Spring & Autumn",theme:["#b5452f","#f3cdb8"],shape:"bridge",love:4,crowd:2,
@@ -834,7 +840,7 @@ document.addEventListener("click",e=>{
 
 /* blog */
 const POSTS=[
- {id:"kochia",cat:"Travel",emoji:"🔴",bg:"#f8d3c8",date:"Nov 2026",min:2,feat:true,
+ {id:"kochia",photo:"photos/kochia.jpg",cat:"Travel",emoji:"🔴",bg:"#f8d3c8",date:"Nov 2026",min:2,feat:true,
   title:"I went to see the kochia!",
   sum:"A whole hill of fluffy red balls. Hitachi Seaside Park in autumn is something else.",
   body:[["p","I finally went to see the kochia at Hitachi Seaside Park! I went early in the morning — and people were already waiting in line! Kochia is that popular. In spring this park is famous for the blue nemophila flowers. But in autumn, the hill changes completely."],
@@ -912,13 +918,13 @@ let liked=load("kahoLikes",[]);
 function renderBlog(){
   document.getElementById("bchips").innerHTML=BCHIPS.map(c=>`<button class="chip bchip ${bfilter===c?"on":""}" data-bk="${c}">${c}</button>`).join("");
   const list=POSTS.filter(p=>bfilter==="All"||p.cat===bfilter);
-  document.getElementById("postList").innerHTML=list.map(p=>`<div class="post ${p.feat&&bfilter==="All"?"feat":""}" data-post="${p.id}"><div class="ph" style="background:${p.bg}"><span class="cat">${p.cat}</span><span>${p.emoji}</span></div><div class="pb"><h3>${p.title}</h3><p>${p.sum}</p><div class="pm"><span>${p.date} · ${p.min} min read</span><span>${liked.includes(p.id)?"♥ Liked":""}</span></div></div></div>`).join("");
+  document.getElementById("postList").innerHTML=list.map(p=>`<div class="post ${p.feat&&bfilter==="All"?"feat":""}" data-post="${p.id}"><div class="ph" style="background:${p.bg};${p.photo?`background:url(${p.photo}) center/cover;height:150px`:""}"><span class="cat">${p.cat}</span><span>${p.photo?"":p.emoji}</span></div><div class="pb"><h3>${p.title}</h3><p>${p.sum}</p><div class="pm"><span>${p.date} · ${p.min} min read</span><span>${liked.includes(p.id)?"♥ Liked":""}</span></div></div></div>`).join("");
 }
 function openPost(id){
   const p=POSTS.find(x=>x.id===id),lk=liked.includes(id);
   const html=p.body.map(([t,v])=>t==="p"?`<p>${v}</p>`:t==="h"?`<h4>${v}</h4>`:t==="pull"?`<div class="pull">${v}</div>`:`<ul>${v.map(x=>`<li>${x}</li>`).join("")}</ul>`).join("");
   document.getElementById("sheet").innerHTML=`
-   <div class="rhead" style="background:${p.bg}">${p.emoji}<button class="close" data-close>✕</button></div>
+   <div class="rhead" style="background:${p.bg};${p.photo?`background:url(${p.photo}) center/cover;height:220px`:""}">${p.photo?"":p.emoji}<button class="close" data-close>✕</button></div>
    <div class="inner"><div class="qnum">${p.cat} · ${p.date} · ${p.min} min read</div><h2 style="margin:6px 0 12px;line-height:1.15">${p.title}</h2>
    <div class="kaho-says" style="margin:0 0 16px"><div class="mini" style="width:36px;height:36px">${AVATAR}</div><div style="font-size:13px;color:var(--muted);align-self:center">by <b style="color:var(--ink)">Kaho</b> · Ibaraki, Japan</div></div>
    <div class="article">${html}</div>
