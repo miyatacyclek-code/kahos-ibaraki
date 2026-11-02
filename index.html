@@ -291,6 +291,19 @@ section.view.on{display:block;animation:fade .25s}
 .evc .where{font-size:12.5px;color:var(--muted)}
 .evc p{font-size:14px;line-height:1.5;margin:8px 0 0;color:#333a48}
 .evc .kp{display:inline-block;font-size:11px;font-weight:800;background:var(--gold);border:1.5px solid var(--ink);border-radius:8px;padding:1px 7px;margin-left:4px;vertical-align:2px}
+
+/* about */
+.about{background:var(--card);border:2px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:4px 4px 0 var(--ink);margin:18px 0 6px}
+.about .ph{position:relative;height:300px;background:#eee;border-bottom:2px solid var(--ink)}
+.about .ph img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.about .ph .nm{position:absolute;left:12px;bottom:12px;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:5px 12px;font-family:"Fraunces";font-weight:800;font-size:18px;box-shadow:2px 2px 0 var(--ink)}
+.about .in{padding:14px 16px 16px}
+.about h3{font-size:18px;margin:14px 0 4px}
+.about h3:first-child{margin-top:0}
+.about p{font-size:14.5px;line-height:1.6;margin:0 0 6px;color:#272d3a}
+.about .dream{background:var(--gold-soft);border:2px dashed var(--gold);border-radius:14px;padding:10px 12px;margin-top:10px}
+.about .dream .hand{font-size:22px;color:var(--red);display:block;line-height:1.15;margin-top:2px}
+.gimg{display:block;width:100%;max-height:260px;object-fit:cover;border:2px solid var(--ink);border-radius:12px;margin:2px 0 10px}
 /* sheet */
 .sheet-bg{position:fixed;inset:0;background:rgba(20,24,34,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
 .sheet-bg.on{display:flex}
@@ -331,7 +344,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     </div>
     <div class="hero-btns">
       <a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ My YouTube</a>
-      <a class="pill gold" href="#map">Stamp rally</a>
+      <a class="pill gold" href="#about" onclick="event.preventDefault();document.getElementById('about').scrollIntoView({behavior:'smooth'})">About me</a>
     </div>
   </header>
 
@@ -339,6 +352,19 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
 
   <!-- HOME -->
   <section class="view" id="v-home">
+
+    <div class="about" id="about">
+      <div class="ph"><img src="photos/kaho.jpg" alt="Kaho at Hitachi Seaside Park" loading="lazy"><span class="nm">Hi, I'm Kaho! 👋</span></div>
+      <div class="in">
+        <h3>About me</h3>
+        <p>I live in Ibaraki, Japan. On YouTube and TikTok I share real life in rural Japan — my work, overtime, food, and the nature around me.</p>
+        <h3>Why I share Ibaraki</h3>
+        <p>Ibaraki is often called Japan’s “least attractive” prefecture. Honestly, that makes me a little sad. Because here we have hills of flowers, a giant waterfall, the ocean and mountains — only about one hour from Tokyo. Most people just don’t know it yet.</p>
+        <p>So I want to change Ibaraki’s image, and show people all over the world how beautiful it is.</p>
+        <div class="dream"><b>My dream</b><span class="hand">To grow little by little with my followers — and one day, show you around Ibaraki myself!</span></div>
+        <div class="hero-btns" style="margin-top:14px"><a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ YouTube</a><a class="pill" href="https://www.tiktok.com/@kahofromjapanjp" target="_blank" rel="noopener">TikTok</a><a class="pill" href="https://www.instagram.com/kahorealjapan" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
+    </div>
     <div class="roulette">
       <div class="q hand">Can't decide? Let Kaho choose!</div>
       <div class="res" id="rRes">🎲</div>
@@ -500,6 +526,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
       <p>Crispy, juicy tonkatsu (pork cutlet) — a classic Japanese comfort meal that locals eat after a long day.</p>
       <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E3%81%A8%E3%82%93Q%20%E6%B0%B4%E6%88%B8" target="_blank" rel="noopener">📍 Google Maps</a>
       <h4>🍣 Kaiten Sushi Marukuni</h4>
+      <img class="gimg" src="photos/marukuni.jpg" alt="Conveyor-belt sushi in Mito" loading="lazy" style="max-height:320px;object-position:center 60%">
       <p>Mito's local conveyor-belt sushi. Fresh fish from the Ibaraki coast at friendly prices — this is where locals go for “everyday sushi” with family. Grab plates as they pass by, or order from the chefs.</p>
       <div class="info">Several shops around Mito (e.g. Sumiyoshi, Aoyagi). Easiest by car — the Aoyagi shop has parking.</div>
       <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%9E%E8%BB%A2%E3%81%99%E3%81%97%20%E3%81%BE%E3%82%8B%E3%81%8F%E3%81%AB%20%E6%B0%B4%E6%88%B8" target="_blank" rel="noopener">📍 Google Maps</a>
@@ -677,7 +704,7 @@ const SPOTS=[
  {id:"kairakuen",name:"Kairakuen Garden",area:"Mito",lat:36.373,lon:140.453,months:[2,3],season:"Late winter",theme:["#c84a7a","#f6cfe0"],shape:"blossom",love:4,crowd:3,
   short:"One of Japan's three great gardens, with thousands of plum trees.",kaho:"Plum blooms before sakura. Beat the crowds, be smart!",
   best:"Plum blossom: mid February–March",tip:"Walk the bamboo forest path behind the garden. So quiet.",access:"JR Mito Station, then bus"},
- {id:"oarai",name:"Oarai Isosaki Shrine",area:"Oarai",lat:36.316,lon:140.597,months:[1,12],season:"All year",allYear:true,theme:["#d4532f","#ffd8b8"],shape:"torii",love:5,crowd:2,
+ {id:"oarai",photo:"photos/oarai.jpg",name:"Oarai Isosaki Shrine",area:"Oarai",lat:36.316,lon:140.597,months:[1,12],season:"All year",allYear:true,theme:["#d4532f","#ffd8b8"],shape:"torii",love:5,crowd:2,
   short:"A torii gate standing on rocks in the Pacific. Magic at sunrise.",kaho:"Woke up at 5am for this. Worth it. Then slept in the car 😴",
   best:"Sunrise, any season · New Year's sunrise is special",tip:"Go to Nakaminato fish market for lunch after.",access:"Oarai Kashima Line to Oarai, then bus"},
  {id:"tsukuba",photo:"photos/tsukubasan.jpg",name:"Mount Tsukuba",area:"Tsukuba",lat:36.225,lon:140.107,months:[4,5,10,11],season:"Spring & Autumn",theme:["#3c7d5a","#cbe8d4"],shape:"mountain",love:4,crowd:3,
@@ -686,10 +713,10 @@ const SPOTS=[
  {id:"ryujin",name:"Ryujin Suspension Bridge",area:"Hitachiota",lat:36.67,lon:140.53,months:[4,5,11],season:"Spring & Autumn",theme:["#b5452f","#f3cdb8"],shape:"bridge",love:4,crowd:2,
   short:"A long walking bridge over a dam lake, surrounded by mountains.",kaho:"I looked down one time. Never again 🙈",
   best:"Autumn leaves: November · carp streamers: spring",tip:"There's bungee jumping here — if you're brave!",access:"Best by car"},
- {id:"ushiku",name:"Ushiku Daibutsu",area:"Ushiku",lat:35.982,lon:140.218,months:[],season:"All year",allYear:true,theme:["#6b6f8a","#dad9ea"],shape:"buddha",love:4,crowd:2,
+ {id:"ushiku",photo:"photos/ushiku.jpg",name:"Ushiku Daibutsu",area:"Ushiku",lat:35.982,lon:140.218,months:[],season:"All year",allYear:true,theme:["#6b6f8a","#dad9ea"],shape:"buddha",love:4,crowd:2,
   short:"A giant bronze Buddha rising over the fields — one of the tallest statues in the world.",kaho:"Taller than the Statue of Liberty. Ibaraki doesn't do small.",
   best:"Any season · flowers around the grounds in spring–summer",tip:"You can go up inside the statue!",access:"JR Joban Line to Ushiku or Hitachino-Ushiku, then bus"},
- {id:"kasama",name:"Kasama Inari & Pottery Town",area:"Kasama",lat:36.387,lon:140.26,months:[10,11],season:"Autumn",theme:["#c47a1c","#f6dfb0"],shape:"pottery",love:4,crowd:2,
+ {id:"kasama",photo:"photos/kasama.jpg",name:"Kasama Inari & Pottery Town",area:"Kasama",lat:36.387,lon:140.26,months:[10,11],season:"Autumn",theme:["#c47a1c","#f6dfb0"],shape:"pottery",love:4,crowd:2,
   short:"Big Inari shrine plus a town full of Kasama-yaki pottery studios.",kaho:"I went to buy ONE cup. I came home with five.",
   best:"Chrysanthemum festival: mid-October–November",tip:"Some studios let you try making pottery. Book ahead.",access:"JR Mito Line to Kasama"},
  {id:"kashima",name:"Kashima Jingu",area:"Kashima",lat:35.969,lon:140.631,months:[],season:"All year",allYear:true,theme:["#2f5d43","#c6dfcc"],shape:"forest",love:5,crowd:2,
