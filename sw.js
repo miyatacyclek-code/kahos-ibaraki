@@ -1,6 +1,6 @@
 // Offline support: keeps the app working without internet.
 // When you update the app, change the version number below.
-const CACHE = "kaho-ibaraki-v3";
+const CACHE = "kaho-ibaraki-v4";
 const FILES = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
