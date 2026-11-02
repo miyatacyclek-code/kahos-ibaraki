@@ -259,6 +259,38 @@ section.view.on{display:block;animation:fade .25s}
 .gphoto{position:relative;margin:-18px -16px 14px;height:190px;overflow:hidden;border-radius:16px 16px 0 0;border-bottom:2px solid var(--ink)}
 .gphoto img{width:100%;height:100%;object-fit:cover}
 .gphoto .credit{top:auto;bottom:8px}
+
+/* events */
+.ev-next{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 14px;scrollbar-width:none}
+.ev-n{flex:none;width:200px;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:12px;box-shadow:3px 3px 0 var(--ink);cursor:pointer}
+.ev-n .cd{display:inline-block;font-size:11px;font-weight:800;background:var(--red);color:#fff;border-radius:8px;padding:2px 8px;border:1.5px solid var(--ink)}
+.ev-n .cd.now{background:var(--green)}
+.ev-n b{display:block;font-family:"Fraunces";font-size:16px;margin-top:6px;line-height:1.2}
+.ev-n span.d{font-size:12px;color:var(--muted)}
+.months{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.mo{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:7px 4px 6px;text-align:center;cursor:pointer;font-size:12px;font-weight:700}
+.mo .ic{display:block;font-size:15px;min-height:20px;letter-spacing:-2px}
+.mo.cur{background:var(--gold-soft)}
+.mo.on{background:var(--ink);color:#fff}
+.cal{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:12px;box-shadow:4px 4px 0 var(--ink);margin-bottom:14px}
+.cal h3{font-size:20px;display:flex;justify-content:space-between;align-items:baseline}
+.cal h3 small{font-family:"DM Sans";font-size:12px;color:var(--muted);font-weight:500}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px;text-align:center}
+.grid7 .h{font-size:11px;font-weight:700;color:var(--muted);padding:2px 0}
+.grid7 .d{position:relative;font-size:13px;padding:6px 0 10px;border-radius:8px}
+.grid7 .d.today{outline:2px solid var(--red);font-weight:800}
+.grid7 .d.ev{background:var(--gold-soft)}
+.grid7 .d.big{background:var(--red);color:#fff;font-weight:800}
+.grid7 .d i{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-style:normal;font-size:9px}
+.cal .nodates{font-size:12px;color:var(--muted);margin:8px 2px 0;line-height:1.45}
+.evc{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:13px 14px;margin-bottom:12px;box-shadow:3px 3px 0 var(--ink)}
+.evc .top{display:flex;gap:10px;align-items:flex-start}
+.evc .e{font-size:28px;line-height:1}
+.evc h4{font-family:"Fraunces";font-size:17px;margin:0;line-height:1.2}
+.evc .when{font-size:12.5px;font-weight:700;color:var(--red);margin-top:3px}
+.evc .where{font-size:12.5px;color:var(--muted)}
+.evc p{font-size:14px;line-height:1.5;margin:8px 0 0;color:#333a48}
+.evc .kp{display:inline-block;font-size:11px;font-weight:800;background:var(--gold);border:1.5px solid var(--ink);border-radius:8px;padding:1px 7px;margin-left:4px;vertical-align:2px}
 /* sheet */
 .sheet-bg{position:fixed;inset:0;background:rgba(20,24,34,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
 .sheet-bg.on{display:flex}
@@ -273,7 +305,7 @@ section.view.on{display:block;animation:fade .25s}
 
 /* nav */
 nav.tabs{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--ink);z-index:10}
-nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
 nav.tabs a{text-decoration:none;color:var(--muted);font-size:11px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 12px}
 nav.tabs a .e{font-size:21px;filter:grayscale(1);opacity:.6;transition:.15s}
 nav.tabs a.on{color:var(--ink);font-weight:700}
@@ -315,7 +347,8 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     </div>
 
 
-    <a class="guide-banner" href="#guide" style="margin-top:18px"><div class="mini-cover"><i></i><span>Ibaraki<br>by Kaho</span></div><div><b>My Ibaraki guidebook 📖 FREE</b><span class="s">The places I really go. Read it now →</span></div></a>
+    <a class="tours-banner" href="#events" style="margin-top:18px;margin-bottom:12px"><span class="e">📅</span><div><b>What's on this month?</b><span>Ibaraki event calendar →</span></div></a>
+    <a class="guide-banner" href="#guide"><div class="mini-cover"><i></i><span>Ibaraki<br>by Kaho</span></div><div><b>My Ibaraki guidebook 📖 FREE</b><span class="s">The places I really go. Read it now →</span></div></a>
     <div class="sec"><h2>Getting here from Tokyo</h2><span class="hand">easier than you think!</span></div>
     <div class="kaho-says" style="margin:0 0 12px"><div class="mini" id="av4" style="width:40px;height:40px"></div><div class="txt hand" style="font-size:20px">Everyone thinks Ibaraki is far. It's not! Pick your style 👇</div></div>
     <div class="route"><div class="ic" style="background:var(--blue-soft)">🚄</div><div>
@@ -384,6 +417,18 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     <div class="sec"><h2>Kaho's blog</h2><span class="hand">real life, no filter</span></div>
     <div class="chips" id="bchips"></div>
     <div id="postList"></div>
+  </section>
+
+
+  <!-- EVENTS -->
+  <section class="view" id="v-events">
+    <div class="sec"><h2>Event calendar</h2><span class="hand">plan your trip!</span></div>
+    <div class="qnum" style="margin:0 2px 8px">Coming up next</div>
+    <div class="ev-next" id="evNext"></div>
+    <div class="months" id="evMonths"></div>
+    <div class="cal" id="evCal"></div>
+    <div id="evList"></div>
+    <p class="note">Dates are from official announcements for 2026. Future dates change every year — always check the official site before you go.</p>
   </section>
 
   <!-- TOURS -->
@@ -536,7 +581,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     </div>
 
     <div class="gch" id="g-festivals">
-      <div class="lab">Festivals & Fireworks</div><h3 class="big">Ibaraki's Big Days</h3><div class="tag2">Pottery fairs, summer festival and fireworks — Kaho's picks</div>
+      <div class="lab">Festivals & Fireworks</div><h3 class="big">Ibaraki's Big Days</h3><a class="gmap" href="#events" style="margin-top:6px">📅 See the event calendar</a><div class="tag2">Pottery fairs, summer festival and fireworks — Kaho's picks</div>
 
       <h4>🔥 Kasama Himatsuri (Pottery Fire Festival)</h4>
       <span class="acc">🚃🚌 Train + bus</span>
@@ -609,6 +654,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
   <a href="#home" data-v="home"><span class="e">🏠</span>Home</a>
   <a href="#map" data-v="map"><span class="e">🗾</span>Stamps</a>
   <a href="#cook" data-v="cook"><span class="e">🍙</span>Cook</a>
+  <a href="#events" data-v="events"><span class="e">📅</span>Events</a>
   <a href="#blog" data-v="blog"><span class="e">📝</span>Blog</a>
   <a href="#guide" data-v="guide"><span class="e">📖</span>Guide</a>
 </div></nav>
@@ -937,15 +983,69 @@ document.addEventListener("click",e=>{
   const lb=e.target.closest("[data-like]");if(lb){const id=lb.dataset.like;liked=liked.includes(id)?liked.filter(x=>x!==id):[...liked,id];save("kahoLikes",liked);if(liked.includes(id))toast("Thank you! 🙏");openPost(id);renderBlog();return}
 },true);
 
+
+/* events calendar */
+const EVENTS=[
+ {id:"ume",e:"🌸",name:"Mito Ume (Plum) Festival",m:[2,3],when:"Every year from about Feb 11 to mid/late March (2026: Feb 11 – Mar 22)",where:"Kairakuen & Kodokan, Mito",d:"Japan’s famous plum festival since 1896. About 3,000 plum trees of 100 kinds bloom early to late, plus night light-ups on weekends.",kp:true,r:[["2026-02-11","2026-03-22"]]},
+ {id:"hatsugama",e:"🏺",name:"Kasama New Year Pottery Market",m:[1],when:"Early January (2026: Jan 2 – 5)",where:"Kasama Craft Hills",d:"Start the year with a new cup! New Year pottery market of Kasama-yaki.",r:[["2026-01-02","2026-01-05"]]},
+ {id:"frozen",e:"🧊",name:"Frozen Fukuroda Falls",m:[1,2],when:"Cold years, January – February",where:"Fukuroda Falls, Daigo",d:"In very cold winters the giant waterfall freezes. Not every year — check the news before you go!"},
+ {id:"winterfood",e:"🍲",name:"Ankō nabe & hoshiimo season",m:[12,1,2],when:"Winter (December – February)",where:"Ibaraki coast & countryside",d:"Monkfish hotpot on the coast and fresh dried sweet potato everywhere. Best winter food in Ibaraki."},
+ {id:"tsutsuji",e:"🌺",name:"Kasama Azalea Festival",m:[4,5],when:"Mid April – early May (2026: Apr 11 – May 6)",where:"Kasama Tsutsuji Park",d:"About 8,500 azaleas cover a small mountain. Easy to combine with the pottery fire festival.",r:[["2026-04-11","2026-05-06"]]},
+ {id:"nemophila",e:"💙",name:"Nemophila at Hitachi Seaside Park",m:[4,5],when:"Late April – mid May",where:"Hitachi Seaside Park, Hitachinaka",d:"The hill turns sky-blue. Go at opening time — Golden Week is super crowded.",kp:true},
+ {id:"himatsuri",e:"🔥",name:"Kasama Himatsuri (Pottery Fire Festival)",m:[4,5],when:"Every year April 29 – May 5",where:"Kasama Art Forest Park",d:"200+ potters sell their work directly in handmade shops. Small entry fee.",kp:true,r:[["2026-04-29","2026-05-05"]]},
+ {id:"mitohanabi",e:"🎆",name:"Mito Kairakuen Fireworks",m:[7],when:"Late July (2026: Jul 25)",where:"Lake Senba, Mito",d:"Fireworks by Nomura Hanabi — Mito’s own champion fireworks makers. Starts the Mito Komon Matsuri.",kp:true,r:[["2026-07-25","2026-07-25"]],big:true},
+ {id:"komon",e:"🏮",name:"Mito Komon Matsuri",m:[8],when:"Early August, Sat & Sun (2026: Aug 1 – 2)",where:"Mito Station North Exit area (free)",d:"Drum floats, paper-lantern parade, dance carnival and one of Japan’s biggest mikoshi.",kp:true,r:[["2026-08-01","2026-08-02"]],big:true},
+ {id:"oarai",e:"🎇",name:"Oarai Sea Fireworks",m:[9],when:"Late September (2026: Sep 26)",where:"Oarai Sun Beach",d:"About 20,000 fireworks over the sea, by Nomura Hanabi. All seats are paid tickets.",r:[["2026-09-26","2026-09-26"]],big:true},
+ {id:"kochia",e:"🔴",name:"Red kochia hill",m:[10],when:"October",where:"Hitachi Seaside Park, Hitachinaka",d:"Fluffy kochia turn bright red. Go early — even in the morning there’s a line!",kp:true},
+ {id:"kiku",e:"🌼",name:"Kasama Chrysanthemum Festival",m:[10,11],when:"Late October – late November (2026: Oct 24 – Nov 23)",where:"Kasama Inari Shrine",d:"Called Japan’s oldest chrysanthemum festival. Thousands of pots of chrysanthemums, free entry. Try Kasama inari sushi nearby!",r:[["2026-10-24","2026-11-23"]]},
+ {id:"tsuchiura",e:"🎇",name:"Tsuchiura All-Japan Fireworks Competition",m:[11],when:"Early November (2026: Sat Nov 7, rain date Nov 14)",where:"Sakuragawa riverside, Tsuchiura",d:"Fireworks makers from all over Japan compete — about 20,000 fireworks. Very crowded, dress warm!",kp:true,r:[["2026-11-07","2026-11-07"]],big:true},
+ {id:"momiji",e:"🍁",name:"Autumn leaves",m:[11],when:"Mid – late November",where:"Fukuroda Falls, Hananuki Gorge, Mt. Tsukuba, Ryujin Bridge",d:"The best time for red leaves in the mountains. Pair it with a hike and an onsen.",kp:true},
+ {id:"shinsoba",e:"🥢",name:"New soba season",m:[10,11,12],when:"Autumn – winter",where:"Soba shops all over Ibaraki",d:"Fresh “shin-soba” made with Hitachi Aki Soba. Try it with kenchin soup in the cold months."},
+ {id:"lucky",e:"🎵",name:"LuckyFes (music festival)",m:[8],when:"August (2026: Aug 8 – 11)",where:"Hitachi Seaside Park",d:"A big summer music festival in the park. Check the official site for lineup and tickets.",r:[["2026-08-08","2026-08-11"]]},
+];
+const MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+let evMonth=TODAY.getMonth()+1;
+const dt=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
+function nextOcc(ev){ // returns {start,end} of next known dated range, or null
+  if(!ev.r)return null;for(const[a,b]of ev.r){const e=dt(b);if(e>=TODAY)return{start:dt(a),end:e}}return null}
+function yearFor(m){const cm=TODAY.getMonth()+1;return m>=cm?TODAY.getFullYear():TODAY.getFullYear()+1}
+function renderEvents(){
+  // coming up
+  const up=EVENTS.map(ev=>({ev,o:nextOcc(ev)})).filter(x=>x.o).sort((a,b)=>a.o.start-b.o.start);
+  let nxt=up.slice(0,3).map(({ev,o})=>{const days=Math.round((o.start-TODAY)/864e5);const lab=days<=0?"ON NOW":days===1?"TOMORROW":`IN ${days} DAYS`;return`<div class="ev-n" data-evm="${o.start.getMonth()+1}"><span class="cd ${days<=0?"now":""}">${lab}</span><b>${ev.e} ${ev.name}</b><span class="d">${ev.when}</span></div>`});
+  const seasonal=EVENTS.filter(ev=>!ev.r&&ev.m.includes(TODAY.getMonth()+1)).slice(0,2).map(ev=>`<div class="ev-n" data-evm="${TODAY.getMonth()+1}"><span class="cd now">IN SEASON</span><b>${ev.e} ${ev.name}</b><span class="d">${ev.when}</span></div>`);
+  document.getElementById("evNext").innerHTML=nxt.concat(seasonal).join("");
+  // month tiles (start from current month)
+  const cm=TODAY.getMonth()+1;let tiles="";
+  for(let i=0;i<12;i++){const m=((cm-1+i)%12)+1;const ics=EVENTS.filter(e=>e.m.includes(m)).map(e=>e.e).slice(0,3).join("");
+    tiles+=`<div class="mo ${m===evMonth?"on":""} ${m===cm?"cur":""}" data-evm="${m}"><span class="ic">${ics||"·"}</span>${MN[m-1]}${i===0?" ★":""}</div>`}
+  document.getElementById("evMonths").innerHTML=tiles;
+  // calendar grid
+  const y=yearFor(evMonth),first=new Date(y,evMonth-1,1),days=new Date(y,evMonth,0).getDate();
+  const evs=EVENTS.filter(e=>e.m.includes(evMonth));
+  const mark={};let anyDated=false;
+  evs.forEach(ev=>{(ev.r||[]).forEach(([a,b])=>{const s=dt(a),e=dt(b);if(s.getFullYear()!==y&&e.getFullYear()!==y)return;
+    for(let d=new Date(s);d<=e;d.setDate(d.getDate()+1)){if(d.getFullYear()===y&&d.getMonth()===evMonth-1){anyDated=true;const k=d.getDate();mark[k]=mark[k]||{big:false,e:""};if(ev.big)mark[k].big=true;if(!mark[k].e||ev.big)mark[k].e=ev.e}}})});
+  let g=["S","M","T","W","T","F","S"].map(h=>`<div class="h">${h}</div>`).join("");
+  for(let i=0;i<first.getDay();i++)g+="<div></div>";
+  for(let d=1;d<=days;d++){const isT=y===TODAY.getFullYear()&&evMonth===TODAY.getMonth()+1&&d===TODAY.getDate();const mk=mark[d];
+    g+=`<div class="d ${isT?"today":""} ${mk?(mk.big?"big":"ev"):""}">${d}${mk?`<i>${mk.e}</i>`:""}</div>`}
+  document.getElementById("evCal").innerHTML=`<h3>${MN[evMonth-1]} ${y}<small>${evs.length} event${evs.length===1?"":"s"}</small></h3><div class="grid7">${g}</div>${anyDated?"":`<div class="nodates">Exact dates for ${y} aren’t announced yet — see the usual timing below.</div>`}`;
+  // list
+  document.getElementById("evList").innerHTML=evs.length?evs.map(ev=>`<div class="evc"><div class="top"><span class="e">${ev.e}</span><div><h4>${ev.name}${ev.kp?'<span class="kp">Kaho’s pick</span>':""}</h4><div class="when">📅 ${ev.when}</div><div class="where">📍 ${ev.where}</div></div></div><p>${ev.d}</p></div>`).join(""):`<div class="evc"><p>A quiet month — perfect for shrines, onsen and local food with no crowds!</p></div>`;
+}
+document.addEventListener("click",e=>{const m=e.target.closest("[data-evm]");if(m){evMonth=+m.dataset.evm;renderEvents();document.getElementById("evCal").scrollIntoView({behavior:"smooth",block:"start"});}},true);
+
 /* routing */
-const VIEWS=["home","map","cook","blog","tours","guide"];
-const BUBBLES={home:"Hi, I'm Kaho! Welcome to my Ibaraki",map:"Collect all 10 stamps. You can do it!",play:"Let's see how much you know 😏",cook:"Let's cook! Itadakimasu 🍚",blog:"Grab a tea. Let's talk 🍵",tours:"Tours are coming soon. Wait for me!",guide:"My guidebook — free for you! 📖"};
+const VIEWS=["home","map","cook","events","blog","tours","guide"];
+const BUBBLES={home:"Hi, I'm Kaho! Welcome to my Ibaraki",map:"Collect all 10 stamps. You can do it!",play:"Let's see how much you know 😏",cook:"Let's cook! Itadakimasu 🍚",blog:"Grab a tea. Let's talk 🍵",events:"What's on in Ibaraki? 📅",tours:"Tours are coming soon. Wait for me!",guide:"My guidebook — free for you! 📖"};
 function route(){
   let h=location.hash.slice(1);if(!VIEWS.includes(h))h="home";
   VIEWS.forEach(v=>document.getElementById("v-"+v).classList.toggle("on",v===h));
   document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("on",a.dataset.v===h));
   document.getElementById("heroBubble").textContent=BUBBLES[h];
-  if(h==="map")renderMap();if(h==="home")renderHome();if(h==="cook")renderCook();if(h==="blog")renderBlog();
+  if(h==="map")renderMap();if(h==="home")renderHome();if(h==="cook")renderCook();if(h==="blog")renderBlog();if(h==="events")renderEvents();
   if(h!=="home")document.getElementById("v-"+h).scrollIntoView({behavior:"smooth"});else window.scrollTo(0,0);
 }
 document.addEventListener("click",e=>{
