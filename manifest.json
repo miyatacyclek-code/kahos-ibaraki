@@ -1,0 +1,16 @@
+{
+  "name": "Kaho's Ibaraki Guide",
+  "short_name": "Kaho's Ibaraki",
+  "description": "A local's guide to Ibaraki, Japan — 1 hour from Tokyo. Spots, food, recipes and stories by Kaho.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f2e7",
+  "theme_color": "#1f3b35",
+  "lang": "en",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

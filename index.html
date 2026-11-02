@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1f3b35">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kaho's Ibaraki">
+<meta name="description" content="A local's guide to Ibaraki, Japan — 1 hour from Tokyo. Spots, food, recipes and stories by Kaho.">
+<title>Kaho's Ibaraki Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1d2433; --muted:#5f6878; --bg:#f7f2e7; --card:#fffdf7; --line:#e7dcc6;
+  --blue:#3b6fd4; --blue-soft:#dfe8fb; --red:#d4532f; --red-soft:#fbe0d6;
+  --green:#3c7d5a; --green-soft:#dcefe3; --gold:#e3a531; --gold-soft:#fcefd2; --pink:#e46b95;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background-image:radial-gradient(#e9dfc9 1px,transparent 1px);background-size:18px 18px}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;margin:0;letter-spacing:-.01em}
+.hand{font-family:"Caveat",cursive;font-weight:700}
+.app{max-width:560px;margin:0 auto;padding-bottom:100px;min-height:100vh}
+button{font:inherit;color:inherit}
+
+/* HERO */
+.hero{padding:22px 20px 26px;position:relative;overflow:hidden}
+.hero .top{display:flex;gap:14px;align-items:center}
+.avatar{flex:none;width:76px;height:76px;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);overflow:hidden}
+.bubble{position:relative;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px 12px;font-size:21px;line-height:1.15;box-shadow:3px 3px 0 var(--ink)}
+.bubble:before{content:"";position:absolute;left:-10px;top:22px;border:8px solid transparent;border-right-color:var(--ink)}
+.bubble:after{content:"";position:absolute;left:-6px;top:23px;border:7px solid transparent;border-right-color:#fff}
+.rank{margin-top:20px;background:var(--ink);color:#fff;border-radius:20px;padding:18px;position:relative;transform:rotate(-1deg)}
+.rank small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.rank h1{font-size:30px;line-height:1.05;margin-top:6px}
+.rank h1 s{text-decoration-color:var(--red);text-decoration-thickness:4px;opacity:.75}
+.rank h1 em{font-style:normal;color:var(--gold)}
+.rank p{margin:10px 0 0;font-size:14px;line-height:1.5;opacity:.85}
+.sticker{position:absolute;right:-6px;top:-14px;background:var(--red);color:#fff;font-weight:700;font-size:12px;padding:6px 10px;border-radius:10px;transform:rotate(8deg);box-shadow:2px 2px 0 var(--ink)}
+.hero-btns{display:flex;gap:10px;margin-top:16px}
+.pill{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:14px;text-decoration:none;padding:11px;border-radius:14px;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);cursor:pointer;background:#fff;color:var(--ink)}
+.pill:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.pill.yt{background:#e33b2e;color:#fff}
+.pill.gold{background:var(--gold)}
+
+section.view{display:none;padding:6px 18px 8px}
+section.view.on{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}}
+.sec{display:flex;justify-content:space-between;align-items:baseline;margin:18px 2px 12px}
+.sec h2{font-size:23px}
+.sec .hand{font-size:20px;color:var(--red)}
+
+/* roulette */
+.roulette{background:var(--gold-soft);border:2px solid var(--ink);border-radius:20px;padding:16px;box-shadow:4px 4px 0 var(--ink);text-align:center}
+.roulette .q{font-size:24px}
+.roulette .res{font-family:"Fraunces";font-size:22px;font-weight:800;min-height:30px;margin:8px 0}
+.roulette .why{font-size:14px;color:#4b4f5c;min-height:20px}
+
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:none}
+.chip{flex:none;border:2px solid var(--ink);background:#fff;padding:7px 13px;border-radius:999px;font-size:14px;cursor:pointer;font-weight:500}
+.chip.on{background:var(--ink);color:#fff}
+
+/* cards */
+.card{background:var(--card);border:2px solid var(--ink);border-radius:20px;overflow:hidden;margin-bottom:16px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s}
+.card:nth-child(odd){transform:rotate(-.4deg)} .card:nth-child(even){transform:rotate(.4deg)}
+.card:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.art{height:124px;position:relative;display:flex;align-items:flex-end;justify-content:space-between;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.badge{position:relative;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fff;border:1.5px solid var(--ink);padding:3px 8px;border-radius:999px}
+.vis{position:relative;font-size:12px;font-weight:700;background:var(--green);color:#fff;padding:4px 9px;border-radius:999px;transform:rotate(-6deg);border:1.5px solid var(--ink)}
+.card .body{padding:12px 16px 14px}
+.card h3{font-size:19px}
+.card .area{font-size:13px;color:var(--muted);margin-top:1px}
+.kaho-says{display:flex;gap:8px;align-items:flex-start;margin-top:10px}
+.kaho-says .mini{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);overflow:hidden;background:#fff}
+.kaho-says .txt{background:var(--blue-soft);border-radius:4px 14px 14px 14px;padding:6px 10px;font-size:19px;line-height:1.15}
+.meters{display:flex;gap:14px;margin-top:10px;font-size:12px;color:var(--muted)}
+.meters b{color:var(--ink);letter-spacing:1px}
+
+/* map */
+.rankcard{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:14px;box-shadow:4px 4px 0 var(--ink);margin-bottom:14px}
+.rankcard .title{font-family:"Fraunces";font-weight:800;font-size:20px}
+.progress{height:14px;border-radius:99px;background:#efe6d3;border:2px solid var(--ink);overflow:hidden;margin:10px 0 6px}
+.progress i{display:block;height:100%;background:repeating-linear-gradient(45deg,var(--green),var(--green) 8px,#4f9a71 8px,#4f9a71 16px);transition:width .4s}
+.mapwrap{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:8px;box-shadow:4px 4px 0 var(--ink)}
+.mapwrap svg{width:100%;height:auto;display:block}
+.pin{cursor:pointer}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin:8px 4px 0}
+
+/* play */
+.quiz,.dialect{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:16px;box-shadow:4px 4px 0 var(--ink);margin-bottom:16px}
+.qnum{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.qtext{font-family:"Fraunces";font-size:20px;font-weight:600;margin:6px 0 12px;line-height:1.25}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);border:2px solid var(--ink);border-radius:12px;padding:11px 13px;margin-bottom:8px;cursor:pointer;font-size:15px}
+.opt.right{background:var(--green-soft);border-color:var(--green)}
+.opt.wrong{background:var(--red-soft);border-color:var(--red)}
+.feedback{font-size:20px;margin:6px 0 4px;line-height:1.2}
+.fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fc{perspective:600px;height:118px;cursor:pointer}
+.fc .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.fc .f,.fc .b{position:absolute;inset:0;backface-visibility:hidden;border:2px solid var(--ink);border-radius:14px;padding:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.fc .f{background:var(--gold-soft)}
+.fc .f .jp{font-size:22px;font-weight:700}
+.fc .f .ro{font-size:13px;color:var(--muted);margin-top:2px}
+.fc .b{background:var(--green-soft);transform:rotateY(180deg);font-size:14px;line-height:1.35}
+.fc .b .hand{font-size:18px;display:block;margin-top:4px;color:var(--green)}
+
+/* tours / support */
+.tour{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:4px 4px 0 var(--ink);position:relative}
+.tour h3{font-size:19px;padding-right:80px}
+.tour .meta{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:4px}
+.tour ul{margin:10px 0 0;padding-left:18px;font-size:14px;line-height:1.6}
+.soon{position:absolute;right:12px;top:-10px;background:var(--gold);border:2px solid var(--ink);font-weight:700;font-size:12px;padding:4px 9px;border-radius:10px;transform:rotate(6deg)}
+.tier{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:13px;margin-bottom:10px}
+.tier .ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;border:2px solid var(--ink)}
+.tier h3{font-size:17px}
+.tier p{margin:3px 0 0;font-size:14px;color:#3d4454;line-height:1.45}
+.btn{display:block;width:100%;text-align:center;font-weight:700;font-size:15px;padding:13px;border-radius:14px;border:2px solid var(--ink);cursor:pointer;margin-top:10px;text-decoration:none;box-shadow:3px 3px 0 var(--ink);background:#fff;color:var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.green{background:var(--green);color:#fff}
+.btn.gold{background:var(--gold)}
+.food{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.food div{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:11px;font-size:13px;line-height:1.4}
+.food b{display:block;font-family:"Fraunces";font-size:15px;margin-bottom:2px}
+.food .e{font-size:24px}
+
+
+/* cook */
+.rcard{display:flex;gap:12px;align-items:stretch;background:var(--card);border:2px solid var(--ink);border-radius:18px;margin-bottom:14px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);overflow:hidden}
+.rcard:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.rcard .pic{flex:none;width:92px;display:grid;place-items:center;font-size:44px;border-right:2px solid var(--ink)}
+.rcard .rb{padding:11px 12px 12px 0;flex:1}
+.rcard h3{font-size:18px}
+.rcard .jp{font-size:12px;color:var(--muted)}
+.rcard .rm{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.tag{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;border:1.5px solid var(--ink);background:#fff}
+.tag.ib{background:var(--gold)}
+.rhead{height:150px;display:grid;place-items:center;font-size:76px;border-bottom:2px solid var(--ink);position:relative}
+.serv{display:flex;align-items:center;gap:10px;margin:14px 0 6px}
+.serv button{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:#fff;font-size:18px;font-weight:700;cursor:pointer}
+.serv b{font-size:16px;min-width:90px;text-align:center}
+.ing{list-style:none;padding:0;margin:6px 0 0}
+.ing li{display:flex;gap:10px;align-items:center;padding:9px 2px;border-bottom:1px dashed var(--line);font-size:15px;cursor:pointer}
+.ing li .bx{flex:none;width:20px;height:20px;border:2px solid var(--ink);border-radius:6px;display:grid;place-items:center;font-size:13px}
+.ing li.done{color:var(--muted);text-decoration:line-through}
+.ing li.done .bx{background:var(--green);color:#fff;border-color:var(--green)}
+.ing li .amt{margin-left:auto;font-weight:700;white-space:nowrap}
+.steps{counter-reset:st;list-style:none;padding:0;margin:8px 0 0}
+.steps li{counter-increment:st;position:relative;padding:4px 0 12px 40px;font-size:15px;line-height:1.5}
+.steps li:before{content:counter(st);position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.swap{background:var(--gold-soft);border:2px dashed var(--gold);border-radius:14px;padding:11px 13px;font-size:14px;line-height:1.5;margin-top:6px}
+.sheet h4{font-family:"Fraunces";font-size:18px;margin:18px 0 4px}
+
+/* blog */
+.post{background:var(--card);border:2px solid var(--ink);border-radius:18px;margin-bottom:16px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);overflow:hidden}
+.post:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.post .ph{height:96px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:2px solid var(--ink);font-size:46px}
+.post .ph .cat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#fff;border:1.5px solid var(--ink);padding:3px 9px;border-radius:999px}
+.post .pb{padding:12px 16px 14px}
+.post h3{font-size:19px;line-height:1.2}
+.post p{font-size:14px;color:#3d4454;line-height:1.5;margin:6px 0 0}
+.post .pm{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:10px}
+.feat{background:var(--ink);color:#fff}
+.feat h3{color:#fff;font-size:22px}
+.feat .cat{color:var(--ink)}
+.feat p{color:#d8dbe3}
+.feat .pm{color:#aab0bd}
+.article{font-size:16px;line-height:1.7;color:#272d3a}
+.article p{margin:0 0 14px}
+.article h4{margin:22px 0 6px}
+.article .pull{font-family:"Caveat",cursive;font-weight:700;font-size:25px;line-height:1.2;color:var(--red);border-left:4px solid var(--red);padding:2px 0 2px 12px;margin:18px 0}
+.article ul{padding-left:20px;margin:0 0 14px}
+.article li{margin-bottom:6px}
+.likebar{display:flex;gap:10px;margin-top:16px}
+.likebar button{flex:1}
+.tours-banner{display:flex;align-items:center;gap:12px;background:var(--gold-soft);border:2px solid var(--ink);border-radius:18px;padding:13px 14px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;color:var(--ink);margin-top:18px}
+.tours-banner .e{font-size:30px}
+.tours-banner b{font-family:"Fraunces";font-size:17px;display:block}
+.tours-banner span{font-size:13px;color:var(--muted)}
+
+/* access */
+.route{display:flex;gap:12px;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:13px;margin-bottom:10px;box-shadow:3px 3px 0 var(--ink)}
+.route .ic{flex:none;width:46px;height:46px;border-radius:12px;border:2px solid var(--ink);display:grid;place-items:center;font-size:24px}
+.route h3{font-size:16px;line-height:1.2}
+.route .rt{font-size:13px;color:var(--muted);margin-top:2px}
+.route .stats{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.route p{font-size:13px;line-height:1.45;margin:7px 0 0;color:#3d4454}
+.route .best{font-size:11px;font-weight:700;background:var(--green-soft);color:var(--green);border:1.5px solid var(--green);padding:2px 7px;border-radius:999px}
+
+/* shop */
+.book{display:flex;gap:16px;align-items:center;margin-bottom:6px}
+.cover{flex:none;width:132px;aspect-ratio:420/595;background:#1f3b35;border:2px solid var(--ink);border-radius:6px 12px 12px 6px;box-shadow:5px 5px 0 var(--ink);padding:12px 10px;color:#fff;position:relative;transform:rotate(-3deg);overflow:hidden}
+.cover .k{font-size:6.5px;letter-spacing:.18em;color:#e8b98c}
+.cover .sun{width:38px;height:38px;border-radius:50%;background:#c4592f;margin:14px 0 12px}
+.cover .t{font-family:"Fraunces";font-weight:800;font-size:15px;line-height:1.05}
+.cover .by{position:absolute;bottom:10px;left:10px;font-size:6.5px;opacity:.85}
+.cover:after{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:rgba(0,0,0,.25)}
+.book h2{font-size:24px;line-height:1.1}
+.book .sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4}
+.newtag{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;border:1.5px solid var(--ink);transform:rotate(-3deg);margin-bottom:6px}
+.pricebox{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:14px;box-shadow:4px 4px 0 var(--ink);margin:16px 0}
+.pricebox .pr{font-family:"Fraunces";font-size:32px;font-weight:800}
+.pricebox .pr small{font-family:"DM Sans";font-size:13px;font-weight:500;color:var(--muted)}
+.inside{list-style:none;padding:0;margin:0}
+.inside li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px;line-height:1.4}
+.inside li .e{font-size:20px;flex:none;width:26px;text-align:center}
+.inside li b{display:block;font-size:15px}
+.peek{background:#fbf7ec;border:2px solid var(--ink);border-radius:16px;padding:16px;position:relative;margin-top:6px;overflow:hidden}
+.peek .lab{font-size:11px;font-weight:800;letter-spacing:.12em;color:#c4592f}
+.peek h3{font-size:20px;margin:4px 0 8px;color:#1f3b35}
+.peek p{font-size:14px;line-height:1.55;margin:0 0 8px}
+.peek .tipbox{background:#fff6d9;border:1.5px dashed #d9a520;border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.5}
+.peek .fade{position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(transparent,#fbf7ec);display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font-weight:700;font-size:13px}
+.why{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.why div{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:11px;font-size:13px;line-height:1.4}
+.why b{display:block;font-family:"Fraunces";font-size:15px;margin:2px 0}
+.faq details{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:11px 13px;margin-bottom:8px;font-size:14px;line-height:1.5}
+.faq summary{font-weight:700;cursor:pointer}
+.guide-banner{display:flex;gap:14px;align-items:center;background:#1f3b35;color:#fff;border:2px solid var(--ink);border-radius:18px;padding:12px 14px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;margin:0 0 18px}
+.guide-banner .mini-cover{flex:none;width:46px;height:64px;background:#1f3b35;border:1.5px solid #fff;border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.guide-banner .mini-cover i{width:16px;height:16px;border-radius:50%;background:#c4592f}
+.guide-banner .mini-cover span{font-family:"Fraunces";font-size:7px;font-weight:800;text-align:center;line-height:1}
+.guide-banner b{font-family:"Fraunces";font-size:17px;display:block}
+.guide-banner span.s{font-size:13px;color:#cfe0da}
+
+/* guide reader */
+.gch{background:#fbf7ec;border:2px solid var(--ink);border-radius:18px;padding:18px 16px;margin-bottom:16px;box-shadow:4px 4px 0 var(--ink);scroll-margin-top:64px}
+.gch .lab{font-size:11px;font-weight:800;letter-spacing:.12em;color:#c4592f;text-transform:uppercase}
+.gch h3.big{font-size:25px;color:#1f3b35;margin:4px 0 2px;line-height:1.1}
+.gch .tag2{font-family:"Fraunces";font-style:italic;color:var(--muted);font-size:14px;margin-bottom:10px}
+.gch h4{font-family:"Fraunces";font-size:18px;color:#1f3b35;margin:18px 0 6px}
+.gch p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:#272d3a}
+.gch ul{margin:0 0 10px;padding-left:20px;font-size:14px;line-height:1.6}
+.acc{display:inline-block;font-size:11px;font-weight:700;background:#1f3b35;color:#fff;padding:3px 9px;border-radius:999px;margin-bottom:8px}
+.acc.car{background:#c4592f}
+.info{border-left:3px solid #1f3b35;background:#fff;padding:9px 12px;font-size:13px;line-height:1.5;margin:6px 0 10px;border-radius:0 10px 10px 0}
+.ktip{background:#fff6d9;border:1.5px dashed #d9a520;border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.55;margin:8px 0 10px}
+.seasons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 10px}
+.seasons div{background:#fff;border:1.5px solid var(--ink);border-radius:12px;padding:8px 10px;font-size:13px}
+.seasons b{display:block;font-family:"Fraunces";font-size:15px}
+.plan{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.plan b{font-family:"Fraunces";font-size:16px}
+.plan ol{margin:6px 0 0;padding-left:22px;font-size:14px;line-height:1.65}
+.toc{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;scrollbar-width:none;position:sticky;top:0;z-index:3;background:var(--bg)}
+.gmap{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:#1a73e8;background:#fff;border:1.5px solid #1a73e8;border-radius:999px;padding:5px 11px;text-decoration:none;margin:0 0 12px}
+.gmap:active{background:#e8f0fe}
+.install{display:none;align-items:center;gap:12px;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:11px 13px;box-shadow:3px 3px 0 var(--ink);margin:0 20px 6px;font-size:13px;line-height:1.4}
+.install.on{display:flex}
+.install img{width:42px;height:42px;border-radius:10px;flex:none}
+.install b{display:block;font-size:14px}
+.install button{margin-left:auto;flex:none;background:var(--ink);color:#fff;border:0;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+.install .x{background:none;color:var(--muted);padding:4px;margin-left:0}
+/* sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(20,24,34,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.sheet-bg.on{display:flex}
+.sheet{background:var(--card);width:100%;max-width:560px;border-radius:24px 24px 0 0;border:2px solid var(--ink);border-bottom:0;max-height:90vh;overflow:auto;padding-bottom:20px;animation:up .25s}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sheet .art{height:160px}
+.sheet .inner{padding:16px 20px}
+.sheet h2{font-size:27px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;font-size:14px;margin:14px 0;line-height:1.4}
+.facts dt{color:var(--muted)} .facts dd{margin:0}
+.close{position:absolute;top:10px;right:12px;width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);background:#fff;font-size:16px;cursor:pointer;z-index:2}
+
+/* nav */
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--ink);z-index:10}
+nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+nav.tabs a{text-decoration:none;color:var(--muted);font-size:11px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 12px}
+nav.tabs a .e{font-size:21px;filter:grayscale(1);opacity:.6;transition:.15s}
+nav.tabs a.on{color:var(--ink);font-weight:700}
+nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:40;white-space:nowrap}
+.toast.on{opacity:1}
+.confetti{position:fixed;top:-20px;width:9px;height:14px;z-index:50;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <div class="top">
+      <div class="avatar" id="av1"></div>
+      <div class="bubble hand" id="heroBubble">Hi, I'm Kaho! Welcome to my hometown prefecture</div>
+    </div>
+    <div class="rank">
+      <span class="sticker">#KahoIbaraki</span>
+      <small>Ibaraki, Japan · ~1 hour from Tokyo</small>
+      <h1><s>Japan's least attractive prefecture</s><br><em>Japan's best-kept secret.</em></h1>
+      <p>Ibaraki often comes last in Japan's “most attractive prefecture” ranking. I live here and I think they're wrong. Let me prove it.</p>
+    </div>
+    <div class="hero-btns">
+      <a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ My YouTube</a>
+      <a class="pill gold" href="#map">Stamp rally</a>
+    </div>
+  </header>
+
+  <div class="install" id="install"><img src="icon-192.png" alt=""><div><b>Get the app</b><span id="instTxt">Add Kaho's Ibaraki to your home screen</span></div><button id="instBtn">Install</button><button class="x" id="instX" aria-label="Close">✕</button></div>
+
+  <!-- HOME -->
+  <section class="view" id="v-home">
+    <div class="roulette">
+      <div class="q hand">Can't decide? Let Kaho choose!</div>
+      <div class="res" id="rRes">🎲</div>
+      <div class="why hand" id="rWhy" style="font-size:19px"></div>
+      <button class="btn dark" id="rBtn">Spin the Ibaraki roulette</button>
+    </div>
+
+
+    <a class="guide-banner" href="#guide" style="margin-top:18px"><div class="mini-cover"><i></i><span>Ibaraki<br>by Kaho</span></div><div><b>My Ibaraki guidebook 📖 FREE</b><span class="s">The places I really go. Read it now →</span></div></a>
+    <div class="sec"><h2>Getting here from Tokyo</h2><span class="hand">easier than you think!</span></div>
+    <div class="kaho-says" style="margin:0 0 12px"><div class="mini" id="av4" style="width:40px;height:40px"></div><div class="txt hand" style="font-size:20px">Everyone thinks Ibaraki is far. It's not! Pick your style 👇</div></div>
+    <div class="route"><div class="ic" style="background:var(--blue-soft)">🚄</div><div>
+      <h3>Limited Express “Hitachi” / “Tokiwa”</h3>
+      <div class="rt">Tokyo · Ueno · Shinagawa → Mito (JR Joban Line)</div>
+      <div class="stats"><span class="tag">⏱ ~70–90 min</span><span class="tag">💴 ~¥4,000</span><span class="best">Fastest</span></div>
+      <p>Comfy reserved seats. For Hitachi Seaside Park, get off at <b>Katsuta</b> (one stop after Mito) and take the bus. Covered by the JR Pass.</p></div></div>
+    <div class="route"><div class="ic" style="background:var(--green-soft)">🚆</div><div>
+      <h3>Tsukuba Express (TX)</h3>
+      <div class="rt">Akihabara → Tsukuba</div>
+      <div class="stats"><span class="tag">⏱ ~45 min (Rapid)</span><span class="tag">💴 ~¥1,200</span><span class="best">For Mt. Tsukuba</span></div>
+      <p>From Tsukuba Station, take the shuttle bus to Mount Tsukuba. Great for a hiking day.</p></div></div>
+    <div class="route"><div class="ic" style="background:var(--gold-soft)">🚌</div><div>
+      <h3>Highway bus</h3>
+      <div class="rt">Tokyo Station (Yaesu South Exit) → Mito Station</div>
+      <div class="stats"><span class="tag">⏱ ~2–2.5 h</span><span class="tag">💴 ~¥2,250</span><span class="best">Cheapest</span></div>
+      <p>Takes longer, but saves money. Traffic can make it slower on weekends.</p></div></div>
+    <div class="route"><div class="ic" style="background:var(--red-soft)">🚗</div><div>
+      <h3>Rent a car</h3>
+      <div class="rt">Tokyo → Joban Expressway</div>
+      <div class="stats"><span class="tag">⏱ ~1.5–2 h to Mito</span><span class="best">Best for countryside</span></div>
+      <p>Fukuroda Falls, Ryujin Bridge and Hananuki Gorge are much easier by car. You need an International Driving Permit.</p></div></div>
+    <p class="note">💡 Suica/PASMO cards work on JR trains and most buses. Local buses are not frequent — check times on Google Maps before you go. Times and prices are approximate.</p>
+    <div class="sec"><h2>My favorite spots</h2><span class="hand" id="monthNote"></span></div>
+    <div class="chips" id="chips"></div>
+    <div id="spotList"></div>
+
+    <div class="sec"><h2>Eat like a local</h2><span class="hand">be brave!</span></div>
+    <div class="food">
+      <div><span class="e">🍠</span><b>Hoshiimo</b>Dried sweet potato. Ibaraki makes most of Japan's. My winter snack.</div>
+      <div><span class="e">🫘</span><b>Natto</b>Mito's famous sticky beans. Rate it 1–10 after you try!</div>
+      <div><span class="e">🍲</span><b>Ankō nabe</b>Monkfish hotpot. Looks scary, tastes amazing.</div>
+      <div><span class="e">🍈</span><b>Melon</b>Ibaraki is Japan's top melon producer. Early summer.</div>
+    </div>
+    <a class="tours-banner" href="#tours"><span class="e">🚐</span><div><b>Tours with Kaho — coming soon</b><span>Peek at the plans →</span></div></a>
+  </section>
+
+  <!-- MAP -->
+  <section class="view" id="v-map">
+    <div class="sec"><h2>Stamp rally</h2><span class="hand">collect them all!</span></div>
+    <div class="rankcard">
+      <div class="qnum">Your Ibaraki level</div>
+      <div class="title" id="lvTitle"></div>
+      <div class="progress"><i id="lvBar" style="width:0"></i></div>
+      <div style="font-size:13px;color:var(--muted)" id="lvNext"></div>
+    </div>
+    <div class="mapwrap"><svg id="map" viewBox="0 0 400 480"></svg></div>
+    <p class="note">Tap a pin → visit → tap “I've been here”. Post your photo with <b>#KahoIbaraki</b> so I can see it! (Simplified map, not to scale.)</p>
+  </section>
+
+
+
+  <!-- COOK -->
+  <section class="view" id="v-cook">
+    <div class="sec"><h2>Kaho's kitchen</h2><span class="hand">easy Japanese food!</span></div>
+    <div class="kaho-says" style="margin:0 0 14px"><div class="mini" id="av3" style="width:44px;height:44px"></div><div class="txt hand" style="font-size:20px">Real home food, not restaurant food. This is what we actually eat after work!</div></div>
+    <div class="chips" id="rchips"></div>
+    <div id="recipeList"></div>
+  </section>
+
+
+  <!-- BLOG -->
+  <section class="view" id="v-blog">
+    <div class="sec"><h2>Kaho's blog</h2><span class="hand">real life, no filter</span></div>
+    <div class="chips" id="bchips"></div>
+    <div id="postList"></div>
+  </section>
+
+  <!-- TOURS -->
+  <section class="view" id="v-tours">
+    <div class="sec"><h2>Tours with Kaho</h2><span class="hand">coming soon!</span></div>
+    <div id="tourList"></div>
+    <div class="tour" style="background:var(--gold-soft)">
+      <h3>Booking opens soon</h3>
+      <p style="font-size:14px;line-height:1.5;margin:8px 0 0;color:#3d4454">I'm still preparing these tours, so you can't book yet. Follow me and you'll be the first to know!</p>
+      <a class="btn dark" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">Follow on YouTube</a>
+      <a class="btn" href="https://www.instagram.com/kahorealjapan" target="_blank" rel="noopener">Follow on Instagram</a>
+    </div>
+  </section>
+
+  <!-- GUIDE -->
+  <section class="view" id="v-guide">
+    <div class="sec"><h2>Kaho's guidebook</h2><span class="hand">free to read!</span></div>
+    <div class="book">
+      <div class="cover"><div class="k">A LOCAL'S GUIDE</div><div class="sun"></div><div class="t">Ibaraki:<br>The Japan<br>1 Hour<br>from Tokyo</div><div class="by">by Kaho · @kahorealjapan</div></div>
+      <div><span class="newtag">FREE</span><h2>Ibaraki: The Japan 1 Hour from Tokyo</h2><div class="sub">Food, nature & secret spots tourists never see.</div></div>
+    </div>
+
+    <div class="toc" id="toc">
+      <button class="chip" data-go="g-welcome">👋 Hello</button>
+      <button class="chip" data-go="g-before">🚃 Before you go</button>
+      <button class="chip" data-go="g-mito">🥐 Mito</button>
+      <button class="chip" data-go="g-hitachinaka">🎣 Hitachinaka</button>
+      <button class="chip" data-go="g-hitachi">⛩️ Hitachi</button>
+      <button class="chip" data-go="g-daigo">🍎 Daigo</button>
+      <button class="chip" data-go="g-plans">🗓️ Day plans</button>
+    </div>
+
+    <div class="gch" id="g-welcome">
+      <div class="lab">Welcome</div><h3 class="big">Hello from Ibaraki</h3><div class="tag2">Your friend in Ibaraki, Kaho</div>
+      <p>Hi, I'm Kaho. I live in Ibaraki — the prefecture that Japan keeps calling its “least attractive.”</p>
+      <p>But here's the secret: Ibaraki is just one hour from Tokyo, and it has quiet mountain shrines, a giant waterfall, apple orchards, a wild fish market, and the best local food I know.</p>
+      <p>This guide is not about famous tourist spots. It's about the places I really go — with my family, on my days off, after long workdays.</p>
+      <p>If you visit, post with <b>#KahoIbaraki</b> — I'd love to see it!</p>
+    </div>
+
+    <div class="gch" id="g-before">
+      <div class="lab">Before you go</div><h3 class="big">Getting to Ibaraki</h3><div class="tag2">Closer than you think</div>
+      <ul><li><b>Tokyo → Mito:</b> JR Limited Express “Hitachi” or “Tokiwa” from Ueno / Shinagawa. About 70–80 min.</li><li><b>Akihabara → Tsukuba:</b> Tsukuba Express. About 45 min.</li></ul>
+      <p style="font-size:13px;color:var(--muted)">More options (bus, car) are on the Home tab.</p>
+      <h4>How to read this guide</h4>
+      <p><span class="acc">🚃 Train OK</span> Easy by train or on foot from the station.<br><span class="acc">🚃🚌 Train + bus/taxi</span> Train, then a short bus or taxi ride.<br><span class="acc car">🚗 Car needed</span> Deep countryside. Almost no buses or taxis.</p>
+      <h4>Kaho's honest tips</h4>
+      <ul><li>Trains in the countryside are not frequent. Check times before you go.</li><li>For the best spots, renting a car in Mito makes life much easier.</li><li>Many small shops take cash only. Bring yen!</li><li>Not much English outside the city — a smile and pointing works great.</li></ul>
+    </div>
+
+    <div class="gch" id="g-mito">
+      <div class="lab">Area 1 · Mito</div><h3 class="big">Mito Bakery Hopping</h3><div class="tag2">& the best crepe in town</div>
+      <h4>🍞 good bakes</h4><span class="acc">🚃 Train OK</span>
+      <p>A bakery that only cares about one thing: really good Japanese wheat. The baker even teaches other bakers about domestic wheat bread, and joined Japan's big wheat festival “Mugi Fes” in 2026.</p>
+      <div class="info"><b>Hours</b> 10:00–18:30 (closed Mon & Wed) · <b>Address</b> 2-2-36 Izumi-cho, Mito<br>No parking — use coin parking nearby. Check Instagram for holidays.</div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=good%20bakes%20%E6%B0%B4%E6%88%B8%E5%B8%82%E6%B3%89%E7%94%BA2-2-36" target="_blank" rel="noopener">📍 Google Maps</a>
+      <h4>🥖 Campagne</h4><span class="acc">🚃 Train OK</span>
+      <p>A stone-oven bakery locals love. On weekends, the line goes out the door — that's how you know it's good. Go early!</p>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=Campagne%20%E3%83%91%E3%83%B3%20%E6%B0%B4%E6%88%B8" target="_blank" rel="noopener">📍 Google Maps</a>
+      <h4>🍓 Crepe Shop K'S (Mito)</h4><span class="acc">🚃 Train OK</span>
+      <p>Their motto is “We bake for real, we make for real.” And you can taste it. Everything is handmade, and the crepes are not too heavy — so you can enjoy one even after lunch.</p>
+      <div class="info"><b>Address</b> 1-4-13 Sannomaru, Mito<br>Close to Mito Station — an easy stop before or after Kairakuen.</div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%20K%27S%20%E6%B0%B4%E6%88%B8%E5%B8%82%E4%B8%89%E3%81%AE%E4%B8%B81-4-13" target="_blank" rel="noopener">📍 Google Maps</a>
+      <div class="ktip"><b>Kaho's pick: Tapioca lassi!</b><br>A crepe shop with amazing tapioca lassi — sounds random, but it's my favorite thing here. Sweet, a little sour, and so refreshing.</div>
+      <h4>🐷 Tonkatsu Ton-Q</h4>
+      <p>Crispy, juicy tonkatsu (pork cutlet) — a classic Japanese comfort meal that locals eat after a long day.</p>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E3%81%A8%E3%82%93Q%20%E6%B0%B4%E6%88%B8" target="_blank" rel="noopener">📍 Google Maps</a>
+      <h4>🍣 Kaiten Sushi Marukuni</h4>
+      <p>Mito's local conveyor-belt sushi. Fresh fish from the Ibaraki coast at friendly prices — this is where locals go for “everyday sushi” with family. Grab plates as they pass by, or order from the chefs.</p>
+      <div class="info">Several shops around Mito (e.g. Sumiyoshi, Aoyagi). Easiest by car — the Aoyagi shop has parking.</div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%9B%9E%E8%BB%A2%E3%81%99%E3%81%97%20%E3%81%BE%E3%82%8B%E3%81%8F%E3%81%AB%20%E6%B0%B4%E6%88%B8" target="_blank" rel="noopener">📍 Google Maps</a>
+      <h4>🍢 Yakitori Nishino</h4>
+      <p>A local yakitori (grilled chicken skewers) spot in Mito. The kind of place where people stop by after work for skewers and a drink.</p>
+      <div class="ktip"><b>Kaho's pick: cheap, fresh, and SO many choices!</b><br>The prices are friendly, everything is fresh, and the menu is big — you can try lots of different skewers without worrying about the bill.</div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E7%84%BC%E3%81%8D%E9%B3%A5%20%E8%A5%BF%E9%87%8E%20%E6%B0%B4%E6%88%B8" target="_blank" rel="noopener">📍 Google Maps</a>
+    </div>
+
+    <div class="gch" id="g-hitachinaka">
+      <div class="lab">Area 2 · Hitachinaka</div><h3 class="big">Nakaminato Fish Market</h3><div class="tag2">Where locals go for the freshest seafood</div>
+      <span class="acc">🚃 Train OK</span>
+      <p>A busy fish market by the port, full of energy. Shop staff shout to sell fresh fish, crabs, oysters and shellfish — real Japan, not a tourist show.</p>
+      <ul><li>Eat a kaisendon (seafood rice bowl)</li><li>Buy grilled seafood on a stick and eat it right there</li><li>Walk the port and see the fishing boats</li><li>Try fishing! 🎣 So relaxing, even for beginners</li></ul>
+      <div class="ktip"><b>Kaho's tip: I caught 20 houbou here!</b><br>Houbou (red gurnard) has beautiful blue “wings” and little “legs” to walk on the sea floor. It even croaks when you catch it! Sometimes you can catch tai (sea bream) too — a lucky fish in Japan, because “tai” sounds like <i>medetai</i>, “congratulations.”</div>
+      <div class="info"><b>Access</b> Hitachinaka Seaside Railway, Katsuta → Nakaminato Sta., then 10 min walk.<br>Go in the morning. Only fish where it's allowed.</div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E7%8F%82%E6%B9%8A%E3%81%8A%E3%81%95%E3%81%8B%E3%81%AA%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">📍 Google Maps</a>
+      <h4>🍜 Ibaraki Stamina Ramen Matsugoro</h4>
+      <p>Stamina ramen is Ibaraki's own soul food. Sweet and spicy thick sauce with pumpkin, cabbage and pork liver on chewy noodles. Try the hiyashi (cold) version — cold noodles with hot sauce. It sounds strange, but trust me.</p>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E3%81%84%E3%81%B0%E3%82%89%E3%81%8D%E3%82%B9%E3%82%BF%E3%83%9F%E3%83%8A%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%20%E6%9D%BE%E4%BA%94%E9%83%8E" target="_blank" rel="noopener">📍 Google Maps</a>
+      <h4>🍱 Menojiya</h4>
+      <p>A local teishoku (set meal) restaurant. Rice, miso soup, side dishes — the everyday food Japanese people really eat, not tourist food.</p>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E3%82%81%E3%81%AE%E3%81%98%E3%82%84%20%E3%81%B2%E3%81%9F%E3%81%A1%E3%81%AA%E3%81%8B" target="_blank" rel="noopener">📍 Google Maps</a>
+    </div>
+
+    <div class="gch" id="g-hitachi">
+      <div class="lab">Area 3 · Hitachi</div><h3 class="big">Oiwa Shrine</h3><div class="tag2">The secret power spot locals don't tell tourists about</div>
+      <span class="acc">🚃🚌 Train + bus/taxi</span>
+      <p>Hidden deep in the mountains of Hitachi, Oiwa Shrine is one of the most sacred places in Ibaraki. More than 180 gods are worshipped here — very rare in Japan.</p>
+      <p>Walk through a quiet forest of huge cedar trees. Don't miss the Sanbon-sugi (Three Cedars), a giant tree hundreds of years old that splits into three trunks.</p>
+      <p>People say an astronaut once saw a strange light from this area from space. True or not, when you stand here, you'll feel something special.</p>
+      <div class="info"><b>Access</b> JR Hitachi Station, then bus or taxi. Car is easiest.<br>Wear good shoes — the path to the top of Mt. Oiwa is a real mountain trail.</div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%BE%A1%E5%B2%A9%E7%A5%9E%E7%A4%BE%20%E6%97%A5%E7%AB%8B%E5%B8%82" target="_blank" rel="noopener">📍 Google Maps</a>
+    </div>
+
+    <div class="gch" id="g-daigo">
+      <div class="lab">Area 4 · Daigo</div><h3 class="big">Fukuroda Falls</h3><div class="tag2">One of Japan's three most beautiful waterfalls</div>
+      <span class="acc">🚃🚌 Train + bus/taxi</span>
+      <p>120 m tall and 73 m wide, the water falls down the rock in four steps — so it's called “Yodo no Taki,” the Four-Times Falls. A famous old poet said you must visit in all four seasons to see its true beauty.</p>
+      <div class="seasons"><div><b>🌱 Spring</b>fresh green</div><div><b>💧 Summer</b>cool mist</div><div><b>🍁 Autumn</b>red & yellow leaves</div><div><b>❄️ Winter</b>sometimes frozen ice falls</div></div>
+      <div class="info"><b>Access</b> JR Suigun Line to Fukuroda Sta., then short bus/taxi. About 1 hr by car from Mito.<br>Small entrance fee for the tunnel to the viewing deck. Try grilled ayu fish on the street!</div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E8%A2%8B%E7%94%B0%E3%81%AE%E6%BB%9D" target="_blank" rel="noopener">📍 Google Maps</a>
+      <h3 class="big" style="margin-top:22px">Apple Picking</h3><div class="tag2">The “phantom apples” of Daigo</div>
+      <span class="acc car">🚗 Car needed</span>
+      <p>In autumn, Daigo turns into apple country. Along the “Apple Road” (Ringo Kaido), family-run orchards let you pick apples yourself.</p>
+      <p>Daigo apples are not famous in Tokyo — most are sold only here, so locals call them “phantom apples.” Sweet, juicy, and fresh from the tree.</p>
+      <div class="ktip"><b>Kaho's favorite: Toyota Apple Farm (豊田りんご園)</b></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E8%B1%8A%E7%94%B0%E3%82%8A%E3%82%93%E3%81%94%E5%9C%92%20%E5%A4%A7%E5%AD%90%E7%94%BA" target="_blank" rel="noopener">📍 Google Maps</a>
+      <div class="info"><b>Season</b> around September–November (check before you go)<br>You need a car. Rent one in Mito (about 1 hr), or combine with Fukuroda Falls on a road trip.</div>
+    </div>
+
+    <div class="gch" id="g-plans">
+      <div class="lab">Plan your trip</div><h3 class="big">Kaho's Day Plans</h3><div class="tag2">Steal my favorite days</div>
+      <div class="plan"><b>🐟 Hitachinaka Sea Day</b><ol><li>Morning: Nakaminato Fish Market — kaisendon breakfast</li><li>Fishing at the port 🎣</li><li>Lunch: Stamina Ramen Matsugoro or Menojiya</li><li>Afternoon: Hitachi Seaside Park</li></ol></div>
+      <div class="plan"><b>🍁 Northern Ibaraki Nature Day 🚗</b><ol><li>Morning: Oiwa Shrine — quiet forest walk</li><li>Fukuroda Falls</li><li>Apple picking at Toyota Apple Farm 🍎</li><li>Apple pie & soft cream, then onsen</li></ol></div>
+      <div class="plan"><b>🥐 Mito Food Walk</b><ol><li>good bakes & Campagne</li><li>Crepe Shop K'S — tapioca lassi!</li><li>Dinner: Tonkatsu Ton-Q, sushi at Marukuni 🍣 or skewers at Yakitori Nishino 🍢</li></ol></div>
+      <p class="note">Info checked in Nov 2026. Hours and prices can change — please check before you go. Post your trip with #KahoIbaraki!</p>
+    </div>
+
+    <div class="sec" style="margin-top:28px"><h2>Support Kaho</h2><span class="hand">arigato!</span></div>
+    <div class="kaho-says" style="margin:0 0 16px"><div class="mini" id="av2" style="width:44px;height:44px"></div><div class="txt hand" style="font-size:21px">This app is free! If it helped your trip, a coffee helps me make more videos after my overtime</div></div>
+    <div class="tier"><div class="ic" style="background:var(--gold-soft)">☕</div><div><h3>Buy me a coffee</h3><p>One-time thank you. I will drink it while editing at midnight.</p></div></div>
+    <div class="tier"><div class="ic" style="background:var(--blue-soft)">🌾</div><div><h3>Monthly member</h3><p>Behind-the-scenes posts and early access to new videos.</p></div></div>
+    <div class="tier"><div class="ic" style="background:var(--red-soft)">✉️</div><div><h3>Top tier</h3><p>All of the above + seasonal postcards mailed from Japan to your home.</p></div></div>
+    <a class="btn" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support on Buy Me a Coffee</a>
+    <a class="btn" href="https://linktr.ee/kahofromjapan" target="_blank" rel="noopener">All my links</a>
+    <div class="tour" style="margin-top:22px">
+      <h3>For brands & local businesses</h3>
+      <p style="font-size:14px;line-height:1.5;margin:8px 0 0;color:#3d4454">Want your inn, café or product in this guide or my videos? Let's work together: <b>guobugongtian@gmail.com</b></p>
+    </div>
+  </section>
+</div>
+
+<nav class="tabs"><div class="in">
+  <a href="#home" data-v="home"><span class="e">🏠</span>Home</a>
+  <a href="#map" data-v="map"><span class="e">🗾</span>Stamps</a>
+  <a href="#cook" data-v="cook"><span class="e">🍙</span>Cook</a>
+  <a href="#blog" data-v="blog"><span class="e">📝</span>Blog</a>
+  <a href="#guide" data-v="guide"><span class="e">📖</span>Guide</a>
+</div></nav>
+
+<div class="sheet-bg" id="sheetBg"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* original simple avatar */
+const AVATAR=`<svg viewBox="0 0 80 80"><rect width="80" height="80" fill="#fde7d4"/><path d="M14 80 Q14 58 40 56 Q66 58 66 80Z" fill="#3b6fd4"/><path d="M16 42 Q14 12 40 12 Q66 12 64 42 L64 56 Q58 50 58 40 L22 40 Q22 50 16 56Z" fill="#2a2320"/><ellipse cx="40" cy="40" rx="18" ry="19" fill="#ffe1c7"/><path d="M22 34 Q30 20 46 22 Q56 24 58 34 Q48 28 40 30 Q30 30 22 34Z" fill="#2a2320"/><circle cx="33" cy="41" r="2.3" fill="#2a2320"/><circle cx="47" cy="41" r="2.3" fill="#2a2320"/><path d="M34 48 Q40 54 46 48" stroke="#2a2320" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="28" cy="47" r="3" fill="#f7a8a8" opacity=".7"/><circle cx="52" cy="47" r="3" fill="#f7a8a8" opacity=".7"/></svg>`;
+document.getElementById("av1").innerHTML=AVATAR;document.getElementById("av3").innerHTML=AVATAR;document.getElementById("av4").innerHTML=AVATAR;document.getElementById("av2").innerHTML=AVATAR;
+
+const SPOTS=[
+ {id:"seaside",name:"Hitachi Seaside Park",area:"Hitachinaka",lat:36.40,lon:140.59,months:[4,5,10],season:"Spring & Autumn",theme:["#3b6fd4","#a9c4f5"],shape:"hills",love:5,crowd:5,
+  short:"Hills turn sky-blue with nemophila in spring, and fluffy red kochia in autumn.",kaho:"Yes, it's really this blue. No filter, I promise!",
+  best:"Nemophila: late April–mid May · Kochia: October",tip:"Go right at opening time. Golden Week (early May) is SO crowded.",access:"JR Joban Line to Katsuta, then bus"},
+ {id:"fukuroda",name:"Fukuroda Falls",area:"Daigo",lat:36.765,lon:140.408,months:[1,2,10,11],season:"Autumn & Winter",theme:["#2f7a8a","#b7e0e4"],shape:"falls",love:5,crowd:3,
+  short:"A huge four-tier waterfall. Red leaves in autumn — and it can freeze in deep winter.",kaho:"Legend says you must see it in all 4 seasons. I'm still working on it 😅",
+  best:"Autumn leaves: mid–late November · Frozen: cold years, Jan–Feb",tip:"Eat the apple pie and salt-grilled ayu fish on the way.",access:"JR Suigun Line to Fukuroda, then bus"},
+ {id:"kairakuen",name:"Kairakuen Garden",area:"Mito",lat:36.373,lon:140.453,months:[2,3],season:"Late winter",theme:["#c84a7a","#f6cfe0"],shape:"blossom",love:4,crowd:3,
+  short:"One of Japan's three great gardens, with thousands of plum trees.",kaho:"Plum blooms before sakura. Beat the crowds, be smart!",
+  best:"Plum blossom: mid February–March",tip:"Walk the bamboo forest path behind the garden. So quiet.",access:"JR Mito Station, then bus"},
+ {id:"oarai",name:"Oarai Isosaki Shrine",area:"Oarai",lat:36.316,lon:140.597,months:[1,12],season:"All year",allYear:true,theme:["#d4532f","#ffd8b8"],shape:"torii",love:5,crowd:2,
+  short:"A torii gate standing on rocks in the Pacific. Magic at sunrise.",kaho:"Woke up at 5am for this. Worth it. Then slept in the car 😴",
+  best:"Sunrise, any season · New Year's sunrise is special",tip:"Go to Nakaminato fish market for lunch after.",access:"Oarai Kashima Line to Oarai, then bus"},
+ {id:"tsukuba",name:"Mount Tsukuba",area:"Tsukuba",lat:36.225,lon:140.107,months:[4,5,10,11],season:"Spring & Autumn",theme:["#3c7d5a","#cbe8d4"],shape:"mountain",love:4,crowd:3,
+  short:"Twin-peaked sacred mountain. Easy hike or cable car, huge views over the Kanto plain.",kaho:"This mountain is famous for toad legends. Find the toad stuff! 🐸",
+  best:"Autumn leaves in November · clear winter days for views",tip:"Hike up, cable car down. Your knees will thank you.",access:"Tsukuba Express from Akihabara, then shuttle bus"},
+ {id:"ryujin",name:"Ryujin Suspension Bridge",area:"Hitachiota",lat:36.67,lon:140.53,months:[4,5,11],season:"Spring & Autumn",theme:["#b5452f","#f3cdb8"],shape:"bridge",love:4,crowd:2,
+  short:"A long walking bridge over a dam lake, surrounded by mountains.",kaho:"I looked down one time. Never again 🙈",
+  best:"Autumn leaves: November · carp streamers: spring",tip:"There's bungee jumping here — if you're brave!",access:"Best by car"},
+ {id:"ushiku",name:"Ushiku Daibutsu",area:"Ushiku",lat:35.982,lon:140.218,months:[],season:"All year",allYear:true,theme:["#6b6f8a","#dad9ea"],shape:"buddha",love:4,crowd:2,
+  short:"A giant bronze Buddha rising over the fields — one of the tallest statues in the world.",kaho:"Taller than the Statue of Liberty. Ibaraki doesn't do small.",
+  best:"Any season · flowers around the grounds in spring–summer",tip:"You can go up inside the statue!",access:"JR Joban Line to Ushiku or Hitachino-Ushiku, then bus"},
+ {id:"kasama",name:"Kasama Inari & Pottery Town",area:"Kasama",lat:36.387,lon:140.26,months:[10,11],season:"Autumn",theme:["#c47a1c","#f6dfb0"],shape:"pottery",love:4,crowd:2,
+  short:"Big Inari shrine plus a town full of Kasama-yaki pottery studios.",kaho:"I went to buy ONE cup. I came home with five.",
+  best:"Chrysanthemum festival: mid-October–November",tip:"Some studios let you try making pottery. Book ahead.",access:"JR Mito Line to Kasama"},
+ {id:"kashima",name:"Kashima Jingu",area:"Kashima",lat:35.969,lon:140.631,months:[],season:"All year",allYear:true,theme:["#2f5d43","#c6dfcc"],shape:"forest",love:5,crowd:2,
+  short:"Ancient shrine in a deep cedar forest. There's even a deer park.",kaho:"The forest air here = free therapy after a long work week.",
+  best:"Any season · early morning is calm and green",tip:"Walk to Mitarashi pond at the end of the forest path.",access:"JR Kashima Line to Kashima-Jingu"},
+ {id:"hananuki",name:"Hananuki Gorge",area:"Takahagi",lat:36.75,lon:140.6,months:[11],season:"Autumn",theme:["#c8452f","#ffd2a8"],shape:"bridge",love:5,crowd:3,
+  short:"A red-leaf valley with a small suspension bridge. Like a painting in autumn.",kaho:"My secret autumn spot. Please don't tell too many people 🤫",
+  best:"Autumn leaves: mid–late November",tip:"Weekends in leaf season get busy — go early.",access:"JR Joban Line to Takahagi, then car or seasonal bus"},
+];
+const GQ={"seaside": "国営ひたち海浜公園", "fukuroda": "袋田の滝", "kairakuen": "偕楽園", "oarai": "大洗磯前神社 神磯の鳥居", "tsukuba": "筑波山", "ryujin": "竜神大吊橋", "ushiku": "牛久大仏", "kasama": "笠間稲荷神社", "kashima": "鹿島神宮", "hananuki": "花貫渓谷"};
+const gmapUrl=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+const TOURS=[
+ {name:"Blue Hills & Ocean Torii",dur:"1 day",when:"Late Apr–May",list:["Hitachi Seaside Park (nemophila)","Seafood lunch at Nakaminato","Sunset at Oarai Isosaki Shrine"]},
+ {name:"Autumn Leaves Road Trip",dur:"1 day",when:"November",list:["Fukuroda Falls + apple pie","Ryujin Suspension Bridge","Countryside dinner"]},
+ {name:"Real Rural Life Day",dur:"Half day",when:"All year",list:["Local supermarket & farm stand","Home-style lunch","Natto & hoshiimo challenge","Q&A: real life in rural Japan"]},
+];
+const QUIZ=[
+ {q:"Which one is NOT Ibaraki's #1 in Japan?",o:["Melons","Lotus root","Chestnuts","Pineapples"],a:3,ok:"Right! Pineapples are Okinawa. Ibaraki is #1 in the other three!",ng:"Nope! Ibaraki is #1 for melons, lotus root AND chestnuts. Pineapples = Okinawa."},
+ {q:"About how much of Japan's hoshiimo (dried sweet potato) comes from Ibaraki?",o:["About 10%","About 50%","About 90%"],a:2,ok:"Yes! Almost all of it. We are the hoshiimo kingdom 🍠",ng:"More! Around 90%. We are the hoshiimo kingdom 🍠"},
+ {q:"How far is Ibaraki from Tokyo?",o:["About 1 hour","About 4 hours","You need a flight"],a:0,ok:"Correct! Easy day trip. No excuses now 😉",ng:"Only about 1 hour by train! Easy day trip."},
+ {q:"What sticky food is Mito famous for?",o:["Mochi","Natto","Tofu"],a:1,ok:"Natto! Stir it a lot — more stirring, more flavor.",ng:"It's natto! The smelly, sticky superfood."},
+ {q:"In Ibaraki-ben, “Igappe!” means…",o:["“I'm hungry!”","“That's fine / good!”","“Go away!”"],a:1,ok:"Igappe! You're basically a local now.",ng:"It means “That's fine!” — now you know, igappe!"},
+];
+const DIALECT=[
+ {jp:"〜だっぺ",ro:"~dappe",en:"“…right?” The most Ibaraki ending ever",ex:"Oishii dappe!"},
+ {jp:"いがっぺ",ro:"igappe",en:"“That's fine / good!”",ex:"Igappe, igappe!"},
+ {jp:"ごじゃっぺ",ro:"gojappe",en:"“Nonsense / sloppy”",ex:"Don't say gojappe!"},
+ {jp:"でれすけ",ro:"deresuke",en:"“Silly person” (teasing)",ex:"Kono deresuke!"},
+ {jp:"おっぺす",ro:"oppesu",en:"“To push”",ex:"Don't oppesu me!"},
+ {jp:"いじやける",ro:"ijiyakeru",en:"“To get annoyed”",ex:"Overtime… ijiyakeru!"},
+];
+const LEVELS=[[0,"Ibaraki newbie 🐣"],[1,"Natto beginner 🫘"],[3,"Hoshiimo fan 🍠"],[6,"Almost local 🚜"],[9,"Ibaraki master 🏯"],[10,"Honorary Ibaraki-jin 🎉"]];
+const CHIPS=[{k:"now",l:"🔥 In season now"},{k:"all",l:"All"},{k:"spring",l:"🌸 Spring",m:[3,4,5]},{k:"summer",l:"🍉 Summer",m:[6,7,8]},{k:"autumn",l:"🍁 Autumn",m:[9,10,11]},{k:"winter",l:"❄️ Winter",m:[12,1,2]}];
+const MONTH=new Date().getMonth()+1;
+const MONTHS=["","January","February","March","April","May","June","July","August","September","October","November","December"];
+let filter="now";
+function load(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+let stamps=load("kahoStamps",[]);
+
+function toast(t){const el=document.getElementById("toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("on"),2000)}
+function confetti(){const c=["#3b6fd4","#d4532f","#e3a531","#3c7d5a","#e46b95"];for(let i=0;i<40;i++){const d=document.createElement("div");d.className="confetti";d.style.left=Math.random()*100+"vw";d.style.background=c[i%5];d.style.animationDuration=(1.4+Math.random()*1.4)+"s";d.style.animationDelay=Math.random()*.3+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),3200)}}
+const dots=(n,ch)=>ch.repeat(n)+"·".repeat(5-n);
+
+function art(s){
+  const [c,l]=s.theme;let fg="";
+  switch(s.shape){
+    case"hills":fg=`<path d="M0 90 Q80 40 160 75 T320 60 L400 70 V140 H0Z" fill="${c}" opacity=".85"/><path d="M0 110 Q100 70 200 100 T400 90 V140 H0Z" fill="${c}"/>`+Array.from({length:40},(_,i)=>`<circle cx="${(i*37)%400}" cy="${100+(i*13)%35}" r="2" fill="#fff" opacity=".75"/>`).join("");break;
+    case"falls":fg=`<path d="M0 140 L0 30 L150 20 L170 140Z" fill="${c}"/><path d="M400 140 L400 25 L240 30 L220 140Z" fill="${c}"/><path d="M165 22 H240 L230 140 H172Z" fill="#fff" opacity=".85"/>`;break;
+    case"blossom":fg=Array.from({length:14},(_,i)=>{const x=20+i*28,y=30+(i*29)%70;return`<g fill="${c}" opacity=".9">${[0,72,144,216,288].map(a=>`<circle cx="${x+7*Math.cos(a*Math.PI/180)}" cy="${y+7*Math.sin(a*Math.PI/180)}" r="5"/>`).join("")}<circle cx="${x}" cy="${y}" r="3" fill="#fff6c8"/></g>`}).join("");break;
+    case"torii":fg=`<circle cx="300" cy="50" r="22" fill="#ffb347"/><rect y="95" width="400" height="45" fill="#4a77b5"/><path d="M150 120 Q200 100 260 122 L250 140 H160Z" fill="#3a3a3a"/><rect x="178" y="45" width="7" height="65" fill="${c}"/><rect x="228" y="45" width="7" height="65" fill="${c}"/><rect x="165" y="42" width="84" height="8" rx="3" fill="${c}"/><rect x="172" y="57" width="70" height="5" fill="${c}"/>`;break;
+    case"mountain":fg=`<path d="M0 140 L140 40 L180 70 L230 30 L400 140Z" fill="${c}"/><path d="M0 140 L120 100 L250 115 L400 95 V140Z" fill="${c}" opacity=".6"/>`;break;
+    case"bridge":fg=`<path d="M0 140 L0 50 Q60 40 110 140Z" fill="${c}"/><path d="M400 140 L400 45 Q330 50 290 140Z" fill="${c}"/><path d="M60 70 Q200 110 340 70" stroke="#333" stroke-width="3" fill="none"/><path d="M60 72 L340 72" stroke="#333" stroke-width="1.5"/><rect y="118" width="400" height="22" fill="#5c90a8" opacity=".6"/>`;break;
+    case"buddha":fg=`<rect y="115" width="400" height="25" fill="#9bbf7a"/><ellipse cx="200" cy="45" rx="16" ry="18" fill="${c}"/><path d="M175 115 Q170 60 200 62 Q230 60 225 115Z" fill="${c}"/>`;break;
+    case"pottery":fg=[60,150,240,330].map((x,i)=>`<path d="M${x-22} 125 Q${x-30} ${85-i*4} ${x-12} ${70-i*3} H${x+12} Q${x+30} ${85-i*4} ${x+22} 125Z" fill="${c}" opacity="${.65+i*.1}"/>`).join("");break;
+    case"forest":fg=Array.from({length:12},(_,i)=>`<path d="M${i*36} 140 L${i*36+18} ${30+(i*17)%30} L${i*36+36} 140Z" fill="${c}" opacity="${.7+(i%3)*.1}"/>`).join("");break;
+  }
+  return`<svg viewBox="0 0 400 140" preserveAspectRatio="xMidYMid slice"><rect width="400" height="140" fill="${l}"/>${fg}</svg>`;
+}
+function inFilter(s){if(filter==="all")return true;if(filter==="now")return s.months.includes(MONTH);const m=CHIPS.find(c=>c.k===filter).m;return s.allYear||s.months.some(x=>m.includes(x))}
+
+function renderHome(){
+  document.getElementById("monthNote").textContent=`it's ${MONTHS[MONTH]}!`;
+  document.getElementById("chips").innerHTML=CHIPS.map(c=>`<button class="chip ${filter===c.k?"on":""}" data-k="${c.k}">${c.l}</button>`).join("");
+  let list=SPOTS.filter(inFilter);if(!list.length){filter="all";list=SPOTS}
+  document.getElementById("spotList").innerHTML=list.map(s=>`
+   <div class="card" data-id="${s.id}">
+    <div class="art">${art(s)}<span class="badge">${s.season}</span>${stamps.includes(s.id)?'<span class="vis">✓ Been here!</span>':""}</div>
+    <div class="body"><h3>${s.name}</h3><div class="area">📍 ${s.area}</div>
+     <div class="kaho-says"><div class="mini">${AVATAR}</div><div class="txt hand">${s.kaho}</div></div>
+     <div class="meters"><span>Kaho's love <b style="color:var(--red)">${dots(s.love,"♥")}</b></span><span>Crowds <b>${dots(s.crowd,"●")}</b></span></div>
+    </div></div>`).join("");
+}
+
+/* roulette */
+const RLINES=["Go here. Trust me!","Kaho's choice. No complaints 😆","Perfect day trip. Igappe!","Bring snacks. And your camera!"];
+document.getElementById("rBtn").addEventListener("click",()=>{
+  const pool=SPOTS.filter(s=>s.allYear||s.months.includes(MONTH));const btn=document.getElementById("rBtn");btn.disabled=true;
+  let i=0,n=14+Math.floor(Math.random()*6);const res=document.getElementById("rRes"),why=document.getElementById("rWhy");why.textContent="";
+  const tick=()=>{res.textContent=pool[i%pool.length].name;i++;if(i<n)setTimeout(tick,50+i*12);else{const s=pool[(i-1)%pool.length];why.textContent=RLINES[Math.floor(Math.random()*RLINES.length)];btn.disabled=false;btn.textContent="Spin again";res.onclick=()=>openSpot(s.id);res.style.cursor="pointer";res.title="Tap for details"}};tick();
+});
+
+/* map */
+const OUTLINE=[[36.93,140.57],[36.79,140.73],[36.6,140.7],[36.4,140.66],[36.3,140.64],[36.1,140.67],[35.9,140.85],[35.74,140.85],[35.83,140.55],[35.9,140.3],[35.85,140.0],[35.95,139.85],[36.1,139.7],[36.2,139.8],[36.4,140.0],[36.65,140.25],[36.8,140.3],[36.93,140.4]];
+const P=(lat,lon)=>[(lon-139.62)*300,(37.0-lat)*300*1.24+12];
+const LB={fukuroda:[-13,4,"end"],seaside:[-13,-8,"end"],kairakuen:[0,22,"middle"],kasama:[-13,4,"end"],kashima:[0,22,"middle"],ushiku:[-13,4,"end"],oarai:[13,5,"start"]};
+function level(n){let t=LEVELS[0];let next=null;for(const l of LEVELS){if(n>=l[0])t=l;else{next=l;break}}return[t[1],next]}
+function renderMap(){
+  const d=OUTLINE.map((p,i)=>{const[x,y]=P(...p);return(i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)}).join(" ")+"Z";
+  const[tx,ty]=P(35.69,139.69);
+  let svg=`<rect width="400" height="480" fill="#e7f0fb"/>${Array.from({length:8},(_,i)=>`<path d="M${340+(i%2)*20} ${60+i*55} q8 -6 16 0 t16 0" stroke="#a9c1e3" stroke-width="2" fill="none"/>`).join("")}
+   <path d="${d}" fill="#f6efdc" stroke="#1d2433" stroke-width="2.5" stroke-linejoin="round"/>
+   <text x="388" y="300" font-size="12" fill="#6d8db8" font-style="italic" transform="rotate(90 388 300)">Pacific Ocean</text>
+   <circle cx="${tx}" cy="${Math.min(ty,468)}" r="5" fill="#888"/><text x="${tx+9}" y="${Math.min(ty,468)+4}" font-size="12" fill="#666">↙ Tokyo (~1h)</text>`;
+  SPOTS.forEach(s=>{const[x,y]=P(s.lat,s.lon);const v=stamps.includes(s.id);const lb=LB[s.id]||[13,4,"start"];
+   svg+=`<g class="pin" data-id="${s.id}"><circle cx="${x}" cy="${y}" r="17" fill="transparent"/><circle cx="${x}" cy="${y}" r="${v?11:9}" fill="${v?"#3c7d5a":s.theme[0]}" stroke="#1d2433" stroke-width="2"/>${v?`<path d="M${x-4.5} ${y} l3 3.5 6-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>`:""}
+   <text x="${x+lb[0]}" y="${y+lb[1]}" font-size="11" font-weight="700" fill="#1d2433" text-anchor="${lb[2]}" paint-order="stroke" stroke="#f6efdc" stroke-width="3">${s.name.replace(/ (Garden|Shrine|& Pottery Town|Suspension Bridge)$/,"")}</text></g>`});
+  document.getElementById("map").innerHTML=svg;
+  const n=stamps.length,[t,next]=level(n);
+  document.getElementById("lvTitle").textContent=t;
+  document.getElementById("lvBar").style.width=(n/SPOTS.length*100)+"%";
+  document.getElementById("lvNext").textContent=next?`${n}/${SPOTS.length} stamps · ${next[0]-n} more to become “${next[1]}”`:`All ${SPOTS.length} stamps! You are officially one of us. Otsukaresama!`;
+}
+
+/* sheet */
+function openSpot(id){
+  const s=SPOTS.find(x=>x.id===id),v=stamps.includes(id);
+  document.getElementById("sheet").innerHTML=`
+   <div class="art" style="position:relative">${art(s)}<button class="close" data-close>✕</button><span class="badge">${s.season}</span></div>
+   <div class="inner"><h2>${s.name}</h2><div style="color:var(--muted);font-size:14px">📍 ${s.area}, Ibaraki</div>
+   <p style="font-size:15px;line-height:1.55">${s.short}</p>
+   <div class="kaho-says"><div class="mini" style="width:40px;height:40px">${AVATAR}</div><div class="txt hand" style="font-size:21px">${s.kaho}</div></div>
+   <dl class="facts"><dt>Best time</dt><dd>${s.best}</dd><dt>Getting there</dt><dd>${s.access}</dd><dt>Kaho's tip</dt><dd>${s.tip}</dd></dl>
+   <a class="gmap" href="${gmapUrl(GQ[s.id]||s.name)}" target="_blank" rel="noopener">📍 Open in Google Maps</a>
+   <button class="btn ${v?"":"green"}" data-stamp="${s.id}">${v?"✓ Stamp collected (tap to undo)":"📸 I've been here! Get my stamp"}</button>
+   <p class="note">Seasons shift a little every year — check the official site before you go.</p></div>`;
+  document.getElementById("sheetBg").classList.add("on");
+}
+function closeSheet(){document.getElementById("sheetBg").classList.remove("on")}
+
+document.getElementById("tourList").innerHTML=TOURS.map(t=>`<div class="tour"><span class="soon">Coming soon</span><h3>${t.name}</h3><div class="meta"><span>⏱ ${t.dur}</span><span>📅 ${t.when}</span><span>👥 small group</span></div><ul>${t.list.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+
+
+/* recipes */
+const RECIPES=[
+ {id:"natto",name:"Mito-style Natto Rice",jp:"納豆ごはん",emoji:"🫘",bg:"#f6e2b3",time:5,level:"Super easy",ib:true,base:1,
+  kaho:"Breakfast of every Ibaraki person. Stir it like your life depends on it!",
+  ing:[["Natto",1,"pack"],["Hot cooked rice",1,"bowl"],["Natto sauce or soy sauce",1,"tsp"],["Karashi (Japanese mustard)",0.5,"tsp"],["Green onion, chopped",1,"tbsp"],["Egg yolk (optional)",1,""]],
+  steps:["Open the natto and stir with chopsticks about 50 times until it gets white and fluffy.","Add the sauce and mustard, then stir again.","Put it on hot rice. Top with green onion and the egg yolk if you like.","Mix and eat right away!"],
+  swap:"Find natto in the freezer section of Asian supermarkets. Thaw it in the fridge overnight."},
+ {id:"onigiri",name:"Onigiri (Rice Balls)",jp:"おにぎり",emoji:"🍙",bg:"#dfe8fb",time:15,level:"Easy",base:4,
+  kaho:"My lunch on busy work days. Convenience store ones are good, homemade is better!",
+  ing:[["Japanese short-grain rice, cooked",2,"cups"],["Salt",0.5,"tsp"],["Nori seaweed sheets",2,""],["Canned tuna",70,"g"],["Mayonnaise",1,"tbsp"]],
+  steps:["Mix the tuna with mayonnaise. This is the filling.","Wet your hands with water and rub a little salt on your palms.","Take a handful of warm rice, make a hole in the middle and put in some filling.","Close the rice around the filling and press gently into a triangle, 3–4 times. Don't squeeze too hard!","Cut nori into strips and wrap around the bottom."],
+  swap:"Other fillings: salted salmon, umeboshi (pickled plum), or kombu tsukudani. Use sushi rice if you can't find Japanese rice."},
+ {id:"miso",name:"Miso Soup",jp:"味噌汁",emoji:"🥣",bg:"#f3dfc6",time:10,level:"Easy",base:2,
+  kaho:"My mom's miso soup = the taste of home. Every family's is a little different.",
+  ing:[["Dashi stock",400,"ml"],["Miso paste",2,"tbsp"],["Silken tofu, cubed",100,"g"],["Dried wakame seaweed",1,"tsp"],["Green onion, chopped",1,"tbsp"]],
+  steps:["Heat the dashi in a pot until it's almost boiling.","Add the tofu and wakame, cook 1–2 minutes.","Turn the heat low. Put the miso in a ladle and melt it slowly into the soup.","Don't boil it after adding miso — it loses the nice smell.","Serve with green onion on top."],
+  swap:"Instant dashi powder (1 tsp + 400 ml water) is totally fine. That's what most Japanese homes use!"},
+ {id:"oyakodon",name:"Oyakodon",jp:"親子丼",emoji:"🍳",bg:"#fbe0d6",time:20,level:"Easy",base:2,
+  kaho:"“Oyako” means parent and child… chicken and egg. A little dark, but so delicious 😂",
+  ing:[["Chicken thigh, bite-size",250,"g"],["Onion, sliced",0.5,""],["Eggs",3,""],["Dashi stock",150,"ml"],["Soy sauce",2,"tbsp"],["Mirin",2,"tbsp"],["Sugar",1,"tsp"],["Hot cooked rice",2,"bowls"]],
+  steps:["Put dashi, soy sauce, mirin and sugar in a small frying pan and bring to a simmer.","Add the onion and chicken. Cook 5–6 minutes until the chicken is cooked through.","Beat the eggs lightly — leave some white parts, don't mix too much.","Pour the eggs over in a circle. Cover and cook about 1 minute until half set.","Slide it on top of the rice. Soft and runny is the best!"],
+  swap:"No mirin? Use 1 tbsp sugar + 1 tbsp water instead."},
+ {id:"tamagoyaki",name:"Tamagoyaki",jp:"卵焼き",emoji:"🥚",bg:"#fcefd2",time:10,level:"Medium",base:2,
+  kaho:"Sweet or salty? This is a big fight in Japan. My answer: sweet!",
+  ing:[["Eggs",3,""],["Sugar",1,"tbsp"],["Soy sauce",1,"tsp"],["Water or dashi",2,"tbsp"],["Oil",1,"tsp"]],
+  steps:["Mix eggs, sugar, soy sauce and water well.","Heat a pan on medium-low and wipe with oil.","Pour in a thin layer. When it's half set, roll it to one side.","Oil the pan again, pour another thin layer, lift the roll so egg goes under, then roll again.","Repeat until the egg is gone. Rest 2 minutes, then slice."],
+  swap:"No square pan? A small round pan works. Just trim the edges — and eat the edges yourself 😋"},
+ {id:"renkon",name:"Lotus Root Kinpira",jp:"れんこんのきんぴら",emoji:"🪷",bg:"#e3efd9",time:15,level:"Easy",ib:true,base:2,
+  kaho:"Ibaraki grows the most lotus root in Japan! Crunchy, sweet and salty.",
+  ing:[["Lotus root",150,"g"],["Sesame oil",1,"tbsp"],["Soy sauce",1.5,"tbsp"],["Mirin",1,"tbsp"],["Sugar",1,"tsp"],["Chili flakes",1,"pinch"],["Sesame seeds",1,"tsp"]],
+  steps:["Peel the lotus root and slice thin (2–3 mm). Soak in water 5 minutes so it stays white.","Heat sesame oil in a pan and stir-fry the lotus root 2–3 minutes.","Add soy sauce, mirin, sugar and chili. Cook until the liquid is almost gone.","Sprinkle sesame seeds. Good hot or cold — great for bento!"],
+  swap:"Frozen sliced lotus root from Asian supermarkets works well. Carrots or burdock root are also classic."},
+ {id:"hoshiimo",name:"Homemade Hoshiimo",jp:"干し芋",emoji:"🍠",bg:"#f6d6b8",time:"1–2 weeks",level:"Patience!",ib:true,base:4,
+  kaho:"Ibaraki's winter treasure. Grandmas make it on their porch. Now you can too!",
+  ing:[["Sweet potatoes",1,"kg"]],
+  steps:["Steam the sweet potatoes with skin on until very soft, about 40–60 minutes.","Peel while still warm (careful, hot!).","Slice lengthwise about 1 cm thick.","Put the slices on a net or rack outside in a sunny, cold, dry place. Bring them in at night.","Dry 1–2 weeks until chewy, turning them sometimes. Done!"],
+  swap:"No cold sunny weather? Use the oven at the lowest temperature with the door a little open for several hours, or a food dehydrator. Orange Japanese-type sweet potatoes (beni haruka) are the best."},
+];
+const RCHIPS=[{k:"all",l:"All"},{k:"easy",l:"⚡ Under 15 min"},{k:"ib",l:"⭐ Ibaraki special"}];
+let rfilter="all",servings=null,curRecipe=null,checked=new Set();
+function fmt(n){if(n>=10)return Math.round(n).toString();const f={0.25:"¼",0.5:"½",0.75:"¾",0.33:"⅓",0.67:"⅔"};const w=Math.floor(n),r=Math.round((n-w)*100)/100;let fr="";for(const k in f){if(Math.abs(r-k)<0.05){fr=f[k];break}}if(!fr&&r>0)return(Math.round(n*10)/10).toString();return(w?w:"")+fr||"0"}
+function renderCook(){
+  document.getElementById("rchips").innerHTML=RCHIPS.map(c=>`<button class="chip rchip ${rfilter===c.k?"on":""}" data-rk="${c.k}">${c.l}</button>`).join("");
+  const list=RECIPES.filter(r=>rfilter==="all"||(rfilter==="ib"&&r.ib)||(rfilter==="easy"&&typeof r.time==="number"&&r.time<=15));
+  document.getElementById("recipeList").innerHTML=list.map(r=>`<div class="rcard" data-r="${r.id}"><div class="pic" style="background:${r.bg}">${r.emoji}</div><div class="rb"><h3>${r.name}</h3><div class="jp">${r.jp}</div><div class="rm"><span class="tag">⏱ ${typeof r.time==="number"?r.time+" min":r.time}</span><span class="tag">${r.level}</span>${r.ib?'<span class="tag ib">⭐ Ibaraki</span>':""}</div></div></div>`).join("");
+}
+function openRecipe(id){curRecipe=RECIPES.find(r=>r.id===id);servings=curRecipe.base;checked=new Set();drawRecipe()}
+function drawRecipe(){
+  const r=curRecipe,k=servings/r.base;
+  document.getElementById("sheet").innerHTML=`
+   <div class="rhead" style="background:${r.bg}">${r.emoji}<button class="close" data-close>✕</button></div>
+   <div class="inner"><h2>${r.name}</h2><div style="color:var(--muted);font-size:14px">${r.jp} · ⏱ ${typeof r.time==="number"?r.time+" min":r.time} · ${r.level}</div>
+   <div class="kaho-says"><div class="mini" style="width:40px;height:40px">${AVATAR}</div><div class="txt hand" style="font-size:21px">${r.kaho}</div></div>
+   <h4>Ingredients</h4>
+   <div class="serv"><button data-sv="-1">−</button><b>${servings} ${servings===1?"serving":"servings"}</b><button data-sv="1">+</button></div>
+   <ul class="ing">${r.ing.map((g,i)=>`<li data-ing="${i}" class="${checked.has(i)?"done":""}"><span class="bx">${checked.has(i)?"✓":""}</span>${g[0]}<span class="amt">${fmt(g[1]*k)} ${g[2]}</span></li>`).join("")}</ul>
+   <h4>How to make it</h4>
+   <ol class="steps">${r.steps.map(x=>`<li>${x}</li>`).join("")}</ol>
+   <div class="swap"><b>🛒 Living outside Japan?</b><br>${r.swap}</div>
+   <p class="note">Made it? Post a photo with <b>#KahoIbaraki</b> — I want to see!</p></div>`;
+  document.getElementById("sheetBg").classList.add("on");
+}
+document.addEventListener("click",e=>{
+  const rc=e.target.closest(".rchip");if(rc){e.stopImmediatePropagation();rfilter=rc.dataset.rk;renderCook();return}
+  const card=e.target.closest(".rcard");if(card){openRecipe(card.dataset.r);return}
+  const sv=e.target.closest("[data-sv]");if(sv){servings=Math.min(12,Math.max(1,servings+ +sv.dataset.sv));drawRecipe();return}
+  const li=e.target.closest("[data-ing]");if(li){const i=+li.dataset.ing;checked.has(i)?checked.delete(i):checked.add(i);drawRecipe();return}
+},true);
+
+
+/* blog */
+const POSTS=[
+ {id:"kochia",cat:"Travel",emoji:"🔴",bg:"#f8d3c8",date:"Nov 2026",min:2,feat:true,
+  title:"I went to see the kochia!",
+  sum:"A whole hill of fluffy red balls. Hitachi Seaside Park in autumn is something else.",
+  body:[["p","I finally went to see the kochia at Hitachi Seaside Park! I went early in the morning — and people were already waiting in line! Kochia is that popular. In spring this park is famous for the blue nemophila flowers. But in autumn, the hill changes completely."],
+   ["p","Kochia are round, fluffy plants. In summer they are bright green. Then in autumn they slowly turn red, like the whole hill is blushing."],
+   ["pull","It looks like someone put thousands of red pom-poms on a hill."],
+   ["h","Fun facts about kochia"],
+   ["ul",["In Japanese it's also called “hōkigi” — broom tree. People used to dry it and make brooms!","Its seeds are eaten in Akita as “tonburi”, also called “field caviar”.","The color changes week by week: green → pink-red → red → golden brown."]],
+   ["h","Tips if you go"],
+   ["ul",["Best red color is usually in October — check the park's website for the latest status","Go early in the morning — but even early, there was already a line when I got there! Arrive before opening if you can","Walk up to the top of the hill. You can see the ocean too!"]],
+   ["p","Spring blue, autumn red. Same hill, two totally different worlds. This is why I love Ibaraki."],
+   ["h","Why I keep sharing Ibaraki"],
+   ["p","Ibaraki is often ranked Japan's “least attractive” prefecture. Honestly, that makes me a little sad — and a little angry 😤"],
+   ["p","Because look at this place! Beautiful nature like this, only about one hour from Tokyo. Most people just don't know about it yet. Even many Japanese people."],
+   ["pull","I want to change Ibaraki's image — and show the whole world how beautiful it is."],
+   ["p","So I make videos, I write this blog, and I made this app. If even one person visits Ibaraki because of me, I'll be so happy."],
+   ["p","Have you seen kochia before? Tell me on YouTube! And if you go, post with #KahoIbaraki 🔴"]]},
+ {id:"least",cat:"Ibaraki",emoji:"🏆",bg:"#fcefd2",date:"Nov 2026",min:3,
+  title:"Is Ibaraki really Japan's “least attractive” prefecture?",
+  sum:"Every year a ranking puts us at (or near) the bottom. Here's why I think it's wrong.",
+  body:[["p","Every autumn, a big survey ranks Japan's 47 prefectures by how “attractive” they are. And every year, people wait to see if Ibaraki is last again. It has been many times. Even Ibaraki people joke about it."],
+   ["p","But honestly? I think the ranking just means people don't know Ibaraki. Not that there's nothing here."],
+   ["pull","Being unknown is not the same as being boring."],
+   ["h","What people miss"],
+   ["ul",["Hills that turn completely blue in spring (Hitachi Seaside Park)","A giant waterfall that can freeze in winter (Fukuroda Falls)","A torii gate standing in the ocean (Oarai)","Some of the best melons, chestnuts and hoshiimo in Japan"]],
+   ["p","And it's about one hour from Tokyo. No crowds like Kyoto. Locals are surprised and happy when foreign people come."],
+   ["p","So this is my small project: show the world the real Ibaraki. If you visit, post with #KahoIbaraki. Let's change that ranking together!"]]},
+ {id:"surprise",cat:"Life",emoji:"🌾",bg:"#e3efd9",date:"Oct 2026",min:4,
+  title:"5 things that surprise people about rural Japan",
+  sum:"It's not Tokyo. No trains every 3 minutes, but neighbors give you vegetables.",
+  body:[["p","When people think of Japan, they think Tokyo: neon, crowded trains, tiny apartments. Rural Japan is a different world. Here's what surprises my followers the most."],
+   ["h","1. You need a car"],["p","Trains and buses come maybe once an hour, sometimes less. Most families have one car per adult. Yes, really."],
+   ["h","2. Neighbors share vegetables"],["p","Someone grows too many cucumbers? You'll find a bag at your door. Then you give something back. It's a never-ending cycle 😂"],
+   ["h","3. It's SO quiet at night"],["p","Except summer. Then the frogs in the rice fields are louder than Shibuya."],
+   ["h","4. Garbage rules are serious"],["p","Burnable, plastic, cans, bottles, paper — each on a different day. Wrong day? Your bag stays there with a warning sticker. Everyone will know."],
+   ["h","5. The convenience store is everything"],["p","Bank, post office, lunch, concert tickets, bills. In the countryside the konbini is the center of the town."],
+   ["pull","Slow, a little inconvenient… but I wouldn't trade it."]]},
+ {id:"overtime",cat:"Work",emoji:"💼",bg:"#dfe8fb",date:"Oct 2026",min:4,
+  title:"Overtime in Japan: what it's really like",
+  sum:"You've heard the stories. Here's my honest view as a working person in Japan.",
+  body:[["p","One of the most common questions I get: “Do Japanese people really work that much?” The short answer: it depends on the company. But overtime culture is real."],
+   ["h","Why people stay late"],
+   ["ul",["Leaving before your boss can feel awkward","Teamwork culture — if your team is busy, you help","Lots of meetings and paperwork (yes, we still love hanko stamps)"]],
+   ["p","Things are slowly changing. The government added limits on overtime, and many younger people care more about work-life balance now."],
+   ["pull","After a long day, a convenience store dessert is my therapy."],
+   ["h","How I survive"],
+   ["p","Weekends in nature. That's why I love Ibaraki — one drive and I'm at the ocean or a waterfall. Then on Monday I'm ready again (kind of)."],
+   ["p","Tell me in the comments on YouTube: how is work culture in your country?"]]},
+ {id:"daytrip",cat:"Travel",emoji:"🚃",bg:"#fbe0d6",date:"Sep 2026",min:3,
+  title:"Easy one-day trip to Ibaraki from Tokyo",
+  sum:"No car? No problem. A simple plan with trains and buses.",
+  body:[["p","Many travelers ask me: “Can I visit Ibaraki without a car?” Yes! Here's an easy route."],
+   ["h","Morning: Hitachi Seaside Park"],["p","Take the JR Joban Line limited express from Tokyo/Ueno toward Katsuta, then the bus to the park. Go early — especially in spring!"],
+   ["h","Lunch: Nakaminato fish market"],["p","Fresh sushi and seafood bowls. It's a short ride from the park area. Come hungry."],
+   ["h","Afternoon: Oarai Isosaki Shrine"],["p","See the torii gate on the rocks by the sea. Sunset here is beautiful too."],
+   ["h","Tips"],["ul",["Check bus times before you go — they are not frequent","Bring cash for small shops","Buy hoshiimo as a souvenir (omiyage)"]],
+   ["pull","Then you can say: I've been to the real Japan!"]]},
+ {id:"rules",cat:"Life",emoji:"🙇‍♀️",bg:"#f6e2b3",date:"Sep 2026",min:3,
+  title:"Unwritten rules of the Japanese countryside",
+  sum:"Nobody tells you these. But everybody knows them.",
+  body:[["p","Living in rural Japan comes with rules that are not written anywhere. Here are a few."],
+   ["ul",["Say hello to everyone. Even people you don't know. Especially old people.","When you travel, bring back omiyage (souvenirs) for coworkers and neighbors.","Join the neighborhood association (jichikai). Cleaning days are not really optional 😅","If someone gives you something, return the favor — but not right away, and not too much.","Don't park in front of someone's field. They will find you."]],
+   ["pull","It sounds strict, but it's how people take care of each other."],
+   ["p","Have you noticed any unwritten rules in Japan? Let me know!"]]},
+ {id:"hoshiimo",cat:"Food",emoji:"🍠",bg:"#f6d6b8",date:"Nov 2026",min:2,
+  title:"Hoshiimo season is here!",
+  sum:"Cold wind + sunshine = Ibaraki's sweetest winter snack.",
+  body:[["p","When the wind gets cold, Ibaraki starts making hoshiimo — dried sweet potato. Ibaraki makes most of the hoshiimo in Japan."],
+   ["p","Farmers steam sweet potatoes, slice them and dry them in the cold sun. The result is chewy, sticky and naturally sweet. No sugar added!"],
+   ["pull","It's like candy, but healthy. Dangerous."],
+   ["p","You can find it at roadside stations (michi-no-eki) and supermarkets in winter. Or try making it at home — the recipe is in the Cook tab!"]]},
+];
+const BCHIPS=["All","Ibaraki","Life","Work","Travel","Food"];
+let bfilter="All";
+let liked=load("kahoLikes",[]);
+function renderBlog(){
+  document.getElementById("bchips").innerHTML=BCHIPS.map(c=>`<button class="chip bchip ${bfilter===c?"on":""}" data-bk="${c}">${c}</button>`).join("");
+  const list=POSTS.filter(p=>bfilter==="All"||p.cat===bfilter);
+  document.getElementById("postList").innerHTML=list.map(p=>`<div class="post ${p.feat&&bfilter==="All"?"feat":""}" data-post="${p.id}"><div class="ph" style="background:${p.bg}"><span class="cat">${p.cat}</span><span>${p.emoji}</span></div><div class="pb"><h3>${p.title}</h3><p>${p.sum}</p><div class="pm"><span>${p.date} · ${p.min} min read</span><span>${liked.includes(p.id)?"♥ Liked":""}</span></div></div></div>`).join("");
+}
+function openPost(id){
+  const p=POSTS.find(x=>x.id===id),lk=liked.includes(id);
+  const html=p.body.map(([t,v])=>t==="p"?`<p>${v}</p>`:t==="h"?`<h4>${v}</h4>`:t==="pull"?`<div class="pull">${v}</div>`:`<ul>${v.map(x=>`<li>${x}</li>`).join("")}</ul>`).join("");
+  document.getElementById("sheet").innerHTML=`
+   <div class="rhead" style="background:${p.bg}">${p.emoji}<button class="close" data-close>✕</button></div>
+   <div class="inner"><div class="qnum">${p.cat} · ${p.date} · ${p.min} min read</div><h2 style="margin:6px 0 12px;line-height:1.15">${p.title}</h2>
+   <div class="kaho-says" style="margin:0 0 16px"><div class="mini" style="width:36px;height:36px">${AVATAR}</div><div style="font-size:13px;color:var(--muted);align-self:center">by <b style="color:var(--ink)">Kaho</b> · Ibaraki, Japan</div></div>
+   <div class="article">${html}</div>
+   <div class="likebar"><button class="btn ${lk?"":"gold"}" data-like="${p.id}" style="margin:0">${lk?"♥ Liked!":"♡ Like this post"}</button><a class="btn dark" style="margin:0" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ Watch videos</a></div></div>`;
+  document.getElementById("sheetBg").classList.add("on");document.getElementById("sheet").scrollTop=0;
+}
+document.addEventListener("click",e=>{
+  const bc=e.target.closest(".bchip");if(bc){e.stopImmediatePropagation();bfilter=bc.dataset.bk;renderBlog();return}
+  const po=e.target.closest(".post");if(po){openPost(po.dataset.post);return}
+  const lb=e.target.closest("[data-like]");if(lb){const id=lb.dataset.like;liked=liked.includes(id)?liked.filter(x=>x!==id):[...liked,id];save("kahoLikes",liked);if(liked.includes(id))toast("Thank you! 🙏");openPost(id);renderBlog();return}
+},true);
+
+/* routing */
+const VIEWS=["home","map","cook","blog","tours","guide"];
+const BUBBLES={home:"Hi, I'm Kaho! Welcome to my Ibaraki",map:"Collect all 10 stamps. You can do it!",play:"Let's see how much you know 😏",cook:"Let's cook! Itadakimasu 🍚",blog:"Grab a tea. Let's talk 🍵",tours:"Tours are coming soon. Wait for me!",guide:"My guidebook — free for you! 📖"};
+function route(){
+  let h=location.hash.slice(1);if(!VIEWS.includes(h))h="home";
+  VIEWS.forEach(v=>document.getElementById("v-"+v).classList.toggle("on",v===h));
+  document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("on",a.dataset.v===h));
+  document.getElementById("heroBubble").textContent=BUBBLES[h];
+  if(h==="map")renderMap();if(h==="home")renderHome();if(h==="cook")renderCook();if(h==="blog")renderBlog();
+  if(h!=="home")document.getElementById("v-"+h).scrollIntoView({behavior:"smooth"});else window.scrollTo(0,0);
+}
+document.addEventListener("click",e=>{
+  const chip=e.target.closest(".chip[data-k]");if(chip){filter=chip.dataset.k;renderHome();return}
+  const card=e.target.closest(".card[data-id]");if(card){openSpot(card.dataset.id);return}
+  const pin=e.target.closest(".pin");if(pin){openSpot(pin.dataset.id);return}
+  const go=e.target.closest("[data-go]");if(go){document.getElementById(go.dataset.go).scrollIntoView({behavior:"smooth"});return}
+  const st=e.target.closest("[data-stamp]");if(st){const id=st.dataset.stamp,was=stamps.includes(id);
+    stamps=was?stamps.filter(x=>x!==id):[...stamps,id];save("kahoStamps",stamps);
+    if(!was){confetti();toast(`Stamp get! Now: ${level(stamps.length)[0]}`)}else toast("Stamp removed");
+    renderMap();renderHome();openSpot(id);return}
+  if(e.target.closest("[data-close]"))closeSheet();
+});
+document.getElementById("sheetBg").addEventListener("click",e=>{if(e.target.id==="sheetBg")closeSheet()});
+window.addEventListener("hashchange",route);route();
+/* PWA: offline + install */
+(function(){
+  try{if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}
+  const standalone=(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone;
+  let dismissed=false;try{dismissed=localStorage.getItem("kahoInstallX")==="1"}catch(e){}
+  if(standalone||dismissed)return;
+  const box=document.getElementById("install"),btn=document.getElementById("instBtn");let ev=null;
+  window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();ev=e;box.classList.add("on")});
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(ios){box.classList.add("on");document.getElementById("instTxt").textContent="Tap Share ⬆️ then “Add to Home Screen”";btn.style.display="none"}
+  btn.onclick=async()=>{if(!ev)return;ev.prompt();try{await ev.userChoice}catch(e){}box.classList.remove("on")};
+  document.getElementById("instX").onclick=()=>{box.classList.remove("on");try{localStorage.setItem("kahoInstallX","1")}catch(e){}};
+})();
+
+</script>
+</body>
+</html>
