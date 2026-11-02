@@ -67,6 +67,7 @@ const head = ({ title, desc, url, image, type, extra = "" }) => `<!DOCTYPE html>
 ${image ? `<meta property="og:image" content="${image}">\n<meta name="twitter:card" content="summary_large_image">` : `<meta name="twitter:card" content="summary">`}
 <meta name="theme-color" content="#1f3b35">
 <link rel="icon" href="../icon-192.png">
+<link rel="alternate" type="application/rss+xml" title="Kaho's Ibaraki Blog" href="${SITE}blog/feed.xml">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>${CSS}</style>
 ${extra}</head>`;
@@ -144,4 +145,16 @@ fs.writeFileSync(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="
 ${urls.map(([u, d]) => `  <url><loc>${u}</loc>${d ? `<lastmod>${d}</lastmod>` : ""}</url>`).join("\n")}
 </urlset>
 `);
-console.log(`Built ${POSTS.length} posts -> blog/, sitemap.xml`);
+// RSS feed (helps search engines and readers find new posts quickly)
+const rssDate = d => { const m = isoMonth(d); return new Date((m || today.slice(0, 7)) + "-01T00:00:00Z").toUTCString(); };
+fs.writeFileSync(path.join(outDir, "feed.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
+<title>Kaho's Ibaraki Blog</title>
+<link>${SITE}blog/</link>
+<atom:link href="${SITE}blog/feed.xml" rel="self" type="application/rss+xml"/>
+<description>${esc(indexDesc)}</description>
+<language>en</language>
+${POSTS.map(p => `<item><title>${esc(plain(p.title))}</title><link>${SITE}blog/${p.id}.html</link><guid>${SITE}blog/${p.id}.html</guid><pubDate>${rssDate(p.date)}</pubDate><category>${esc(p.cat)}</category><description>${esc(plain(p.sum))}</description></item>`).join("\n")}
+</channel></rss>
+`);
+console.log(`Built ${POSTS.length} posts -> blog/, sitemap.xml, blog/feed.xml`);
