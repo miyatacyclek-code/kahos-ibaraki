@@ -11,6 +11,12 @@
 <meta name="apple-mobile-web-app-title" content="Kaho's Ibaraki">
 <meta name="description" content="A local's guide to Ibaraki, Japan — 1 hour from Tokyo. Spots, food, recipes and stories by Kaho.">
 <title>Kaho's Ibaraki Guide</title>
+<link rel="canonical" href="https://miyatacyclek-code.github.io/kahos-ibaraki/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kaho's Ibaraki Guide">
+<meta property="og:description" content="A local's guide to Ibaraki, Japan — 1 hour from Tokyo. Spots, food, recipes and stories by Kaho.">
+<meta property="og:url" content="https://miyatacyclek-code.github.io/kahos-ibaraki/">
+<meta property="og:image" content="https://miyatacyclek-code.github.io/kahos-ibaraki/photos/seaside-nemophila.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&family=Caveat:wght@600;700&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -477,6 +483,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     <div class="sec"><h2>Kaho's blog</h2><span class="hand">real life, no filter</span></div>
     <div class="chips" id="bchips"></div>
     <div id="postList"></div>
+    <p style="text-align:center;font-size:13px;margin:4px 0 0"><a href="blog/" style="color:var(--muted)">All posts as web pages →</a></p>
   </section>
 
 
@@ -1066,7 +1073,7 @@ function openPost(id){
    <div class="inner"><div class="qnum">${p.cat} · ${p.date} · ${p.min} min read</div><h2 style="margin:6px 0 12px;line-height:1.15">${p.title}</h2>
    <div class="kaho-says" style="margin:0 0 16px"><div class="mini" style="width:36px;height:36px">${AVATAR}</div><div style="font-size:13px;color:var(--muted);align-self:center">by <b style="color:var(--ink)">Kaho</b> · Ibaraki, Japan</div></div>
    <div class="article">${html}</div>
-   <div class="likebar"><button class="btn ${lk?"":"gold"}" data-like="${p.id}" style="margin:0">${lk?"♥ Liked!":"♡ Like this post"}</button><a class="btn dark" style="margin:0" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ Watch videos</a></div></div>`;
+   <div class="likebar"><button class="btn ${lk?"":"gold"}" data-like="${p.id}" style="margin:0">${lk?"♥ Liked!":"♡ Like this post"}</button><a class="btn dark" style="margin:0" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ Watch videos</a></div><p style="text-align:center;font-size:13px;margin:14px 0 0"><a href="blog/${p.id}.html" style="color:var(--muted)">🔗 Open as a web page (easy to share)</a></p></div>`;
   document.getElementById("sheetBg").classList.add("on");document.getElementById("sheet").scrollTop=0;
 }
 document.addEventListener("click",e=>{

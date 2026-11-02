@@ -1,6 +1,6 @@
 // Offline support: keeps the app working without internet.
 // When you update the app, change the version number below.
-const CACHE = "kaho-ibaraki-v16";
+const CACHE = "kaho-ibaraki-v17";
 const FILES = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./photos/seaside-nemophila.jpg", "./photos/kochia.jpg", "./photos/fukuroda.jpg", "./photos/nakaminato.jpg", "./photos/tsukubasan.jpg", "./photos/oarai.jpg", "./photos/ushiku.jpg", "./photos/kasama.jpg", "./photos/kaho.jpg", "./photos/marukuni.jpg"];
 
 self.addEventListener("install", e => {
