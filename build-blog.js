@@ -20,6 +20,10 @@ const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(
 const plain = s => String(s).replace(/<[^>]*>/g, "");
 const MONTHS = { Jan: "01", Feb: "02", Mar: "03", Apr: "04", May: "05", Jun: "06", Jul: "07", Aug: "08", Sep: "09", Oct: "10", Nov: "11", Dec: "12" };
 const isoMonth = d => { const [m, y] = String(d).split(" "); return MONTHS[m] && y ? `${y}-${MONTHS[m]}` : null; };
+// Exact publish date (p.pub = "YYYY-MM-DD") if set, otherwise the month from p.date
+const pubDate = p => p.pub || isoMonth(p.date);
+const MNAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const showDate = p => { if (!p.pub) return esc(p.date); const [y, m, d] = p.pub.split("-"); return `<time datetime="${p.pub}">${MNAMES[+m - 1]} ${+d}, ${y}</time>`; };
 
 const CSS = `:root{--ink:#1d2433;--muted:#5f6878;--bg:#f7f2e7;--card:#fffdf7;--red:#d4532f;--line:#e7dcc6}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -30,7 +34,7 @@ a{color:#3b6fd4}
 .top a.brand{font-family:"Fraunces",Georgia,serif;font-weight:800;color:var(--ink);text-decoration:none;font-size:18px}
 .cardx{background:var(--card);border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);overflow:hidden}
 .hero{height:150px;display:grid;place-items:center;font-size:64px;border-bottom:2px solid var(--ink)}
-.hero.photo{height:260px;background-size:cover;background-position:center}
+img.hero{display:block;width:100%;height:260px;object-fit:cover;border-bottom:2px solid var(--ink)}
 .inner{padding:18px 18px 22px}
 .meta{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 h1,h2,h3{font-family:"Fraunces",Georgia,serif;letter-spacing:-.01em}
@@ -95,21 +99,21 @@ for (const p of POSTS) {
   const title = plain(p.title);
   const image = p.photo ? SITE + p.photo : null;
   const ld = {
-    "@context": "https://schema.org", "@type": "BlogPosting", headline: title, description: plain(p.sum),
+    "@context": "https://schema.org", "@type": "BlogPosting", headline: title, description: plain(p.desc || p.sum),
     author: { "@type": "Person", name: "Kaho", url: SITE }, mainEntityOfPage: url, inLanguage: "en",
-    articleSection: p.cat, ...(isoMonth(p.date) ? { datePublished: isoMonth(p.date) } : {}), ...(image ? { image } : {})
+    articleSection: p.cat, ...(pubDate(p) ? { datePublished: pubDate(p), dateModified: p.updated || pubDate(p) } : {}), ...(image ? { image } : {})
   };
   const related = [...POSTS.filter(x => x.id !== p.id && x.cat === p.cat), ...POSTS.filter(x => x.id !== p.id && x.cat !== p.cat)].slice(0, 3);
   const html = head({
-    title: `${title} | Kaho's Ibaraki Guide`, desc: plain(p.sum), url, image, type: "article",
+    title: p.seo || `${title} | Kaho's Ibaraki Guide`, desc: plain(p.desc || p.sum), url, image, type: "article",
     extra: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>\n`
   }) + `
 <body><div class="wrap">
 ${topbar}
 <div class="cardx">
-${p.photo ? `<div class="hero photo" style="background-image:url(../${p.photo})" role="img" aria-label="${esc(title)}"></div>` : `<div class="hero" style="background:${p.bg}">${p.emoji}</div>`}
+${p.photo ? `<img class="hero" src="../${p.photo}" alt="${esc(p.alt || title)}" width="680" height="260">` : `<div class="hero" style="background:${p.bg}">${p.emoji}</div>`}
 <div class="inner">
-<div class="meta">${esc(p.cat)} · ${esc(p.date)} · ${p.min} min read</div>
+<div class="meta">${esc(p.cat)} · ${showDate(p)} · ${p.min} min read</div>
 <h1>${p.title}</h1>
 <div class="by">by <b>Kaho</b> · Ibaraki, Japan</div>
 <article>
@@ -139,14 +143,14 @@ ${footer}
 `);
 
 const today = new Date().toISOString().slice(0, 10);
-const urls = [[SITE, today], [SITE + "blog/", today], ...POSTS.map(p => [`${SITE}blog/${p.id}.html`, null])];
+const urls = [[SITE, today], [SITE + "blog/", today], ...POSTS.map(p => [`${SITE}blog/${p.id}.html`, p.updated || pubDate(p)])];
 fs.writeFileSync(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(([u, d]) => `  <url><loc>${u}</loc>${d ? `<lastmod>${d}</lastmod>` : ""}</url>`).join("\n")}
 </urlset>
 `);
 // RSS feed (helps search engines and readers find new posts quickly)
-const rssDate = d => { const m = isoMonth(d); return new Date((m || today.slice(0, 7)) + "-01T00:00:00Z").toUTCString(); };
+const rssDate = p => new Date(p.pub ? p.pub + "T00:00:00Z" : (isoMonth(p.date) || today.slice(0, 7)) + "-01T00:00:00Z").toUTCString();
 fs.writeFileSync(path.join(outDir, "feed.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
 <title>Kaho's Ibaraki Blog</title>
@@ -154,7 +158,7 @@ fs.writeFileSync(path.join(outDir, "feed.xml"), `<?xml version="1.0" encoding="U
 <atom:link href="${SITE}blog/feed.xml" rel="self" type="application/rss+xml"/>
 <description>${esc(indexDesc)}</description>
 <language>en</language>
-${POSTS.map(p => `<item><title>${esc(plain(p.title))}</title><link>${SITE}blog/${p.id}.html</link><guid>${SITE}blog/${p.id}.html</guid><pubDate>${rssDate(p.date)}</pubDate><category>${esc(p.cat)}</category><description>${esc(plain(p.sum))}</description></item>`).join("\n")}
+${POSTS.map(p => `<item><title>${esc(plain(p.title))}</title><link>${SITE}blog/${p.id}.html</link><guid>${SITE}blog/${p.id}.html</guid><pubDate>${rssDate(p)}</pubDate><category>${esc(p.cat)}</category><description>${esc(plain(p.desc || p.sum))}</description></item>`).join("\n")}
 </channel></rss>
 `);
 console.log(`Built ${POSTS.length} posts -> blog/, sitemap.xml, blog/feed.xml`);
