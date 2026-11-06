@@ -94,6 +94,14 @@ details p{margin-top:8px}
 .it.wear{border-color:#d9a83a;background:#2a2614}
 .it.wear small{color:#d9a83a}
 .it.lock{opacity:.55}
+.it.season{border-style:dashed}
+
+.journey{background:#141a22;border:1px solid #232c38;border-radius:16px;padding:12px 14px;font-size:14px}
+.jbar{height:12px;border-radius:6px;background:#26303c;overflow:hidden;margin:8px 0 4px;position:relative}
+.jbar i{display:block;height:100%;background:#6fae4a}
+.jst{display:flex;justify-content:space-between;font-size:11px;color:#8f8a78}
+.ms{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1f2731;font-size:13px}
+.ms.done{color:#cfe3b8}.ms span:last-child{color:#8f8a78}.ms.done span:last-child{color:#d9a83a}
 </style>
 </head>
 <body>
@@ -121,6 +129,7 @@ details p{margin-top:8px}
 
 <div class="msg" id="msg">Aボタンを押してはじめよう</div>
 <button class="ok" id="greet" style="margin-top:10px">あいさつする</button>
+<button class="ok" id="fight" style="margin-top:8px;background:#5a2a20">水戸の丸いばあちゃんと しょうぶ！</button>
 
 <div class="row">
 <button class="g on" id="sSound">音：オン</button>
@@ -130,6 +139,13 @@ details p{margin-top:8px}
 <div class="row" style="display:none">
 </div>
 
+<h2>1年のせいちょう</h2>
+<div class="journey">
+<div id="jHead"></div>
+<div class="jbar"><i id="jFill"></i></div>
+<div class="jst"><span>0日</span><span>半年</span><span>365日</span></div>
+<div id="jList" style="margin-top:10px"></div>
+</div>
 <h2>きせかえ</h2>
 <div class="shop">
 <div class="shead"><span>いいことや英語で<b class="acorn">どんぐり</b>がたまるよ</span><span class="acorn" id="acorn">どんぐり 5</span></div>
@@ -169,13 +185,15 @@ details p{margin-top:8px}
 <p>しかる：用もないのに呼んだとき（わがまま）は、しかってしつけよう。わがままじゃないときにしかると悲しみます。</p>
 <p>よぶ：赤く光ったらオクタマ坊が呼んでいます。15分以上ほうっておくと「お世話ミス」になります。</p>
 <p>たまご：小さいたまごが、だんだん大きくなって、ヒビが入って生まれます（約6分）。ボタンを押すとあたためられて、早く大きくなります。いいことボタンでも大きくなります。</p>
-<p>成長：たまご → こども（1時間）→ わかもの（12時間）→ せいねん（1日）→ おとな。お世話ミスが少なく、しつけが75%以上だと、こわい「山の主」になります。ワサビ好きなら「ワサビ坊」、お世話が足りないと「ぐうたら坊」に。</p>
+<p>成長（1年かけてゆっくり）：たまご（約6分）→ あかちゃん → こども（3日目）→ おにいさん（45日目）→ おとな（150日目）→ 365日で「でんせつ」。小さくなっているあいだ（80%未満）は成長がとまります。7日・30日・100日・200日・300日・365日にはプレゼントがあります。季節ごとに、その月だけ買えるきせかえ（点線のわく）も出てきます。</p>
+<p>おとなの姿：お世話ミスが少なく、しつけが75%以上だと、こわい「山の主」になります。ワサビ好きなら「ワサビ坊」、お世話が足りないと「ぐうたら坊」に。</p>
 <p>きょうの英語：毎日ひとつ、5さいでもわかるかんたんな英語が、絵といっしょに出ます。「きく」「ゆっくり」「ぶんで」で発音を聞いて、まねして言えたら「言えた！」を押してね。ごきげんとやさしさが上がります。</p>
 <p>やさしさ：「きょうのいいこと」や、ちゃんとしたお世話でやさしさが上がります。やさしさ70%以上でおとなになると「やさしい山の神」に。おとなになってからでも80%になると、やさしい姿に変わります。お世話ミスや、わけもなくしかるとやさしさが下がり、30%を切るとこわい姿にもどります。</p>
 <p>あいさつ：時間に合わせて「おはようございます」「こんにちは」「こんばんは」「おやすみなさい」のボタンが出ます。押すと声でこたえてくれます（1日1回ずつ、やさしさとどんぐりがもらえます）。夜8時にねむくなると「おやすみなさい」、朝7時におきると「おはようございます」と話しかけてきます。</p>
+<p>水戸の丸いばあちゃん：ときどき、ライバルの「水戸の丸いばあちゃん」があらわれます（こどもになってから）。Bでしょうぶ、Cでにげる。メーターがまんなかに来たときにAかBでワサビアタック！ばあちゃんは「なっとうネバネバこうげき」と「ほしいもビーム」でやりかえしてきます。かつとどんぐり+5。ほうっておくと、どんぐりを1こ持って帰ってしまいます。「しょうぶ」ボタンで自分からも1日3回までたたかえます。</p>
 <p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
 <p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
-<p>病気やおなかぺこぺこを長くほうっておくと、山へ帰ってしまいます。お出かけのときは「時間」を止めておけます。</p>
+<p>病気やおなかぺこぺこを長くほうっておくと、小さくなってしまいます。お出かけのときは「時間」を止めておけます。</p>
 </details>
 
 <h2>オクタマ坊のこわい声</h2>
@@ -198,6 +216,8 @@ const W=40,H=26,DOT=8;
 const P=a=>a.map(r=>r.padEnd(16,'.').slice(0,16));
 const Q=a=>a.map(r=>r.padEnd(8,'.').slice(0,8));
 const SPR={
+baa1:P([".......##.......", "......####......", "....########....", "...##########...", "..###......###..", "..#..........#..", ".#.###....###.#.", ".#.#.#.##.#.#.#.", ".#.###....###.#.", ".#............#.", ".#....####....#.", ".#.....##.....#.", "..#..........#..", "...##########...", "....#..##..#....", "...##......##..."]),
+baa2:P([".......##.......", "......####......", "....########....", "...##########...", "..###......###..", "..#..........#..", ".#.###....###.#.", ".#.#.#.##.#.#.#.", ".#.###....###.#.", ".#............#.", ".#.....##.....#.", ".#....#..#....#.", "..#..........#..", "...##########...", "....#..##..#....", "....##....##...."]),
 eggS:P(["................","................","................","................","................","................","......####......",".....#....#.....","....#..#...#....","....#......#....","....#.#..#.#....","....#......#....",".....#....#.....","......####......","................","................"]),
 eggM:P(["................","................","................",".......##.......",".....##..##.....","....#......#....","...#..#..#..#...","...#........#...","...#.#....#.#...","...#........#...","...#...##...#...","....#......#....",".....##..##.....",".......##.......","................","................"]),
 eggc2:P(["......####......","....##.#..##....","...#...#....#...","..#..#..#.#..#..","..#....#.....#..",".#....#.#.....#.",".#.#..#.#..#..#.",".##.##.#.##.#.#.",".#............#.",".#.....##.....#.","..#..........#..","..#..#....#..#..","...#........#...","....##....##....","......####......","................"]),
@@ -244,11 +264,15 @@ note:Q(["...####.","...#..#.","...#..#.","...#..#.",".###.###","####.###",".##..
 scale:Q(["...##...","########","#..##..#","#..##..#","...##...","...##...","..####..","########"]),
 flower:Q(["..#.#...",".#####..","..###...",".#####..","..#.#...","...#....","..##....","...#...."]),
 sparkle:Q(["...#....","...#....",".#####..","...#....","...#....","......#.",".....###","......#."]),
+natto:Q(["#.#.#...",".#.#.#..","#.###.#.",".#####..","#.###.#.",".#.#.#..","#.#.#...","........"]),
+imo:Q(["........","..####..",".######.","########","########",".######.","..####..","........"]),
+boom:Q(["#..#..#.",".#.#.#..","..###...","#######.","..###...",".#.#.#..","#..#..#.","........"]),
 cake:Q(["...#....","...#....","########","#......#","########","#......#","########","........"])
 };
 const FONT={'0':["###","#.#","#.#","#.#","###"],'1':[".#.","##.",".#.",".#.","###"],'2':["###","..#","###","#..","###"],'3':["###","..#","###","..#","###"],'4':["#.#","#.#","###","..#","..#"],'5':["###","#..","###","..#","###"],'6':["###","#..","###","#.#","###"],'7':["###","..#","..#",".#.",".#."],'8':["###","#.#","###","#.#","###"],'9':["###","#.#","###","..#","###"],'%':["#.#","..#",".#.","#..","#.#"]};
 const MENU=[{k:'food',l:'ごはん',i:'onigiri'},{k:'light',l:'でんき',i:'bulb'},{k:'game',l:'あそぶ',i:'ball'},{k:'med',l:'くすり',i:'syringe'},{k:'toilet',l:'トイレ',i:'toilet'},{k:'stat',l:'ようす',i:'meter'},{k:'scold',l:'しかる',i:'fist'},{k:'call',l:'よぶ',i:'bell'}];
-const STAGE_N=['たまご','こども','わかもの','せいねん','おとな'];
+const STAGE_N=['たまご','あかちゃん','こども','おにいさん','おとな'];
+const GD=[0,0,3,45,150];
 const FORM_N=['山の主オクタマ坊','ワサビ坊','ぐうたら坊','やさしい山の神オクタマ坊'];
 const HR=[0,15,40,60,80], JR=[0,18,45,65,90], EVO=[6,60,720,1440,Infinity];
 const KEY='okutamabo-v2';
@@ -258,7 +282,7 @@ $('icTop').innerHTML=MENU.slice(0,4).map((m,i)=>'<div class="ic" id="ic'+i+'">'+
 $('icBot').innerHTML=MENU.slice(4).map((m,i)=>'<div class="ic" id="ic'+(i+4)+'">'+iconSvg(m.i)+m.l+'</div>').join('');
 
 function rng(s){s.seed=(s.seed+0x6D2B79F5)|0;let t=s.seed;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}
-function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,size:1,greet:{d:'',l:[]},acorn:5,own:[],wear:{head:'',face:'',neck:'',bg:''},bad:{d:'',l:[]},eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
+function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,size:1,enemy:0,wins:0,loses:0,fights:{d:'',n:0},growDays:0,together:[],legend:false,greet:{d:'',l:[]},acorn:5,own:[],wear:{head:'',face:'',neck:'',bg:''},bad:{d:'',l:[]},eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
 let S=null,ref=null,saving=false,again=false,live=false;
 function loadLocal(){try{const v=localStorage.getItem(KEY);return v?JSON.parse(v):null}catch(e){return null}}
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
@@ -268,6 +292,7 @@ function save(){saveLocal();saveRemote()}
 function needsAtt(s){
   if(s.sleeping)return s.light?'light':'';
   if(s.sick)return'sick';
+  if(s.enemy)return'enemy';
   if(s.need)return'toilet';
   if(s.hunger===0)return'hunger';
   if(s.happy===0)return'happy';
@@ -284,19 +309,23 @@ function step(s,mt,isLive){
     if(--s.jT<=0){s.happy=Math.max(0,s.happy-1);s.jT=JR[s.stage]}
     if(s.pending>0&&!s.need){if(--s.pendT<=0){s.need=1;s.pending--;s.pendT=20+Math.floor(rng(s)*20)}}
     else if(s.need){s.need++;if(s.need>12){s.need=0;s.poops=Math.min(4,s.poops+1);if(isLive)ev('poop')}}
+    if(isLive&&s.stage>=2&&!s.enemy&&!s.sick&&!s.need&&Math.random()<1/240){s.enemy=1;ev('enemy')}
+    else if(s.enemy){if(++s.enemy>20){s.enemy=0;if(s.acorn>0)s.acorn--;if(isLive)ev('enemyLeft')}}
     if((s.stage===2||s.stage===3)&&!s.att&&!s.sick&&rng(s)<1/150){s.att='fake';s.attMin=0;s.attCounted=false}
   }
   if(s.poops>0){s.poopMin++;if(s.poopMin>=90&&!s.sick){s.sick=s.stage>=3?2:1;s.sickMin=0}}else s.poopMin=0;
-  if(s.sick){if(++s.sickMin>360){s.gone=true;s.goneWhy='sick'}}
-  if(s.hunger===0){if(++s.starve>720){s.gone=true;s.goneWhy='hunger'}}else s.starve=0;
+  if(s.sick){if(++s.sickMin>360){s.sickMin=0;s.size=Math.max(0.5,Math.round(((s.size||1)-0.1)*100)/100)}}
+  if(s.hunger===0){if(++s.starve>720){s.starve=0;s.size=Math.max(0.5,Math.round(((s.size||1)-0.1)*100)/100)}}else s.starve=0;
+  if(s.hunger>0&&(s.size||1)>=0.8)s.growDays=(s.growDays||0)+1/1440;
   const prev=s.att,na=needsAtt(s);
   if(na!==prev){s.att=na;s.attMin=0;s.attCounted=false;if(na&&isLive)ev('call')}
   else if(na){s.attMin++;if(na==='fake'&&s.attMin>15){s.att='';}
-    else if(s.attMin>=15&&!s.attCounted&&na!=='fake'){s.attCounted=true;s.mistakes++;s.kind=Math.max(0,(s.kind||0)-5);if(isLive)ev('angry')}}
-  if(s.stage>=1&&s.stage<4&&s.stageMin>=EVO[s.stage]){
+    else if(s.attMin>=15&&!s.attCounted&&na!=='fake'&&na!=='enemy'){s.attCounted=true;s.mistakes++;s.kind=Math.max(0,(s.kind||0)-5);if(isLive)ev('angry')}}
+  if(s.stage>=1&&s.stage<4&&(s.growDays||0)>=GD[s.stage+1]){
     s.stage++;s.stageMin=0;
     if(s.stage===4)s.form=s.kind>=70?3:(s.mistakes<=2&&s.disc>=75)?0:(s.wasabi>=5&&s.mistakes<=4)?1:2;
     if(isLive)ev('evolve')}
+  if(s.stage===4&&!s.legend&&(s.growDays||0)>=365){s.legend=true;if(isLive)ev('legend')}
 }
 function advance(s,now){
   if(s.gone)return;
@@ -373,6 +402,7 @@ function drawMain(){
   if(S.need){petX+=tick%2?1:-1;y=9}
   blitPet(petSpr(fr),petX,y,petDir<0);
   for(let i=0;i<S.poops;i++){const px0=poopX(i),py0=i<2?17:9;blit(ICO.poop,px0,py0);if(tick%2)px(px0+5,py0-1)}
+  if(S.legend&&tick%4<2)blit(ICO.sparkle,W-8,10);
   if(S.sick)blit(ICO.skull,0,0);
   else if(S.kind>=60&&!S.need&&S.att!=='fake'&&tick%8<5)blit(ICO.flower,0,1);
   if(S.need&&tick%2)blit(ICO.excl,Math.min(petX+16,W-8),1);
@@ -407,7 +437,7 @@ function drawStat(){
   else if(page===1){blit(ICO.fist,1,4);for(let x=0;x<26;x++){px(12+x,5);px(12+x,11)}px(12,6);px(12,7);px(12,8);px(12,9);px(12,10);px(37,6);px(37,7);px(37,8);px(37,9);px(37,10);
     const f=Math.round(S.disc/100*24);for(let x=0;x<f;x++)for(let y=7;y<10;y++)px(13+x,y);text(String(S.disc)+'%',14,16)}
   else if(page===3){blit(ICO.heart,1,4);for(let x=0;x<26;x++){px(12+x,5);px(12+x,11)}for(let y=5;y<12;y++){px(12,y);px(37,y)}const f=Math.round(S.kind/100*24);for(let x=0;x<f;x++)for(let y=7;y<10;y++)px(13+x,y);blit(ICO.flower,1,15);text(String(S.kind)+'%',14,16)}
-  else{const days=Math.floor((Date.now()-S.born)/86400000);blit(ICO.cake,1,3);text(String(days),12,4);blit(ICO.scale,1,15);text(String(S.weight),12,16)}
+  else{const days=Math.floor(S.growDays||0);blit(ICO.cake,1,3);text(String(days),12,4);blit(ICO.scale,1,15);text(String(S.weight),12,16)}
 }
 function drawGame(){
   const g=game,fr=tick%2;
@@ -419,7 +449,7 @@ function render(){
   if(typeof scaring!=='undefined'&&scaring)return;
   clr();dark=false;
   if(!anim&&mode==='main'&&typeof drawBg==='function')drawBg();
-  if(anim)drawAnim();else if(mode==='stat')drawStat();else if(mode==='game')drawGame();else if(mode==='food'){blit(ICO.onigiri,4,3);blit(ICO.dango,16,3);blit(ICO.wasabi,28,3);const fx=4+page*12;if(tick%2)blit(ICO.right.map(r=>r),fx,14);}
+  if(mode==='battle'&&battle){drawBattle()}else if(anim)drawAnim();else if(mode==='stat')drawStat();else if(mode==='game')drawGame();else if(mode==='food'){blit(ICO.onigiri,4,3);blit(ICO.dango,16,3);blit(ICO.wasabi,28,3);const fx=4+page*12;if(tick%2)blit(ICO.right.map(r=>r),fx,14);}
   else drawMain();
   flush();
   for(let i=0;i<8;i++){const e=$('ic'+i);e.classList.toggle('sel',i===menu);e.classList.toggle('alert',i===7&&!!S.att&&!S.gone)}
@@ -430,12 +460,14 @@ function statusText(){
   if(S.paused)return'時間を止めています（「時間」ボタンでうごかす）';
   if(mode==='main'&&menu>=0)return MENU[menu].l+'　Bでけってい　Cでとじる';
   if(mode==='food')return['おにぎり：おなかがふくれる','おだんご：ごきげんアップ（太りやすい）','ワサビ：ツーン！おなかとごきげん'][page]+'　A：えらぶ　B：あげる';
-  if(mode==='stat')return['おなか と ごきげん','しつけ '+S.disc+'%','年れい '+Math.floor((Date.now()-S.born)/86400000)+'さい・体重 '+S.weight+'kg','やさしさ '+S.kind+'%'][page]+'　（Aでつぎへ）';
+  if(mode==='stat')return['おなか と ごきげん','しつけ '+S.disc+'%','生まれて '+Math.floor(S.growDays||0)+'日・いっしょにすごした日 '+(S.together||[]).length+'日・体重 '+S.weight+'kg','やさしさ '+S.kind+'%'][page]+'　（Aでつぎへ）';
+  if(mode==='battle')return'';
   if(mode==='game')return game.phase==='ask'?'どっちを向くかな？ A：左　B：右':'';
   if(S.stage===0){const p=eggProg();return(p<2?'小さなたまご。あたためてあげよう（どのボタンでも）':p<4?'たまごが大きくなってきた！':p<5.2?'たまごがもっと大きくなった！ヒビが入りそう':'ヒビが入った！もうすぐ生まれる！')+'（'+Math.min(100,Math.round(p/6*100))+'%）'}
   const nm=S.stage===4?FORM_N[S.form]:STAGE_N[S.stage];
   if(S.sleeping)return S.light?nm+'がねむっている。でんきを消してあげよう':'すやすや……（でんきは消えている）';
   if(S.sick)return'ドクロが出ている！病気だ。くすりをあげよう';
+  if(S.enemy)return'水戸の丸いばあちゃんが近くにいる！「しょうぶ」ボタンかBでたたかおう';
   if(S.need)return'モジモジしている！トイレに連れていこう';
   if(S.hunger===0)return'おなかがぺこぺこ！ごはんをあげよう';
   if(S.happy===0)return'さみしそう……いっしょにあそぼう';
@@ -452,6 +484,9 @@ function ev(e){
   else if(e==='wake'){SND.wake();gVoice('g_ohayo_auto');say('「おはようございます！あさだよ。おきて、おきて」……「おはようございます」とかえしてあげよう',6000);renderGreet();save()}
   else if(e==='poop'){SND.no();say('あっ……うんちをしてしまった',3000);save()}
   else if(e==='gone'){SND.gone()}
+  else if(e==='legend'){SND.evolve();play('evolve',3000,{},()=>say('1年いっしょ！おめでとう！でんせつのオクタマ坊になった！「でんせつのおうかん」がもらえるよ',6000));if(S.own.indexOf('legend')<0)S.own.push('legend');save()}
+  else if(e==='enemy'){SND.call();say('あっ！水戸の丸いばあちゃんがあらわれた！Bでしょうぶ、Cでにげる',8000);mode='battle';battle={phase:'intro',t:Date.now()}}
+  else if(e==='enemyLeft'){say('ばあちゃんは、どんぐりを1こ持って帰っていった……',4000);if(mode==='battle'){mode='main';battle=null}renderShop()}
   else if(e==='angry'){shrink(0.05,'ほうっておかれて、すこし小さくなってしまった……');checkKind()}
 }
 
@@ -500,8 +535,9 @@ function gameGuess(d){
       S.att=needsAtt(S);save()}
     else g.phase='ask'},1100)}
 
+function markDay(){if(!S)return;const t=today();if(!S.together)S.together=[];if(S.together.indexOf(t)<0){S.together.push(t);if(S.together.length>400)S.together=S.together.slice(-400)}}
 function press(b){
-  if(scaring)return;
+  if(scaring)return;markDay();
   ac();preloadV();['g_'+greetType(),'g_oyasumi_auto','g_ohayo_auto'].forEach(loadV);
   if(!S)return;
   if(S.gone){SND.b();const ke=S.eng;S=fresh();S.eng=ke;renderDeeds();renderBads();renderEng();renderShop();live=true;save();menu=-1;mode='main';return}
@@ -509,9 +545,11 @@ function press(b){
   if(S.stage===0){const before=eggProg();S.eggBonus=(S.eggBonus||0)+1/6;tone(1800+Math.random()*600,0.04,0);play('wobble',500);
     const p=eggProg();if((before<2&&p>=2)||(before<4&&p>=4)){seq([1046,1318,1568],0.08);say(p>=4?'たまごがもっと大きくなった！':'たまごが大きくなった！',2000)}
     if(p>=EVO[0])setTimeout(hatchNow,500);else saveLocal();return}
+  if(mode==='battle'&&battle){if(battle.phase==='intro'){if(b==='C'){SND.c();mode='main';battle=null;S.enemy=0;S.att=needsAtt(S);S.happy=Math.max(0,S.happy-1);say('にげた！ばあちゃん「にげるなんて、ずるいっぺ〜」',3000);save()}else{SND.b();bStart()}}else if(battle.phase==='aim')bHit();return}
   if(mode==='game'){if(b==='A')gameGuess(-1);else if(b==='B')gameGuess(1);else{SND.c();mode='main';game=null}return}
   if(mode==='food'){if(b==='A'){SND.a();page=(page+1)%3}else if(b==='B'){feed(page)}else{SND.c();mode='main'}return}
   if(mode==='stat'){if(b==='A'||b==='B'){SND.a();page=(page+1)%4}else{SND.c();mode='main'}return}
+  if(S.enemy&&b==='B'&&menu<0){startBattle(false);return}
   if(b==='A'){SND.a();menu=(menu+1)%7}
   else if(b==='B'){if(menu<0){SND.b();return}SND.b();act(MENU[menu].k)}
   else{SND.c();menu=-1}
@@ -541,7 +579,7 @@ function checkKind(){
   if(S.form!==3&&S.kind>=80){const old=S.form;S.form=3;SND.evolve();play('evolve',2600,{},()=>{say('オクタマ坊は、やさしい山の神に変わった！',4000);preloadV();voice('v_evolve')});save()}
   else if(S.form===3&&S.kind<30){S.form=(S.mistakes<=2&&S.disc>=75)?0:(S.wasabi>=5&&S.mistakes<=4)?1:0;SND.evolve();play('evolve',2600,{},()=>{say('やさしさがなくなって……こわい姿にもどってしまった',4000);preloadV()});save()}}
 function doDeed(k,label){
-  ac();if(scaring||!S||S.gone)return;
+  ac();markDay();if(scaring||!S||S.gone)return;
   if(!S.deeds||S.deeds.d!==today())S.deeds={d:today(),l:[]};
   if(S.deeds.l.indexOf(k)>=0)return;
   S.deeds.l.push(k);earn(3);S.kind=Math.min(100,(S.kind||0)+10);const grew=grow(0.1);S.happy=Math.min(4,S.happy+1);
@@ -568,7 +606,7 @@ function ePlay(i,t){const key=pad3(i%WORDS.length)+t;
   eUrl(key).then(u=>{eA.pause();eA.src=u;eA.currentTime=0;const p=eA.play();if(p&&p.catch)p.catch(()=>{say('もう一度押してね',2000)})}).catch(()=>say('音声を読みこめませんでした',2500))}
 function renderEng(){
   const d=engIdx(),i=d%WORDS.length,w=WORDS[i];
-  $('eDay').textContent='Day '+(d+1);
+  $('eDay').textContent='Day '+(d+1)+(d>=WORDS.length?'（ふくしゅう '+(Math.floor(d/WORDS.length)+1)+'しゅうめ）':'');
   const cnt=Object.keys(S.eng.said||{}).length;$('eCount').textContent='おぼえた数：'+cnt;
   $('eEmoji').textContent=w[1];$('eWord').textContent=w[0];$('eKana').textContent=w[3];$('eJa').textContent=w[2];
   $('eSent').innerHTML='';const t1=document.createElement('div');t1.textContent=w[4];const t2=document.createElement('small');t2.textContent=w[5];$('eSent').append(t1,t2);
@@ -593,7 +631,7 @@ function renderBads(){if(!S.bad||S.bad.d!==today())S.bad={d:today(),l:[]};
 function shrink(amt,msg){
   if(S.stage===0||S.gone)return;
   const before=S.size||1;
-  if(before<=0.5+1e-6&&S.stage>=2){S.stage--;S.stageMin=0;S.size=0.75;if(S.stage<4)S.form=0;SND.lose();play('evolve',2000,{},()=>say('小さくなりすぎて……ひとつ前のすがたにもどってしまった！',4500));save();return}
+  if(before<=0.5+1e-6&&S.stage>=2){S.stage--;S.stageMin=0;S.size=0.8;S.growDays=Math.max(0,GD[S.stage+1]-3);if(S.stage<4)S.form=0;SND.lose();play('evolve',2000,{},()=>say('小さくなりすぎて……ひとつ前のすがたにもどってしまった！',4500));save();return}
   S.size=Math.max(0.5,Math.round((before-amt)*100)/100);
   SND.lose();voice('v_sad');play('sad',1800,{},()=>say(msg+'（大きさ '+Math.round(S.size*100)+'%）',4000));save()}
 function grow(amt){if(S.stage===0||S.gone)return false;const b=S.size||1;S.size=Math.min(1,Math.round((b+amt)*100)/100);return S.size>b}
@@ -618,6 +656,18 @@ glasses:{n:'めがね',slot:'face',p:4,b:["###.###","#.###.#","###.###"]},
 sun:{n:'サングラス',slot:'face',p:6,b:["###.###","#######","###.###"]},
 bow:{n:'ちょうネクタイ',slot:'neck',p:4,b:["#...#","#####","#...#"]},
 scarf:{n:'マフラー',slot:'neck',p:5,b:["#########","#########","......##."]},
+santa:{n:'サンタぼうし',slot:'head',p:5,mo:[12],b:["....#...","...###..","..#####.","########"]},
+shime:{n:'しめかざり',slot:'head',p:5,mo:[1],b:["#######","..#.#..","..#.#.."]},
+onimask:{n:'おにのおめん',slot:'face',p:5,mo:[2],b:["#.....#",".#####.","#.#.#.#",".#####."]},
+sakura:{n:'さくら',slot:'head',p:4,mo:[3,4],b:[".#.#.","##.##",".#.#."]},
+kabuto:{n:'かぶと',slot:'head',p:6,mo:[5],b:["#.....#",".#...#.","..###..",".#####.","#######"]},
+kasa:{n:'かさ',slot:'head',p:5,mo:[6],b:["..###..",".#####.","#######","...#..."]},
+hachi:{n:'はちまき',slot:'head',p:4,mo:[7,8],b:["#########","........#"]},
+pumpkin:{n:'かぼちゃ',slot:'head',p:6,mo:[10],b:["...#...",".#####.","#.#.#.#","#######",".#####."]},
+momiji:{n:'もみじ',slot:'head',p:4,mo:[9,11],b:["..#..","#.#.#",".###.","#####","..#.."]},
+cape:{n:'マント',slot:'neck',p:0,ms:30,b:["#########","##.....##","#.......#"]},
+star:{n:'ほしのかみかざり',slot:'head',p:0,ms:100,b:["..#..",".###.","#####",".#.#."]},
+legend:{n:'でんせつのおうかん',slot:'head',p:0,ms:365,b:["#.#.#.#","#######","#.###.#","#######"]},
 bgM:{n:'やま',slot:'bg',p:4},
 bgS:{n:'ほしぞら',slot:'bg',p:6},
 bgF:{n:'おはなばたけ',slot:'bg',p:6},
@@ -643,11 +693,14 @@ function bmSvg(b){const w=b?b[0].length:5,h=b?b.length:3;let r='';if(b)for(let y
 const BGICON={bgM:["....#....","...###...","..#####..",".#######."],bgS:["#...#....","...#...#.",".#....#..","....#...#"],bgF:[".#...#...","#.#.#.#..",".#...#...",".#...#..."],bgY:["#.#...#..","...#.#..#",".#....#..","#..#....#"]};
 function renderShop(){if(!$('shopItems'))return;$('acorn').textContent='どんぐり '+(S.acorn||0);
   let h='';['head','face','neck','bg'].forEach(sl=>{h+='<div class="slot">'+SLOTN[sl]+'</div><div class="items">';
-    Object.keys(WEAR).filter(k=>WEAR[k].slot===sl).forEach(k=>{const it=WEAR[k],own=S.own.indexOf(k)>=0,on=S.wear[sl]===k;
-      h+='<button class="it'+(on?' wear':'')+(!own&&(S.acorn||0)<it.p?' lock':'')+'" data-w="'+k+'">'+bmSvg(it.b||BGICON[k])+it.n+'<small>'+(on?'つけている':own?'もっている':'どんぐり '+it.p)+'</small></button>'});
+    Object.keys(WEAR).filter(k=>WEAR[k].slot===sl).forEach(k=>{const it=WEAR[k],own=S.own.indexOf(k)>=0,on=S.wear[sl]===k;const mo=new Date().getMonth()+1;
+      if(it.mo&&!own&&it.mo.indexOf(mo)<0)return;
+      if(it.ms&&!own){h+='<button class="it lock" data-w="'+k+'">'+bmSvg(it.b)+it.n+'<small>'+it.ms+'日でもらえる</small></button>';return}
+      h+='<button class="it'+(on?' wear':'')+(it.mo?' season':'')+(!own&&(S.acorn||0)<it.p?' lock':'')+'" data-w="'+k+'">'+bmSvg(it.b||BGICON[k])+it.n+'<small>'+(on?'つけている':own?'もっている':'どんぐり '+it.p)+'</small></button>'});
     h+='</div>'});
   $('shopItems').innerHTML=h;$('shopItems').querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>tapWear(b.dataset.w))}
-function tapWear(k){ac();const it=WEAR[k];if(!S||S.gone)return;
+function tapWear(k){ac();markDay();const it=WEAR[k];if(!S||S.gone)return;
+  if(it.ms&&S.own.indexOf(k)<0){SND.no();say(it.ms+'日いっしょにすごすと、もらえるよ',3000);return}
   if(S.own.indexOf(k)<0){if((S.acorn||0)<it.p){SND.no();say('どんぐりがたりないよ。あと '+(it.p-(S.acorn||0))+'こ（いいことや英語でたまるよ）',3000);return}
     S.acorn-=it.p;S.own.push(k);S.wear[it.slot]=k;seq([1318,1568,2093],0.08);say(it.n+'をかってつけた！',2500)}
   else{if(S.wear[it.slot]===k){S.wear[it.slot]='';SND.c();say(it.n+'をはずした',2000)}else{S.wear[it.slot]=k;SND.b();say(it.n+'をつけた！',2000)}}
@@ -660,7 +713,7 @@ function gVoice(k){if(!soundOn)return;const a=ac();if(!a)return;const b=VB[k];if
   try{if(gSrc)gSrc.stop()}catch(e){}const s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start();gSrc=s}
 function greetType(){const h=new Date().getHours();if(S.sleeping||h>=20||h<5)return'oyasumi';if(h<10)return'ohayo';if(h<17)return'konnichiwa';return'konbanwa'}
 function renderGreet(){if(!S)return;$('greet').textContent='「'+GT[greetType()][0]+'」とあいさつする'}
-function doGreet(){ac();if(!S||S.gone)return;anim=null;const t=greetType();
+function doGreet(){ac();markDay();if(!S||S.gone)return;anim=null;const t=greetType();
   if(!S.greet||S.greet.d!==today())S.greet={d:today(),l:[]};
   const first=S.greet.l.indexOf(t)<0;if(first){S.greet.l.push(t);S.kind=Math.min(100,(S.kind||0)+5);S.happy=Math.min(4,S.happy+1);earn(1)}
   gVoice('g_'+t);mode='main';menu=-1;
@@ -670,13 +723,66 @@ function doGreet(){ac();if(!S||S.gone)return;anim=null;const t=greetType();
   if(first)say($('msg').textContent+'　どんぐり +1',4500);
   save();renderGreet();render()}
 $('greet').onclick=doGreet;
+$('fight').onclick=()=>{ac();markDay();if(!S||S.gone)return;if(S.stage<2){say('もうすこし大きくなったら、たたかえるよ（こどもになってから）',3000);return}if(S.sleeping){say('ねているよ',2000);return}if(mode==='battle')return;
+  if(!S.fights||S.fights.d!==today())S.fights={d:today(),n:0};if(S.fights.n>=3){say('きょうはもう3かいたたかったよ。ばあちゃんもつかれたって',3000);return}S.fights.n++;save();startBattle(true)};
+
+/* ---------- year journey ---------- */
+const MILES=[[0,'あかちゃん','生まれた！'],[3,'こども','あるけるようになる'],[7,'1しゅうかん','「マフラー」がタダでもらえる',null],[30,'1か月','「マント」がもらえる'],[45,'おにいさん','すこし大きくなる'],[100,'100日','「ほしのかみかざり」がもらえる'],[150,'おとな','お世話のしかたで姿がきまる'],[200,'200日','どんぐり +30'],[300,'300日','どんぐり +50'],[365,'1年！','でんせつのオクタマ坊・でんせつのおうかん']];
+function renderJourney(){if(!$('jHead'))return;const d=Math.floor(S.growDays||0),tg=(S.together||[]).length;
+  const nx=MILES.find(m=>m[0]>d);
+  $('jHead').innerHTML='';const h=document.createElement('div');h.textContent=(S.stage===0?'たまご':'生まれて '+d+'日目')+'（いっしょにすごした日：'+tg+'日）'+(nx?'　つぎは「'+nx[1]+'」まで あと'+(nx[0]-d)+'日':'　1年たっせい！');$('jHead').append(h);
+  if((S.size||1)<0.8&&S.stage>0){const w=document.createElement('div');w.style.cssText='color:#e0261b;font-size:12px;margin-top:4px';w.textContent='小さくなっているあいだは、成長がとまっているよ。いいことをして大きくしてあげよう';$('jHead').append(w)}
+  $('jFill').style.width=Math.min(100,d/365*100)+'%';
+  $('jList').innerHTML=MILES.map(m=>'<div class="ms'+(d>=m[0]&&S.stage>0?' done':'')+'"><span>'+m[0]+'日　'+m[1]+'</span><span>'+(d>=m[0]&&S.stage>0?'たっせい':m[2])+'</span></div>').join('')}
+function checkMiles(){if(S.stage===0)return;const d=Math.floor(S.growDays||0);if(!S.miles)S.miles=[];let got=[];
+  const give=(day,fn,label)=>{if(d>=day&&S.miles.indexOf(day)<0){S.miles.push(day);fn();got.push(label)}};
+  give(7,()=>{if(S.own.indexOf('scarf')<0)S.own.push('scarf')},'マフラー');
+  give(30,()=>{if(S.own.indexOf('cape')<0)S.own.push('cape')},'マント');
+  give(100,()=>{if(S.own.indexOf('star')<0)S.own.push('star')},'ほしのかみかざり');
+  give(200,()=>{S.acorn=(S.acorn||0)+30},'どんぐり30こ');
+  give(300,()=>{S.acorn=(S.acorn||0)+50},'どんぐり50こ');
+  give(365,()=>{if(S.own.indexOf('legend')<0)S.own.push('legend')},'でんせつのおうかん');
+  if(got.length){seq([1046,1318,1568,2093],0.1);say('きねんびのプレゼント：'+got.join('・')+'！',5000);save();renderShop()}}
+
+/* ---------- battle ---------- */
+let battle=null;
+function startBattle(manual){if(!S||S.stage<1||S.gone)return;anim=null;menu=-1;mode='battle';
+  battle={phase:'intro',t:Date.now(),manual};SND.call();say('水戸の丸いばあちゃんがあらわれた！「なっとうと ほしいもで しょうぶじゃ！」　Bでしょうぶ／Cでにげる',8000);render()}
+function bStart(){const adult=S.stage>=4;battle={phase:'aim',hp:[3+(S.stage>=3?1:0)+(S.legend?1:0),3+(adult?1:0)],max:[0,0],m:0,dir:1,spd:S.stage>=3?2:1.5,fx:null,t:Date.now()};battle.max=[battle.hp[0],battle.hp[1]];say('メーターがまんなかに来たときにAかBでこうげき！',4000)}
+function bHit(){const b=battle;if(!b||b.phase!=='aim')return;const d=Math.abs(b.m-19.5);let dmg=d<=2.5?2:d<=8?1:0;
+  b.phase='pAtk';b.t=Date.now();b.dmg=dmg;tone(dmg?1800:400,0.08,0);
+  say(dmg===2?'クリティカル！ワサビアタック！':dmg?'ワサビアタック！':'あっ、はずれた！',2000);
+  setTimeout(()=>{b.hp[1]=Math.max(0,b.hp[1]-dmg);if(dmg){SND.scold()}if(b.hp[1]<=0)return bEnd(true);
+    b.phase='eAtk';b.t=Date.now();const hit=Math.random()<(S.stage>=4?0.45:0.55);b.ehit=hit;b.ew=Math.random()<.5?'natto':'imo';
+    say(b.ew==='natto'?'ばあちゃんの「なっとうネバネバこうげき」！':'ばあちゃんの「ほしいもビーム」！',2000);
+    setTimeout(()=>{if(hit){b.hp[0]=Math.max(0,b.hp[0]-1);SND.no();say('あいたた！',1500)}else{tone(2200,0.05,0);say('ひらりとよけた！',1500)}
+      if(b.hp[0]<=0)return bEnd(false);b.phase='aim';b.t=Date.now()},1100)},900)}
+function bEnd(win){const b=battle;b.phase=win?'win':'lose';b.t=Date.now();
+  if(win){S.wins=(S.wins||0)+1;earn(5);S.happy=Math.min(4,S.happy+1);SND.win();voice('v_win');say('かった！ばあちゃん「まいったまいった、またくるっぺ！」 どんぐり +5（'+S.wins+'しょう）',5000)}
+  else{S.loses=(S.loses||0)+1;S.happy=Math.max(0,S.happy-1);SND.lose();voice('v_lose');say('まけちゃった……なっとうまみれ！ばあちゃん「まだまだだっぺ」',5000)}
+  S.enemy=0;S.att=needsAtt(S);save();setTimeout(()=>{if(battle===b){mode='main';battle=null;render()}},2600)}
+function battleTick(){const b=battle;if(!b||b.phase!=='aim')return;b.m+=b.dir*b.spd;if(b.m>=39){b.m=39;b.dir=-1}if(b.m<=0){b.m=0;b.dir=1}}
+function drawBattle(){const b=battle,fr=tick%2;const baa=fr?SPR.baa2:SPR.baa1;
+  if(b.phase==='intro'){blit(baa,12+(fr?1:-1),8);if(fr)blit(ICO.excl,30,1);return}
+  const pHit=b.phase==='eAtk'&&b.ehit&&Date.now()-b.t>700,eHit=b.phase==='pAtk'&&b.dmg&&Date.now()-b.t>600;
+  if(!(eHit&&fr)&&b.phase!=='win')blit(baa,0,8);
+  if(b.phase==='lose'){blit(baa,0,fr?6:8)}
+  if(!(pHit&&fr))blitPet(petSpr(fr),24,8,true);
+  for(let i=0;i<b.max[1];i++){const x=1+i*4;px(x,0);px(x+1,0);px(x,1);px(x+1,1);if(i>=b.hp[1]){px(x,0);px(x+1,1);G[1*W+x]=0;G[0*W+x+1]=0}}
+  for(let i=0;i<b.max[0];i++){const x=38-i*4;px(x,0);px(x-1,0);px(x,1);px(x-1,1);if(i>=b.hp[0]){G[1*W+x-1]=0;G[0*W+x]=0}}
+  if(b.phase==='aim'){for(let x=0;x<W;x++)if(x%2===0)px(x,25);for(let x=17;x<=22;x++)px(x,25);const m=Math.round(b.m);px(m,24);px(m,25);px(m-1,24);px(m+1,24)}
+  if(b.phase==='pAtk'){const t=Math.min(1,(Date.now()-b.t)/600);blit(t<1?ICO.wasabi:ICO.boom,Math.round(24-t*20),10)}
+  if(b.phase==='eAtk'){const t=Math.min(1,(Date.now()-b.t)/700);blit(t<1?ICO[b.ew]:(b.ehit?ICO.boom:ICO.ques),Math.round(10+t*18),10)}
+  if(b.phase==='win'&&fr)blit(ICO.sun,26,0);
+}
+setInterval(()=>{if(mode==='battle'&&battle){battleTick();render()}},100);
 
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();render();
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();render();
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
-setInterval(()=>{tick++;if(tick%20===0)renderGreet();if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
+setInterval(()=>{tick++;if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
   if(!window.claude||!window.claude.use)return;
   const [d,u]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
@@ -687,6 +793,6 @@ setInterval(()=>{tick++;if(tick%20===0)renderGreet();if(S.deeds&&S.deeds.d!==tod
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:25</p>
+<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:29</p>
 </body>
 </html>
