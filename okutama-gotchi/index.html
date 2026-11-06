@@ -81,6 +81,19 @@ details p{margin-top:8px}
 .ok:disabled{background:#26303c;color:#8f8a78}
 .past{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #232c38}
 .past button{background:#1d2a1a;color:#cfe3b8;border:1px solid #2f4526;border-radius:10px;padding:6px 10px;font-size:13px;font-family:inherit}
+
+.shop{background:#141a22;border:1px solid #232c38;border-radius:16px;padding:12px}
+.shead{display:flex;justify-content:space-between;align-items:center;font-size:14px;margin-bottom:8px}
+.acorn{color:#d9a83a;font-weight:800}
+.slot{font-size:12px;color:#8f8a78;margin:10px 0 6px}
+.items{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.it{background:#1a222c;border:1px solid #2b3644;border-radius:12px;padding:8px 4px;text-align:center;cursor:pointer;color:#e9e3cf;font-family:inherit;font-size:13px;font-weight:700;line-height:1.3}
+.it svg{width:44px;height:30px;display:block;margin:0 auto 4px;background:#a7b28e;border-radius:4px;padding:3px}
+.it svg rect{fill:#1d2416}
+.it small{display:block;font-weight:400;font-size:11px;color:#8f8a78}
+.it.wear{border-color:#d9a83a;background:#2a2614}
+.it.wear small{color:#d9a83a}
+.it.lock{opacity:.55}
 </style>
 </head>
 <body>
@@ -107,6 +120,7 @@ details p{margin-top:8px}
 </div>
 
 <div class="msg" id="msg">Aボタンを押してはじめよう</div>
+<button class="ok" id="greet" style="margin-top:10px">あいさつする</button>
 
 <div class="row">
 <button class="g on" id="sSound">音：オン</button>
@@ -116,6 +130,11 @@ details p{margin-top:8px}
 <div class="row" style="display:none">
 </div>
 
+<h2>きせかえ</h2>
+<div class="shop">
+<div class="shead"><span>いいことや英語で<b class="acorn">どんぐり</b>がたまるよ</span><span class="acorn" id="acorn">どんぐり 5</span></div>
+<div id="shopItems"></div>
+</div>
 <h2>きょうの英語</h2>
 <div class="eng">
 <div class="eday"><span id="eDay">Day 1</span><span id="eCount">おぼえた数：0</span></div>
@@ -153,6 +172,8 @@ details p{margin-top:8px}
 <p>成長：たまご → こども（1時間）→ わかもの（12時間）→ せいねん（1日）→ おとな。お世話ミスが少なく、しつけが75%以上だと、こわい「山の主」になります。ワサビ好きなら「ワサビ坊」、お世話が足りないと「ぐうたら坊」に。</p>
 <p>きょうの英語：毎日ひとつ、5さいでもわかるかんたんな英語が、絵といっしょに出ます。「きく」「ゆっくり」「ぶんで」で発音を聞いて、まねして言えたら「言えた！」を押してね。ごきげんとやさしさが上がります。</p>
 <p>やさしさ：「きょうのいいこと」や、ちゃんとしたお世話でやさしさが上がります。やさしさ70%以上でおとなになると「やさしい山の神」に。おとなになってからでも80%になると、やさしい姿に変わります。お世話ミスや、わけもなくしかるとやさしさが下がり、30%を切るとこわい姿にもどります。</p>
+<p>あいさつ：時間に合わせて「おはようございます」「こんにちは」「こんばんは」「おやすみなさい」のボタンが出ます。押すと声でこたえてくれます（1日1回ずつ、やさしさとどんぐりがもらえます）。夜8時にねむくなると「おやすみなさい」、朝7時におきると「おはようございます」と話しかけてきます。</p>
+<p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
 <p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
 <p>病気やおなかぺこぺこを長くほうっておくと、山へ帰ってしまいます。お出かけのときは「時間」を止めておけます。</p>
 </details>
@@ -182,20 +203,20 @@ eggM:P(["................","................","................",".......##.....
 eggc2:P(["......####......","....##.#..##....","...#...#....#...","..#..#..#.#..#..","..#....#.....#..",".#....#.#.....#.",".#.#..#.#..#..#.",".##.##.#.##.#.#.",".#............#.",".#.....##.....#.","..#..........#..","..#..#....#..#..","...#........#...","....##....##....","......####......","................"]),
 egg:P(["......####......","....##....##....","...#........#...","..#..#....#..#..","..#..........#..",".#....#..#....#.",".#............#.",".#..#......#..#.",".#............#.",".#.....##.....#.","..#..........#..","..#..#....#..#..","...#........#...","....##....##....","......####......","................"]),
 eggc:P(["......####......","....##....##....","...#........#...","..#..#....#..#..","..#..........#..",".#....#..#....#.",".#.#..#.#..#..#.",".##.##.#.##.#.#.",".#............#.",".#.....##.....#.","..#..........#..","..#..#....#..#..","...#........#...","....##....##....","......####......","................"]),
-b1:P(["................","................","................","................",".......##.......","......#..#......",".......##.......","........#.......",".....######.....","....#......#....","...#.##..##.#...","...#........#...","...#..####..#...","....#......#....",".....######.....","................"]),
-b2:P(["................","................","................","................","................",".......##.......","......#..#......",".......##.......","....########....","...#........#...","..#..##..##..#..","..#..........#..","..#...####...#..","...#........#...","....########....","................"]),
-c1:P(["................","...#........#...","...##......##...","....##.##.##....",".....######.....","....#......#....","...#.#....#.#...","...#.##..##.#...","...#........#...","...#.######.#...","...#..#..#..#...","....#......#....",".....######.....",".....#....#.....","....##....##....","................"]),
-c2:P(["................","...#........#...","...##......##...","....##.##.##....",".....######.....","....#......#....","...#.#....#.#...","...#.##..##.#...","...#........#...","...#.######.#...","...#..#..#..#...","....#......#....",".....######.....","......#..#......",".....##..##.....","................"]),
-t1:P(["..#..........#..","..##........##..","...###.##.###...","....########....","...#........#...","..#.##....##.#..","..#.###..###.#..","..#..........#..","#.#.########.#.#","#.#.#.#..#.#.#.#",".##..######..##.","..#..........#..","..#..........#..","...##########...","...##......##...","..###......###.."]),
-t2:P(["..#..........#..","..##........##..","...###.##.###...","....########....","...#........#...","..#.##....##.#..","..#.###..###.#..","..#..........#..","#.#.########.#.#","#.#.#.#..#.#.#.#",".##..######..##.","..#..........#..","..#..........#..","...##########...","....##....##....","...###....###..."]),
-a01:P(["#.#..........#.#",".##..........##.","..##..####..##..","...##########...","..#..........#..",".#.###....###.#.",".#.#.#....#.#.#.",".#.###....###.#.","##............##","#..##########..#","#..#.#.##.#.#..#","##..########..##",".#............#.",".#..##....##..#.",".##.#......#.##.","#.#.#......#.#.#"]),
-a02:P(["#.#..........#.#",".##..........##.","..##..####..##..","...##########...","..#..........#..",".#.###....###.#.",".#.#.#....#.#.#.",".#.###....###.#.","##............##","#..##########..#","#..#.#.##.#.#..#","##..########..##",".#............#.",".#...##..##...#.",".##..#....#..##.","#.#..#....#..#.#"]),
-a11:P(["...###....###...","..#####..#####..","...###.##.###...","......####......",".....######.....","....#......#....","...#.##..##.#...","...#........#...","..#...#..#...#..","..#....##....#..","..#..........#..","..#..........#..","...#........#...","....########....","....#.#..#.#....","...##......##..."]),
-a12:P(["...###....###...","..#####..#####..","...###.##.###...","......####......",".....######.....","....#......#....","...#.##..##.#...","...#........#...","..#...#..#...#..","..#....##....#..","..#..........#..","..#..........#..","...#........#...","....########....",".....#.##.#.....","....##....##...."]),
-a31:P(["....#.#..#.#....","...###.##.###...","....########....","....#.#..#.#....","...#........#...","..#..........#..","..#.##....##.#..","..#..........#..",".##.#......#.##.","..#..######..#..","..#...####...#..","..#..........#..","...#........#...","....########....","....#......#....","...##......##..."]),
-a32:P(["....#.#..#.#....","...###.##.###...","....########....","....#.#..#.#....","...#........#...","..#..........#..","..#.##....##.#..","..#..........#..",".##.#......#.##.","..#..######..#..","..#...####...#..","..#..........#..","...#........#...","....########....",".....#....#.....","....##....##...."]),
-a21:P(["................","....#......#....","....########....","...#........#...","..#..........#..","..#.###..###.#..","..#..........#..",".#.....##.....#.",".#....#..#....#.","#.....####.....#","#..............#","#....######....#","#...#......#...#",".#..#......#..#.","..############..","..##........##.."]),
-a22:P(["................","....#......#....","....########....","...#........#...","..#..........#..","..#.###..###.#..","..#..........#..",".#.....##.....#.",".#....#..#....#.","#.....####.....#","#..............#","#....######....#","#...#......#...#",".#..#......#..#.","..############..","...##......##..."])
+b1:P(["................", "................", "................", "................", "................", "................", "......####......", ".....######.....", "....########....", "....#......#....", "....#.#..#.#....", "....#......#....", "....#..##..#....", ".....######.....", "......#..#......", "................"]),
+b2:P(["................", "................", "................", "................", "................", "................", "................", "......####......", "....########....", "...##########...", "...#.#....#.#...", "...#........#...", "...#...##...#...", "....########....", ".....#....#.....", "................"]),
+c1:P(["................", "................", "................", ".....######.....", "....########....", "...##########...", "...##......##...", "...#.##..##.#...", "...#........#...", "...#...##...#...", "....#......#....", ".....######.....", "....#.#..#.#....", "...#.#.##.#.#...", "....#......#....", "....##....##...."]),
+c2:P(["................", "................", "................", ".....######.....", "....########....", "...##########...", "...##......##...", "...#.##..##.#...", "...#........#...", "...#...##...#...", "....#......#....", ".....######.....", "....#.#..#.#....", "...#.#.##.#.#...", "....#......#....", ".....#....#....."]),
+t1:P(["................", ".....######.....", "...##########...", "..############..", "..###......###..", "..##.##..##.##..", "..##........##..", "..##...##...##..", "...#..####..#...", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#..", "..#.#.#..#.#.#..", "...##########...", "....#......#....", "...##......##..."]),
+t2:P(["................", ".....######.....", "...##########...", "..############..", "..###......###..", "..##.##..##.##..", "..##........##..", "..##...##...##..", "...#..####..#...", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#..", "..#.#.#..#.#.#..", "...##########...", "....##....##....", "....##....##...."]),
+a01:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##.##....##.##.", ".##...#..#...##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#...####...#..", "..##..#..#..##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
+a02:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##.##....##.##.", ".##...#..#...##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#....##....#..", "..##...##...##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
+a11:P(["..##..####..##..", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#...####...#..", "..##........##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
+a12:P(["..##..####..##..", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#....##....#..", "..##........##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
+a31:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##.#.#..#.#.##.", ".##..........##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#..#....#..#..", "..##..####..##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
+a32:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.###..###.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#..#....#..#..", "..##..####..##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
+a21:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.###..###.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#....##....#..", "..##...##...##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
+a22:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.###..###.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#...####...#..", "..##........##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."])
 };
 const ICO={
 onigiri:Q(["...##...","..#..#..",".#....#.",".#....#.","#......#","#.####.#","#.####.#","########"]),
@@ -237,7 +258,7 @@ $('icTop').innerHTML=MENU.slice(0,4).map((m,i)=>'<div class="ic" id="ic'+i+'">'+
 $('icBot').innerHTML=MENU.slice(4).map((m,i)=>'<div class="ic" id="ic'+(i+4)+'">'+iconSvg(m.i)+m.l+'</div>').join('');
 
 function rng(s){s.seed=(s.seed+0x6D2B79F5)|0;let t=s.seed;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}
-function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,size:1,bad:{d:'',l:[]},eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
+function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,size:1,greet:{d:'',l:[]},acorn:5,own:[],wear:{head:'',face:'',neck:'',bg:''},bad:{d:'',l:[]},eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
 let S=null,ref=null,saving=false,again=false,live=false;
 function loadLocal(){try{const v=localStorage.getItem(KEY);return v?JSON.parse(v):null}catch(e){return null}}
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
@@ -327,7 +348,7 @@ function flush(){cx.fillStyle=dark?'#1c2117':'#a7b28e';cx.fillRect(0,0,cv.width,
 const SC={};
 function scaled(b,n){const key=b.join('')+n;if(SC[key])return SC[key];const out=[];for(let y=0;y<n;y++){let r='';for(let x=0;x<n;x++){const sx=Math.min(15,Math.floor((x+.5)*16/n)),sy=Math.min(15,Math.floor((y+.5)*16/n));r+=b[sy][sx]}out.push(r)}return SC[key]=out}
 function petN(){return Math.max(8,Math.round(16*(S.size||1)))}
-function blitPet(b,x,y,flip){const n=petN();if(n>=16){blit(b,x,y,flip);return}const off=Math.floor((16-n)/2);blit(scaled(b,n),x+off,y+(16-n),flip)}
+function blitPet(b,x,y,flip){const n=petN();if(n>=16)blit(b,x,y,flip);else{const off=Math.floor((16-n)/2);blit(scaled(b,n),x+off,y+(16-n),flip)}if(typeof drawWear==='function'&&b!==SPR.egg&&b!==SPR.eggc)drawWear(x,y,n)}
 function petSpr(f){const s=S.stage;if(s===0)return SPR.egg;if(s===1)return f?SPR.b2:SPR.b1;if(s===2)return f?SPR.c2:SPR.c1;if(s===3)return f?SPR.t2:SPR.t1;return SPR['a'+S.form+(f?'2':'1')]}
 
 let tick=0,petX=12,petDir=1,menu=-1,mode='main',page=0,anim=null,game=null,msgLock=0;
@@ -397,6 +418,7 @@ function drawGame(){
 function render(){
   if(typeof scaring!=='undefined'&&scaring)return;
   clr();dark=false;
+  if(!anim&&mode==='main'&&typeof drawBg==='function')drawBg();
   if(anim)drawAnim();else if(mode==='stat')drawStat();else if(mode==='game')drawGame();else if(mode==='food'){blit(ICO.onigiri,4,3);blit(ICO.dango,16,3);blit(ICO.wasabi,28,3);const fx=4+page*12;if(tick%2)blit(ICO.right.map(r=>r),fx,14);}
   else drawMain();
   flush();
@@ -426,8 +448,8 @@ function ev(e){
   if(e==='call'){SND.call();if(S.att==='sick'){voice('v_sick')}else if(S.att==='light')voice('v_sleep');else voice('v_call')}
   else if(e==='hatch'){SND.hatch();play('hatch',2400,{},null);say('オクタマ坊が生まれた！',3000)}
   else if(e==='evolve'){SND.evolve();if(S.stage===4){['v_evolve','v_eat','v_call'].forEach(loadV)}play('evolve',2600,{},()=>{if(S.stage===4){say(FORM_N[S.form]+'になった！',4000);if(S.form===0)voice('v_evolve')}else say(STAGE_N[S.stage]+'に成長した！',3000)});save()}
-  else if(e==='sleep'){SND.sleep();save()}
-  else if(e==='wake'){SND.wake();voice('v_wake');save()}
+  else if(e==='sleep'){SND.sleep();gVoice('g_oyasumi_auto');say('「ふわぁ、ねむくなってきたよ。おやすみなさい」……「おやすみなさい」とあいさつしてあげてね',6000);renderGreet();save()}
+  else if(e==='wake'){SND.wake();gVoice('g_ohayo_auto');say('「おはようございます！あさだよ。おきて、おきて」……「おはようございます」とかえしてあげよう',6000);renderGreet();save()}
   else if(e==='poop'){SND.no();say('あっ……うんちをしてしまった',3000);save()}
   else if(e==='gone'){SND.gone()}
   else if(e==='angry'){shrink(0.05,'ほうっておかれて、すこし小さくなってしまった……');checkKind()}
@@ -442,7 +464,7 @@ function act(k){
   if(k==='med'){if(!S.sick)return refuse('病気じゃないよ');SND.med();play('med',1600,{},()=>{S.sick--;if(S.sick<=0){S.sick=0;S.sickMin=0;S.kind=Math.min(100,S.kind+2);say('病気がなおった！',3000);S.att=needsAtt(S)}else say('もう一回くすりがいるみたい',3000);save()});return}
   if(k==='toilet'){
     if(S.sleeping)return refuse('ねむっているよ');
-    if(S.need){play('goToilet',3000,{},()=>{S.need=0;S.disc=Math.min(100,S.disc+5);S.kind=Math.min(100,S.kind+3);SND.toilet();voice('v_toilet');say('ひとりでトイレができた！えらい！',3000);S.att=needsAtt(S);play('happy',1200);save()});return}
+    if(S.need){play('goToilet',3000,{},()=>{S.need=0;earn(1);S.disc=Math.min(100,S.disc+5);S.kind=Math.min(100,S.kind+3);SND.toilet();voice('v_toilet');say('ひとりでトイレができた！えらい！',3000);S.att=needsAtt(S);play('happy',1200);save()});return}
     if(S.poops){SND.flush();play('flush',1300,{},()=>{S.poops=0;S.poopMin=0;say('ジャー！きれいになった',2500);save()});return}
     return refuse('いまは行きたくないみたい')}
   if(k==='stat'){mode='stat';page=0;return}
@@ -473,16 +495,16 @@ function gameGuess(d){
   g.dir=rng(S)<0.5?-1:1;g.ok=(g.dir===d);g.res.push(g.ok);g.round++;g.phase='show';
   g.ok?tone(2000,0.1,0):tone(500,0.15,0);
   setTimeout(()=>{if(g.round>=5){const w=g.res.filter(x=>x).length;mode='main';game=null;S.weight=Math.max(1,S.weight-1);
-      if(w>=3){S.happy=Math.min(4,S.happy+1);S.kind=Math.min(100,S.kind+1);SND.win();voice('v_win');play('happy',1500);say(w+'かい当たり！かち！ごきげんアップ',3000)}
+      if(w>=3){earn(2);S.happy=Math.min(4,S.happy+1);S.kind=Math.min(100,S.kind+1);SND.win();voice('v_win');play('happy',1500);say(w+'かい当たり！かち！ごきげんアップ',3000)}
       else{SND.lose();voice('v_lose');play('sad',1500);say(w+'かい当たり……まけちゃった',3000)}
       S.att=needsAtt(S);save()}
     else g.phase='ask'},1100)}
 
 function press(b){
   if(scaring)return;
-  ac();preloadV();loadV('v_ghost');
+  ac();preloadV();['g_'+greetType(),'g_oyasumi_auto','g_ohayo_auto'].forEach(loadV);
   if(!S)return;
-  if(S.gone){SND.b();const ke=S.eng;S=fresh();S.eng=ke;renderDeeds();renderBads();renderEng();live=true;save();menu=-1;mode='main';return}
+  if(S.gone){SND.b();const ke=S.eng;S=fresh();S.eng=ke;renderDeeds();renderBads();renderEng();renderShop();live=true;save();menu=-1;mode='main';return}
   if(busy())return;
   if(S.stage===0){const before=eggProg();S.eggBonus=(S.eggBonus||0)+1/6;tone(1800+Math.random()*600,0.04,0);play('wobble',500);
     const p=eggProg();if((before<2&&p>=2)||(before<4&&p>=4)){seq([1046,1318,1568],0.08);say(p>=4?'たまごがもっと大きくなった！':'たまごが大きくなった！',2000)}
@@ -500,7 +522,7 @@ $('sSound').onclick=()=>{soundOn=!soundOn;$('sSound').textContent='音：'+(soun
 $('sPause').onclick=()=>{advance(S,Date.now());S.paused=!S.paused;S.last=Date.now();$('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);save();render()};
 let rArm=0;
 $('sReset').onclick=()=>{if(Date.now()-rArm>4000){rArm=Date.now();$('sReset').textContent='もう一度押すとリセット';setTimeout(()=>$('sReset').textContent='たまごから',4000);return}
-  const keepEng=S.eng;S=fresh();S.eng=keepEng;renderDeeds();renderBads();renderEng();rArm=0;$('sReset').textContent='たまごから';menu=-1;mode='main';anim=null;save();render()};
+  const keepEng=S.eng;S=fresh();S.eng=keepEng;renderDeeds();renderBads();renderEng();renderShop();rArm=0;$('sReset').textContent='たまごから';menu=-1;mode='main';anim=null;save();render()};
 
 const sb=new Audio();let curB=null;
 document.querySelectorAll('.b').forEach(b=>b.addEventListener('click',()=>{vAudio.pause();sb.pause();if(curB)curB.classList.remove('playing');sb.src=b.dataset.src;sb.currentTime=0;curB=b;b.classList.add('playing');const p=sb.play();if(p&&p.catch)p.catch(()=>{})}));
@@ -522,12 +544,12 @@ function doDeed(k,label){
   ac();if(scaring||!S||S.gone)return;
   if(!S.deeds||S.deeds.d!==today())S.deeds={d:today(),l:[]};
   if(S.deeds.l.indexOf(k)>=0)return;
-  S.deeds.l.push(k);S.kind=Math.min(100,(S.kind||0)+10);const grew=grow(0.1);S.happy=Math.min(4,S.happy+1);
+  S.deeds.l.push(k);earn(3);S.kind=Math.min(100,(S.kind||0)+10);const grew=grow(0.1);S.happy=Math.min(4,S.happy+1);
   preloadV();
   seq([1318,1568,2093,2637],0.1);
   anim=null;mode='main';menu=-1;
   if(S.stage===0){S.eggBonus=(S.eggBonus||0)+1;play('wobble',800);say('たまごがうれしそうにゆれて、大きくなった！（やさしさ '+S.kind+'%）',3000);if(eggProg()>=EVO[0])setTimeout(hatchNow,900)}
-  else{play('deed',2200,{},()=>checkKind());say(grew?'いいことしたね！オクタマ坊がまた大きくなった！（大きさ '+Math.round(S.size*100)+'%）':'いいことしたね！オクタマ坊がよろこんでいる（やさしさ '+S.kind+'%）',3500);voice('v_deed');}
+  else{play('deed',2200,{},()=>checkKind());say((grew?'いいことしたね！オクタマ坊がまた大きくなった！':'いいことしたね！オクタマ坊がよろこんでいる！')+' どんぐり +3',3500);voice('v_deed');}
   save();renderDeeds();render()}
 
 /* ---------- English ---------- */
@@ -557,7 +579,7 @@ function renderEng(){
 $('ePlay').onclick=()=>ePlay(engIdx(),'w');
 $('eSlow').onclick=()=>ePlay(engIdx(),'s');
 $('eSen').onclick=()=>ePlay(engIdx(),'x');
-$('eOk').onclick=()=>{ac();const d=engIdx();if(S.eng.said[d]||S.gone||scaring)return;S.eng.said[d]=1;S.happy=Math.min(4,S.happy+1);grow(0.05);S.kind=Math.min(100,S.kind+5);
+$('eOk').onclick=()=>{ac();const d=engIdx();if(S.eng.said[d]||S.gone||scaring)return;S.eng.said[d]=1;earn(3);S.happy=Math.min(4,S.happy+1);grow(0.05);S.kind=Math.min(100,S.kind+5);
   seq([1568,2093,2637,3136],0.09);
   if(S.stage===0){S.eggBonus=(S.eggBonus||0)+1;play('wobble',800);say('Good job! たまごもよろこんで大きくなった！',3000);if(eggProg()>=EVO[0])setTimeout(hatchNow,900)}
   else{anim=null;mode='main';play('deed',2200,{},()=>checkKind());say('Good job! 「'+WORDS[d%WORDS.length][0]+'」が言えた！ごきげんとやさしさアップ',3500)}
@@ -585,22 +607,87 @@ function doBad(k){
   else shrink(0.1,'わるいことをしたから、オクタマ坊が小さくなってしまった……');
   checkKind();save();renderBads();render()}
 
+/* ---------- dress up ---------- */
+const WEAR={
+ribbon:{n:'りぼん',slot:'head',p:3,b:["##.##","#####","##.##"]},
+flower:{n:'おはな',slot:'head',p:3,b:[".#.",'#.#',".#."]},
+cap:{n:'ぼうし',slot:'head',p:5,b:["..####..",".######.","########"]},
+straw:{n:'むぎわら',slot:'head',p:6,b:["...###...","..#####..","#########"]},
+crown:{n:'おうかん',slot:'head',p:12,b:["#.#.#","#####","#####"]},
+glasses:{n:'めがね',slot:'face',p:4,b:["###.###","#.###.#","###.###"]},
+sun:{n:'サングラス',slot:'face',p:6,b:["###.###","#######","###.###"]},
+bow:{n:'ちょうネクタイ',slot:'neck',p:4,b:["#...#","#####","#...#"]},
+scarf:{n:'マフラー',slot:'neck',p:5,b:["#########","#########","......##."]},
+bgM:{n:'やま',slot:'bg',p:4},
+bgS:{n:'ほしぞら',slot:'bg',p:6},
+bgF:{n:'おはなばたけ',slot:'bg',p:6},
+bgY:{n:'ゆき',slot:'bg',p:8}
+};
+const SLOTN={head:'あたま',face:'かお',neck:'くび',bg:'はいけい'};
+const ANCH={b:[6,10,13],c:[3,7,11],t:[1,5,9],a0:[0,7,13],a1:[0,7,13],a2:[0,7,13],a3:[0,7,13]};
+function scaleBM(b,f){if(f>=1)return b;const h=b.length,w=b[0].length,nh=Math.max(2,Math.round(h*f)),nw=Math.max(3,Math.round(w*f));const o=[];for(let y=0;y<nh;y++){let r='';for(let x=0;x<nw;x++)r+=b[Math.min(h-1,Math.floor((y+.5)*h/nh))][Math.min(w-1,Math.floor((x+.5)*w/nw))];o.push(r)}return o}
+function drawWear(x,y,n){
+  if(!S.wear||S.stage===0)return;
+  const key=S.stage===1?'b':S.stage===2?'c':S.stage===3?'t':'a'+S.form;const a=ANCH[key];if(!a)return;
+  const f=n/16,off=Math.floor((16-n)/2),top=y+(16-n),cxp=x+off+n/2;
+  [['head',0],['face',1],['neck',2]].forEach(([sl,ai])=>{const id=S.wear[sl];if(!id||!WEAR[id])return;const b=scaleBM(WEAR[id].b,f);const w=b[0].length,h=b.length;
+    const row=top+Math.round(a[ai]*f);const bx=Math.round(cxp-w/2);let by=sl==='head'?row-h+1:row-Math.floor(h/2);
+    for(let r=0;r<h;r++)for(let c=0;c<w;c++){const X=bx+c,Y=by+r;if(X<0||Y<0||X>=W||Y>=H)continue;G[Y*W+X]=b[r][c]==='#'?1:0}})}
+function drawBg(){const id=S.wear&&S.wear.bg;if(!id||S.gone)return;
+  if(id==='bgM'){for(let x=0;x<W;x++){const h=Math.max(0,6-Math.abs(x-5))+Math.max(0,5-Math.abs(x-34));for(let k=0;k<h;k++)if((x+k)%2===0)px(x,H-1-k)}}
+  if(id==='bgS'){[[2,2],[7,5],[33,3],[37,7],[25,1],[14,2]].forEach(([x,y],i)=>{if((tick+i)%3)px(x,y);else{px(x-1,y);px(x+1,y);px(x,y-1);px(x,y+1)}})}
+  if(id==='bgF'){for(let x=1;x<W;x+=5){const y=H-2;px(x,y);px(x-1,y-1);px(x+1,y-1);px(x,y-2);px(x,H-1)}}
+  if(id==='bgY'){for(let i=0;i<14;i++){const x=(i*11+tick*(i%3?1:0))%W,y=(i*7+tick)%H;px(x,y)}}}
+function earn(n){S.acorn=(S.acorn||0)+n;renderShop()}
+function bmSvg(b){const w=b?b[0].length:5,h=b?b.length:3;let r='';if(b)for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(b[y][x]==='#')r+='<rect x="'+x+'" y="'+y+'" width="1.02" height="1.02"/>';return'<svg viewBox="-1 -1 '+(Math.max(w,9)+2)+' '+(h+2)+'" preserveAspectRatio="xMidYMid meet">'+r+'</svg>'}
+const BGICON={bgM:["....#....","...###...","..#####..",".#######."],bgS:["#...#....","...#...#.",".#....#..","....#...#"],bgF:[".#...#...","#.#.#.#..",".#...#...",".#...#..."],bgY:["#.#...#..","...#.#..#",".#....#..","#..#....#"]};
+function renderShop(){if(!$('shopItems'))return;$('acorn').textContent='どんぐり '+(S.acorn||0);
+  let h='';['head','face','neck','bg'].forEach(sl=>{h+='<div class="slot">'+SLOTN[sl]+'</div><div class="items">';
+    Object.keys(WEAR).filter(k=>WEAR[k].slot===sl).forEach(k=>{const it=WEAR[k],own=S.own.indexOf(k)>=0,on=S.wear[sl]===k;
+      h+='<button class="it'+(on?' wear':'')+(!own&&(S.acorn||0)<it.p?' lock':'')+'" data-w="'+k+'">'+bmSvg(it.b||BGICON[k])+it.n+'<small>'+(on?'つけている':own?'もっている':'どんぐり '+it.p)+'</small></button>'});
+    h+='</div>'});
+  $('shopItems').innerHTML=h;$('shopItems').querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>tapWear(b.dataset.w))}
+function tapWear(k){ac();const it=WEAR[k];if(!S||S.gone)return;
+  if(S.own.indexOf(k)<0){if((S.acorn||0)<it.p){SND.no();say('どんぐりがたりないよ。あと '+(it.p-(S.acorn||0))+'こ（いいことや英語でたまるよ）',3000);return}
+    S.acorn-=it.p;S.own.push(k);S.wear[it.slot]=k;seq([1318,1568,2093],0.08);say(it.n+'をかってつけた！',2500)}
+  else{if(S.wear[it.slot]===k){S.wear[it.slot]='';SND.c();say(it.n+'をはずした',2000)}else{S.wear[it.slot]=k;SND.b();say(it.n+'をつけた！',2000)}}
+  if(S.stage===0&&it.slot!=='bg')say('生まれたら、つけてあげられるよ',2500);
+  mode='main';menu=-1;save();renderShop();render()}
+
+/* ---------- greetings ---------- */
+const GT={ohayo:['おはようございます','おはようございます！きょうもいっしょにがんばろうね'],konnichiwa:['こんにちは','こんにちは！あそびにきてくれてありがとう'],konbanwa:['こんばんは','こんばんは。きょうもいちにちおつかれさま'],oyasumi:['おやすみなさい','おやすみなさい。また、あしたね']};
+let gSrc=null;
+function gVoice(k){if(!soundOn)return;const a=ac();if(!a)return;const b=VB[k];if(!b||b==='loading'){loadV(k);if(b!=='loading'){const iv=setInterval(()=>{if(VB[k]&&VB[k]!=='loading'){clearInterval(iv);gVoice(k)}},200);setTimeout(()=>clearInterval(iv),3000)}return}
+  try{if(gSrc)gSrc.stop()}catch(e){}const s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start();gSrc=s}
+function greetType(){const h=new Date().getHours();if(S.sleeping||h>=20||h<5)return'oyasumi';if(h<10)return'ohayo';if(h<17)return'konnichiwa';return'konbanwa'}
+function renderGreet(){if(!S)return;$('greet').textContent='「'+GT[greetType()][0]+'」とあいさつする'}
+function doGreet(){ac();if(!S||S.gone)return;anim=null;const t=greetType();
+  if(!S.greet||S.greet.d!==today())S.greet={d:today(),l:[]};
+  const first=S.greet.l.indexOf(t)<0;if(first){S.greet.l.push(t);S.kind=Math.min(100,(S.kind||0)+5);S.happy=Math.min(4,S.happy+1);earn(1)}
+  gVoice('g_'+t);mode='main';menu=-1;
+  if(S.stage===0){play('wobble',800);say('たまごが「'+GT[t][0]+'」ってゆれているよ',3500)}
+  else if(t==='oyasumi'){if(S.sleeping){S.light=false;if(S.att==='light')S.att=''}play('sad',1800);say('「'+GT[t][1]+'」'+(S.sleeping?'（でんきを消したよ）':''),4500)}
+  else{play('happy',1800);say('「'+GT[t][1]+'」',4500)}
+  if(first)say($('msg').textContent+'　どんぐり +1',4500);
+  save();renderGreet();render()}
+$('greet').onclick=doGreet;
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();render();
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();render();
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
-setInterval(()=>{tick++;if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
+setInterval(()=>{tick++;if(tick%20===0)renderGreet();if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
   if(!window.claude||!window.claude.use)return;
   const [d,u]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
   if(!d||!u)return;const id=await u.id();if(!id)return;
   const r=d.collection('data/users/'+id).doc('pet2');const snap=await r.get();
-  if(snap.exists){const v=snap.data();if(v&&v.v===2&&typeof v.born==='number'&&(v.last>S.last||v.born!==S.born&&v.last>=S.last)){live=false;S=Object.assign(fresh(),JSON.parse(JSON.stringify(v)));advance(S,Date.now());live=true;saveLocal();renderDeeds();renderBads();renderEng();render()}}
+  if(snap.exists){const v=snap.data();if(v&&v.v===2&&typeof v.born==='number'&&(v.last>S.last||v.born!==S.born&&v.last>=S.last)){live=false;S=Object.assign(fresh(),JSON.parse(JSON.stringify(v)));advance(S,Date.now());live=true;saveLocal();renderDeeds();renderBads();renderEng();renderShop();render()}}
   ref=r;if(!snap.exists||snap.data().last<S.last)saveRemote();
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:13</p>
+<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:22</p>
 </body>
 </html>
