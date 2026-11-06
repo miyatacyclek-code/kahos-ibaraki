@@ -7,9 +7,9 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="奥多摩ごっち">
-<meta name="theme-color" content="#10151c">
+<meta name="theme-color" content="#ffe8f4">
 <meta name="robots" content="noindex">
 <title>奥多摩ごっち</title>
 <style>
@@ -135,16 +135,78 @@ h2{scroll-margin-top:12px}
 .brand i:last-child{animation-delay:.6s;color:#ff9fc4}
 @keyframes hop{0%,60%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-5px) rotate(-6deg)}}
 @keyframes twk{0%,100%{transform:scale(.7);opacity:.6}50%{transform:scale(1.15);opacity:1}}
+
+/* ===== yumekawa theme ===== */
+body{background:linear-gradient(180deg,#ffe8f4 0%,#efe6ff 45%,#e2f6ff 100%) fixed!important;color:#5b4a7a!important;font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif}
+.chain{border-color:#ffc6e0!important}
+.dev{background:linear-gradient(160deg,#ffd3ea 0%,#e6d4ff 55%,#c9ecff 100%)!important;box-shadow:inset 0 -12px 0 rgba(170,140,220,.35),inset 0 10px 0 rgba(255,255,255,.6),0 10px 0 #d6c4f2,0 18px 30px rgba(150,110,200,.25)!important}
+.face{background:#fff!important;box-shadow:inset 0 3px 0 #f3e3ff,0 0 0 4px #fff3fa!important;border-radius:26px!important}
+.ic{color:#c3a8e0!important}.ic svg rect{fill:#d7c2ef!important}
+.ic.sel{color:#ff5fa2!important}.ic.sel svg rect{fill:#ff7ab6!important}
+.top .ic.sel::after{border-top-color:#ff7ab6!important}.bot .ic.sel::after{border-bottom-color:#ff7ab6!important}
+.ic.alert svg rect{fill:#ff4f8b!important}
+canvas{background:#fff4fa!important;border-radius:12px!important}
+.btn{background:radial-gradient(circle at 35% 30%,#fff 0 12%,#ff9fcb 13% 100%)!important;box-shadow:0 5px 0 #e57aaa!important;color:#fff!important;font-size:17px!important;text-shadow:0 1px 0 #e06a9c}
+#bB{background:radial-gradient(circle at 35% 30%,#fff 0 12%,#ffd96b 13% 100%)!important;box-shadow:0 5px 0 #e3b23f!important;text-shadow:0 1px 0 #d29a1e}
+#bC{background:radial-gradient(circle at 35% 30%,#fff 0 12%,#8fdcff 13% 100%)!important;box-shadow:0 5px 0 #5fb5e0!important;text-shadow:0 1px 0 #4aa0cc}
+.blab{color:#8a6bb8!important;font-weight:700}
+.msg{background:#fff!important;border:3px solid #ffc6e0!important;border-radius:22px!important;color:#5b4a7a!important;font-size:16px!important;font-weight:700;position:relative;box-shadow:0 4px 0 #f2d6ff}
+.msg::before{content:"";position:absolute;top:-12px;left:50%;margin-left:-10px;border:10px solid transparent;border-bottom-color:#ffc6e0;border-top:0}
+.quick{gap:9px!important}
+.q{background:#fff!important;border:2px solid #f3dcff!important;border-radius:20px!important;color:#6b4a9a!important;font-size:13px!important;padding:8px 2px 8px!important;box-shadow:0 4px 0 #ead9ff}
+.q .qe{display:block;font-size:30px;line-height:1.15;margin-bottom:2px}
+.q:active{transform:translateY(3px)!important;box-shadow:0 1px 0 #ead9ff;background:#fff5fb!important}
+.q.hot{border-color:#ff6fa5!important;background:#fff0f6!important}
+.ok{background:linear-gradient(90deg,#ff9fcb,#c9a7ff)!important;color:#fff!important;border-radius:22px!important;font-size:18px!important;padding:15px!important;box-shadow:0 4px 0 #d79bd6;text-shadow:0 1px 0 rgba(150,80,150,.4)}
+.ok:disabled{background:#eee6f6!important;color:#a99bbf!important;box-shadow:none;text-shadow:none}
+.ok.fight{background:linear-gradient(90deg,#ffc27a,#ff9fa8)!important;box-shadow:0 4px 0 #e6a07a;margin-top:10px}
+h2{color:#e05f9e!important;font-size:19px!important;text-align:center;margin:26px 0 12px!important}
+.recap,.eng,.shop,.journey,.lovebox,details.parent{background:#fff!important;border:2px solid #f3dcff!important;border-radius:22px!important;color:#5b4a7a!important;box-shadow:0 4px 0 #ecdcff}
+.recap h3{color:#e05f9e!important}.recap .rl b{color:#a58bc8!important}.recap .say{background:#fff3fa!important;color:#6b4a9a!important}
+.week div{background:#f8f0ff!important;color:#a58bc8!important}.week div b{color:#e05f9e!important}
+.eday{color:#a58bc8!important}.eword{color:#6b4a9a!important}.ekana{color:#e05f9e!important;font-weight:700}.eja{color:#a58bc8!important}
+.esen{background:#f6f0ff!important;color:#5b4a7a}.esen small{color:#a58bc8!important}
+.b{background:#fff!important;color:#6b4a9a!important;border:2px solid #f3dcff!important;border-radius:18px!important;box-shadow:0 3px 0 #ecdcff}
+.b small{color:#b39ddb!important}.b:active{background:#fff0f8!important;border-color:#ff9fcb!important}
+.erow .b{font-size:15px;line-height:1.3}
+#deeds .b{border-color:#ffe08a!important;box-shadow:0 3px 0 #ffe9b0}#bads .b{border-color:#bfe3ff!important;box-shadow:0 3px 0 #d6eeff}
+.it{background:#fff!important;border:2px solid #f3dcff!important;color:#6b4a9a!important;border-radius:16px!important}
+.it svg{background:#fff4fa!important}.it svg rect{fill:#b07cd8!important}.it small{color:#b39ddb!important}
+.it.wear{border-color:#ff7ab6!important;background:#fff0f7!important}.it.wear small{color:#ff5fa2!important}
+.acorn{color:#d58a2a!important}.slot{color:#a58bc8!important;font-weight:700}
+.jbar{background:#f3e8ff!important}.jbar i{background:linear-gradient(90deg,#9be08a,#8fdcff)!important}.jst{color:#a58bc8!important}
+.ms{border-bottom:1px dashed #efe2ff!important}.ms span:last-child{color:#a58bc8!important}.ms.done{color:#6b4a9a!important}.ms.done span:last-child{color:#ff5fa2!important}
+.past{border-bottom:1px dashed #efe2ff!important}.past button{background:#fff0f8!important;color:#e05f9e!important;border-color:#ffc6e0!important}
+details{background:#fff!important;border:2px solid #f3dcff!important;color:#5b4a7a!important}summary{color:#a26bd0!important}
+details.parent{margin-top:28px;padding:12px 14px}details.inner{border:none!important;box-shadow:none;padding:0;margin-top:12px}
+.g{background:#fff!important;color:#8a6bb8!important;border:2px solid #f3dcff!important}.g.on{background:#f0fff5!important;color:#3f9a6a!important;border-color:#bfeccd!important}
+.nav{background:rgba(255,255,255,.92)!important;border-top:2px solid #f3dcff!important}
+.nav button{color:#b39ddb!important;font-weight:700}.nav .ne{display:block;font-size:22px;line-height:1.2}.nav button.cur{color:#ff5fa2!important}
+.lovebox{padding:14px;font-size:15px}
+.lv-lock{color:#a58bc8;text-align:center;line-height:1.7}
+.lv-head{display:flex;justify-content:space-between;color:#6b4a9a}.lv-head b{color:#ff5fa2}
+.lv-bar{height:14px;border-radius:7px;background:#ffe6f2;margin:10px 0 4px;overflow:hidden}.lv-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff9fcb,#ff6fa5)}
+.lv-sub{font-size:13px;color:#e05f9e;text-align:right}
+.lv-btns{display:flex;gap:8px;margin-top:12px}.lb{flex:1;background:#fff;border:2px solid #ffc6e0;border-radius:18px;padding:10px 4px;font-size:15px;font-weight:700;color:#e05f9e;font-family:inherit;line-height:1.4;box-shadow:0 3px 0 #ffd9ea}
+.lb small{display:block;font-size:11px;color:#d58a2a}.lb.hot{background:linear-gradient(90deg,#ff9fcb,#c9a7ff);color:#fff;border-color:transparent;animation:blinkA 1s steps(2) infinite}
+.lb.sm{flex:none;padding:6px 12px;font-size:13px}
+.lv-name{margin-top:12px;font-size:12px;color:#a58bc8;display:flex;gap:6px;align-items:center}.lv-name input{flex:1;border:2px solid #f3dcff;border-radius:12px;padding:6px 8px;font-size:14px;color:#6b4a9a;font-family:inherit;min-width:0}
+p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
+.wrap{padding-bottom:20px}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="chain" id="secTop"></div>
 <div class="dev" id="dev">
-<svg class="print" viewBox="0 0 380 470" preserveAspectRatio="none" aria-hidden="true">
-<path d="M0 400 L60 340 L110 380 L170 320 L230 375 L290 330 L380 390 L380 470 L0 470 Z" fill="#3c5630"/>
-<g fill="#45623a"><circle cx="60" cy="120" r="14"/><circle cx="320" cy="150" r="10"/><circle cx="40" cy="260" r="9"/><circle cx="345" cy="270" r="15"/><circle cx="300" cy="80" r="7"/></g>
-<g fill="#2f4526"><polygon points="20,430 34,380 48,430"/><polygon points="330,430 346,372 362,430"/></g>
+<svg class="print" viewBox="0 0 380 500" preserveAspectRatio="none" aria-hidden="true">
+<path d="M0 430 L50 370 L95 405 L160 330 L220 395 L280 345 L380 420 L380 500 L0 500 Z" fill="#c9f0dd"/>
+<path d="M0 460 L70 420 L140 450 L210 410 L290 450 L380 425 L380 500 L0 500 Z" fill="#a8e6cf"/>
+<g fill="#8fd8b4"><polygon points="24,470 38,415 52,470"/><polygon points="44,478 56,430 68,478"/><polygon points="318,470 334,410 350,470"/><polygon points="340,478 352,432 364,478"/></g>
+<path d="M120 470 Q190 455 260 470" stroke="#bfe6ff" stroke-width="7" fill="none" stroke-linecap="round"/>
+<g fill="#fff" opacity=".9"><path d="M52 92 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4z"/><path d="M322 126 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3z"/><path d="M30 250 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3z"/><path d="M350 300 l4 9 l9 4 l-9 4 l-4 9 l-4 -9 l-9 -4 l9 -4z"/></g>
+<g fill="#ffd1e8"><circle cx="300" cy="70" r="5"/><circle cx="80" cy="330" r="4"/><circle cx="330" cy="210" r="3"/></g>
+<g transform="translate(330 380) rotate(-20)"><ellipse cx="0" cy="0" rx="10" ry="6" fill="#9be08a"/><line x1="0" y1="0" x2="0" y2="20" stroke="#7cc46a" stroke-width="3"/></g>
 </svg>
 <div class="brand" aria-label="おくたまごっち"><i>★</i><span>お</span><span>く</span><span>た</span><span>ま</span><span>ご</span><span>っ</span><span>ち</span><i>♥</i></div>
 <div class="face">
@@ -163,9 +225,47 @@ h2{scroll-margin-top:12px}
 <div class="msg" id="msg">Aボタンを押してはじめよう</div>
 <div class="quick" id="quick"></div>
 <button class="ok" id="greet" style="margin-top:10px">あいさつする</button>
-<button class="ok" id="fight" style="margin-top:8px;background:#5a2a20">水戸の丸いばあちゃんと しょうぶ！</button>
+<button class="ok fight" id="fight">👵 みとの まるい ばあちゃんと しょうぶ！</button>
 
 <div class="recap" id="recap"></div>
+<h2 id="secEng">🔤 きょうのえいご</h2>
+<div class="eng">
+<div class="eday"><span id="eDay">Day 1</span><span id="eCount">おぼえた数：0</span></div>
+<div class="eemoji" id="eEmoji"></div>
+<div class="eword" id="eWord">apple</div>
+<div class="ekana" id="eKana">アップル</div>
+<div class="eja" id="eJa">りんご</div>
+<div class="erow">
+<button class="b" id="ePlay">🔊<br>きく</button>
+<button class="b" id="eSlow">🐢<br>ゆっくり</button>
+<button class="b" id="eSen">💬<br>ぶんで</button>
+</div>
+<div class="esen" id="eSent"></div>
+<button class="ok" id="eOk">🎉 いえた！</button>
+<details style="margin-top:12px"><summary>これまでの単語</summary><div id="ePast"></div></details>
+</div>
+<h2 id="secDeed">🌟 きょうのいいこと</h2>
+<p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">おうちでいいことができたら押してね。オクタマ坊がよろこんで、やさしく育つよ（1日1回ずつ）。</p>
+<div class="grid2" id="deeds"></div>
+<h2>💧 きょうのわるいこと</h2>
+<p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">わるいことをしてしまったら押してね。オクタマ坊が小さくなってしまうよ。いいことをすると、また大きくなるよ。</p>
+<div class="grid2" id="bads"></div>
+<h2 id="secWear">🎀 きせかえ</h2>
+<div class="shop">
+<div class="shead"><span>いいことや英語で<b class="acorn">どんぐり</b>がたまるよ</span><span class="acorn" id="acorn">どんぐり 5</span></div>
+<div id="shopItems"></div>
+</div>
+<h2 id="secGrow">🌱 1ねんのせいちょう</h2>
+<div class="journey">
+<div id="jHead"></div>
+<div class="jbar"><i id="jFill"></i></div>
+<div class="jst"><span>0日</span><span>半年</span><span>365日</span></div>
+<div id="jList" style="margin-top:10px"></div>
+</div>
+<h2 id="secLove">💕 こいびと</h2>
+<div class="lovebox" id="love"></div>
+<details class="parent">
+<summary>👪 おうちのひとへ（せってい）</summary>
 <div class="row">
 <button class="g on" id="sSound">音：オン</button>
 <button class="g" id="sPause">時間：うごいている</button>
@@ -174,42 +274,8 @@ h2{scroll-margin-top:12px}
 <div class="row" style="display:none">
 </div>
 
-<h2 id="secEng">きょうの英語</h2>
-<div class="eng">
-<div class="eday"><span id="eDay">Day 1</span><span id="eCount">おぼえた数：0</span></div>
-<div class="eemoji" id="eEmoji"></div>
-<div class="eword" id="eWord">apple</div>
-<div class="ekana" id="eKana">アップル</div>
-<div class="eja" id="eJa">りんご</div>
-<div class="erow">
-<button class="b" id="ePlay">きく<small>ふつう</small></button>
-<button class="b" id="eSlow">ゆっくり<small>スロー</small></button>
-<button class="b" id="eSen">ぶんで<small>文をきく</small></button>
-</div>
-<div class="esen" id="eSent"></div>
-<button class="ok" id="eOk">言えた！</button>
-<details style="margin-top:12px"><summary>これまでの単語</summary><div id="ePast"></div></details>
-</div>
-<h2 id="secDeed">きょうのいいこと</h2>
-<p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">おうちでいいことができたら押してね。オクタマ坊がよろこんで、やさしく育つよ（1日1回ずつ）。</p>
-<div class="grid2" id="deeds"></div>
-<h2>きょうのわるいこと</h2>
-<p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">わるいことをしてしまったら押してね。オクタマ坊が小さくなってしまうよ。いいことをすると、また大きくなるよ。</p>
-<div class="grid2" id="bads"></div>
-<h2 id="secWear">きせかえ</h2>
-<div class="shop">
-<div class="shead"><span>いいことや英語で<b class="acorn">どんぐり</b>がたまるよ</span><span class="acorn" id="acorn">どんぐり 5</span></div>
-<div id="shopItems"></div>
-</div>
-<h2 id="secGrow">1年のせいちょう</h2>
-<div class="journey">
-<div id="jHead"></div>
-<div class="jbar"><i id="jFill"></i></div>
-<div class="jst"><span>0日</span><span>半年</span><span>365日</span></div>
-<div id="jList" style="margin-top:10px"></div>
-</div>
-<details>
-<summary>あそびかた</summary>
+<details class="inner">
+<summary>📖 あそびかた（くわしく）</summary>
 <p><b>A</b>でメニューをえらび、<b>B</b>でけってい、<b>C</b>でもどります。画面のまわりのアイコンをタップしても、すぐにできます。下の「すぐできるボタン」（おにぎり・おやつ・ワサビ・トイレ・あそぶ・くすり・でんき・ようす・しかる・なでる・ジャンプ・おはなし）でも、ワンタッチでおせわできます。いま必要なボタンは赤くひかります。</p>
 <p>ごはん：おにぎり（おなか）、おだんご（ごきげん・太りやすい）、ワサビ（おなかとごきげん。たくさん食べると…？）</p>
 <p>でんき：夜8時になるとねむります。でんきを消してあげよう。</p>
@@ -228,12 +294,13 @@ h2{scroll-margin-top:12px}
 <p>あいさつ：時間に合わせて「おはようございます」「こんにちは」「こんばんは」「おやすみなさい」のボタンが出ます。押すと声でこたえてくれます（1日1回ずつ、やさしさとどんぐりがもらえます）。夜8時にねむくなると「おやすみなさい」、朝7時におきると「おはようございます」と話しかけてきます。</p>
 <p>水戸の丸いばあちゃん：ときどき、ライバルの「水戸の丸いばあちゃん」があらわれます（こどもになってから）。Bでしょうぶ、Cでにげる。メーターがまんなかに来たときにAかBでワサビアタック！ばあちゃんは「なっとうネバネバこうげき」と「ほしいもビーム」でやりかえしてきます。かつとどんぐり+5。ほうっておくと、どんぐりを1こ持って帰ってしまいます。「しょうぶ」ボタンで自分からも1日3回までたたかえます。</p>
 <p>きのうのふりかえり：その日の「いいこと」「わるいこと」「英語」「あいさつ」などが記録されて、次の日に「きのうのふりかえり」として見られます。朝ひらくと、オクタマ坊がきのうのことを話しかけてくれます。1週間分の ◎（いいことが多い）○ △（わるいことが多い）も出ます。</p>
+<p>こいびと：おとな（150日目〜）になって、やさしさが50%いじょうになると、すてきなひと（さいしょは「ゆうくん」。なまえはかえられます）に出会えます。「デート」（1日2回）や「おはなをあげる」（どんぐり3こ）で、なかよしがアップ。なかよし100%で、出会って14日たつと「けっこん！」ボタンが出て、けっこんしきができます。けっこんすると「ウエディングベール」がもらえて、毎日いっしょにくらします。</p>
 <p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
 <p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
 <p>病気やおなかぺこぺこを長くほうっておくと、小さくなってしまいます。お出かけのときは「時間」を止めておけます。</p>
 </details>
 
-<h2>オクタマ坊のこわい声</h2>
+<div class="slot" style="margin-top:14px">🔊 こわい声（しつけ用）</div>
 <div class="grid2">
 <button class="b wide" data-src="audio/line01.mp3">登場<small>悪い子はどこじゃ</small></button>
 <button class="b" data-src="audio/line02.mp3">歯みがき<small>におうぞ……</small></button>
@@ -243,6 +310,8 @@ h2{scroll-margin-top:12px}
 <button class="b" data-src="audio/line05.mp3">ごめんなさい<small>ワサビの山へ</small></button>
 <button class="b" data-src="audio/line06.mp3">帰るとき<small>また見ておるぞ</small></button>
 </div>
+</details>
+
 </div>
 
 
@@ -254,6 +323,8 @@ const W=40,H=26,DOT=8;
 const P=a=>a.map(r=>r.padEnd(16,'.').slice(0,16));
 const Q=a=>a.map(r=>r.padEnd(8,'.').slice(0,8));
 const SPR={
+bf2:P(["....o.ooooo.o...", "....ooHhhhho....", "...oHHHhhhhho...", "..ohhhhhhhhhho..", ".ohhhhhhhhhhhho.", ".osssssssssssso.", ".osssssssssssso.", ".ossewssssewsso.", ".osseesssseesso.", ".osssssssssssso.", "..ossssmmsssso..", "...osssmmssso...", "....osssssso....", "..oogggWWgggoo..", "..oggggggggggo..", "..oooooooooooo.."]),
+bf1:P(["....o.ooooo.o...", "....ooHhhhho....", "...oHHHhhhhho...", "..ohhhhhhhhhho..", ".ohhhhhhhhhhhho.", ".osssssssssssso.", ".osssssssssssso.", ".ossewssssewsso.", ".osseesssseesso.", ".osssssssssssso.", "..ossssmmsssso..", "...osssssssso...", "....osssssso....", "..oogggWWgggoo..", "..oggggggggggo..", "..oooooooooooo.."]),
 baa1:P([".......##.......", "......####......", "....########....", "...##########...", "..###......###..", "..#..........#..", ".#.###....###.#.", ".#.#.#.##.#.#.#.", ".#.###....###.#.", ".#............#.", ".#....####....#.", ".#.....##.....#.", "..#..........#..", "...##########...", "....#..##..#....", "...##......##..."]),
 baa2:P([".......##.......", "......####......", "....########....", "...##########...", "..###......###..", "..#..........#..", ".#.###....###.#.", ".#.#.#.##.#.#.#.", ".#.###....###.#.", ".#............#.", ".#.....##.....#.", ".#....#..#....#.", "..#..........#..", "...##########...", "....#..##..#....", "....##....##...."]),
 eggS:P(["................","................","................","................","................","................","......####......",".....#....#.....","....#..#...#....","....#......#....","....#.#..#.#....","....#......#....",".....#....#.....","......####......","................","................"]),
@@ -261,20 +332,20 @@ eggM:P(["................","................","................",".......##.....
 eggc2:P(["......####......","....##.#..##....","...#...#....#...","..#..#..#.#..#..","..#....#.....#..",".#....#.#.....#.",".#.#..#.#..#..#.",".##.##.#.##.#.#.",".#............#.",".#.....##.....#.","..#..........#..","..#..#....#..#..","...#........#...","....##....##....","......####......","................"]),
 egg:P(["......####......","....##....##....","...#........#...","..#..#....#..#..","..#..........#..",".#....#..#....#.",".#............#.",".#..#......#..#.",".#............#.",".#.....##.....#.","..#..........#..","..#..#....#..#..","...#........#...","....##....##....","......####......","................"]),
 eggc:P(["......####......","....##....##....","...#........#...","..#..#....#..#..","..#..........#..",".#....#..#....#.",".#.#..#.#..#..#.",".##.##.#.##.#.#.",".#............#.",".#.....##.....#.","..#..........#..","..#..#....#..#..","...#........#...","....##....##....","......####......","................"]),
-b1:P(["................", "................", "................", "................", "................", "................", "......####......", ".....######.....", "....########....", "....#......#....", "....#.#..#.#....", "....#......#....", "....#..##..#....", ".....######.....", "......#..#......", "................"]),
-b2:P(["................", "................", "................", "................", "................", "................", "................", "......####......", "....########....", "...##########...", "...#.#....#.#...", "...#........#...", "...#...##...#...", "....########....", ".....#....#.....", "................"]),
-c1:P(["................", "................", "................", ".....######.....", "....########....", "...##########...", "...##......##...", "...#.##..##.#...", "...#........#...", "...#...##...#...", "....#......#....", ".....######.....", "....#.#..#.#....", "...#.#.##.#.#...", "....#......#....", "....##....##...."]),
-c2:P(["................", "................", "................", ".....######.....", "....########....", "...##########...", "...##......##...", "...#.##..##.#...", "...#........#...", "...#...##...#...", "....#......#....", ".....######.....", "....#.#..#.#....", "...#.#.##.#.#...", "....#......#....", ".....#....#....."]),
-t1:P(["................", ".....######.....", "...##########...", "..############..", "..###......###..", "..##.##..##.##..", "..##........##..", "..##...##...##..", "...#..####..#...", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#..", "..#.#.#..#.#.#..", "...##########...", "....#......#....", "...##......##..."]),
-t2:P(["................", ".....######.....", "...##########...", "..############..", "..###......###..", "..##.##..##.##..", "..##........##..", "..##...##...##..", "...#..####..#...", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#..", "..#.#.#..#.#.#..", "...##########...", "....##....##....", "....##....##...."]),
-a01:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##.##....##.##.", ".##...#..#...##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#...####...#..", "..##..#..#..##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
-a02:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##.##....##.##.", ".##...#..#...##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#....##....#..", "..##...##...##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
-a11:P(["..##..####..##..", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#...####...#..", "..##........##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
-a12:P(["..##..####..##..", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.##....##.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#....##....#..", "..##........##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
-a31:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##.#.#..#.#.##.", ".##..........##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#..#....#..#..", "..##..####..##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
-a32:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.###..###.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#..#....#..#..", "..##..####..##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
-a21:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.###..###.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#....##....#..", "..##...##...##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."]),
-a22:P(["....########....", "..############..", ".##############.", ".##############.", ".###........###.", ".##..##..##..##.", ".##..........##.", ".##.###..###.##.", ".##..........##.", ".##.....#....##.", "..#..........#..", "..#...####...#..", "..##........##..", "....########....", "...#.#.##.#.#...", "..#.#.#..#.#.#.."])
+b1:P(["................", "................", "................", "................", "................", ".........o......", "........o.......", ".....ooohoo.....", "....ohhhhhho....", "...osssssssso...", "...osssssssso...", "...osewssewso...", "...oseesseeso...", "...ocssmmssco...", "....oossssoo....", "......oooo......"]),
+b2:P(["................", "................", "................", "................", "................", ".........o......", "........o.......", "......ooho......", "....ooHhhhoo....", "...osssssssso...", "...osssssssso...", "...osewssewso...", "...oseesseeso...", "...ocssmmssco...", "....oosmmsoo....", "......oooo......"]),
+c1:P(["................", "................", ".....oooooo.....", "....oHHhhhho....", "...ohhhhhhhho...", "..ohhhhhhhhhho..", "..ohhhhhhhhhho..", "..ohssssssssho..", "..ohsewssewsho..", "..ohseesseesho..", "...ocssmmssco...", "...osssssssso...", "....obWbbnbo....", "....oWbbWbbo....", "....obboobWo....", ".....oo..oo....."]),
+c2:P(["................", "................", ".....oooooo.....", "....oHHhhhho....", "...ohhhhhhhho...", "..ohhhhhhhhhho..", "..ohhhhhhhhhho..", "..ohssssssssho..", "..ohsewssewsho..", "..ohseesseesho..", "...ocssmmssco...", "...osssmmssso...", "....obWbbnbo....", "....oWbbWbbo....", "....oobWbboo....", "......oooo......"]),
+t1:P(["................", ".....oooooo.....", "...ooHHhhhhoo...", "..ohhhhhhhhhho..", "..ohhhhhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhsssssssshho.", ".ohhsewssewshho.", ".ohhseesseeshho.", "..ohcsssssscho..", "..ohsssmmsssho..", "...osssssssso...", "...obbWbbnbbo...", "...obWbbWbbno...", "...oobboobWoo...", ".....oo..oo....."]),
+t2:P(["................", ".....oooooo.....", "...ooHHhhhhoo...", "..ohhhhhhhhhho..", "..ohhhhhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhsssssssshho.", ".ohhsewssewshho.", ".ohhseesseeshho.", "..ohcsssssscho..", "..ohsssmmsssho..", "...osssmmssso...", "...obbWbbnbbo...", "...obWbbWbbno...", "...ooobWbbooo...", "......oooo......"]),
+a01:P([".....oooooo.....", "...ooHHhhhhoo...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhohhhhhhhhohho", "ohhsossssssoshho", "ohhseesssseeshho", "ohhseesssseeshho", ".ohcsssssssscho.", ".ohsssoooosssho.", "..osssssssssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."]),
+a02:P([".....oooooo.....", "...ooHHhhhhoo...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhohhhhhhhhohho", "ohhsossssssoshho", "ohhseesssseeshho", "ohhseesssseeshho", ".ohcsssssssscho.", ".ohsssmmmmsssho.", "..ossssmmsssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."]),
+a11:P(["....oooooooo....", "...oHGHhhhGho...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhhhhhhhhhhhhho", "ohhsssssssssshho", "ohhsewssssewshho", "ohhseesssseeshho", ".ohcsssssssscho.", ".ohssssmmssssho.", "..osssssssssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."]),
+a12:P(["....oooooooo....", "...oHGHhhhGho...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhhhhhhhhhhhhho", "ohhsssssssssshho", "ohhsewssssewshho", "ohhseesssseeshho", ".ohcsssssssscho.", ".ohssssmmssssho.", "..ossssmmsssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."]),
+a31:P([".....oooooo.....", "...ooHHhhhhoo...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhhhhhhhhhhhhho", "ohhsssssssssshho", "ohhssosssssoshho", "ohhsosssssosshho", ".ohcsssssssscho.", ".ohsssmmmmsssho.", "..ossssmmsssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."]),
+a32:P([".....oooooo.....", "...ooHHhhhhoo...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhhhhhhhhhhhhho", "ohhsssssssssshho", "ohhssosssssoshho", "ohhsosssssosshho", ".ohcsssssssscho.", ".ohssssmmssssho.", "..osssssssssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."]),
+a21:P([".....oooooo.....", "...ooHHhhhhoo...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhhhhhhhhhhhhho", "ohhsssssssssshho", "ohhsssssssssshho", "ohhsoossssooshho", ".ohcsssssssscho.", ".ohsssmmmmsssho.", "..osssssssssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."]),
+a22:P([".....oooooo.....", "...ooHHhhhhoo...", "..oHHHHhhhhhho..", ".ohhhhhhhhhhhho.", ".ohhhhhhhhhhhho.", "ohhhhhhhhhhhhhho", "ohhsssssssssshho", "ohhsssssssssshho", "ohhsoossssooshho", ".ohcsssssssscho.", ".ohssssmmssssho.", "..ossssmmsssso..", "...osssssssso...", "..obbWbbWbbnbo..", "..obnbbWbbWbbo..", "..oooooooooooo.."])
 };
 const ICO={
 onigiri:Q(["...##...","..#..#..",".#....#.",".#....#.","#......#","#.####.#","#.####.#","########"]),
@@ -320,7 +391,7 @@ $('icTop').innerHTML=MENU.slice(0,4).map((m,i)=>'<div class="ic" id="ic'+i+'">'+
 $('icBot').innerHTML=MENU.slice(4).map((m,i)=>'<div class="ic" id="ic'+(i+4)+'">'+iconSvg(m.i)+m.l+'</div>').join('');
 
 function rng(s){s.seed=(s.seed+0x6D2B79F5)|0;let t=s.seed;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}
-function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,size:1,log:{},seenRecap:'',enemy:0,wins:0,loses:0,fights:{d:'',n:0},growDays:0,together:[],legend:false,greet:{d:'',l:[]},acorn:5,own:[],wear:{head:'',face:'',neck:'',bg:''},bad:{d:'',l:[]},eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
+function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,size:1,love:{name:'ゆうくん',met:'',lv:0,dates:{d:'',n:0},married:'',gift:''},log:{},seenRecap:'',enemy:0,wins:0,loses:0,fights:{d:'',n:0},growDays:0,together:[],legend:false,greet:{d:'',l:[]},acorn:5,own:[],wear:{head:'',face:'',neck:'',bg:''},bad:{d:'',l:[]},eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
 let S=null,ref=null,saving=false,again=false,live=false;
 function loadLocal(){try{const v=localStorage.getItem(KEY);return v?JSON.parse(v):null}catch(e){return null}}
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
@@ -407,11 +478,12 @@ const vAudio={pause(){try{if(vSrc)vSrc.stop()}catch(e){}}};
 const cv=$('lcd'),cx=cv.getContext('2d');
 let G=new Uint8Array(W*H),dark=false;
 function clr(){G.fill(0)}
-function px(x,y){if(x>=0&&y>=0&&x<W&&y<H)G[y*W+x]=1}
-function blit(b,x,y,flip){const w=b[0].length;for(let r=0;r<b.length;r++)for(let c=0;c<w;c++)if(b[r][c]==='#')px(flip?x+w-1-c:x+c,y+r)}
+const PALS=['','#6b4a7b','#a8775f','#d4a58a','#ffe6d6','#3d2f4f','#ffffff','#ffadc8','#ec6a8c','#9fbcff','#ffffff','#6f86d6','#7ccf6a','#4fa84a','#ffd34d','#ffb8d9','#e04f6f'];const PI={'#':1,o:1,h:2,H:3,s:4,e:5,w:6,c:7,m:8,b:9,W:10,n:11,g:12,G:13,y:14,p:15,r:16};
+function px(x,y,c){if(x>=0&&y>=0&&x<W&&y<H)G[y*W+x]=c||1}
+function blit(b,x,y,flip,col){const w=b[0].length;for(let r=0;r<b.length;r++)for(let c=0;c<w;c++){const ch=b[r][c];if(ch!=='.')px(flip?x+w-1-c:x+c,y+r,ch==='#'?(col||1):(PI[ch]||1))}}
 function text(str,x,y){for(const ch of str){const g=FONT[ch];if(g){for(let r=0;r<5;r++)for(let c=0;c<3;c++)if(g[r][c]==='#')px(x+c,y+r)}x+=4}}
-function flush(){cx.fillStyle=dark?'#1c2117':'#a7b28e';cx.fillRect(0,0,cv.width,cv.height);
-  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const on=G[y*W+x];cx.fillStyle=dark?(on?'#2a3122':'#20261b'):(on?'#1d2416':'#9aa582');cx.fillRect(x*DOT+1,y*DOT+1,DOT-1,DOT-1)}}
+function flush(){cx.fillStyle=dark?'#2b2440':'#fff4fa';cx.fillRect(0,0,cv.width,cv.height);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const on=G[y*W+x];cx.fillStyle=dark?(on?'#3a3158':'#302848'):(on?PALS[on]:'#ffe6f1');cx.fillRect(x*DOT+1,y*DOT+1,DOT-1,DOT-1)}}
 const SC={};
 function scaled(b,n){const key=b.join('')+n;if(SC[key])return SC[key];const out=[];for(let y=0;y<n;y++){let r='';for(let x=0;x<n;x++){const sx=Math.min(15,Math.floor((x+.5)*16/n)),sy=Math.min(15,Math.floor((y+.5)*16/n));r+=b[sy][sx]}out.push(r)}return SC[key]=out}
 function petN(){return Math.max(8,Math.round(16*(S.size||1)))}
@@ -436,10 +508,12 @@ function drawMain(){
   const maxX=W-16-(S.poops?(S.poops>=2?16:8):0);
   if(tick%2===0&&!S.need){if(Math.random()<0.25)petDir*=-1;petX+=petDir*2;if(petX<0){petX=0;petDir=1}if(petX>maxX){petX=maxX;petDir=-1}}
   if(petX>maxX)petX=maxX;
+  const wed=S.love&&S.love.married&&Math.floor(tick/20)%3!==2;if(wed&&petX<17)petX=Math.min(17,maxX);
   let y=9+(fr?0:1);
   if(S.need){petX+=tick%2?1:-1;y=9}
   blitPet(petSpr(fr),petX,y,petDir<0);
   for(let i=0;i<S.poops;i++){const px0=poopX(i),py0=i<2?17:9;blit(ICO.poop,px0,py0);if(tick%2)px(px0+5,py0-1)}
+  if(S.love&&S.love.married&&!S.sleeping&&S.poops<2&&Math.floor(tick/20)%3!==2){blit((tick%2)?SPR.bf2:SPR.bf1,0,9);if(tick%6<2)blit(ICO.heart,16,1,false,15)}
   if(S.legend&&tick%4<2)blit(ICO.sparkle,W-8,10);
   if(S.sick)blit(ICO.skull,0,0);
   else if(S.kind>=60&&!S.need&&S.att!=='fake'&&tick%8<5)blit(ICO.flower,0,1);
@@ -467,6 +541,8 @@ function drawAnim(){
   else if(a.type==='hatch'){if(t<0.6)blit(SPR.eggc,12+(fr?1:-1),9);else{blit(SPR.b1,12,9);blit(ICO.sun,30,1)}}
   else if(a.type==='deed'){blitPet(petSpr(fr),12,fr?8:9);const hs=[[2,2],[30,4],[6,12],[28,14],[18,0]];hs.forEach((h,i)=>{if((i+Math.floor(t*8))%2)blit(i%2?ICO.heart:ICO.sparkle,h[0],h[1]-Math.floor(t*3))})}
   else if(a.type==='wobble'){const p=eggProg();const sp=p<2?SPR.eggS:p<4?SPR.eggM:p<5.2?SPR.egg:SPR.eggc;blit(sp,12+(fr?2:-2),9);px(10,8);px(29,8);px(9,10);px(30,10)}
+  else if(a.type==='date'){blitPet(petSpr(fr),3,9);blit(fr?SPR.bf2:SPR.bf1,21,9,true);if(fr)blit(ICO.heart,16,2,false,16);else blit(ICO.heart,16,4,false,15)}
+  else if(a.type==='wedding'){blitPet(petSpr(fr),3,9);blit(fr?SPR.bf2:SPR.bf1,21,9,true);const k=Math.floor(t*12);blit(ICO.bell,16,1,false,14);for(let i=0;i<6;i++){const x=(i*7+k*3)%W,y=(i*5+k)%8;px(x,y,[15,7,14,16][i%4])}}
   else if(a.type==='call'){blitPet(petSpr(fr),petX,9,petDir<0);if(fr)blit(ICO.bell,W-8,0)}
   if(t>=1){const f=a.onEnd;anim=null;f&&f()}
 }
@@ -648,7 +724,7 @@ function renderEng(){
   const cnt=Object.keys(S.eng.said||{}).length;$('eCount').textContent='おぼえた数：'+cnt;
   $('eEmoji').textContent=w[1];$('eWord').textContent=w[0];$('eKana').textContent=w[3];$('eJa').textContent=w[2];
   $('eSent').innerHTML='';const t1=document.createElement('div');t1.textContent=w[4];const t2=document.createElement('small');t2.textContent=w[5];$('eSent').append(t1,t2);
-  const done=!!(S.eng.said&&S.eng.said[d]);$('eOk').disabled=done;$('eOk').textContent=done?'きょうはクリア！また明日ね':'言えた！';
+  const done=!!(S.eng.said&&S.eng.said[d]);$('eOk').disabled=done;$('eOk').textContent=done?'⭐ きょうはクリア！またあしたね':'🎉 いえた！';
   let h='';for(let k=d-1;k>=0&&k>=d-60;k--){const ww=WORDS[k%WORDS.length];h+='<div class="past"><span>'+ww[1]+' <b>'+ww[0]+'</b>　'+ww[2]+(S.eng.said[k]?'　○':'')+'</span><button data-ei="'+(k%WORDS.length)+'">きく</button></div>'}
   $('ePast').innerHTML=h||'<p style="color:#8f8a78">あしたから、ここにたまっていくよ</p>';
   $('ePast').querySelectorAll('[data-ei]').forEach(b=>b.onclick=()=>ePlay(+b.dataset.ei,'w'))}
@@ -685,34 +761,35 @@ function doBad(k){
 
 /* ---------- dress up ---------- */
 const WEAR={
-ribbon:{n:'りぼん',slot:'head',p:3,b:["##.##","#####","##.##"]},
-flower:{n:'おはな',slot:'head',p:3,b:[".#.",'#.#',".#."]},
-cap:{n:'ぼうし',slot:'head',p:5,b:["..####..",".######.","########"]},
-straw:{n:'むぎわら',slot:'head',p:6,b:["...###...","..#####..","#########"]},
-crown:{n:'おうかん',slot:'head',p:12,b:["#.#.#","#####","#####"]},
+ribbon:{col:'r',n:'りぼん',slot:'head',p:3,b:["##.##","#####","##.##"]},
+flower:{col:'p',n:'おはな',slot:'head',p:3,b:[".#.",'#.#',".#."]},
+cap:{col:'b',n:'ぼうし',slot:'head',p:5,b:["..####..",".######.","########"]},
+straw:{col:'y',n:'むぎわら',slot:'head',p:6,b:["...###...","..#####..","#########"]},
+crown:{col:'y',n:'おうかん',slot:'head',p:12,b:["#.#.#","#####","#####"]},
 glasses:{n:'めがね',slot:'face',p:4,b:["###.###","#.###.#","###.###"]},
 sun:{n:'サングラス',slot:'face',p:6,b:["###.###","#######","###.###"]},
-bow:{n:'ちょうネクタイ',slot:'neck',p:4,b:["#...#","#####","#...#"]},
-scarf:{n:'マフラー',slot:'neck',p:5,b:["#########","#########","......##."]},
-santa:{n:'サンタぼうし',slot:'head',p:5,mo:[12],b:["....#...","...###..","..#####.","########"]},
+bow:{col:'r',n:'ちょうネクタイ',slot:'neck',p:4,b:["#...#","#####","#...#"]},
+scarf:{col:'r',n:'マフラー',slot:'neck',p:5,b:["#########","#########","......##."]},
+santa:{col:'r',n:'サンタぼうし',slot:'head',p:5,mo:[12],b:["....#...","...###..","..#####.","########"]},
 shime:{n:'しめかざり',slot:'head',p:5,mo:[1],b:["#######","..#.#..","..#.#.."]},
 onimask:{n:'おにのおめん',slot:'face',p:5,mo:[2],b:["#.....#",".#####.","#.#.#.#",".#####."]},
-sakura:{n:'さくら',slot:'head',p:4,mo:[3,4],b:[".#.#.","##.##",".#.#."]},
-kabuto:{n:'かぶと',slot:'head',p:6,mo:[5],b:["#.....#",".#...#.","..###..",".#####.","#######"]},
-kasa:{n:'かさ',slot:'head',p:5,mo:[6],b:["..###..",".#####.","#######","...#..."]},
-hachi:{n:'はちまき',slot:'head',p:4,mo:[7,8],b:["#########","........#"]},
-pumpkin:{n:'かぼちゃ',slot:'head',p:6,mo:[10],b:["...#...",".#####.","#.#.#.#","#######",".#####."]},
-momiji:{n:'もみじ',slot:'head',p:4,mo:[9,11],b:["..#..","#.#.#",".###.","#####","..#.."]},
-cape:{n:'マント',slot:'neck',p:0,ms:30,b:["#########","##.....##","#.......#"]},
-star:{n:'ほしのかみかざり',slot:'head',p:0,ms:100,b:["..#..",".###.","#####",".#.#."]},
-legend:{n:'でんせつのおうかん',slot:'head',p:0,ms:365,b:["#.#.#.#","#######","#.###.#","#######"]},
+sakura:{col:'p',n:'さくら',slot:'head',p:4,mo:[3,4],b:[".#.#.","##.##",".#.#."]},
+kabuto:{col:'y',n:'かぶと',slot:'head',p:6,mo:[5],b:["#.....#",".#...#.","..###..",".#####.","#######"]},
+kasa:{col:'b',n:'かさ',slot:'head',p:5,mo:[6],b:["..###..",".#####.","#######","...#..."]},
+hachi:{col:'r',n:'はちまき',slot:'head',p:4,mo:[7,8],b:["#########","........#"]},
+pumpkin:{col:'y',n:'かぼちゃ',slot:'head',p:6,mo:[10],b:["...#...",".#####.","#.#.#.#","#######",".#####."]},
+momiji:{col:'r',n:'もみじ',slot:'head',p:4,mo:[9,11],b:["..#..","#.#.#",".###.","#####","..#.."]},
+cape:{col:'r',n:'マント',slot:'neck',p:0,ms:30,b:["#########","##.....##","#.......#"]},
+star:{col:'y',n:'ほしのかみかざり',slot:'head',p:0,ms:100,b:["..#..",".###.","#####",".#.#."]},
+veil:{n:'ウエディングベール',slot:'head',p:0,ms:9999,b:["..oWWo..",".oWWWWo.","oWWWWWWo","oW....Wo"]},
+legend:{col:'y',n:'でんせつのおうかん',slot:'head',p:0,ms:365,b:["#.#.#.#","#######","#.###.#","#######"]},
 bgM:{n:'やま',slot:'bg',p:4},
 bgS:{n:'ほしぞら',slot:'bg',p:6},
 bgF:{n:'おはなばたけ',slot:'bg',p:6},
 bgY:{n:'ゆき',slot:'bg',p:8}
 };
 const SLOTN={head:'あたま',face:'かお',neck:'くび',bg:'はいけい'};
-const ANCH={eS:[6,9,13],eM:[3,7,12],eL:[0,6,12],b:[6,10,13],c:[3,7,11],t:[1,5,9],a0:[0,7,13],a1:[0,7,13],a2:[0,7,13],a3:[0,7,13]};
+const ANCH={eS:[6,9,13],eM:[3,7,12],eL:[0,6,12],b:[7,11,15],c:[2,8,12],t:[1,7,12],a0:[0,7,13],a1:[0,7,13],a2:[0,7,13],a3:[0,7,13]};
 function scaleBM(b,f){if(f>=1)return b;const h=b.length,w=b[0].length,nh=Math.max(2,Math.round(h*f)),nw=Math.max(3,Math.round(w*f));const o=[];for(let y=0;y<nh;y++){let r='';for(let x=0;x<nw;x++)r+=b[Math.min(h-1,Math.floor((y+.5)*h/nh))][Math.min(w-1,Math.floor((x+.5)*w/nw))];o.push(r)}return o}
 function drawWear(x,y,n,egg){
   if(!S.wear)return;
@@ -720,7 +797,7 @@ function drawWear(x,y,n,egg){
   const f=n/16,off=Math.floor((16-n)/2),top=y+(16-n),cxp=x+off+n/2;
   [['head',0],['face',1],['neck',2]].forEach(([sl,ai])=>{const id=S.wear[sl];if(!id||!WEAR[id])return;const b=scaleBM(WEAR[id].b,f);const w=b[0].length,h=b.length;
     const row=top+Math.round(a[ai]*f);const bx=Math.round(cxp-w/2);let by=sl==='head'?row-h+1:row-Math.floor(h/2);
-    for(let r=0;r<h;r++)for(let c=0;c<w;c++){const X=bx+c,Y=by+r;if(X<0||Y<0||X>=W||Y>=H)continue;G[Y*W+X]=b[r][c]==='#'?1:0}})}
+    for(let r=0;r<h;r++)for(let c=0;c<w;c++){const X=bx+c,Y=by+r;if(X<0||Y<0||X>=W||Y>=H)continue;const ch=b[r][c];G[Y*W+X]=ch==='#'?(PI[WEAR[id].col]||1):ch==='.'?0:(PI[ch]||1)}})}
 function drawBg(){const id=S.wear&&S.wear.bg;if(!id||S.gone)return;
   if(id==='bgM'){for(let x=0;x<W;x++){const h=Math.max(0,6-Math.abs(x-5))+Math.max(0,5-Math.abs(x-34));for(let k=0;k<h;k++)if((x+k)%2===0)px(x,H-1-k)}}
   if(id==='bgS'){[[2,2],[7,5],[33,3],[37,7],[25,1],[14,2]].forEach(([x,y],i)=>{if((tick+i)%3)px(x,y);else{px(x-1,y);px(x+1,y);px(x,y-1);px(x,y+1)}})}
@@ -750,7 +827,7 @@ let gSrc=null;
 function gVoice(k){if(!soundOn)return;const a=ac();if(!a)return;const b=VB[k];if(!b||b==='loading'){loadV(k);if(b!=='loading'){const iv=setInterval(()=>{if(VB[k]&&VB[k]!=='loading'){clearInterval(iv);gVoice(k)}},200);setTimeout(()=>clearInterval(iv),3000)}return}
   try{if(gSrc)gSrc.stop()}catch(e){}const s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start();gSrc=s}
 function greetType(){const h=new Date().getHours();if(S.sleeping||h>=20||h<5)return'oyasumi';if(h<10)return'ohayo';if(h<17)return'konnichiwa';return'konbanwa'}
-function renderGreet(){if(!S)return;$('greet').textContent='「'+GT[greetType()][0]+'」とあいさつする'}
+function renderGreet(){if(!S)return;const t=greetType();$('greet').textContent=({ohayo:'🌅',konnichiwa:'☀️',konbanwa:'🌆',oyasumi:'🌙'}[t])+' 「'+GT[t][0]+'」'}
 function doGreet(){ac();markDay();if(!S||S.gone)return;anim=null;const t=greetType();
   if(!S.greet||S.greet.d!==today())S.greet={d:today(),l:[]};
   const first=S.greet.l.indexOf(t)<0;logT('greet',t);if(first){S.greet.l.push(t);S.kind=Math.min(100,(S.kind||0)+5);S.happy=Math.min(4,S.happy+1);earn(1)}
@@ -849,7 +926,7 @@ function renderRecap(){const el=$('recap');if(!el||!S)return;const y=dstr(-1),L=
   if(L&&S.seenRecap!==today()&&S.stage>0){S.seenRecap=today();saveLocal();say(R.msg,9000)}}
 
 /* ---------- quick buttons ---------- */
-const QUICK=[['onigiri','おにぎり',()=>qFeed(0)],['dango','おやつ',()=>qFeed(1)],['wasabi','ワサビ',()=>qFeed(2)],['toilet','トイレ',()=>qAct('toilet')],['ball','あそぶ',()=>qAct('game')],['syringe','くすり',()=>qAct('med')],['bulb','でんき',()=>qAct('light')],['meter','ようす',()=>qAct('stat')],['fist','しかる',()=>qAct('scold')],['heart','なでる',()=>qPet()],['sun','ジャンプ',()=>qJump()],['note','おはなし',()=>doTalk()]];
+const QUICK=[['🍙','ごはん',()=>qFeed(0)],['🍡','おやつ',()=>qFeed(1)],['🚽','トイレ',()=>qAct('toilet')],['⚽','あそぶ',()=>qAct('game')],['🤚','なでなで',()=>qPet()],['💬','おはなし',()=>doTalk()],['💊','くすり',()=>qAct('med')],['💡','でんき',()=>qAct('light')],['🌿','ワサビ',()=>qFeed(2)],['⭐','ジャンプ',()=>qJump()],['😠','しかる',()=>qAct('scold')],['📋','ようす',()=>qAct('stat')]];
 function qReady(){ac();markDay();if(!S||S.gone||scaring)return false;if(mode==='battle'){say('いまはばあちゃんとしょうぶ中！',1500);return false}if(anim)anim=null;if(mode==='game'){game=null}mode='main';menu=-1;
   if(S.stage===0){S.eggBonus=(S.eggBonus||0)+1/6;play('wobble',500);tone(1900,0.04,0);say('まだたまごだよ。あたためてあげたよ',2000);if(eggProg()>=EVO[0])setTimeout(hatchNow,500);saveLocal();render();return false}return true}
 function qFeed(i){if(!qReady())return;if(S.sleeping){refuse('ねむっているよ');render();return}feed(i);render()}
@@ -858,13 +935,13 @@ let petCount=0;
 function qPet(){if(!qReady())return;if(S.sleeping){say('しーっ、ねているよ',1500);return}petCount++;seq([1568,2093],0.08);play('deed',1400);
   if(petCount%5===0&&S.happy<4){S.happy=Math.min(4,S.happy+1);say('なでなで……とってもうれしそう！ごきげんアップ',2500);save()}else say('なでなで……にこにこしている',1800);render()}
 function qJump(){if(!qReady())return;if(S.sleeping){say('ねているよ',1500);return}tone(1200,0.05,0);tone(1800,0.05,0.08);play('happy',1300);say('ぴょーん！',1200);render()}
-function renderQuick(){const q=$('quick');if(!q)return;q.innerHTML=QUICK.map((b,i)=>'<button class="q" data-q="'+i+'">'+iconSvg(b[0])+b[1]+'</button>').join('');q.querySelectorAll('[data-q]').forEach(el=>el.onclick=()=>QUICK[+el.dataset.q][2]())}
-function quickHot(){const q=$('quick');if(!q||!S)return;const hot={3:S.need||S.poops,5:S.sick,0:S.hunger===0,4:S.happy===0,6:S.sleeping&&S.light};q.querySelectorAll('[data-q]').forEach(el=>el.classList.toggle('hot',!!hot[+el.dataset.q]))}
+function renderQuick(){const q=$('quick');if(!q)return;q.innerHTML=QUICK.map((b,i)=>'<button class="q" data-q="'+i+'"><span class="qe">'+b[0]+'</span>'+b[1]+'</button>').join('');q.querySelectorAll('[data-q]').forEach(el=>el.onclick=()=>QUICK[+el.dataset.q][2]())}
+function quickHot(){const q=$('quick');if(!q||!S)return;const hot={2:S.need||S.poops,6:S.sick,0:S.hunger===0,3:S.happy===0,7:S.sleeping&&S.light};q.querySelectorAll('[data-q]').forEach(el=>el.classList.toggle('hot',!!hot[+el.dataset.q]))}
 for(let i=0;i<8;i++){const el=$('ic'+i);el.addEventListener('click',()=>{if(i===7){qAct('call');return}if(MENU[i].k==='food'){if(!qReady())return;mode='food';page=0;SND.b();render();return}qAct(MENU[i].k)})}
 
 /* ---------- bottom nav ---------- */
-const NAV=[['secTop','おせわ','onigiri'],['secEng','英語','note'],['secDeed','いいこと','heart'],['secWear','きせかえ','cake'],['secGrow','せいちょう','star']];
-function renderNav(){$('navIn').innerHTML=NAV.map((n,i)=>'<button data-n="'+i+'">'+(n[2]==='star'?bmSvg(["..#..",".###.","#####",".#.#."]):iconSvg(n[2]))+n[1]+'</button>').join('');
+const NAV=[['secTop','おせわ','🏠'],['secEng','えいご','🔤'],['secDeed','いいこと','🌟'],['secWear','きせかえ','🎀'],['secGrow','せいちょう','🌱'],['secLove','こいびと','💕']];
+function renderNav(){$('navIn').innerHTML=NAV.map((n,i)=>'<button data-n="'+i+'"><span class="ne">'+n[2]+'</span>'+n[1]+'</button>').join('');
   $('navIn').querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{const t=$(NAV[+b.dataset.n][0]);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});tone(2000,0.03,0)})}
 function navCur(){let cur=0;NAV.forEach((n,i)=>{const t=$(n[0]);if(t&&t.getBoundingClientRect().top<window.innerHeight*0.35)cur=i});$('navIn').querySelectorAll('[data-n]').forEach((b,i)=>b.classList.toggle('cur',i===cur))}
 window.addEventListener('scroll',navCur,{passive:true});
@@ -880,12 +957,40 @@ function doTalk(){if(!qReady())return;if(S.sleeping){say('すやすや……ね�
   say('「'+talkText(k)+'」'+(st<=1?'（あかちゃんだから、まだおはなしできないみたい）':st===2?'（すこしずつ、ことばをおぼえてきたよ）':''),4500);
   S.happy=Math.min(4,S.happy+(Math.random()<.3?1:0));saveLocal();render()}
 
+/* ---------- romance ---------- */
+function loveOK(){return S.stage>=4&&!S.gone}
+function bfName(){return(S.love&&S.love.name)||'ゆうくん'}
+function renderLove(){const el=$('love');if(!el||!S)return;const L=S.love||(S.love={name:'ゆうくん',met:'',lv:0,dates:{d:'',n:0},married:'',gift:''});const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let h='';
+  if(!loveOK()){h='<div class="lv-lock">💌 おとなになったら（150日目〜）、すてきな出会いがあるかも…？</div>'}
+  else if(!L.met){h='<div class="lv-lock">💌 やさしさが50%いじょうになると、すてきなひとに出会えるよ（いま '+S.kind+'%）</div>'}
+  else{const days=Math.max(0,dayNum(L.met,today()));
+    h='<div class="lv-head"><span>'+(L.married?'💍 ふうふ':'💕 こいびと')+'：<b>'+esc(bfName())+'</b></span><span>'+(L.married?'けっこんして '+Math.max(0,dayNum(L.married,today()))+'日':'出会って '+days+'日')+'</span></div>';
+    if(!L.married){h+='<div class="lv-bar"><i style="width:'+Math.min(100,L.lv)+'%"></i></div><div class="lv-sub">なかよし '+L.lv+'%'+(L.lv>=100?(days>=14?'　プロポーズできるよ！':'　あと'+(14-days)+'日でプロポーズできるよ'):'')+'</div>'}
+    h+='<div class="lv-btns"><button class="lb" id="lDate">💑<br>デート</button><button class="lb" id="lGift">💐<br>おはなをあげる<small>どんぐり3</small></button>'+(!L.married&&L.lv>=100&&days>=14?'<button class="lb hot" id="lProp">💍<br>けっこん！</button>':'')+'</div>';
+    h+='<div class="lv-name">なまえをかえる：<input id="lName" maxlength="8" value="'+esc(bfName())+'"><button class="lb sm" id="lNameOk">OK</button></div>'}
+  el.innerHTML=h;
+  if($('lDate'))$('lDate').onclick=goDate;if($('lGift'))$('lGift').onclick=giveGift;if($('lProp'))$('lProp').onclick=propose;
+  if($('lNameOk'))$('lNameOk').onclick=()=>{const v=$('lName').value.trim().slice(0,8);if(!v){say('なまえを入れてね',2000);return}S.love.name=v;save();renderLove();say('なまえを「'+v+'」にしたよ',2000)}}
+function checkMeet(){if(!loveOK()||!S.love||S.love.met)return;if(S.kind>=50){S.love.met=today();S.love.lv=10;gVoice('r_meet');mode='main';anim=null;play('date',3000);say('すてきな出会い！「'+bfName()+'」となかよくなったよ 💕',6000);save();renderLove()}}
+function goDate(){ac();markDay();if(!qReady())return;if(S.sleeping){say('ねているよ',1500);return}const L=S.love;if(!L.dates||L.dates.d!==today())L.dates={d:today(),n:0};
+  if(L.dates.n>=2){say('きょうはもう2かいデートしたよ。またあしたね',2500);return}L.dates.n++;
+  const plc=['おくたま湖','ワサビ畑','日原の森','山のてっぺん','かわら'][Math.floor(Math.random()*5)];
+  if(!L.married)L.lv=Math.min(100,L.lv+10);S.happy=Math.min(4,S.happy+1);seq([1318,1568,2093,1568,2093],0.12);gVoice('r_date');play('date',3500);
+  say(bfName()+'と「'+plc+'」でデートした！💕'+(L.married?'':'（なかよし '+L.lv+'%）'),4500);save();renderLove();render()}
+function giveGift(){ac();markDay();if(!qReady())return;const L=S.love;if((S.acorn||0)<3){say('どんぐりがたりないよ（3こいるよ）',2500);return}
+  if(L.gift===today()){say('おはなは1日1かいだよ',2000);return}L.gift=today();S.acorn-=3;if(!L.married)L.lv=Math.min(100,L.lv+15);seq([1568,2093,2637],0.1);play('date',2500);
+  say(bfName()+'におはなをあげた！とってもよろこんでいる 💐',3500);save();renderLove();renderShop();render()}
+function propose(){ac();if(!qReady())return;const L=S.love;L.married=today();if(S.own.indexOf('veil')<0)S.own.push('veil');S.wear.head='veil';
+  gVoice('r_propose');seq([523,659,784,1046,0,1046,1318,1568,2093,0,1568,2093],0.16);play('wedding',7000,{},()=>{gVoice('r_wedding');say('おめでとう！'+bfName()+'とけっこんしたよ！💍 これからは毎日いっしょ',6000)});
+  say('けっこんしき！🔔 '+bfName()+'「ずっといっしょにいてね」',7000);save();renderLove();renderShop();render()}
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();render();renderRecap();
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
-setInterval(()=>{tick++;quickHot();if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
+setInterval(()=>{tick++;quickHot();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
   if(!window.claude||!window.claude.use)return;
   const [d,u]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
@@ -896,6 +1001,6 @@ setInterval(()=>{tick++;quickHot();if(tick%20===0){renderGreet();renderJourney()
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:50</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 12:58</p>
 </body>
 </html>
