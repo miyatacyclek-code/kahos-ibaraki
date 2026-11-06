@@ -362,7 +362,7 @@ function drawMain(){
     if(tick%4<2)blit(ICO.note,4,3);return}
   if(S.stage===0){const p=eggProg();let sp,wob;
     if(p<2){sp=SPR.eggS;wob=tick%8===0?1:0}else if(p<4){sp=SPR.eggM;wob=tick%6===0?1:tick%6===3?-1:0}else if(p<5.2){sp=tick%5===0?SPR.eggc:SPR.egg;wob=tick%4===1?1:tick%4===3?-1:0}else{sp=tick%2?SPR.eggc2:SPR.eggc;wob=tick%2?1:-1}
-    blit(sp,12+wob,9);
+    blit(sp,12+wob,9);drawWear(12+wob,9,16,p<2?'eS':p<4?'eM':'eL');
     const bars=Math.min(6,Math.floor(p));for(let i=0;i<6;i++){const x=8+i*4;px(x,1);px(x+1,1);if(i<bars){px(x,2);px(x+1,2)}else px(x,2)}
     if(p>=5.2&&tick%2)blit(ICO.excl,30,6);return}
   if(S.sleeping){dark=!S.light;blitPet(petSpr(0),12,9);if(S.light&&tick%2)blit(ICO.zz,30,1);return}
@@ -624,11 +624,11 @@ bgF:{n:'おはなばたけ',slot:'bg',p:6},
 bgY:{n:'ゆき',slot:'bg',p:8}
 };
 const SLOTN={head:'あたま',face:'かお',neck:'くび',bg:'はいけい'};
-const ANCH={b:[6,10,13],c:[3,7,11],t:[1,5,9],a0:[0,7,13],a1:[0,7,13],a2:[0,7,13],a3:[0,7,13]};
+const ANCH={eS:[6,9,13],eM:[3,7,12],eL:[0,6,12],b:[6,10,13],c:[3,7,11],t:[1,5,9],a0:[0,7,13],a1:[0,7,13],a2:[0,7,13],a3:[0,7,13]};
 function scaleBM(b,f){if(f>=1)return b;const h=b.length,w=b[0].length,nh=Math.max(2,Math.round(h*f)),nw=Math.max(3,Math.round(w*f));const o=[];for(let y=0;y<nh;y++){let r='';for(let x=0;x<nw;x++)r+=b[Math.min(h-1,Math.floor((y+.5)*h/nh))][Math.min(w-1,Math.floor((x+.5)*w/nw))];o.push(r)}return o}
-function drawWear(x,y,n){
-  if(!S.wear||S.stage===0)return;
-  const key=S.stage===1?'b':S.stage===2?'c':S.stage===3?'t':'a'+S.form;const a=ANCH[key];if(!a)return;
+function drawWear(x,y,n,egg){
+  if(!S.wear)return;
+  const key=egg||(S.stage===1?'b':S.stage===2?'c':S.stage===3?'t':'a'+S.form);const a=ANCH[key];if(!a)return;
   const f=n/16,off=Math.floor((16-n)/2),top=y+(16-n),cxp=x+off+n/2;
   [['head',0],['face',1],['neck',2]].forEach(([sl,ai])=>{const id=S.wear[sl];if(!id||!WEAR[id])return;const b=scaleBM(WEAR[id].b,f);const w=b[0].length,h=b.length;
     const row=top+Math.round(a[ai]*f);const bx=Math.round(cxp-w/2);let by=sl==='head'?row-h+1:row-Math.floor(h/2);
@@ -651,7 +651,6 @@ function tapWear(k){ac();const it=WEAR[k];if(!S||S.gone)return;
   if(S.own.indexOf(k)<0){if((S.acorn||0)<it.p){SND.no();say('どんぐりがたりないよ。あと '+(it.p-(S.acorn||0))+'こ（いいことや英語でたまるよ）',3000);return}
     S.acorn-=it.p;S.own.push(k);S.wear[it.slot]=k;seq([1318,1568,2093],0.08);say(it.n+'をかってつけた！',2500)}
   else{if(S.wear[it.slot]===k){S.wear[it.slot]='';SND.c();say(it.n+'をはずした',2000)}else{S.wear[it.slot]=k;SND.b();say(it.n+'をつけた！',2000)}}
-  if(S.stage===0&&it.slot!=='bg')say('生まれたら、つけてあげられるよ',2500);
   mode='main';menu=-1;save();renderShop();render()}
 
 /* ---------- greetings ---------- */
@@ -688,6 +687,6 @@ setInterval(()=>{tick++;if(tick%20===0)renderGreet();if(S.deeds&&S.deeds.d!==tod
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:22</p>
+<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:25</p>
 </body>
 </html>
