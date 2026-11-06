@@ -407,6 +407,8 @@ body.introing{overflow:hidden}
 <button class="g" id="sReset">たまごから</button>
 </div>
 <div class="slot" style="margin-top:12px">⏳ 1日に あそべる じかん（よる9じ〜あさ6じは つかえません）</div>
+<div class="slot" style="margin-top:12px">🎒 ほいくえんモード（へいじつ あさ6じ〜 は あそべない。かえってきたら「がんばった！」で あそべる）</div>
+<div class="row" id="schoolSel"><button class="g" data-sc="14">14じまで</button><button class="g" data-sc="15">15じまで</button><button class="g" data-sc="16">16じまで</button><button class="g" data-sc="off">つかわない</button></div>
 <div class="row" id="limitSel"><button class="g" data-lim="30">30ぷん</button><button class="g" data-lim="60">1じかん</button><button class="g" data-lim="90">1じかん半</button><button class="g" data-lim="0">なし</button></div>
 <div class="row" style="display:none">
 </div>
@@ -443,6 +445,7 @@ body.introing{overflow:hidden}
 <p>かのちゃんの おたんじょうび（11月22日）：1しゅうかん まえから「おたんじょうびまで あと○にち」が でます。とうじつは、ひらいた しゅんかんに オクタマ坊・ママ・パパが「おめでとう！」と いってくれて、ケーキと ハッピーバースデーの うたで おいわい。どんぐり50こ・「バースデーぼうし」・レアシールの プレゼントが あります（まいとし）。</p>
 <p>こいびと：おとな（150日目〜）になって、やさしさが50%いじょうになると、すてきなひと（さいしょは「ゆうくん」。なまえはかえられます）に出会えます。「デート」（1日2回）や「おはなをあげる」（どんぐり3こ）で、なかよしがアップ。なかよし100%で、出会って14日たつと「けっこん！」ボタンが出て、けっこんしきができます。けっこんすると「ウエディングベール」がもらえて、毎日いっしょにくらします。</p>
 <p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
+<p>ほいくえんモード：へいじつ（月〜金）の あさ6じから 15じ（おうちのひとへ で かえられます）までは「🎒 ほいくえん がんばってね！」の がめんに なって、あそべません。オクタマ坊が「ほいくえん がんばってね！がんばったら、かえってきてから いっしょに あそぼうね！」と おうえん。「👋いってきます！」を おすと「いってらっしゃい！」。かえってきて ひらくと「おかえり！ほいくえん がんばった？」→「がんばった！」で どんぐり5こ と ほめてもらえて、あそべるように なります。土日は いつでも あそべます。おやすみの ひは「つかわない」に してね。</p>
 <p>あそぶ じかん：1日1じかん（おうちのひとへ で かえられます）あそぶと「きょうは もう おしまい」に なって、つかえなくなります。のこり10ぷんで おしらせします。よる9じを すぎると「ねないと オクタマモンスターが くるよ！」と おしらせ、1ぷんたっても あそんでいると モンスターが きて、あさ6じまで つかえなくなります。おうちのひとは「👪 おうちのひと」ボタンを 3びょう ながおしすると、15ふん（よるは30ぷん）だけ のばせます。</p>
 <p>オクタマモンスター：「わるいこと」をすると、おくたまの やまから オクタマモンスターが やってきて、ぱくっと たべられちゃいます！「🙏ごめんなさい」ボタンか、「いいこと」をすると、ぺっと はきだして かえしてくれます（1じかんたつと、かってに はきだします）。たべられているあいだは、おせわが できません。</p>
 <p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
@@ -466,7 +469,8 @@ body.introing{overflow:hidden}
 
 
 <div class="modal" id="modal"><div class="mcard" id="mcard"></div></div>
-<div id="lock"><div class="stars"><i style="left:10%;top:12%">✦</i><i style="left:80%;top:8%;animation-delay:.4s">✦</i><i style="left:60%;top:25%;animation-delay:.8s">✧</i><i style="left:20%;top:70%;animation-delay:.2s">✧</i><i style="left:85%;top:65%;animation-delay:1s">✦</i></div><div class="lbig" id="lockE">🌙</div><div class="lt" id="lockT">おやすみの じかん</div><div class="ls" id="lockS"></div><button id="lockParent"><span id="lockBar"></span>👪 おうちのひと（3びょう ながおし）</button></div>
+<div id="lock"><div class="stars"><i style="left:10%;top:12%">✦</i><i style="left:80%;top:8%;animation-delay:.4s">✦</i><i style="left:60%;top:25%;animation-delay:.8s">✧</i><i style="left:20%;top:70%;animation-delay:.2s">✧</i><i style="left:85%;top:65%;animation-delay:1s">✦</i></div><div class="lbig" id="lockE">🌙</div><div class="lt" id="lockT">おやすみの じかん</div><div class="ls" id="lockS"></div><button id="lockGo" style="display:none;margin-top:24px;background:#fff;color:#e05f9e;border:none;border-radius:999px;padding:14px 30px;font-size:20px;font-weight:800;font-family:inherit;box-shadow:0 5px 0 rgba(0,0,0,.15)">👋 いってきます！</button>
+<button id="lockParent"><span id="lockBar"></span>👪 おうちのひと（3びょう ながおし）</button></div>
 <nav class="nav" aria-label="メニュー"><div id="navIn"></div></nav>
 <script>
 const $=id=>document.getElementById(id);
@@ -1047,6 +1051,7 @@ function doGreet(){ac();markDay();if(!S||S.gone)return;anim=null;const t=greetTy
   if(first)say($('msg').textContent+'　どんぐり +1',4500);
   save();renderGreet();render()}
 $('greet').onclick=doGreet;
+document.querySelectorAll('[data-sc]').forEach(b=>b.onclick=()=>{const v=b.dataset.sc;if(v==='off'){S.school=false}else{S.school=true;S.schoolEnd=+v}save();renderSchool();say(S.school===false?'ほいくえんモードを つかわない ように したよ':'へいじつは '+S.schoolEnd+'じまで ほいくえんモードに したよ',2500)});
 document.querySelectorAll('[data-lim]').forEach(b=>b.onclick=()=>{S.limit=+b.dataset.lim;save();renderLimit();say(S.limit?'1日 '+S.limit+'ぷんに したよ':'じかんの せいげんを なしに したよ',2500)});
 $('rescue').onclick=()=>{ac();markDay();if(!S||!S.eaten)return;rescue()};
 $('fight').onclick=()=>{ac();markDay();if(!S||S.gone)return;if(S.stage<2){say('もうすこし大きくなったら、たたかえるよ（こどもになってから）',3000);return}if(S.sleeping){say('ねているよ',2000);return}if(mode==='battle')return;
@@ -1300,11 +1305,14 @@ let lockWhy='',nightWarnAt=0;
 function playInit(){if(!S.play||S.play.d!==today())S.play={d:today(),sec:0,extra:0};if(S.limit===undefined)S.limit=60}
 function isNight(){const h=new Date().getHours();return h>=21||h<6}
 function lockShow(why){lockWhy=why;const L=$('lock');
+  $('lockGo').style.display=why==='school'?'':'none';$('lock').style.background=why==='school'?'linear-gradient(180deg,#ffe9a8 0%,#ffc6e0 55%,#bfe6ff 100%)':'';
+  if(why==='school'){$('lockE').textContent='🎒';$('lockT').textContent='ほいくえん がんばってね！';$('lockS').innerHTML='かのちゃん、おはよー！<br>ほいくえんで いっぱい がんばったら、<br>かえってきてから いっしょに あそぼうね！<br><small>（'+(S.schoolEnd||15)+'じに なったら あそべるよ）</small>';$('lockT').style.color='#e05f9e';$('lockS').style.color='#6b4a9a'}
+  else{$('lockT').style.color='';$('lockS').style.color=''}
   if(why==='time'){$('lockE').textContent='⏰';$('lockT').textContent='きょうは もう おしまい！';$('lockS').innerHTML='いっぱい あそんだね。<br>オクタマ坊も つかれて ねむっちゃった。<br>また あした あそぼうね！';gVoice('t_end')}
-  else{$('lockE').textContent='🌙';$('lockT').textContent='おやすみの じかん';$('lockS').innerHTML='よる9じを すぎたよ。<br>オクタマ坊も オクタマモンスターも<br>もう ねているよ。<br>あさ6じに また あおうね。おやすみなさい！'}
+  else if(why!=='school'){$('lockE').textContent='🌙';$('lockT').textContent='おやすみの じかん';$('lockS').innerHTML='よる9じを すぎたよ。<br>オクタマ坊も オクタマモンスターも<br>もう ねているよ。<br>あさ6じに また あおうね。おやすみなさい！'}
   L.classList.add('show');mq=[];$('modal').classList.remove('show')}
 function lockHide(){lockWhy='';$('lock').classList.remove('show')}
-function playTick(){if(!S||document.visibilityState!=='visible')return;playInit();const now=Date.now();
+function playTick(){if(!S||document.visibilityState!=='visible')return;playInit();const now=Date.now();if(schoolTick())return;
   if(isNight()&&!(S.nightOK&&S.nightOK>now)){
     if(lockWhy==='night')return;
     if(!nightWarnAt){nightWarnAt=now;gVoice('n_warn');modal('<div class="mtitle">もう よる9じ だよ！</div><div class="mbig">🌙</div><div class="mtext">はやく ねないと……<br><b>オクタマモンスターが くるよ！</b><br><small>1ぷんで おしまいに なるよ</small></div>','はーい、ねます');say('よる9じを すぎたよ。ねないと オクタマモンスターが くるよ！',60000);return}
@@ -1319,7 +1327,8 @@ function playTick(){if(!S||document.visibilityState!=='visible')return;playInit(
   if(S.limit&&left<=0){save();lockShow('time')}}
 setInterval(playTick,1000);
 (function(){let ht=null,st=0;const b=$('lockParent');const start=e=>{e.preventDefault();st=Date.now();ht=setInterval(()=>{const p=Math.min(1,(Date.now()-st)/3000);$('lockBar').style.width=(p*100)+'%';if(p>=1){clearInterval(ht);ht=null;$('lockBar').style.width='0';
-  if(lockWhy==='time'){S.play.extra+=15;say('おうちのひとが 15ふん のばしてくれたよ',3000)}else{S.nightOK=Date.now()+30*60000;nightWarnAt=0;if(S.eaten)S.eaten=null;say('おうちのひとが 30ぷんだけ いいよって',3000)}save();lockHide();renderRescue();render()}},50)};
+  if(lockWhy==='school'){S.schoolOK=Date.now()+30*60000;say('おうちのひとが 30ぷんだけ いいよって',3000)}
+  else if(lockWhy==='time'){S.play.extra+=15;say('おうちのひとが 15ふん のばしてくれたよ',3000)}else{S.nightOK=Date.now()+30*60000;nightWarnAt=0;if(S.eaten)S.eaten=null;say('おうちのひとが 30ぷんだけ いいよって',3000)}save();lockHide();renderRescue();render()}},50)};
   const end=()=>{if(ht){clearInterval(ht);ht=null}$('lockBar').style.width='0'};b.addEventListener('pointerdown',start);b.addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.addEventListener('pointercancel',end)})();
 function renderLimit(){const el=$('limitSel');if(!el)return;el.querySelectorAll('[data-lim]').forEach(b=>b.classList.toggle('on',+b.dataset.lim===(S.limit||0)))}
 
@@ -1365,10 +1374,24 @@ function bdCheck(){if(!S||S.gone||!isBD())return;const y=new Date().getFullYear(
   S.acorn=(S.acorn||0)+50;if(S.own.indexOf('party')<0)S.own.push('party');S.wear.head='party';S.happy=4;S.kind=Math.min(100,S.kind+10);const st=giveSticker(true);save();renderShop();renderDaily();
   setTimeout(()=>{modal('<div class="mtitle">かのちゃん<br>おたんじょうび おめでとう！</div><div class="mbig">🎂</div><div class="mtext">オクタマ坊、ママ（あかねちゃん）、パパ（たいがくん）から<br>おいわいの プレゼント！<br><b>どんぐり 50こ<br>🎉「バースデーぼうし」<br>'+STK[st][0]+' シール「'+STK[st][1]+'」</b></div>','ありがとう！',()=>bdParty(true));confetti(40)},1600)}
 
+/* ---------- nursery school mode ---------- */
+function schoolNow(){if(!S||S.school===false)return false;const n=new Date(),dw=n.getDay(),h=n.getHours();if(dw===0||dw===6)return false;return h>=6&&h<(S.schoolEnd||15)}
+function schoolDay(){const dw=new Date().getDay();return S&&S.school!==false&&dw>0&&dw<6}
+let schoolGreeted='';
+function schoolTick(){if(!S||document.visibilityState!=='visible')return false;const now=Date.now();
+  if(schoolNow()&&!(S.schoolOK&&S.schoolOK>now)){if(lockWhy!=='school'){lockShow('school');if(schoolGreeted!==today()){schoolGreeted=today();loadV('hk_morning');helloPending='hk_morning'}}return true}
+  if(lockWhy==='school'){lockHide()}
+  if(schoolDay()&&new Date().getHours()>=(S.schoolEnd||15)&&S.schoolDone!==today()&&!isNight()&&!introOpen&&!lockWhy){S.schoolDone=today();saveLocal();loadV('hk_back');
+    modal('<div class="mtitle">おかえり！かのちゃん</div><div class="mbig">🎒</div><div class="mtext">ほいくえん がんばった？</div>','がんばった！ 💪',()=>{gVoice('hk_back');S.acorn=(S.acorn||0)+5;S.happy=Math.min(4,S.happy+1);S.kind=Math.min(100,S.kind+3);S.hoiku=(S.hoiku||0)+1;logT('good','hoiku');save();renderShop();anim=null;mode='main';play('deed',2600,{fam:Math.random()<.5?'mama':'papa'});confetti(18);say('おかえり！ほいくえん がんばったね！ どんぐり +5（ほいくえん がんばった '+S.hoiku+'にちめ）さあ、いっしょに あそぼう！',6000)})}
+  return false}
+$('lockGo').onclick=()=>{ac();gVoice('hk_bye');$('lockS').innerHTML='いってらっしゃい！👋<br>がんばってね！ まってるよ！';seq([1046,1318,1568],0.12)};
+$('lock').addEventListener('pointerdown',()=>{if(lockWhy==='school'&&helloPending==='hk_morning'){helloPending=null;ac();setTimeout(()=>gVoice('hk_morning'),150)}});
+function renderSchool(){const el=$('schoolSel');if(!el||!S)return;el.querySelectorAll('[data-sc]').forEach(b=>{const v=b.dataset.sc;b.classList.toggle('on',v==='off'?S.school===false:(S.school!==false&&+v===(S.schoolEnd||15)))})}
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();renderBD();bdCheck();drawMini('cMama',SPR.mama1);drawMini('cPapa',SPR.papa1);showIntro();loadV('welcome');
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();renderBD();bdCheck();renderSchool();drawMini('cMama',SPR.mama1);drawMini('cPapa',SPR.papa1);showIntro();loadV('welcome');
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
 setInterval(()=>{tick++;quickHot();if(tick%60===0){renderBD();bdCheck()}renderRescue();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
@@ -1381,6 +1404,6 @@ setInterval(()=>{tick++;quickHot();if(tick%60===0){renderBD();bdCheck()}renderRe
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:50</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:56</p>
 </body>
 </html>
