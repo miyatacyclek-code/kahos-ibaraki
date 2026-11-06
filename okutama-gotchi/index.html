@@ -410,6 +410,7 @@ body.introing{overflow:hidden}
 <details class="parent">
 <summary>👪 おうちのひとへ（せってい）</summary>
 <div class="row">
+<button class="g" id="sTest2">🔊 おとテスト</button>
 <button class="g on" id="sSound">音：オン</button>
 <button class="g" id="sPause">時間：うごいている</button>
 <button class="g" id="sReset">たまごから</button>
@@ -624,7 +625,13 @@ function advance(s,now){
 
 /* ---------- sound ---------- */
 let AC=null,soundOn=true;
-function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+const SILENT='data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA//NwwAAAAAAAAAAAAEluZm8AAAAPAAAADAAABZwAMjIyMjIyMjJFRUVFRUVFRVhYWFhYWFhYampqampqampqfX19fX19fX2QkJCQkJCQkKKioqKioqKiorW1tbW1tbW1yMjIyMjIyMja2tra2tra2trt7e3t7e3t7f//////////AAAAAExhdmM2MC4zMQAAAAAAAAAAAAAAACQDNwAAAAAAAAWcHqGxZwAAAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxKMAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NAxKQAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80LEowAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80DEpAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsSjAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxKMAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NAxKQAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80LEowAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=';let unlockEl=null,unlocked=false;
+function unlockAudio(){try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+  try{if(!unlockEl){unlockEl=new Audio(SILENT);unlockEl.loop=true;unlockEl.volume=0.01;unlockEl.setAttribute('playsinline','')}const p=unlockEl.play();if(p&&p.catch)p.catch(()=>{});unlocked=true}catch(e){}}
+function ac(){unlockAudio();if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state!=='running'){try{AC.resume()}catch(e){}}return AC}
+let preDone=false;document.addEventListener('pointerdown',()=>{ac();if(!preDone&&typeof CHAT!=='undefined'&&S){preDone=true;setTimeout(()=>{const st=Math.min(4,Math.max(2,S.stage));Object.keys(CHAT).forEach(id=>loadV('c_'+id+'_'+st));['ohayo','konnichiwa','konbanwa','oyasumi','sleepy','wake'].forEach(t=>loadV(talkKey(t)));['m_eat','m_help','m_spit','ma1','ma2','pa1','pa2','w_2','w_3','w_4'].forEach(loadV)},800)}},{capture:true});
+document.addEventListener('touchend',()=>{ac()},{capture:true,passive:true});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&AC&&AC.state!=='running'){try{AC.resume()}catch(e){}}});
 function tone(f,d,t0,type,vol){const a=ac();if(!a||!soundOn)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'square';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(vol||0.06,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+0.02)}
 function seq(notes,len){notes.forEach((f,i)=>f&&tone(f,len*0.9,i*len))}
 const SND={
@@ -1046,7 +1053,7 @@ function tapWear(k){ac();markDay();const it=WEAR[k];if(!S||S.gone)return;
 /* ---------- greetings ---------- */
 const GT={ohayo:['おはようございます','おはようございます！きょうもいっしょにがんばろうね'],konnichiwa:['こんにちは','こんにちは！あそびにきてくれてありがとう'],konbanwa:['こんばんは','こんばんは。きょうもいちにちおつかれさま'],oyasumi:['おやすみなさい','おやすみなさい。また、あしたね']};
 let gSrc=null;
-function gVoice(k){if(!soundOn)return;const a=ac();if(!a)return;const b=VB[k];if(!b||b==='loading'){loadV(k);if(b!=='loading'){const iv=setInterval(()=>{if(VB[k]&&VB[k]!=='loading'){clearInterval(iv);gVoice(k)}},200);setTimeout(()=>clearInterval(iv),3000)}return}
+function gVoice(k){if(!soundOn)return;const a=ac();if(!a||a.state!=='running'){try{const el=new Audio('audio/'+k+'.mp3');el.setAttribute('playsinline','');el.play().catch(()=>{})}catch(e){}return}const b=VB[k];if(!b||b==='loading'){loadV(k);try{const el=new Audio('audio/'+k+'.mp3');el.setAttribute('playsinline','');el.play().catch(()=>{})}catch(e){}return}
   try{if(gSrc)gSrc.stop()}catch(e){}const s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start();gSrc=s}
 function greetType(){const h=new Date().getHours();if(S.sleeping||h>=20||h<5)return'oyasumi';if(h<10)return'ohayo';if(h<17)return'konnichiwa';return'konbanwa'}
 function renderGreet(){if(!S)return;const t=greetType();$('greet').textContent=({ohayo:'🌅',konnichiwa:'☀️',konbanwa:'🌆',oyasumi:'🌙'}[t])+' 「'+GT[t][0]+'」'}
@@ -1060,6 +1067,7 @@ function doGreet(){ac();markDay();if(!S||S.gone)return;anim=null;const t=greetTy
   if(first)say($('msg').textContent+'　どんぐり +1',4500);
   save();renderGreet();render()}
 $('greet').onclick=doGreet;
+$('sTest2').onclick=()=>{ac();seq([1046,1318,1568],0.12);setTimeout(()=>gVoice(talkKey('konnichiwa')),500);say('おとが きこえない ときは：①iPhoneの よこの スイッチ（マナーモード）を オフに ②おとの おおきさを 上げてね ③アプリを いちど とじて ひらきなおしてね',9000)};
 document.querySelectorAll('[data-sc]').forEach(b=>b.onclick=()=>{const v=b.dataset.sc;if(v==='off'){S.school=false}else{S.school=true;S.schoolEnd=+v}save();renderSchool();say(S.school===false?'ほいくえんモードを つかわない ように したよ':'へいじつは '+S.schoolEnd+'じまで ほいくえんモードに したよ',2500)});
 document.querySelectorAll('[data-lim]').forEach(b=>b.onclick=()=>{S.limit=+b.dataset.lim;save();renderLimit();say(S.limit?'1日 '+S.limit+'ぷんに したよ':'じかんの せいげんを なしに したよ',2500)});
 $('rescue').onclick=()=>{ac();markDay();if(!S||!S.eaten)return;rescue()};
@@ -1435,6 +1443,6 @@ setInterval(()=>{tick++;quickHot();if(tick%60===0){renderBD();bdCheck()}renderRe
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 14:06</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 14:16</p>
 </body>
 </html>
