@@ -97,7 +97,7 @@ for (const p of POSTS) {
   ids.add(p.id);
   const url = `${SITE}blog/${p.id}.html`;
   const title = plain(p.title);
-  const image = p.photo ? SITE + p.photo : null;
+  const image = SITE + (p.photo || "photos/seaside-nemophila.jpg");
   const ld = {
     "@context": "https://schema.org", "@type": "BlogPosting", headline: title, description: plain(p.desc || p.sum),
     author: { "@type": "Person", name: "Kaho", url: SITE }, mainEntityOfPage: url, inLanguage: "en",
@@ -130,7 +130,7 @@ ${footer}
 }
 
 const indexDesc = "Stories about Ibaraki, Japan by Kaho, a local: places, food, travel tips and real life in rural Japan.";
-fs.writeFileSync(path.join(outDir, "index.html"), head({ title: "Kaho's Ibaraki Blog | Food, travel and life in Ibaraki, Japan", desc: indexDesc, url: SITE + "blog/", type: "website" }) + `
+fs.writeFileSync(path.join(outDir, "index.html"), head({ title: "Kaho's Ibaraki Blog | Food, travel and life in Ibaraki, Japan", desc: indexDesc, url: SITE + "blog/", image: SITE + "photos/seaside-nemophila.jpg", type: "website" }) + `
 <body><div class="wrap">
 ${topbar}
 <h1>Kaho's Ibaraki Blog</h1>
