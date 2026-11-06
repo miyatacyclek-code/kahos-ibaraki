@@ -246,9 +246,53 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 #lockParent{margin-top:40px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.5);color:#fff;border-radius:999px;padding:10px 18px;font-size:13px;font-family:inherit;font-weight:700;position:relative;overflow:hidden}
 #lockParent span{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(255,255,255,.35)}
 .timer{font-size:12px;color:#a58bc8;text-align:center;margin-top:6px;font-weight:700}
+
+#intro{position:fixed;inset:0;z-index:95;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#ffd6ec 0%,#e6d3ff 40%,#c8e9ff 75%,#d9fbe9 100%);cursor:pointer;transition:opacity .7s ease}
+#intro.gone{opacity:0;pointer-events:none}
+#intro svg.scene{position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 58%;transition:transform 1.3s cubic-bezier(.6,0,.9,.4)}
+#intro.enter svg.scene{transform:scale(6)}
+#intro .flash{position:absolute;inset:0;background:radial-gradient(circle,#fff 0,#fff8 40%,transparent 70%);opacity:0;pointer-events:none}
+#intro.enter .flash{animation:flsh 1.3s ease-in forwards}
+@keyframes flsh{0%{opacity:0}70%{opacity:.6}100%{opacity:1}}
+#intro .ilogo{position:relative;z-index:2;margin-top:-18vh;font-family:"OkgLogo","Hiragino Maru Gothic ProN",sans-serif;font-size:min(13vw,56px);display:flex;gap:2px;filter:drop-shadow(0 4px 0 rgba(160,110,200,.35))}
+#intro .ilogo span{display:inline-block;-webkit-text-stroke:7px #fff;paint-order:stroke fill;animation:hop 1.6s ease-in-out infinite}
+#intro .ilogo span:nth-child(1){color:#ff6fa5}#intro .ilogo span:nth-child(2){color:#ff9f43;animation-delay:.1s}#intro .ilogo span:nth-child(3){color:#ffc93f;animation-delay:.2s}#intro .ilogo span:nth-child(4){color:#5fc95a;animation-delay:.3s}#intro .ilogo span:nth-child(5){color:#3fb8ef;animation-delay:.4s}#intro .ilogo span:nth-child(6){color:#a98bff;animation-delay:.5s;font-size:.8em;align-self:flex-end}#intro .ilogo span:nth-child(7){color:#ff6fa5;animation-delay:.6s}
+#intro .isub{position:relative;z-index:2;margin-top:10px;font-size:min(4.6vw,19px);font-weight:800;color:#8a5fc0;background:rgba(255,255,255,.8);padding:6px 18px;border-radius:999px;letter-spacing:.1em;box-shadow:0 3px 0 #e2d0ff}
+#intro .ipet{position:relative;z-index:2;margin-top:3vh;width:min(30vw,128px);height:min(30vw,128px);image-rendering:pixelated;animation:float 2.6s ease-in-out infinite;background:transparent!important}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-14px) rotate(3deg)}}
+#intro .ibtn{position:relative;z-index:2;margin-top:4vh;font-size:min(5.6vw,22px);font-weight:800;color:#fff;background:linear-gradient(90deg,#ff8fc4,#b98bff,#7fd3ff);background-size:200% 100%;padding:16px 30px;border-radius:999px;box-shadow:0 6px 0 #c08ad8,0 0 30px rgba(255,255,255,.9);animation:shimmer 2s linear infinite,pulse 1.4s ease-in-out infinite;border:3px solid #fff}
+@keyframes shimmer{0%{background-position:0 0}100%{background-position:200% 0}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+#intro .sp{position:absolute;color:#fff;font-style:normal;text-shadow:0 0 8px #fff,0 0 16px #ffd6ec;animation:twk 1.8s ease-in-out infinite;z-index:1;pointer-events:none}
+#intro .fall{position:absolute;top:-30px;z-index:1;pointer-events:none;animation:fall linear infinite;opacity:.9}
+@keyframes fall{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(110vh) rotate(360deg)}}
+#intro .burst{position:absolute;left:50%;top:58%;z-index:3;pointer-events:none;font-size:26px;animation:burst 1.2s ease-out forwards}
+@keyframes burst{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.3);opacity:0}}
+body.introing{overflow:hidden}
 </style>
 </head>
 <body>
+<div id="intro" role="button" aria-label="タップして はいる">
+<svg class="scene" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><linearGradient id="rb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9fcb"/><stop offset=".2" stop-color="#ffc77a"/><stop offset=".4" stop-color="#fff07a"/><stop offset=".6" stop-color="#9be89a"/><stop offset=".8" stop-color="#8fd3ff"/><stop offset="1" stop-color="#c3a4ff"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+<circle cx="200" cy="470" r="230" fill="none" stroke="url(#rb)" stroke-width="34" opacity=".75"/>
+<circle cx="200" cy="470" r="150" fill="url(#glow)"/>
+<g fill="#fff" opacity=".9"><ellipse cx="70" cy="170" rx="50" ry="18"/><ellipse cx="100" cy="160" rx="34" ry="20"/><ellipse cx="320" cy="230" rx="56" ry="18"/><ellipse cx="295" cy="220" rx="30" ry="18"/><ellipse cx="330" cy="110" rx="36" ry="12"/></g>
+<path d="M0 560 L60 470 L110 520 L170 430 L230 505 L290 450 L350 500 L400 470 L400 800 L0 800Z" fill="#cfefff"/>
+<path d="M0 600 L70 520 L130 570 L200 500 L260 560 L330 515 L400 560 L400 800 L0 800Z" fill="#c4f0da"/>
+<path d="M0 650 L90 590 L170 640 L240 600 L320 640 L400 610 L400 800 L0 800Z" fill="#a9e6c7"/>
+<g fill="#8fd8b4"><polygon points="30,690 46,620 62,690"/><polygon points="60,700 74,640 88,700"/><polygon points="320,690 336,618 352,690"/><polygon points="346,700 360,640 374,700"/></g>
+<ellipse cx="200" cy="700" rx="170" ry="40" fill="#bfe6ff"/><ellipse cx="200" cy="696" rx="120" ry="16" fill="#e6f6ff"/>
+<path d="M110 700 L290 700" stroke="#ffe08a" stroke-width="6" stroke-dasharray="10 8"/>
+<g fill="#9be08a"><ellipse cx="60" cy="760" rx="16" ry="9"/><ellipse cx="80" cy="752" rx="12" ry="8"/><ellipse cx="335" cy="762" rx="15" ry="9"/></g>
+</svg>
+<div class="flash"></div>
+<div class="ilogo"><span>お</span><span>く</span><span>た</span><span>ま</span><span>ご</span><span>っ</span><span>ち</span></div>
+<div class="isub">✨ おくたまの ゆめのくに ✨</div>
+<canvas class="ipet" id="ipet" width="16" height="16"></canvas>
+<div class="ibtn">✨ タップして はいる ✨</div>
+</div>
 <div class="wrap">
 <div class="chain" id="secTop"></div>
 <div class="dev" id="dev">
@@ -1101,7 +1145,7 @@ let helloPending=null;
 function helloOnOpen(){if(!S||S.gone||S.stage<1)return;const t=greetType();if(!S.hello||S.hello.d!==today())S.hello={d:today(),l:[]};if(S.hello.l.indexOf(t)>=0)return;
   S.hello.l.push(t);saveLocal();const k=talkKey(t==='oyasumi'&&!S.sleeping?'konbanwa':t);helloPending=k;loadV(k);
   const cur=Date.now()<msgLock?' '+$('msg').textContent:'';say('「'+talkText(k)+'」'+(S.stage<=1?'（あかちゃんだから、まだおはなしできないみたい）':'')+cur,9000);anim=null;play('happy',1800)}
-function helloPlay(){if(!helloPending)return;const k=helloPending;helloPending=null;ac();setTimeout(()=>gVoice(k),120)}
+function helloPlay(){if(!helloPending||(typeof introOpen!=='undefined'&&introOpen))return;const k=helloPending;helloPending=null;ac();setTimeout(()=>gVoice(k),120)}
 document.addEventListener('pointerdown',helloPlay,{once:false,capture:true});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){setTimeout(helloOnOpen,400);setTimeout(()=>{dailyRoll();renderDaily()},700)}});
 
@@ -1223,10 +1267,23 @@ setInterval(playTick,1000);
   const end=()=>{if(ht){clearInterval(ht);ht=null}$('lockBar').style.width='0'};b.addEventListener('pointerdown',start);b.addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.addEventListener('pointercancel',end)})();
 function renderLimit(){const el=$('limitSel');if(!el)return;el.querySelectorAll('[data-lim]').forEach(b=>b.classList.toggle('on',+b.dataset.lim===(S.limit||0)))}
 
+/* ---------- magical intro ---------- */
+(function introDeco(){const it=$('intro');const sy=['✦','✧','⋆','✦','♡','✧'];for(let i=0;i<16;i++){const e=document.createElement('i');e.className='sp';e.textContent=sy[i%sy.length];e.style.left=(Math.random()*95)+'%';e.style.top=(Math.random()*90)+'%';e.style.fontSize=(10+Math.random()*18)+'px';e.style.animationDelay=(Math.random()*2)+'s';it.appendChild(e)}
+  const fl=['🌸','🍁','✨','🌿','⭐','💗'];for(let i=0;i<10;i++){const e=document.createElement('i');e.className='fall';e.textContent=fl[i%fl.length];e.style.left=(Math.random()*95)+'%';e.style.fontSize=(14+Math.random()*12)+'px';e.style.animationDuration=(6+Math.random()*6)+'s';e.style.animationDelay=(-Math.random()*8)+'s';it.appendChild(e)}})();
+function introPet(){const c=$('ipet');if(!c||!S)return;const x=c.getContext('2d');x.clearRect(0,0,16,16);const b=S.stage===0?SPR.egg:petSpr(0);for(let r=0;r<16;r++)for(let k=0;k<16;k++){const ch=(b[r]||'')[k];if(ch&&ch!=='.'){x.fillStyle=PALS[ch==='#'?1:(PI[ch]||1)];x.fillRect(k,r,1,1)}}}
+let introOpen=false;
+function showIntro(){const it=$('intro');it.classList.remove('gone','enter');introOpen=true;document.body.classList.add('introing');introPet()}
+function enterIntro(){if(!introOpen)return;introOpen=false;const it=$('intro');ac();
+  const a=AC;if(a&&soundOn){[1046,1318,1568,2093,2637,3136,2637,3136,4186].forEach((f,i)=>tone(f,0.18,i*0.09,'triangle',0.06));setTimeout(()=>gVoice('welcome'),350)}
+  const em=['✨','💖','⭐','🌸','💫','🌈'];for(let i=0;i<18;i++){const e=document.createElement('i');e.className='burst';e.textContent=em[i%em.length];const ang=i/18*Math.PI*2,d=120+Math.random()*120;e.style.setProperty('--dx',Math.cos(ang)*d+'px');e.style.setProperty('--dy',Math.sin(ang)*d+'px');it.appendChild(e);setTimeout(()=>e.remove(),1300)}
+  it.classList.add('enter');setTimeout(()=>{it.classList.add('gone');document.body.classList.remove('introing');window.scrollTo(0,0);setTimeout(helloPlay,1400)},1350)}
+$('intro').addEventListener('click',enterIntro);
+let hiddenAt=0;document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')hiddenAt=Date.now();else if(hiddenAt&&Date.now()-hiddenAt>10*60000)showIntro()});
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();showIntro();loadV('welcome');
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
 setInterval(()=>{tick++;quickHot();renderRescue();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
@@ -1239,6 +1296,6 @@ setInterval(()=>{tick++;quickHot();renderRescue();if(tick%20===0){checkMeet();re
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:34</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:38</p>
 </body>
 </html>
