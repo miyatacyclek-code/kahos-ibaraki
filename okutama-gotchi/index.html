@@ -34,11 +34,11 @@ body{background:#10151c;color:#e9e3cf;font-family:"Hiragino Sans","Noto Sans JP"
 .ic.alert{color:#ff7a6a;animation:blinkA .6s steps(2) infinite}
 @keyframes blinkA{50%{opacity:.35}}
 canvas{display:block;width:100%;image-rendering:pixelated;border-radius:6px;margin:6px 0;background:#a7b28e}
-.btns{position:relative;display:flex;justify-content:center;gap:9%;margin-top:7%}
+.btns{position:relative;display:flex;justify-content:center;gap:9%;margin-top:4%}
 .btn{width:17%;aspect-ratio:1;border-radius:50%;border:none;background:#d9c27a;box-shadow:0 5px 0 #8c7a3c,inset 0 -3px 0 #b8a05c;color:#4a3a14;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit}
 .btn:active{transform:translateY(4px);box-shadow:0 1px 0 #8c7a3c}
 .btn.b2{margin-top:5%}
-.blab{display:flex;justify-content:center;gap:9%;font-size:11px;color:#dfe6cf;margin-top:6px;position:relative}
+.blab{display:flex;justify-content:center;gap:9%;font-size:11px;color:#dfe6cf;margin-top:3px;position:relative}
 .blab span{width:17%;text-align:center}
 .blab span:nth-child(2){margin-top:5%}
 .msg{min-height:50px;margin-top:14px;background:#161d26;border:1px solid #26303c;border-radius:14px;padding:11px 14px;font-size:15px;line-height:1.55;text-align:center}
@@ -109,11 +109,28 @@ details p{margin-top:8px}
 .recap .say{margin-top:8px;background:#0f1510;border-radius:10px;padding:8px 10px;color:#f4efd9}
 .week{display:flex;gap:4px;margin-top:8px}.week div{flex:1;text-align:center;font-size:11px;color:#8f8a78;background:#141a22;border-radius:8px;padding:4px 0}
 .week div b{display:block;font-size:14px;color:#e9e3cf}
+
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}
+.q{background:#1a2430;color:#e9e3cf;border:1px solid #2f3c4c;border-radius:14px;padding:9px 2px 7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1.25}
+.q svg{width:22px;height:22px;display:block;margin:0 auto 3px}
+.q svg rect{fill:#cfe3b8}
+.q:active{background:#2a3a24;transform:scale(.96)}
+.q.hot{border-color:#e0261b;animation:blinkA .8s steps(2) infinite}
+.ic{cursor:pointer}
+
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;justify-content:center;background:#0b0f15ee;border-top:1px solid #232c38;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.nav div{display:flex;gap:4px;width:100%;max-width:440px}
+.nav button{flex:1;background:transparent;border:none;color:#a9a38e;font-size:11px;font-family:inherit;padding:4px 0;cursor:pointer;line-height:1.3}
+.nav button svg{width:20px;height:20px;display:block;margin:0 auto 2px}
+.nav button svg rect{fill:#a9a38e}
+.nav button.cur{color:#f4efd9}.nav button.cur svg rect{fill:#d9a83a}
+body{padding-bottom:74px}
+h2{scroll-margin-top:12px}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="chain"></div>
+<div class="chain" id="secTop"></div>
 <div class="dev" id="dev">
 <svg class="print" viewBox="0 0 380 470" preserveAspectRatio="none" aria-hidden="true">
 <path d="M0 400 L60 340 L110 380 L170 320 L230 375 L290 330 L380 390 L380 470 L0 470 Z" fill="#3c5630"/>
@@ -135,6 +152,7 @@ details p{margin-top:8px}
 </div>
 
 <div class="msg" id="msg">Aボタンを押してはじめよう</div>
+<div class="quick" id="quick"></div>
 <button class="ok" id="greet" style="margin-top:10px">あいさつする</button>
 <button class="ok" id="fight" style="margin-top:8px;background:#5a2a20">水戸の丸いばあちゃんと しょうぶ！</button>
 
@@ -147,19 +165,7 @@ details p{margin-top:8px}
 <div class="row" style="display:none">
 </div>
 
-<h2>1年のせいちょう</h2>
-<div class="journey">
-<div id="jHead"></div>
-<div class="jbar"><i id="jFill"></i></div>
-<div class="jst"><span>0日</span><span>半年</span><span>365日</span></div>
-<div id="jList" style="margin-top:10px"></div>
-</div>
-<h2>きせかえ</h2>
-<div class="shop">
-<div class="shead"><span>いいことや英語で<b class="acorn">どんぐり</b>がたまるよ</span><span class="acorn" id="acorn">どんぐり 5</span></div>
-<div id="shopItems"></div>
-</div>
-<h2>きょうの英語</h2>
+<h2 id="secEng">きょうの英語</h2>
 <div class="eng">
 <div class="eday"><span id="eDay">Day 1</span><span id="eCount">おぼえた数：0</span></div>
 <div class="eemoji" id="eEmoji"></div>
@@ -175,15 +181,27 @@ details p{margin-top:8px}
 <button class="ok" id="eOk">言えた！</button>
 <details style="margin-top:12px"><summary>これまでの単語</summary><div id="ePast"></div></details>
 </div>
-<h2>きょうのいいこと</h2>
+<h2 id="secDeed">きょうのいいこと</h2>
 <p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">おうちでいいことができたら押してね。オクタマ坊がよろこんで、やさしく育つよ（1日1回ずつ）。</p>
 <div class="grid2" id="deeds"></div>
 <h2>きょうのわるいこと</h2>
 <p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">わるいことをしてしまったら押してね。オクタマ坊が小さくなってしまうよ。いいことをすると、また大きくなるよ。</p>
 <div class="grid2" id="bads"></div>
+<h2 id="secWear">きせかえ</h2>
+<div class="shop">
+<div class="shead"><span>いいことや英語で<b class="acorn">どんぐり</b>がたまるよ</span><span class="acorn" id="acorn">どんぐり 5</span></div>
+<div id="shopItems"></div>
+</div>
+<h2 id="secGrow">1年のせいちょう</h2>
+<div class="journey">
+<div id="jHead"></div>
+<div class="jbar"><i id="jFill"></i></div>
+<div class="jst"><span>0日</span><span>半年</span><span>365日</span></div>
+<div id="jList" style="margin-top:10px"></div>
+</div>
 <details>
 <summary>あそびかた</summary>
-<p><b>A</b>でメニューをえらび、<b>B</b>でけってい、<b>C</b>でもどります。</p>
+<p><b>A</b>でメニューをえらび、<b>B</b>でけってい、<b>C</b>でもどります。画面のまわりのアイコンをタップしても、すぐにできます。下の「すぐできるボタン」（おにぎり・おやつ・ワサビ・トイレ・あそぶ・くすり・でんき・ようす・しかる・なでる・ジャンプ・よぶ）でも、ワンタッチでおせわできます。いま必要なボタンは赤くひかります。</p>
 <p>ごはん：おにぎり（おなか）、おだんご（ごきげん・太りやすい）、ワサビ（おなかとごきげん。たくさん食べると…？）</p>
 <p>でんき：夜8時になるとねむります。でんきを消してあげよう。</p>
 <p>あそぶ：オクタマ坊がどっちを向くか当てるゲーム。Aで左、Bで右。</p>
@@ -219,6 +237,7 @@ details p{margin-top:8px}
 
 
 
+<nav class="nav" aria-label="メニュー"><div id="navIn"></div></nav>
 <script>
 const $=id=>document.getElementById(id);
 const W=40,H=26,DOT=8;
@@ -818,12 +837,33 @@ function renderRecap(){const el=$('recap');if(!el||!S)return;const y=dstr(-1),L=
   const rb=$('rEng');if(rb)rb.onclick=()=>{const i=WORDS.findIndex(w=>w[0]===L.eng);if(i>=0)ePlay(i,'w')};
   if(L&&S.seenRecap!==today()&&S.stage>0){S.seenRecap=today();saveLocal();say(R.msg,9000)}}
 
+/* ---------- quick buttons ---------- */
+const QUICK=[['onigiri','おにぎり',()=>qFeed(0)],['dango','おやつ',()=>qFeed(1)],['wasabi','ワサビ',()=>qFeed(2)],['toilet','トイレ',()=>qAct('toilet')],['ball','あそぶ',()=>qAct('game')],['syringe','くすり',()=>qAct('med')],['bulb','でんき',()=>qAct('light')],['meter','ようす',()=>qAct('stat')],['fist','しかる',()=>qAct('scold')],['heart','なでる',()=>qPet()],['sun','ジャンプ',()=>qJump()],['bell','よぶ',()=>qAct('call')]];
+function qReady(){ac();markDay();if(!S||S.gone||scaring)return false;if(mode==='battle'){say('いまはばあちゃんとしょうぶ中！',1500);return false}if(anim)anim=null;if(mode==='game'){game=null}mode='main';menu=-1;
+  if(S.stage===0){S.eggBonus=(S.eggBonus||0)+1/6;play('wobble',500);tone(1900,0.04,0);say('まだたまごだよ。あたためてあげたよ',2000);if(eggProg()>=EVO[0])setTimeout(hatchNow,500);saveLocal();render();return false}return true}
+function qFeed(i){if(!qReady())return;if(S.sleeping){refuse('ねむっているよ');render();return}feed(i);render()}
+function qAct(k){if(!qReady())return;act(k);render()}
+let petCount=0;
+function qPet(){if(!qReady())return;if(S.sleeping){say('しーっ、ねているよ',1500);return}petCount++;seq([1568,2093],0.08);play('deed',1400);
+  if(petCount%5===0&&S.happy<4){S.happy=Math.min(4,S.happy+1);say('なでなで……とってもうれしそう！ごきげんアップ',2500);save()}else say('なでなで……にこにこしている',1800);render()}
+function qJump(){if(!qReady())return;if(S.sleeping){say('ねているよ',1500);return}tone(1200,0.05,0);tone(1800,0.05,0.08);play('happy',1300);say('ぴょーん！',1200);render()}
+function renderQuick(){const q=$('quick');if(!q)return;q.innerHTML=QUICK.map((b,i)=>'<button class="q" data-q="'+i+'">'+iconSvg(b[0])+b[1]+'</button>').join('');q.querySelectorAll('[data-q]').forEach(el=>el.onclick=()=>QUICK[+el.dataset.q][2]())}
+function quickHot(){const q=$('quick');if(!q||!S)return;const hot={3:S.need||S.poops,5:S.sick,0:S.hunger===0,4:S.happy===0,6:S.sleeping&&S.light};q.querySelectorAll('[data-q]').forEach(el=>el.classList.toggle('hot',!!hot[+el.dataset.q]))}
+for(let i=0;i<8;i++){const el=$('ic'+i);el.addEventListener('click',()=>{if(i===7){qAct('call');return}if(MENU[i].k==='food'){if(!qReady())return;mode='food';page=0;SND.b();render();return}qAct(MENU[i].k)})}
+
+/* ---------- bottom nav ---------- */
+const NAV=[['secTop','おせわ','onigiri'],['secEng','英語','note'],['secDeed','いいこと','heart'],['secWear','きせかえ','cake'],['secGrow','せいちょう','star']];
+function renderNav(){$('navIn').innerHTML=NAV.map((n,i)=>'<button data-n="'+i+'">'+(n[2]==='star'?bmSvg(["..#..",".###.","#####",".#.#."]):iconSvg(n[2]))+n[1]+'</button>').join('');
+  $('navIn').querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{const t=$(NAV[+b.dataset.n][0]);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});tone(2000,0.03,0)})}
+function navCur(){let cur=0;NAV.forEach((n,i)=>{const t=$(n[0]);if(t&&t.getBoundingClientRect().top<window.innerHeight*0.35)cur=i});$('navIn').querySelectorAll('[data-n]').forEach((b,i)=>b.classList.toggle('cur',i===cur))}
+window.addEventListener('scroll',navCur,{passive:true});
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();render();renderRecap();
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();render();renderRecap();
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
-setInterval(()=>{tick++;if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
+setInterval(()=>{tick++;quickHot();if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
   if(!window.claude||!window.claude.use)return;
   const [d,u]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
@@ -834,6 +874,6 @@ setInterval(()=>{tick++;if(tick%20===0){renderGreet();renderJourney();checkMiles
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:38</p>
+<p style="text-align:center;font-size:11px;color:#4d5560;padding:0 0 20px">バージョン 11/06 12:40</p>
 </body>
 </html>
