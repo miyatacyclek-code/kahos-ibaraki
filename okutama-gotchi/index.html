@@ -113,9 +113,7 @@ details p{margin-top:8px}
 <button class="g" id="sPause">時間：うごいている</button>
 <button class="g" id="sReset">たまごから</button>
 </div>
-<div class="row">
-<button class="g on" id="sScare">びっくり：オン</button>
-<button class="g" id="sTest">おこらせてみる</button>
+<div class="row" style="display:none">
 </div>
 
 <h2>きょうの英語</h2>
@@ -137,6 +135,9 @@ details p{margin-top:8px}
 <h2>きょうのいいこと</h2>
 <p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">おうちでいいことができたら押してね。オクタマ坊がよろこんで、やさしく育つよ（1日1回ずつ）。</p>
 <div class="grid2" id="deeds"></div>
+<h2>きょうのわるいこと</h2>
+<p style="font-size:13px;color:#8f8a78;margin:-4px 0 10px;line-height:1.6">わるいことをしてしまったら押してね。オクタマ坊が小さくなってしまうよ。いいことをすると、また大きくなるよ。</p>
+<div class="grid2" id="bads"></div>
 <details>
 <summary>あそびかた</summary>
 <p><b>A</b>でメニューをえらび、<b>B</b>でけってい、<b>C</b>でもどります。</p>
@@ -151,7 +152,8 @@ details p{margin-top:8px}
 <p>たまご：小さいたまごが、だんだん大きくなって、ヒビが入って生まれます（約6分）。ボタンを押すとあたためられて、早く大きくなります。いいことボタンでも大きくなります。</p>
 <p>成長：たまご → こども（1時間）→ わかもの（12時間）→ せいねん（1日）→ おとな。お世話ミスが少なく、しつけが75%以上だと、こわい「山の主」になります。ワサビ好きなら「ワサビ坊」、お世話が足りないと「ぐうたら坊」に。</p>
 <p>きょうの英語：毎日ひとつ、5さいでもわかるかんたんな英語が、絵といっしょに出ます。「きく」「ゆっくり」「ぶんで」で発音を聞いて、まねして言えたら「言えた！」を押してね。ごきげんとやさしさが上がります。</p>
-<p>やさしさ：「きょうのいいこと」や、ちゃんとしたお世話でやさしさが上がります。やさしさ70%以上でおとなになると「やさしい山の神」に。おとなになってからでも80%になると、やさしい姿に変わります。やさしい姿のときは、おこってもお化けは出ません。お世話ミスや、わけもなくしかるとやさしさが下がり、30%を切るとこわい姿にもどります。</p>
+<p>やさしさ：「きょうのいいこと」や、ちゃんとしたお世話でやさしさが上がります。やさしさ70%以上でおとなになると「やさしい山の神」に。おとなになってからでも80%になると、やさしい姿に変わります。お世話ミスや、わけもなくしかるとやさしさが下がり、30%を切るとこわい姿にもどります。</p>
+<p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
 <p>病気やおなかぺこぺこを長くほうっておくと、山へ帰ってしまいます。お出かけのときは「時間」を止めておけます。</p>
 </details>
 
@@ -168,36 +170,7 @@ details p{margin-top:8px}
 </div>
 
 
-<div id="scare"><svg viewBox="0 0 400 400" aria-hidden="true">
-<defs>
-<radialGradient id="gFace" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#d9dcd6"/><stop offset=".55" stop-color="#9ea39c"/><stop offset="1" stop-color="#2b2e2b"/></radialGradient>
-<radialGradient id="gMouth" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#000"/><stop offset=".8" stop-color="#140303"/><stop offset="1" stop-color="#3a0d0d"/></radialGradient>
-<radialGradient id="gEye" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff"/><stop offset=".75" stop-color="#d8cfc4"/><stop offset="1" stop-color="#7a3a34"/></radialGradient>
-<radialGradient id="gVig" cx="50%" cy="50%" r="70%"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#2a0000" stop-opacity=".95"/></radialGradient>
-<filter id="fDist" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3"><animate attributeName="seed" values="1;9;4;12" dur=".3s" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
-<filter id="fGrain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="2"><animate attributeName="seed" values="1;5;9;3" dur=".2s" repeatCount="indefinite"/></feTurbulence><feColorMatrix values="0 0 0 0 .8  0 0 0 0 .8  0 0 0 0 .8  0 0 0 .55 0"/></filter>
-<filter id="fBlur"><feGaussianBlur stdDeviation="1.2"/></filter>
-</defs>
-<rect width="400" height="400" fill="#050505"/>
-<g filter="url(#fDist)">
-<g id="hairBack"></g>
-<path d="M118 200 C 110 120, 160 70, 200 70 C 245 70, 292 120, 282 205 C 276 265, 248 330, 200 342 C 152 330, 124 265, 118 200 Z" fill="url(#gFace)"/>
-<ellipse cx="160" cy="190" rx="34" ry="24" fill="#3a3a36" opacity=".85" filter="url(#fBlur)"/>
-<ellipse cx="240" cy="190" rx="34" ry="24" fill="#3a3a36" opacity=".85" filter="url(#fBlur)"/>
-<ellipse cx="240" cy="190" rx="22" ry="17" fill="url(#gEye)"/>
-<g stroke="#9a1f1a" stroke-width=".9" fill="none" opacity=".8"><path d="M219 186 l8 2 l5 -3"/><path d="M220 196 l9 -1 l4 3"/><path d="M261 184 l-8 3 l-5 -2"/><path d="M260 197 l-7 -2 l-5 2"/></g>
-<circle cx="241" cy="191" r="5" fill="#111"/><circle cx="241" cy="191" r="2" fill="#000"/>
-<ellipse cx="160" cy="190" rx="20" ry="15" fill="url(#gEye)" opacity=".9"/>
-<circle cx="161" cy="191" r="4.5" fill="#111"/>
-<path d="M196 205 L188 245 L206 245 Z" fill="#5d615b" opacity=".6"/>
-<path id="gMouthP" d="M168 265 C 172 250, 228 250, 232 265 C 236 300, 222 335, 200 338 C 178 335, 164 300, 168 265 Z" fill="url(#gMouth)"/>
-<path d="M176 262 C 190 258, 210 258, 224 262" stroke="#7d7a70" stroke-width="2" fill="none"/>
-<g id="hairFront"></g>
-<g id="hands"></g>
-</g>
-<rect width="400" height="400" fill="url(#gVig)"/>
-<rect width="400" height="400" filter="url(#fGrain)" opacity=".1"/>
-</svg><div class="flash"></div></div>
+
 <script>
 const $=id=>document.getElementById(id);
 const W=40,H=26,DOT=8;
@@ -264,7 +237,7 @@ $('icTop').innerHTML=MENU.slice(0,4).map((m,i)=>'<div class="ic" id="ic'+i+'">'+
 $('icBot').innerHTML=MENU.slice(4).map((m,i)=>'<div class="ic" id="ic'+(i+4)+'">'+iconSvg(m.i)+m.l+'</div>').join('');
 
 function rng(s){s.seed=(s.seed+0x6D2B79F5)|0;let t=s.seed;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}
-function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
+function fresh(){const t=Date.now();return{v:2,stage:0,form:0,hunger:3,happy:3,disc:0,weight:5,poops:0,sick:0,sickMin:0,starve:0,sleeping:false,light:true,mistakes:0,wasabi:0,need:0,pending:0,pendT:0,poopMin:0,hT:15,jT:18,att:'',attMin:0,attCounted:false,kind:30,size:1,bad:{d:'',l:[]},eggBonus:0,eng:{start:'',said:{}},deeds:{d:'',l:[]},born:t,stageMin:0,last:t,seed:(Math.random()*1e9)|0,gone:false,paused:false,goneWhy:''}}
 let S=null,ref=null,saving=false,again=false,live=false;
 function loadLocal(){try{const v=localStorage.getItem(KEY);return v?JSON.parse(v):null}catch(e){return null}}
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
@@ -351,6 +324,10 @@ function blit(b,x,y,flip){const w=b[0].length;for(let r=0;r<b.length;r++)for(let
 function text(str,x,y){for(const ch of str){const g=FONT[ch];if(g){for(let r=0;r<5;r++)for(let c=0;c<3;c++)if(g[r][c]==='#')px(x+c,y+r)}x+=4}}
 function flush(){cx.fillStyle=dark?'#1c2117':'#a7b28e';cx.fillRect(0,0,cv.width,cv.height);
   for(let y=0;y<H;y++)for(let x=0;x<W;x++){const on=G[y*W+x];cx.fillStyle=dark?(on?'#2a3122':'#20261b'):(on?'#1d2416':'#9aa582');cx.fillRect(x*DOT+1,y*DOT+1,DOT-1,DOT-1)}}
+const SC={};
+function scaled(b,n){const key=b.join('')+n;if(SC[key])return SC[key];const out=[];for(let y=0;y<n;y++){let r='';for(let x=0;x<n;x++){const sx=Math.min(15,Math.floor((x+.5)*16/n)),sy=Math.min(15,Math.floor((y+.5)*16/n));r+=b[sy][sx]}out.push(r)}return SC[key]=out}
+function petN(){return Math.max(8,Math.round(16*(S.size||1)))}
+function blitPet(b,x,y,flip){const n=petN();if(n>=16){blit(b,x,y,flip);return}const off=Math.floor((16-n)/2);blit(scaled(b,n),x+off,y+(16-n),flip)}
 function petSpr(f){const s=S.stage;if(s===0)return SPR.egg;if(s===1)return f?SPR.b2:SPR.b1;if(s===2)return f?SPR.c2:SPR.c1;if(s===3)return f?SPR.t2:SPR.t1;return SPR['a'+S.form+(f?'2':'1')]}
 
 let tick=0,petX=12,petDir=1,menu=-1,mode='main',page=0,anim=null,game=null,msgLock=0;
@@ -367,13 +344,13 @@ function drawMain(){
     blit(sp,12+wob,9);
     const bars=Math.min(6,Math.floor(p));for(let i=0;i<6;i++){const x=8+i*4;px(x,1);px(x+1,1);if(i<bars){px(x,2);px(x+1,2)}else px(x,2)}
     if(p>=5.2&&tick%2)blit(ICO.excl,30,6);return}
-  if(S.sleeping){dark=!S.light;blit(petSpr(0),12,9);if(S.light&&tick%2)blit(ICO.zz,30,1);return}
+  if(S.sleeping){dark=!S.light;blitPet(petSpr(0),12,9);if(S.light&&tick%2)blit(ICO.zz,30,1);return}
   const maxX=W-16-(S.poops?(S.poops>=2?16:8):0);
   if(tick%2===0&&!S.need){if(Math.random()<0.25)petDir*=-1;petX+=petDir*2;if(petX<0){petX=0;petDir=1}if(petX>maxX){petX=maxX;petDir=-1}}
   if(petX>maxX)petX=maxX;
   let y=9+(fr?0:1);
   if(S.need){petX+=tick%2?1:-1;y=9}
-  blit(petSpr(fr),petX,y,petDir<0);
+  blitPet(petSpr(fr),petX,y,petDir<0);
   for(let i=0;i<S.poops;i++){const px0=poopX(i),py0=i<2?17:9;blit(ICO.poop,px0,py0);if(tick%2)px(px0+5,py0-1)}
   if(S.sick)blit(ICO.skull,0,0);
   else if(S.kind>=60&&!S.need&&S.att!=='fake'&&tick%8<5)blit(ICO.flower,0,1);
@@ -385,23 +362,23 @@ function hatchNow(){if(S.stage!==0)return;S.stage=1;S.stageMin=0;S.hT=HR[1];S.jT
 function drawAnim(){
   const a=anim,t=(Date.now()-a.t0)/a.dur,fr=tick%2;
   if(a.type==='eat'){const bites=Math.min(3,Math.floor(t*4));const ic=ICO[a.data.food];
-    const part=ic.map((r,i)=>i<bites*3?'........':r);blit(part,4,13);blit(petSpr(fr),18,9);}
-  else if(a.type==='no'){blit(petSpr(0),12,9,fr===1);blit(ICO.anger,30,1)}
-  else if(a.type==='happy'){blit(petSpr(fr),12,fr?7:9);blit(ICO.sun,fr?2:30,1)}
-  else if(a.type==='sad'){blit(petSpr(0),12,10);if(fr)blit(ICO.heart0,30,2)}
+    const part=ic.map((r,i)=>i<bites*3?'........':r);blit(part,4,13);blitPet(petSpr(fr),18,9);}
+  else if(a.type==='no'){blitPet(petSpr(0),12,9,fr===1);blit(ICO.anger,30,1)}
+  else if(a.type==='happy'){blitPet(petSpr(fr),12,fr?7:9);blit(ICO.sun,fr?2:30,1)}
+  else if(a.type==='sad'){blitPet(petSpr(0),12,10);if(fr)blit(ICO.heart0,30,2)}
   else if(a.type==='flush'){const wx=Math.floor(t*(W+8))-8;for(let i=0;i<S.poops;i++){const px0=poopX(i);if(px0>wx)blit(ICO.poop,px0,i<2?17:9)}
-    blit(petSpr(0),petX,9,petDir<0);for(let y=1;y<H;y++)for(let x=wx;x<wx+3;x++)if((x+y)%3!==0)px(x,y)}
+    blitPet(petSpr(0),petX,9,petDir<0);for(let y=1;y<H;y++)for(let x=wx;x<wx+3;x++)if((x+y)%3!==0)px(x,y)}
   else if(a.type==='goToilet'){const ph=t;let x;
     blit(ICO.toilet,0,17);
     if(ph<0.35)x=Math.round(14-ph/0.35*8);else if(ph<0.7)x=6;else x=Math.round(6+(ph-0.7)/0.3*8);
-    if(ph>=0.35&&ph<0.7){if(fr)blit(ICO.excl,20,1);blit(petSpr(0),x,10)}else blit(petSpr(fr),x,9,ph<0.35)}
-  else if(a.type==='med'){const sx=Math.round(-8+t*18);blit(petSpr(0),16+(t>0.6&&fr?1:0),9);blit(ICO.syringe,Math.min(sx,8),6)}
-  else if(a.type==='scold'){blit(petSpr(0),12,10+(fr?1:0));blit(ICO.anger,28,1);blit(ICO.fist,2,2)}
-  else if(a.type==='evolve'){if(Math.floor(t*10)%2===0){for(let i=0;i<W*H;i++)G[i]=1}else blit(petSpr(0),12,9)}
+    if(ph>=0.35&&ph<0.7){if(fr)blit(ICO.excl,20,1);blitPet(petSpr(0),x,10)}else blitPet(petSpr(fr),x,9,ph<0.35)}
+  else if(a.type==='med'){const sx=Math.round(-8+t*18);blitPet(petSpr(0),16+(t>0.6&&fr?1:0),9);blit(ICO.syringe,Math.min(sx,8),6)}
+  else if(a.type==='scold'){blitPet(petSpr(0),12,10+(fr?1:0));blit(ICO.anger,28,1);blit(ICO.fist,2,2)}
+  else if(a.type==='evolve'){if(Math.floor(t*10)%2===0){for(let i=0;i<W*H;i++)G[i]=1}else blitPet(petSpr(0),12,9)}
   else if(a.type==='hatch'){if(t<0.6)blit(SPR.eggc,12+(fr?1:-1),9);else{blit(SPR.b1,12,9);blit(ICO.sun,30,1)}}
-  else if(a.type==='deed'){blit(petSpr(fr),12,fr?8:9);const hs=[[2,2],[30,4],[6,12],[28,14],[18,0]];hs.forEach((h,i)=>{if((i+Math.floor(t*8))%2)blit(i%2?ICO.heart:ICO.sparkle,h[0],h[1]-Math.floor(t*3))})}
+  else if(a.type==='deed'){blitPet(petSpr(fr),12,fr?8:9);const hs=[[2,2],[30,4],[6,12],[28,14],[18,0]];hs.forEach((h,i)=>{if((i+Math.floor(t*8))%2)blit(i%2?ICO.heart:ICO.sparkle,h[0],h[1]-Math.floor(t*3))})}
   else if(a.type==='wobble'){const p=eggProg();const sp=p<2?SPR.eggS:p<4?SPR.eggM:p<5.2?SPR.egg:SPR.eggc;blit(sp,12+(fr?2:-2),9);px(10,8);px(29,8);px(9,10);px(30,10)}
-  else if(a.type==='call'){blit(petSpr(fr),petX,9,petDir<0);if(fr)blit(ICO.bell,W-8,0)}
+  else if(a.type==='call'){blitPet(petSpr(fr),petX,9,petDir<0);if(fr)blit(ICO.bell,W-8,0)}
   if(t>=1){const f=a.onEnd;anim=null;f&&f()}
 }
 function drawStat(){
@@ -414,8 +391,8 @@ function drawStat(){
 function drawGame(){
   const g=game,fr=tick%2;
   for(let i=0;i<5;i++){const yy=1,xx=10+i*4;if(i<g.round){if(g.res[i]){px(xx,yy);px(xx+1,yy);px(xx,yy+1);px(xx+1,yy+1)}else{px(xx,yy);px(xx+1,yy+1)}}else px(xx,yy+1)}
-  if(g.phase==='ask'){blit(petSpr(fr),12,9);if(fr)blit(ICO.ques,30,4)}
-  else if(g.phase==='show'){blit(petSpr(0),12,9,g.dir<0);blit(g.dir<0?ICO.left:ICO.right,g.dir<0?2:30,12);blit(g.ok?ICO.sun:ICO.anger,g.dir<0?30:2,1)}
+  if(g.phase==='ask'){blitPet(petSpr(fr),12,9);if(fr)blit(ICO.ques,30,4)}
+  else if(g.phase==='show'){blitPet(petSpr(0),12,9,g.dir<0);blit(g.dir<0?ICO.left:ICO.right,g.dir<0?2:30,12);blit(g.ok?ICO.sun:ICO.anger,g.dir<0?30:2,1)}
 }
 function render(){
   if(typeof scaring!=='undefined'&&scaring)return;
@@ -442,6 +419,7 @@ function statusText(){
   if(S.happy===0)return'さみしそう……いっしょにあそぼう';
   if(S.att==='fake')return'なにかよんでいるけど……わがままかも？';
   if(S.poops)return'うんちが落ちている。トイレで流そう';
+  if((S.size||1)<1)return nm+'が小さくなっている（大きさ '+Math.round(S.size*100)+'%）。いいことをすると大きくなるよ';
   return nm+'（'+STAGE_N[S.stage]+'）　Aでメニュー';
 }
 function ev(e){
@@ -452,7 +430,7 @@ function ev(e){
   else if(e==='wake'){SND.wake();voice('v_wake');save()}
   else if(e==='poop'){SND.no();say('あっ……うんちをしてしまった',3000);save()}
   else if(e==='gone'){SND.gone()}
-  else if(e==='angry'){if(S.stage===4&&S.form===3){say('やさしいオクタマ坊が、かなしそうにしている……',3000);voice('v_sad');play('sad',1600)}else{say('オクタマ坊がおこっている……！',3000);setTimeout(()=>jumpScare(false),600)}checkKind()}
+  else if(e==='angry'){shrink(0.05,'ほうっておかれて、すこし小さくなってしまった……');checkKind()}
 }
 
 /* ---------- actions ---------- */
@@ -470,7 +448,7 @@ function act(k){
   if(k==='stat'){mode='stat';page=0;return}
   if(k==='scold'){
     if(S.att==='fake'){SND.scold();voice('v_scold');play('scold',1600,{},()=>{S.disc=Math.min(100,S.disc+25);S.att='';say('しつけができた！しつけ '+S.disc+'%',3000);save()})}
-    else{SND.scold();play('sad',1600,{},()=>{S.happy=Math.max(0,S.happy-1);S.kind=Math.max(0,S.kind-8);if(S.stage===4&&S.form===3){say('なにもしていないのに……かなしそう',3000);voice('v_sad')}else{say('なにもしていないのに……オクタマ坊がおこった！',3000);setTimeout(()=>jumpScare(false),500)}checkKind();save()})}
+    else{SND.scold();play('sad',1600,{},()=>{S.happy=Math.max(0,S.happy-1);S.kind=Math.max(0,S.kind-8);say('なにもしていないのに……かなしそう',3000);voice('v_sad');checkKind();save()})}
     return}
   if(k==='call'){say(S.att?'よんでいるよ！ようすを見てあげて':'いまはよんでいないよ',2000)}
 }
@@ -504,7 +482,7 @@ function press(b){
   if(scaring)return;
   ac();preloadV();loadV('v_ghost');
   if(!S)return;
-  if(S.gone){SND.b();const ke=S.eng;S=fresh();S.eng=ke;renderDeeds();renderEng();live=true;save();menu=-1;mode='main';return}
+  if(S.gone){SND.b();const ke=S.eng;S=fresh();S.eng=ke;renderDeeds();renderBads();renderEng();live=true;save();menu=-1;mode='main';return}
   if(busy())return;
   if(S.stage===0){const before=eggProg();S.eggBonus=(S.eggBonus||0)+1/6;tone(1800+Math.random()*600,0.04,0);play('wobble',500);
     const p=eggProg();if((before<2&&p>=2)||(before<4&&p>=4)){seq([1046,1318,1568],0.08);say(p>=4?'たまごがもっと大きくなった！':'たまごが大きくなった！',2000)}
@@ -522,49 +500,14 @@ $('sSound').onclick=()=>{soundOn=!soundOn;$('sSound').textContent='音：'+(soun
 $('sPause').onclick=()=>{advance(S,Date.now());S.paused=!S.paused;S.last=Date.now();$('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);save();render()};
 let rArm=0;
 $('sReset').onclick=()=>{if(Date.now()-rArm>4000){rArm=Date.now();$('sReset').textContent='もう一度押すとリセット';setTimeout(()=>$('sReset').textContent='たまごから',4000);return}
-  const keepEng=S.eng;S=fresh();S.eng=keepEng;renderDeeds();renderEng();rArm=0;$('sReset').textContent='たまごから';menu=-1;mode='main';anim=null;save();render()};
+  const keepEng=S.eng;S=fresh();S.eng=keepEng;renderDeeds();renderBads();renderEng();rArm=0;$('sReset').textContent='たまごから';menu=-1;mode='main';anim=null;save();render()};
 
 const sb=new Audio();let curB=null;
 document.querySelectorAll('.b').forEach(b=>b.addEventListener('click',()=>{vAudio.pause();sb.pause();if(curB)curB.classList.remove('playing');sb.src=b.dataset.src;sb.currentTime=0;curB=b;b.classList.add('playing');const p=sb.play();if(p&&p.catch)p.catch(()=>{})}));
 sb.addEventListener('ended',()=>{if(curB)curB.classList.remove('playing');curB=null});
 
 
-/* ---------- jump scare ---------- */
-(function buildGhost(){
-  const r=()=>Math.random();let hb='',hf='';
-  for(let i=0;i<70;i++){const x=95+i*3.1+r()*6,x2=x+(r()-.5)*60,len=300+r()*120;const c=['#050505','#0b0b0b','#121212','#070606'][i%4];
-    hb+='<path d="M'+(200+(x-200)*.5)+' 60 C '+(x-20)+' 140, '+(x+20)+' 240, '+x2+' '+(60+len)+'" stroke="'+c+'" stroke-width="'+(4+r()*6)+'" fill="none" stroke-linecap="round"/>'}
-  const gaps=[[140,182],[214,262]];
-  for(let i=0;i<46;i++){let x=128+i*3.2+r()*4;if(gaps.some(g=>x>g[0]&&x<g[1])&&r()<.8)continue;const x2=x+(r()-.5)*40,len=230+r()*150;
-    hf+='<path d="M'+(200+(x-200)*.3)+' 66 C '+(x-10)+' 120, '+(x+12)+' 220, '+x2+' '+(80+len)+'" stroke="#060606" stroke-width="'+(2+r()*4)+'" fill="none" stroke-linecap="round" opacity="'+(0.75+r()*.25)+'"/>'}
-  document.getElementById('hairBack').innerHTML=hb;document.getElementById('hairFront').innerHTML=hf;
-  const hand=(sx,flip)=>{let h='<g transform="translate('+sx+',400) scale('+(flip?-1:1)+',1)">';h+='<path d="M0 0 C 10 -60, 30 -90, 55 -110 L 85 -100 C 70 -70, 50 -40, 40 0 Z" fill="#8e938b"/>';
-    const f=[[52,-112,30,-205],[64,-112,62,-220],[75,-108,92,-210],[84,-100,118,-185],[44,-100,0,-150]];
-    f.forEach(q=>{h+='<path d="M'+q[0]+' '+q[1]+' Q '+((q[0]+q[2])/2+6)+' '+((q[1]+q[3])/2)+', '+q[2]+' '+q[3]+'" stroke="#9aa096" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="'+q[2]+'" cy="'+q[3]+'" r="3.5" fill="#4a3a36"/>'});
-    return h+'</g>'};
-  document.getElementById('hands').innerHTML=hand(20,false)+hand(380,true);
-})();
-let scareOn=true,lastScare=0,scaring=false;
-const GHOST=P(["...##########...","..############..","..###......###..","..##.#....#.###.","..##.##..##..##.","..##..........#.","..##...####...#.","..##..#....#..#.","..##...####...#.","..##..........#.","..###........##.","..####......###.","..##.##....##.#.","..##..##..##..#.","..##..........#.","..#............."]);
-function scream(){const a=ac();if(!a||!soundOn)return;const t=a.currentTime,g=a.createGain();g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.5,t+0.05);g.gain.setValueAtTime(0.5,t+1.1);g.gain.exponentialRampToValueAtTime(0.001,t+1.8);g.connect(a.destination);
-  [440,466,622,880,932].forEach((f,i)=>{const o=a.createOscillator();o.type=i%2?'sawtooth':'square';o.frequency.setValueAtTime(f*0.7,t);o.frequency.exponentialRampToValueAtTime(f*1.6,t+0.35);o.frequency.setValueAtTime(f*1.6,t+0.35);const l=a.createOscillator();l.frequency.value=23+i*3;const lg=a.createGain();lg.gain.value=f*0.08;l.connect(lg);lg.connect(o.frequency);o.connect(g);o.start(t);l.start(t);o.stop(t+1.9);l.stop(t+1.9)});
-  const n=a.createBuffer(1,a.sampleRate*1.8,a.sampleRate),d=n.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const ns=a.createBufferSource();ns.buffer=n;const bp=a.createBiquadFilter();bp.type='bandpass';bp.frequency.value=2500;bp.Q.value=.7;const ng=a.createGain();ng.gain.value=.6;ns.connect(bp);bp.connect(ng);ng.connect(g);ns.start(t);
-  const b=a.createOscillator(),bg=a.createGain();b.frequency.setValueAtTime(90,t);b.frequency.exponentialRampToValueAtTime(30,t+0.8);bg.gain.setValueAtTime(0.9,t);bg.gain.exponentialRampToValueAtTime(0.001,t+1);b.connect(bg);bg.connect(a.destination);b.start(t);b.stop(t+1.05)}
-function whisper(){const a=ac();if(!a||!soundOn)return;const b=VB['v_ghost'];if(!b||b==='loading'){loadV('v_ghost');return}const s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start()}
-function jumpScare(force){
-  if(scaring||(!scareOn&&!force))return;if(!force&&Date.now()-lastScare<120000)return;
-  scaring=true;lastScare=Date.now();loadV('v_ghost');
-  const dev=$('dev'),sc=$('scare');
-  setTimeout(()=>{dev.classList.add('glitch');whisper();say('……ゆるさない……',4000)},100);
-  let k=0;const iv=setInterval(()=>{k++;clr();dark=k%4===0;if(k%3!==0)blit(GHOST,12+((k*7)%5)-2,9+(k%2));for(let i=0;i<40;i++)px(Math.random()*W|0,Math.random()*H|0);flush()},90);
-  setTimeout(()=>{clearInterval(iv);dev.classList.remove('glitch');sc.classList.add('show','lunge');scream();try{navigator.vibrate&&navigator.vibrate([300,80,500])}catch(e){}},2400);
-  setTimeout(()=>{sc.classList.remove('lunge');sc.classList.add('hold')},2850);
-  setTimeout(()=>{sc.classList.remove('show','hold');scaring=false;render()},4300);
-}
-$('sScare').onclick=()=>{scareOn=!scareOn;$('sScare').textContent='びっくり：'+(scareOn?'オン':'オフ');$('sScare').classList.toggle('on',scareOn)};
-$('sTest').onclick=()=>{ac();loadV('v_ghost');setTimeout(()=>jumpScare(true),300)};
-$('scare').addEventListener('click',()=>{});
-
+let scaring=false;function jumpScare(){}
 /* ---------- good deeds & kindness ---------- */
 const DEEDS=[['ha','歯みがきした'],['te','おてつだいした'],['go','ごめんなさいが言えた'],['ne','はやく寝た'],['zen','ごはんをぜんぶ食べた'],['ai','あいさつができた'],['ya','だれかにやさしくした'],['ka','おかたづけした']];
 function today(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
@@ -579,12 +522,12 @@ function doDeed(k,label){
   ac();if(scaring||!S||S.gone)return;
   if(!S.deeds||S.deeds.d!==today())S.deeds={d:today(),l:[]};
   if(S.deeds.l.indexOf(k)>=0)return;
-  S.deeds.l.push(k);S.kind=Math.min(100,(S.kind||0)+10);S.happy=Math.min(4,S.happy+1);
+  S.deeds.l.push(k);S.kind=Math.min(100,(S.kind||0)+10);const grew=grow(0.1);S.happy=Math.min(4,S.happy+1);
   preloadV();
   seq([1318,1568,2093,2637],0.1);
   anim=null;mode='main';menu=-1;
   if(S.stage===0){S.eggBonus=(S.eggBonus||0)+1;play('wobble',800);say('たまごがうれしそうにゆれて、大きくなった！（やさしさ '+S.kind+'%）',3000);if(eggProg()>=EVO[0])setTimeout(hatchNow,900)}
-  else{play('deed',2200,{},()=>checkKind());say('いいことしたね！オクタマ坊がよろこんでいる（やさしさ '+S.kind+'%）',3500);voice('v_deed');}
+  else{play('deed',2200,{},()=>checkKind());say(grew?'いいことしたね！オクタマ坊がまた大きくなった！（大きさ '+Math.round(S.size*100)+'%）':'いいことしたね！オクタマ坊がよろこんでいる（やさしさ '+S.kind+'%）',3500);voice('v_deed');}
   save();renderDeeds();render()}
 
 /* ---------- English ---------- */
@@ -614,24 +557,46 @@ function renderEng(){
 $('ePlay').onclick=()=>ePlay(engIdx(),'w');
 $('eSlow').onclick=()=>ePlay(engIdx(),'s');
 $('eSen').onclick=()=>ePlay(engIdx(),'x');
-$('eOk').onclick=()=>{ac();const d=engIdx();if(S.eng.said[d]||S.gone||scaring)return;S.eng.said[d]=1;S.happy=Math.min(4,S.happy+1);S.kind=Math.min(100,S.kind+5);
+$('eOk').onclick=()=>{ac();const d=engIdx();if(S.eng.said[d]||S.gone||scaring)return;S.eng.said[d]=1;S.happy=Math.min(4,S.happy+1);grow(0.05);S.kind=Math.min(100,S.kind+5);
   seq([1568,2093,2637,3136],0.09);
   if(S.stage===0){S.eggBonus=(S.eggBonus||0)+1;play('wobble',800);say('Good job! たまごもよろこんで大きくなった！',3000);if(eggProg()>=EVO[0])setTimeout(hatchNow,900)}
   else{anim=null;mode='main';play('deed',2200,{},()=>checkKind());say('Good job! 「'+WORDS[d%WORDS.length][0]+'」が言えた！ごきげんとやさしさアップ',3500)}
   save();renderEng();render()};
 
+/* ---------- bad deeds & size ---------- */
+const BADS=[['ha','歯みがきしなかった'],['go','ごめんなさいが言えなかった'],['ne','なかなか寝なかった'],['ka','おかたづけしなかった'],['ke','けんかした・たたいた'],['ga','ゲーム・動画をやめなかった'],['no','ごはんをのこした'],['ki','いうことをきかなかった']];
+function renderBads(){if(!S.bad||S.bad.d!==today())S.bad={d:today(),l:[]};
+  $('bads').innerHTML=BADS.map(d=>{const done=S.bad.l.indexOf(d[0])>=0;return'<button class="b"'+' data-bad="'+d[0]+'"'+(done?' disabled style="opacity:.45"':'')+'>'+d[1]+'<small>'+(done?'きょうは押したよ':'小さくなる')+'</small></button>'}).join('');
+  $('bads').querySelectorAll('[data-bad]').forEach(b=>b.onclick=()=>doBad(b.dataset.bad))}
+function shrink(amt,msg){
+  if(S.stage===0||S.gone)return;
+  const before=S.size||1;
+  if(before<=0.5+1e-6&&S.stage>=2){S.stage--;S.stageMin=0;S.size=0.75;if(S.stage<4)S.form=0;SND.lose();play('evolve',2000,{},()=>say('小さくなりすぎて……ひとつ前のすがたにもどってしまった！',4500));save();return}
+  S.size=Math.max(0.5,Math.round((before-amt)*100)/100);
+  SND.lose();voice('v_sad');play('sad',1800,{},()=>say(msg+'（大きさ '+Math.round(S.size*100)+'%）',4000));save()}
+function grow(amt){if(S.stage===0||S.gone)return false;const b=S.size||1;S.size=Math.min(1,Math.round((b+amt)*100)/100);return S.size>b}
+function doBad(k){
+  ac();if(!S||S.gone)return;
+  if(!S.bad||S.bad.d!==today())S.bad={d:today(),l:[]};
+  if(S.bad.l.indexOf(k)>=0)return;
+  S.bad.l.push(k);S.kind=Math.max(0,(S.kind||0)-5);S.happy=Math.max(0,S.happy-1);
+  anim=null;mode='main';menu=-1;
+  if(S.stage===0){say('たまごがしょんぼりしている……',3000);SND.lose()}
+  else shrink(0.1,'わるいことをしたから、オクタマ坊が小さくなってしまった……');
+  checkKind();save();renderBads();render()}
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderEng();render();
+renderDeeds();renderBads();renderEng();render();
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
-setInterval(()=>{tick++;if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderEng()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
+setInterval(()=>{tick++;if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
   if(!window.claude||!window.claude.use)return;
   const [d,u]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
   if(!d||!u)return;const id=await u.id();if(!id)return;
   const r=d.collection('data/users/'+id).doc('pet2');const snap=await r.get();
-  if(snap.exists){const v=snap.data();if(v&&v.v===2&&typeof v.born==='number'&&(v.last>S.last||v.born!==S.born&&v.last>=S.last)){live=false;S=Object.assign(fresh(),JSON.parse(JSON.stringify(v)));advance(S,Date.now());live=true;saveLocal();renderDeeds();renderEng();render()}}
+  if(snap.exists){const v=snap.data();if(v&&v.v===2&&typeof v.born==='number'&&(v.last>S.last||v.born!==S.born&&v.last>=S.last)){live=false;S=Object.assign(fresh(),JSON.parse(JSON.stringify(v)));advance(S,Date.now());live=true;saveLocal();renderDeeds();renderBads();renderEng();render()}}
   ref=r;if(!snap.exists||snap.data().last<S.last)saveRemote();
 }catch(e){}})();
 </script>
