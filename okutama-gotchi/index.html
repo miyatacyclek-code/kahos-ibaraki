@@ -218,6 +218,10 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 .stbook{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
 .stbook div{aspect-ratio:1;border-radius:12px;background:#f8f2ff;display:flex;align-items:center;justify-content:center;font-size:24px;color:#d9c6ee;font-weight:800}
 .stbook div.got{background:#fff4fa;border:2px solid #ffc6e0}
+
+.okusub{position:relative;text-align:center;font-size:12px;font-weight:800;color:#5fa98a;letter-spacing:.12em;margin:-4px auto 8px;background:rgba(255,255,255,.75);border-radius:999px;padding:3px 12px;width:max-content;box-shadow:0 2px 0 #c9efd9}
+.mame{margin-top:10px;background:#f0fbf5;border:2px dashed #b3e2c6;border-radius:16px;padding:10px 12px;font-size:14px;line-height:1.6;color:#3f7d63}
+.mame b{display:block;color:#2f8a63;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -234,6 +238,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 <g transform="translate(330 380) rotate(-20)"><ellipse cx="0" cy="0" rx="10" ry="6" fill="#9be08a"/><line x1="0" y1="0" x2="0" y2="20" stroke="#7cc46a" stroke-width="3"/></g>
 </svg>
 <div class="brand" aria-label="おくたまごっち"><i>★</i><span>お</span><span>く</span><span>た</span><span>ま</span><span>ご</span><span>っ</span><span>ち</span><i>♥</i></div>
+<div class="okusub">⛰️ おくたまの やまから ⛰️</div>
 <div class="face">
 <div class="icons top" id="icTop"></div>
 <canvas id="lcd" width="320" height="208"></canvas>
@@ -509,7 +514,7 @@ const vAudio={pause(){try{if(vSrc)vSrc.stop()}catch(e){}}};
 const cv=$('lcd'),cx=cv.getContext('2d');
 let G=new Uint8Array(W*H),dark=false;
 function clr(){G.fill(0)}
-const PALS=['','#6b4a7b','#a8775f','#d4a58a','#ffe6d6','#3d2f4f','#ffffff','#ffadc8','#ec6a8c','#9fbcff','#ffffff','#6f86d6','#7ccf6a','#4fa84a','#ffd34d','#ffb8d9','#e04f6f'];const PI={'#':1,o:1,h:2,H:3,s:4,e:5,w:6,c:7,m:8,b:9,W:10,n:11,g:12,G:13,y:14,p:15,r:16};
+const PALS=['','#6b4a7b','#a8775f','#d4a58a','#ffe6d6','#3d2f4f','#ffffff','#ffadc8','#ec6a8c','#9fbcff','#ffffff','#6f86d6','#7ccf6a','#4fa84a','#ffd34d','#ffb8d9','#e04f6f','#c9efd9','#cfe9ff','#ffd9ec','#b3e2c6','#ffe9a8'];const PI={'#':1,o:1,h:2,H:3,s:4,e:5,w:6,c:7,m:8,b:9,W:10,n:11,g:12,G:13,y:14,p:15,r:16,M:17,L:18,P:19,D:20,Y:21};
 function px(x,y,c){if(x>=0&&y>=0&&x<W&&y<H)G[y*W+x]=c||1}
 function blit(b,x,y,flip,col){const w=b[0].length;for(let r=0;r<b.length;r++)for(let c=0;c<w;c++){const ch=b[r][c];if(ch!=='.')px(flip?x+w-1-c:x+c,y+r,ch==='#'?(col||1):(PI[ch]||1))}}
 function text(str,x,y){for(const ch of str){const g=FONT[ch];if(g){for(let r=0;r<5;r++)for(let c=0;c<3;c++)if(g[r][c]==='#')px(x+c,y+r)}x+=4}}
@@ -830,7 +835,14 @@ function drawWear(x,y,n,egg){
   [['head',0],['face',1],['neck',2]].forEach(([sl,ai])=>{const id=S.wear[sl];if(!id||!WEAR[id])return;const b=scaleBM(WEAR[id].b,f);const w=b[0].length,h=b.length;
     const row=top+Math.round(a[ai]*f);const bx=Math.round(cxp-w/2);let by=sl==='head'?row-h+1:row-Math.floor(h/2);
     for(let r=0;r<h;r++)for(let c=0;c<w;c++){const X=bx+c,Y=by+r;if(X<0||Y<0||X>=W||Y>=H)continue;const ch=b[r][c];G[Y*W+X]=ch==='#'?(PI[WEAR[id].col]||1):ch==='.'?0:(PI[ch]||1)}})}
-function drawBg(){const id=S.wear&&S.wear.bg;if(!id||S.gone)return;
+function okutamaScene(){if(S.gone||S.sleeping)return;const mo=new Date().getMonth()+1,h=new Date().getHours();
+  for(let x=0;x<W;x++){const m1=Math.max(0,9-Math.abs(x-7)*0.9),m2=Math.max(0,11-Math.abs(x-30)*0.8),m3=Math.max(0,6-Math.abs(x-19)*0.7);const hgt=Math.round(Math.max(m1,m2,m3));for(let k=0;k<hgt;k++){const y=H-3-k;if(y>=0)G[y*W+x]=k===hgt-1?20:17}}
+  for(let x=0;x<W;x++){G[(H-2)*W+x]=18;G[(H-1)*W+x]=(x+tick)%5===0?6:18}
+  for(const tx of [2,35]){const by=H-3;for(let k=0;k<5;k++){const w=Math.floor(k/2);for(let d=-w;d<=w;d++){const X=tx+d,Y=by-4+k;if(X>=0&&X<W)G[Y*W+X]=13}}}
+  if(h>=6&&h<17){for(const[dx,dy]of[[0,0],[1,0],[0,1],[1,1],[-1,0],[2,1],[0,-1],[1,2]]){const X=35+dx,Y=2+dy;G[Y*W+X]=21}}
+  else{for(const[dx,dy]of[[0,0],[1,0],[0,1],[-1,1],[0,2],[1,2]]){G[(2+dy)*W+(35+dx)]=21}}
+  const ptc=mo>=3&&mo<=4?19:mo>=10&&mo<=11?16:(mo===12||mo<=2)?6:0;if(ptc){for(let i=0;i<6;i++){const x=(i*13+tick)%W,y=(i*7+Math.floor(tick*0.7))%(H-4);if(!G[y*W+x])G[y*W+x]=ptc}}}
+function drawBg(){const id=S.wear&&S.wear.bg;if(!id){okutamaScene();return}if(S.gone)return;
   if(id==='bgM'){for(let x=0;x<W;x++){const h=Math.max(0,6-Math.abs(x-5))+Math.max(0,5-Math.abs(x-34));for(let k=0;k<h;k++)if((x+k)%2===0)px(x,H-1-k)}}
   if(id==='bgS'){[[2,2],[7,5],[33,3],[37,7],[25,1],[14,2]].forEach(([x,y],i)=>{if((tick+i)%3)px(x,y);else{px(x-1,y);px(x+1,y);px(x,y-1);px(x,y+1)}})}
   if(id==='bgF'){for(let x=1;x<W;x+=5){const y=H-2;px(x,y);px(x-1,y-1);px(x+1,y-1);px(x,y-2);px(x,H-1)}}
@@ -1062,9 +1074,13 @@ function renderDaily(){const el=$('daily');if(!el||!S)return;const D=S.daily;if(
   let h='<div class="dhead"><span>📅 きょうのおやくそく</span><span>🔥 '+D.streak+'日れんぞく</span></div>';
   D.missions.forEach(id=>{const m=MPOOL.find(x=>x[0]===id);const done=D.done.indexOf(id)>=0;h+='<div class="mis'+(done?' done':'')+'"><span class="ck">'+(done?'✓':'')+'</span><span>'+m[2]+' '+m[1]+'</span></div>'});
   h+='<div class="gacha"><button class="gbtn" id="gSpin"'+(D.gacha>0?'':' disabled')+'>🎰 ガチャ'+(D.gacha>0?'（あと'+D.gacha+'かい）':'はあした')+'</button><button class="gbtn book" id="gBook">📒 シールちょう<br><small>'+(D.stk||[]).length+'/'+STK.length+'</small></button></div>';
-  el.innerHTML=h;$('gSpin').onclick=spinGacha;$('gBook').onclick=showBook}
+  h+=mameHTML();el.innerHTML=h;$('gSpin').onclick=spinGacha;$('gBook').onclick=showBook}
 function doClean(){if(!qReady())return;if(!S.poops){say('ピカピカだよ！うんちはないよ ✨',2000);return}SND.flush();play('clean',1600,{},()=>{S.poops=0;S.poopMin=0;earn(1);S.kind=Math.min(100,S.kind+1);logT('clean',1);mission('clean');say('おそうじできた！ピカピカ ✨ どんぐり +1',3000);save()});render()}
 cv.addEventListener('click',()=>{if(mode!=='main'||anim)return;if(S.poops)doClean();else if(S.stage>0&&!S.sleeping)qPet()});
+
+/* ---------- okutama trivia ---------- */
+const MAME=['くもとりやまは、とうきょうで いちばん たかい やま。たかさは 2017メートル！','おくたまこは、おごうちダムで できた おおきな みずうみだよ。','おくたまは、ワサビの ふるさと。きれいな みずで そだつんだ。','にっぱらしょうにゅうどうは、やまの なかの ふしぎな どうくつ。なかは ひんやり！','たまがわは、おくたまを ながれて うみまで いくよ。','おくたまえきは、JRおうめせんの いちばん さいご（しゅうてん）の えき。','おくたまの もりには、ツキノワグマや シカや リスが すんでいるよ。','はとのすけいこくは、みどりの みずが とっても きれいな たに。','おくたまこには、うかぶ はし（うきばし）が あるよ。','おくたまの もりは、とうきょうの みんなの おみずを まもっているんだ。','おくたまの かわには、ヤマメという さかなが すんでいるよ。','あきの おくたまは、もみじで やまが まっかになるよ。'];
+function mameHTML(){const i=Math.floor(new Date(today().replace(/-/g,'/')).getTime()/86400000)%MAME.length;return'<div class="mame"><b>⛰️ きょうの おくたま まめちしき</b>'+MAME[(i+MAME.length)%MAME.length]+'</div>'}
 
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
@@ -1082,6 +1098,6 @@ setInterval(()=>{tick++;quickHot();if(tick%20===0){checkMeet();renderLove()}if(t
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:08</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:13</p>
 </body>
 </html>
