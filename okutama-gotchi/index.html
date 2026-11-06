@@ -294,6 +294,11 @@ body.introing{overflow:hidden}
 #intro .ifam .ipet{margin-top:0}
 #intro .ipar{width:min(21vw,92px)!important;height:min(21vw,92px)!important;image-rendering:pixelated;background:transparent!important;border-radius:0!important;margin:0!important;animation:float 2.6s ease-in-out infinite}
 #intro .ipar:first-child{animation-delay:.6s}#intro .ipar:last-child{animation-delay:1.2s}
+
+.bdbanner{display:none;margin-top:10px;text-align:center;background:linear-gradient(90deg,#ffe08a,#ffb3d6,#c9a7ff);border-radius:20px;padding:12px;font-weight:800;color:#fff;font-size:17px;text-shadow:0 1px 0 rgba(160,80,140,.5);box-shadow:0 4px 0 #e8b6d6}
+.bdbanner.show{display:block}
+.bdbanner.soon{background:#fff;border:2px dashed #ffb3d6;color:#e05f9e;text-shadow:none;font-size:15px}
+.confetti{position:fixed;top:-20px;z-index:85;pointer-events:none;font-size:20px;animation:fall linear forwards}
 </style>
 </head>
 <body>
@@ -350,6 +355,7 @@ body.introing{overflow:hidden}
 <div class="quick" id="quick"></div>
 <div class="timer" id="timer"></div>
 <div class="daily" id="daily"></div>
+<div class="bdbanner" id="bdb"></div>
 <div class="family"><button class="fam" id="fMama"><canvas width="16" height="16" id="cMama"></canvas>ママ<small>あかねちゃん</small></button><button class="fam papa" id="fPapa"><canvas width="16" height="16" id="cPapa"></canvas>パパ<small>たいがくん</small></button></div>
 <button class="ok" id="greet" style="margin-top:10px">あいさつする</button>
 <button class="ok fight" id="fight">👵 みとの まるい ばあちゃんと しょうぶ！</button>
@@ -434,6 +440,7 @@ body.introing{overflow:hidden}
 <p>ヤマメ：🐟ヤマメのしおやきは、おなかが いっぱいになる おくたまの ごちそうです。</p>
 <p>かぞく（画面にも登場）：ママと パパは、ときどき 画面の なかにも あそびに きます。あさは ママが「おはよう！」、ゆうがたは パパが「ただいま！」。画面の ママや パパを タップすると、ハグや たかいたかいを してくれます。けっこんしていると、こいびとも いっしょに でてきます。</p>
 <p>かぞく：「👩ママ（あかねちゃん）」「👨パパ（たいがくん）」ボタンで、かのちゃんの ママと パパが あそびに きてくれます。ママは ぎゅーっと ハグ、パパは たかい たかーい！（それぞれ 1日1かい どんぐり+2）。「いいこと」を すると、ママか パパが「えらいね！」と ほめに きてくれます。</p>
+<p>かのちゃんの おたんじょうび（11月22日）：1しゅうかん まえから「おたんじょうびまで あと○にち」が でます。とうじつは、ひらいた しゅんかんに オクタマ坊・ママ・パパが「おめでとう！」と いってくれて、ケーキと ハッピーバースデーの うたで おいわい。どんぐり50こ・「バースデーぼうし」・レアシールの プレゼントが あります（まいとし）。</p>
 <p>こいびと：おとな（150日目〜）になって、やさしさが50%いじょうになると、すてきなひと（さいしょは「ゆうくん」。なまえはかえられます）に出会えます。「デート」（1日2回）や「おはなをあげる」（どんぐり3こ）で、なかよしがアップ。なかよし100%で、出会って14日たつと「けっこん！」ボタンが出て、けっこんしきができます。けっこんすると「ウエディングベール」がもらえて、毎日いっしょにくらします。</p>
 <p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
 <p>あそぶ じかん：1日1じかん（おうちのひとへ で かえられます）あそぶと「きょうは もう おしまい」に なって、つかえなくなります。のこり10ぷんで おしらせします。よる9じを すぎると「ねないと オクタマモンスターが くるよ！」と おしらせ、1ぷんたっても あそんでいると モンスターが きて、あさ6じまで つかえなくなります。おうちのひとは「👪 おうちのひと」ボタンを 3びょう ながおしすると、15ふん（よるは30ぷん）だけ のばせます。</p>
@@ -531,6 +538,7 @@ yamame:Q(["........",".#....#.","##.##.##","########","#.####.#",".#....#.","...
 deer:Q(["#.#.....",".#......",".###....","..######","..######","..#.#..#","..#.#..#","........"]),
 bear:Q(["#..#....","####....","#.##....","#####...",".######.",".######.",".#.#.#..","........"]),
 squirrel:Q(["......##",".##..#.#","####.#..","#.##.##.",".####.#.",".####...","..#.#...","........"]),
+bcake:Q(["..#.#.#.","..#.#.#.",".#######",".#.#.#.#","########","#......#","########","........"]),
 cake:Q(["...#....","...#....","########","#......#","########","#......#","########","........"])
 };
 const FONT={'0':["###","#.#","#.#","#.#","###"],'1':[".#.","##.",".#.",".#.","###"],'2':["###","..#","###","#..","###"],'3':["###","..#","###","..#","###"],'4':["#.#","#.#","###","..#","..#"],'5':["###","#..","###","..#","###"],'6':["###","#..","###","#.#","###"],'7':["###","..#","..#",".#.",".#."],'8':["###","#.#","###","#.#","###"],'9':["###","#.#","###","..#","###"],'%':["#.#","..#",".#.","#..","#.#"]};
@@ -727,6 +735,8 @@ function drawAnim(){
   else if(a.type==='fam'){const who=a.data.who,sp=who==='mama'?(fr?SPR.mama2:SPR.mama1):(fr?SPR.papa2:SPR.papa1);const px0=Math.max(22,Math.round(W-(t/0.3)*18));blit(sp,px0,9,true);
     let py=9;if(who==='papa'&&t>0.35){py=9-Math.round(Math.abs(Math.sin((t-0.35)*14))*6)}blitPet(petSpr(fr),3,py);
     if(t>0.35){for(let i=0;i<4;i++){const hx=(i*9+Math.floor(t*30))%W,hy=1+((i*3+Math.floor(t*20))%6);blit(ICO.heart,hx,hy,false,i%2?15:7)}}}
+  else if(a.type==='bday'){blit(fr?SPR.mama2:SPR.mama1,0,9);blit(fr?SPR.papa2:SPR.papa1,24,9,true);const n=petN();blitPet(petSpr(fr),12,fr?7:9);blit(ICO.bcake,16,1,false,15);for(const x of[18,20,22]){px(x,0,fr?14:16)}
+    for(let i=0;i<8;i++){const x=(i*5+Math.floor(t*40))%W,y=(i*3+Math.floor(t*25))%8;px(x,y,[15,14,9,7][i%4])}}
   else if(a.type==='call'){blitPet(petSpr(fr),petX,9,petDir<0);if(fr)blit(ICO.bell,W-8,0)}
   if(t>=1){const f=a.onEnd;anim=null;f&&f()}
 }
@@ -971,6 +981,7 @@ cape:{col:'r',n:'マント',slot:'neck',p:0,ms:30,b:["#########","##.....##","#.
 star:{col:'y',n:'ほしのかみかざり',slot:'head',p:0,ms:100,b:["..#..",".###.","#####",".#.#."]},
 veil:{n:'ウエディングベール',slot:'head',p:0,ms:9999,b:["..oWWo..",".oWWWWo.","oWWWWWWo","oW....Wo"]},
 hike:{col:'g',n:'やまのぼうし',slot:'head',p:0,ms:9999,b:["..####..",".######.","########","#......#"]},
+party:{col:'p',n:'バースデーぼうし',slot:'head',p:0,ms:9999,b:["...y...","..ppp..",".pyppp.","ppppypp"]},
 legend:{col:'y',n:'でんせつのおうかん',slot:'head',p:0,ms:365,b:["#.#.#.#","#######","#.###.#","#######"]},
 bgM:{n:'やま',slot:'bg',p:4},
 bgS:{n:'ほしぞら',slot:'bg',p:6},
@@ -1187,7 +1198,7 @@ function propose(){ac();if(!qReady())return;const L=S.love;L.married=today();if(
 
 /* ---------- hello on open ---------- */
 let helloPending=null;
-function helloOnOpen(){if(!S||S.gone||S.stage<1)return;const t=greetType();if(!S.hello||S.hello.d!==today())S.hello={d:today(),l:[]};if(S.hello.l.indexOf(t)>=0)return;
+function helloOnOpen(){if(!S||S.gone||S.stage<1)return;if(isBD()&&(!S.hello||S.hello.d!==today()||S.hello.l.indexOf('bd')<0)){if(!S.hello||S.hello.d!==today())S.hello={d:today(),l:[]};S.hello.l.push('bd');saveLocal();helloPending='bd_pet';loadV('bd_pet');say('「かのちゃん、おたんじょうび おめでとう！だいすきだよ！」🎂🎉',9000);return}const t=greetType();if(!S.hello||S.hello.d!==today())S.hello={d:today(),l:[]};if(S.hello.l.indexOf(t)>=0)return;
   S.hello.l.push(t);saveLocal();const k=talkKey(t==='oyasumi'&&!S.sleeping?'konbanwa':t);helloPending=k;loadV(k);
   const cur=Date.now()<msgLock?' '+$('msg').textContent:'';say('「'+talkText(k)+'」'+(S.stage<=1?'（あかちゃんだから、まだおはなしできないみたい）':'')+cur,9000);anim=null;play('happy',1800)}
 function helloPlay(){if(!helloPending||(typeof introOpen!=='undefined'&&introOpen))return;const k=helloPending;helloPending=null;ac();setTimeout(()=>gVoice(k),120)}
@@ -1317,7 +1328,7 @@ function renderLimit(){const el=$('limitSel');if(!el)return;el.querySelectorAll(
   const fl=['🌸','🍁','✨','🌿','⭐','💗'];for(let i=0;i<10;i++){const e=document.createElement('i');e.className='fall';e.textContent=fl[i%fl.length];e.style.left=(Math.random()*95)+'%';e.style.fontSize=(14+Math.random()*12)+'px';e.style.animationDuration=(6+Math.random()*6)+'s';e.style.animationDelay=(-Math.random()*8)+'s';it.appendChild(e)}})();
 function introPet(){drawMini('imama',SPR.mama1);drawMini('ipapa',SPR.papa1);const c=$('ipet');if(!c||!S)return;const x=c.getContext('2d');x.clearRect(0,0,16,16);const b=S.stage===0?SPR.egg:petSpr(0);for(let r=0;r<16;r++)for(let k=0;k<16;k++){const ch=(b[r]||'')[k];if(ch&&ch!=='.'){x.fillStyle=PALS[ch==='#'?1:(PI[ch]||1)];x.fillRect(k,r,1,1)}}}
 let introOpen=false;
-function showIntro(){const it=$('intro');it.classList.remove('gone','enter');introOpen=true;document.body.classList.add('introing');introPet()}
+function showIntro(){const it=$('intro');const sb=it.querySelector('.isub');if(sb)sb.textContent=isBD()?'🎂 かのちゃん おたんじょうび おめでとう！ 🎂':'✨ おくたまの ゆめのくに ✨';it.classList.remove('gone','enter');introOpen=true;document.body.classList.add('introing');introPet()}
 function enterIntro(){if(!introOpen)return;introOpen=false;const it=$('intro');ac();
   const a=AC;if(a&&soundOn){[1046,1318,1568,2093,2637,3136,2637,3136,4186].forEach((f,i)=>tone(f,0.18,i*0.09,'triangle',0.06));setTimeout(()=>gVoice('welcome'),350)}
   const em=['✨','💖','⭐','🌸','💫','🌈'];for(let i=0;i<18;i++){const e=document.createElement('i');e.className='burst';e.textContent=em[i%em.length];const ang=i/18*Math.PI*2,d=120+Math.random()*120;e.style.setProperty('--dx',Math.cos(ang)*d+'px');e.style.setProperty('--dy',Math.sin(ang)*d+'px');it.appendChild(e);setTimeout(()=>e.remove(),1300)}
@@ -1338,12 +1349,28 @@ function callFam(who,silent){ac();markDay();if(!S||S.gone)return;if(S.eaten){say
   say(F.n+'が きてくれた！ '+F.t[i]+' '+F.act+(first?' どんぐり +2':''),5000);save();render()}
 $('fMama').onclick=()=>callFam('mama');$('fPapa').onclick=()=>callFam('papa');
 
+/* ---------- Kano's birthday (Nov 22) ---------- */
+const BD={m:11,d:22};
+function daysToBD(){const n=new Date();const t=new Date(n.getFullYear(),n.getMonth(),n.getDate());let b=new Date(n.getFullYear(),BD.m-1,BD.d);if(b<t)b=new Date(n.getFullYear()+1,BD.m-1,BD.d);return Math.round((b-t)/86400000)}
+function isBD(){return daysToBD()===0}
+function confetti(n){const em=['🎉','🎊','🎈','🎂','💖','⭐','🌸'];for(let i=0;i<(n||30);i++){const e=document.createElement('i');e.className='confetti';e.textContent=em[i%em.length];e.style.left=(Math.random()*100)+'vw';e.style.animationDuration=(2.5+Math.random()*2.5)+'s';e.style.animationDelay=(Math.random()*1.2)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),6000)}}
+function renderBD(){const el=$('bdb');if(!el)return;const d=daysToBD();el.className='bdbanner';
+  if(d===0){el.classList.add('show');el.innerHTML='🎂 かのちゃん おたんじょうび おめでとう！ 🎉<br><small>タップで みんなで おいわい！</small>';el.onclick=()=>bdParty(false)}
+  else if(d<=7){el.classList.add('show','soon');el.textContent='🎁 かのちゃんの おたんじょうびまで あと '+d+'にち！';el.onclick=()=>{ac();gVoice('bd_soon');say('もうすぐ かのちゃんの おたんじょうび！ たのしみだね 🎂',3000)}}
+  else el.innerHTML=''}
+function bdParty(first){ac();if(!S||S.gone)return;anim=null;mode='main';menu=-1;
+  seq([523,523,587,523,698,659,0,523,523,587,523,784,698],0.22);setTimeout(()=>gVoice('bd_pet'),3200);setTimeout(()=>gVoice('bd_mama'),7200);setTimeout(()=>gVoice('bd_papa'),12000);
+  play('bday',9000);confetti(36);setTimeout(()=>confetti(24),2500);window.scrollTo({top:0,behavior:'smooth'})}
+function bdCheck(){if(!S||S.gone||!isBD())return;const y=new Date().getFullYear();if(S.bdYear===y)return;S.bdYear=y;
+  S.acorn=(S.acorn||0)+50;if(S.own.indexOf('party')<0)S.own.push('party');S.wear.head='party';S.happy=4;S.kind=Math.min(100,S.kind+10);const st=giveSticker(true);save();renderShop();renderDaily();
+  setTimeout(()=>{modal('<div class="mtitle">かのちゃん<br>おたんじょうび おめでとう！</div><div class="mbig">🎂</div><div class="mtext">オクタマ坊、ママ（あかねちゃん）、パパ（たいがくん）から<br>おいわいの プレゼント！<br><b>どんぐり 50こ<br>🎉「バースデーぼうし」<br>'+STK[st][0]+' シール「'+STK[st][1]+'」</b></div>','ありがとう！',()=>bdParty(true));confetti(40)},1600)}
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();drawMini('cMama',SPR.mama1);drawMini('cPapa',SPR.papa1);showIntro();loadV('welcome');
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();renderBD();bdCheck();drawMini('cMama',SPR.mama1);drawMini('cPapa',SPR.papa1);showIntro();loadV('welcome');
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
-setInterval(()=>{tick++;quickHot();renderRescue();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
+setInterval(()=>{tick++;quickHot();if(tick%60===0){renderBD();bdCheck()}renderRescue();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
   if(!window.claude||!window.claude.use)return;
   const [d,u]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
@@ -1354,6 +1381,6 @@ setInterval(()=>{tick++;quickHot();renderRescue();if(tick%20===0){checkMeet();re
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:47</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:50</p>
 </body>
 </html>
