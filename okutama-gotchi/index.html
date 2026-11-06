@@ -299,6 +299,13 @@ body.introing{overflow:hidden}
 .bdbanner.show{display:block}
 .bdbanner.soon{background:#fff;border:2px dashed #ffb3d6;color:#e05f9e;text-shadow:none;font-size:15px}
 .confetti{position:fixed;top:-20px;z-index:85;pointer-events:none;font-size:20px;animation:fall linear forwards}
+
+.face{position:relative}
+.bub{position:absolute;left:50%;top:44px;transform:translateX(-50%) scale(.6);opacity:0;z-index:5;width:max-content;max-width:86%;background:#fff;border:3px solid #ffb3d6;border-radius:18px;padding:8px 12px;font-size:15px;font-weight:800;color:#6b4a9a;line-height:1.45;text-align:center;box-shadow:0 4px 0 #f3d6ff;pointer-events:none;transition:all .25s cubic-bezier(.3,1.6,.6,1)}
+.bub.show{opacity:1;transform:translateX(-50%) scale(1);pointer-events:auto}
+.bub::after{content:"";position:absolute;bottom:-12px;left:50%;margin-left:-8px;border:8px solid transparent;border-top-color:#ffb3d6;border-bottom:0}
+.bub .rp{display:flex;gap:6px;justify-content:center;margin-top:7px}
+.bub .rp button{white-space:nowrap;border:none;border-radius:999px;padding:7px 12px;font-size:14px;font-weight:800;font-family:inherit;color:#fff;background:linear-gradient(90deg,#ff9fcb,#c9a7ff);box-shadow:0 3px 0 #d79bd6}
 </style>
 </head>
 <body>
@@ -340,6 +347,7 @@ body.introing{overflow:hidden}
 <div class="face">
 <div class="icons top" id="icTop"></div>
 <canvas id="lcd" width="320" height="208"></canvas>
+<div class="bub" id="bub"></div>
 <div class="icons bot" id="icBot"></div>
 </div>
 <div class="btns">
@@ -430,6 +438,7 @@ body.introing{overflow:hidden}
 <p>きょうの英語：毎日ひとつ、5さいでもわかるかんたんな英語が、絵といっしょに出ます。「きく」「ゆっくり」「ぶんで」で発音を聞いて、まねして言えたら「言えた！」を押してね。ごきげんとやさしさが上がります。</p>
 <p>やさしさ：「きょうのいいこと」や、ちゃんとしたお世話でやさしさが上がります。やさしさ70%以上でおとなになると「やさしい山の神」に。おとなになってからでも80%になると、やさしい姿に変わります。お世話ミスや、わけもなくしかるとやさしさが下がり、30%を切るとこわい姿にもどります。</p>
 <p>ひらいたとき：アプリをひらくと、オクタマ坊のほうから「かのちゃん、おはよー！」「かのちゃん、こんにちはー！」と声をかけてくれます（朝・昼・夜それぞれ1日1回。画面をさわると声が出ます）。</p>
+<p>おしゃべり：オクタマ坊は ときどき じぶんから はなしかけてきます（画面に ふきだしが でます）。「おなか すいたなあ」「うんち しちゃった」「きょうは たのしかった？」など。しつもんの ときは ふきだしの ボタンで おへんじ できます。あかちゃんの うちは「ばぶー？」だけ。</p>
 <p>おはなし：あかちゃんのうちは「ばぶー」「あうー」としか言えません。こどもになると「かのちゃ、おあよー！」と少しずつことばをおぼえて、おにいさんになると「かのちゃん、おはよう！」、おとなになると「かのちゃん、おはようございます！」とちゃんとおはなしできるようになります。「おはなし」ボタンで話しかけてくれます。</p>
 <p>あいさつ：時間に合わせて「おはようございます」「こんにちは」「こんばんは」「おやすみなさい」のボタンが出ます。押すと声でこたえてくれます（1日1回ずつ、やさしさとどんぐりがもらえます）。夜8時にねむくなると「おやすみなさい」、朝7時におきると「おはようございます」と話しかけてきます。</p>
 <p>水戸の丸いばあちゃん：ときどき、ライバルの「水戸の丸いばあちゃん」があらわれます（こどもになってから）。Bでしょうぶ、Cでにげる。メーターがまんなかに来たときにAかBでワサビアタック！ばあちゃんは「なっとうネバネバこうげき」と「ほしいもビーム」でやりかえしてきます。かつとどんぐり+5。ほうっておくと、どんぐりを1こ持って帰ってしまいます。「しょうぶ」ボタンで自分からも1日3回までたたかえます。</p>
@@ -1044,7 +1053,7 @@ function renderGreet(){if(!S)return;const t=greetType();$('greet').textContent=(
 function doGreet(){ac();markDay();if(!S||S.gone)return;anim=null;const t=greetType();
   if(!S.greet||S.greet.d!==today())S.greet={d:today(),l:[]};
   const first=S.greet.l.indexOf(t)<0;logT('greet',t);mission('greet');if(first){S.greet.l.push(t);S.kind=Math.min(100,(S.kind||0)+5);S.happy=Math.min(4,S.happy+1);earn(1)}
-  const tk=talkKey(t);gVoice(tk);const said=talkText(tk);mode='main';menu=-1;
+  const tk=talkKey(t);gVoice(tk);const said=talkText(tk);mode='main';menu=-1;bubble(said);
   if(S.stage===0){play('wobble',800);say('たまごが「'+GT[t][0]+'」ってゆれているよ',3500)}
   else if(t==='oyasumi'){if(S.sleeping){S.light=false;if(S.att==='light')S.att=''}play('sad',1800);say('「'+said+'」'+(S.stage<=1?'（あかちゃんだから、まだおはなしできないみたい）':'')+(S.sleeping?'（でんきを消したよ）':''),4500)}
   else{play('happy',1800);say('「'+said+'」'+(S.stage<=1?'（あかちゃんだから、まだおはなしできないみたい）':''),4500)}
@@ -1170,7 +1179,7 @@ function talkKey(kind){const st=S.stage;if(st<=1)return kind==='sleepy'?'s1_e':p
 function talkText(k){return TALK[k]||''}
 function doTalk(){if(!qReady())return;if(S.sleeping){say('すやすや……ねているよ',1500);return}
   mission('talk');const st=S.stage;const k=st<=1?pick(BABY):'s'+st+'_t'+(1+Math.floor(Math.random()*4));gVoice(k);play('deed',1800);
-  say('「'+talkText(k)+'」'+(st<=1?'（あかちゃんだから、まだおはなしできないみたい）':st===2?'（すこしずつ、ことばをおぼえてきたよ）':''),4500);
+  bubble(talkText(k));lastChat=Date.now();say('「'+talkText(k)+'」'+(st<=1?'（あかちゃんだから、まだおはなしできないみたい）':st===2?'（すこしずつ、ことばをおぼえてきたよ）':''),4500);
   S.happy=Math.min(4,S.happy+(Math.random()<.3?1:0));saveLocal();render()}
 
 /* ---------- romance ---------- */
@@ -1388,6 +1397,28 @@ $('lockGo').onclick=()=>{ac();gVoice('hk_bye');$('lockS').innerHTML='いって�
 $('lock').addEventListener('pointerdown',()=>{if(lockWhy==='school'&&helloPending==='hk_morning'){helloPending=null;ac();setTimeout(()=>gVoice('hk_morning'),150)}});
 function renderSchool(){const el=$('schoolSel');if(!el||!S)return;el.querySelectorAll('[data-sc]').forEach(b=>{const v=b.dataset.sc;b.classList.toggle('on',v==='off'?S.school===false:(S.school!==false&&+v===(S.schoolEnd||15)))})}
 
+/* ---------- chatter ---------- */
+const CHAT={"hungry": {"2": "おなか、しゅいたー。ごはん、ちょーだい！", "3": "おなか、すいたなあ。ごはん、ちょうだい！"}, "poop": {"2": "うんち、でたー！おしょうじ、してー！", "3": "あっ、うんち、しちゃった。おそうじ、してー！"}, "happy": {"2": "かのちゃ、たのちいー！", "3": "かのちゃんと、いっしょだと、たのしいな！"}, "play": {"2": "あしょぼ、あしょぼ！", "3": "ねえねえ、かのちゃん、あそぼうよ！"}, "trip": {"2": "おでかけ、しゅるー！", "3": "おくたまの、やまに、おでかけしたいな！"}, "wasabi": {"2": "ワサビ、からい？", "3": "ワサビ、たべてみたいな。ツーンって、するかな？"}, "eng": {"2": "えいご、いうー！", "3": "きょうの、えいご、いっしょに、いってみよう！"}, "q1": {"2": "かのちゃ、たのちかった？", "3": "かのちゃん、きょうは、たのしかった？"}, "q2": {"2": "かのちゃ、なに、しゅき？", "3": "かのちゃん、すきな、たべものは、なあに？"}, "mama": {"2": "ママ、だいしゅき！", "3": "ママと、パパ、だいすき！"}, "r_yes": {"2": "やったー！", "3": "よかったー！わたしも、うれしい！"}, "r_tired": {"2": "よちよち。", "3": "そっかあ。ゆっくり、やすもうね。"}, "r_food": {"2": "おいちそう！", "3": "わあ、おいしそう！わたしも、たべたいな！"}};
+let bubT=0,lastChat=Date.now(),nextChat=40000;
+function bubble(text,replies,ms){const b=$('bub');b.innerHTML='';const t=document.createElement('div');b.appendChild(t);let i=0;const chars=[...text];const iv=setInterval(()=>{t.textContent=chars.slice(0,++i).join('');if(i>=chars.length)clearInterval(iv)},45);
+  if(replies){const r=document.createElement('div');r.className='rp';replies.forEach(([lab,fn])=>{const bt=document.createElement('button');bt.textContent=lab;bt.onclick=e=>{e.stopPropagation();ac();fn()};r.appendChild(bt)});b.appendChild(r)}
+  b.classList.add('show');clearTimeout(bubT);bubT=setTimeout(()=>b.classList.remove('show'),ms||(replies?12000:4500))}
+function chatSay(id,replies){if(!S)return;const st=Math.min(4,S.stage);if(st<=1){const k=pick(BABY);gVoice(k);bubble(talkText(k));return}
+  const txt=st===2?CHAT[id]['2']:CHAT[id]['3'];gVoice('c_'+id+'_'+st);bubble(txt,replies);lastChat=Date.now()}
+function chatPick(){const h=new Date().getHours();
+  if(S.poops)return['poop'];if(S.hunger<=1)return['hungry'];
+  const pool=['happy','play','trip','eng','mama','q1','q2'];if(S.stage>=2)pool.push('wasabi');if(h<12)pool.splice(pool.indexOf('q1'),1);
+  const id=pick(pool);
+  if(id==='q1')return[id,[['うん！たのしかった',()=>{chatSay('r_yes');S.happy=Math.min(4,S.happy+1);play('happy',1500);saveLocal()}],['ちょっと つかれた',()=>{chatSay('r_tired')}]]];
+  if(id==='q2')return[id,[['🍙',()=>{chatSay('r_food')}],['🍓',()=>{chatSay('r_food')}],['🍰',()=>{chatSay('r_food')}]]];
+  if(id==='eng')return[id,[['うん！',()=>{$('secEng').scrollIntoView({behavior:'smooth'});bubble('いっしょに いおう！')}],['あとで',()=>bubble('わかった！あとでね')]]];
+  if(id==='trip')return[id,[['いこう！',()=>{$('secTrip').scrollIntoView({behavior:'smooth'});bubble('ちずの ピンを タップしてね！')}],['また こんど',()=>bubble('うん、また こんどね')]]];
+  if(id==='play')return[id,[['あそぼう！',()=>{qAct('game')}],['あとでね',()=>bubble('はーい')]]];
+  return[id]}
+function chatTick(){if(!S||S.gone||S.stage<1||S.sleeping||S.eaten||anim||mode!=='main'||lockWhy||introOpen||document.visibilityState!=='visible'||$('modal').classList.contains('show'))return;
+  if(Date.now()<msgLock-2000)return;if(Date.now()-lastChat<nextChat)return;nextChat=45000+Math.random()*45000;const c=chatPick();chatSay(c[0],c[1])}
+setInterval(chatTick,3000);
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
@@ -1404,6 +1435,6 @@ setInterval(()=>{tick++;quickHot();if(tick%60===0){renderBD();bdCheck()}renderRe
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:56</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 14:06</p>
 </body>
 </html>
