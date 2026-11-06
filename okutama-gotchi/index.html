@@ -306,6 +306,20 @@ body.introing{overflow:hidden}
 .bub::after{content:"";position:absolute;bottom:-12px;left:50%;margin-left:-8px;border:8px solid transparent;border-top-color:#ffb3d6;border-bottom:0}
 .bub .rp{display:flex;gap:6px;justify-content:center;margin-top:7px}
 .bub .rp button{white-space:nowrap;border:none;border-radius:999px;padding:7px 12px;font-size:14px;font-weight:800;font-family:inherit;color:#fff;background:linear-gradient(90deg,#ff9fcb,#c9a7ff);box-shadow:0 3px 0 #d79bd6}
+
+#bgmBtn{position:fixed;right:10px;top:calc(10px + env(safe-area-inset-top));z-index:60;width:44px;height:44px;border-radius:50%;border:2px solid #f3dcff;background:rgba(255,255,255,.9);font-size:20px;box-shadow:0 3px 0 #ecdcff;cursor:pointer}
+#bgmBtn.off{opacity:.5;filter:grayscale(1)}
+
+/* ===== layout fix (iPhone) ===== */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{display:block!important;padding-bottom:calc(100px + env(safe-area-inset-bottom))!important}
+.wrap{margin:0 auto!important;width:100%!important;max-width:440px!important;box-sizing:border-box}
+.dev{aspect-ratio:auto!important;width:100%!important;max-width:390px!important;padding:12% 7% 8%!important;border-radius:50% 50% 46% 46% / 40% 40% 34% 34%!important}
+.brand{white-space:nowrap!important;font-size:min(7.6vw,31px)!important;flex-wrap:nowrap!important}
+.okusub{font-size:min(3.2vw,12px)!important}
+.btns{margin-top:5%!important}
+.blab{margin-bottom:2px}
+.quick{margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -441,6 +455,7 @@ body.introing{overflow:hidden}
 <p>ひらいたとき：アプリをひらくと、オクタマ坊のほうから「かのちゃん、おはよー！」「かのちゃん、こんにちはー！」と声をかけてくれます（朝・昼・夜それぞれ1日1回。画面をさわると声が出ます）。</p>
 <p>おしゃべり：オクタマ坊は ときどき じぶんから はなしかけてきます（画面に ふきだしが でます）。「おなか すいたなあ」「うんち しちゃった」「きょうは たのしかった？」など。しつもんの ときは ふきだしの ボタンで おへんじ できます。あかちゃんの うちは「ばぶー？」だけ。</p>
 <p>おはなし：あかちゃんのうちは「ばぶー」「あうー」としか言えません。こどもになると「かのちゃ、おあよー！」と少しずつことばをおぼえて、おにいさんになると「かのちゃん、おはよう！」、おとなになると「かのちゃん、おはようございます！」とちゃんとおはなしできるようになります。「おはなし」ボタンで話しかけてくれます。</p>
+<p>おんがく：オリジナルきょく「おくたま たまたま」が ながれます（よるは こもりうたバージョン）。みぎうえの 🎵で オン・オフ できます。</p>
 <p>あいさつ：時間に合わせて「おはようございます」「こんにちは」「こんばんは」「おやすみなさい」のボタンが出ます。押すと声でこたえてくれます（1日1回ずつ、やさしさとどんぐりがもらえます）。夜8時にねむくなると「おやすみなさい」、朝7時におきると「おはようございます」と話しかけてきます。</p>
 <p>水戸の丸いばあちゃん：ときどき、ライバルの「水戸の丸いばあちゃん」があらわれます（こどもになってから）。Bでしょうぶ、Cでにげる。メーターがまんなかに来たときにAかBでワサビアタック！ばあちゃんは「なっとうネバネバこうげき」と「ほしいもビーム」でやりかえしてきます。かつとどんぐり+5。ほうっておくと、どんぐりを1こ持って帰ってしまいます。「しょうぶ」ボタンで自分からも1日3回までたたかえます。</p>
 <p>きのうのふりかえり：その日の「いいこと」「わるいこと」「英語」「あいさつ」などが記録されて、次の日に「きのうのふりかえり」として見られます。朝ひらくと、オクタマ坊がきのうのことを話しかけてくれます。1週間分の ◎（いいことが多い）○ △（わるいことが多い）も出ます。</p>
@@ -481,6 +496,7 @@ body.introing{overflow:hidden}
 <div class="modal" id="modal"><div class="mcard" id="mcard"></div></div>
 <div id="lock"><div class="stars"><i style="left:10%;top:12%">✦</i><i style="left:80%;top:8%;animation-delay:.4s">✦</i><i style="left:60%;top:25%;animation-delay:.8s">✧</i><i style="left:20%;top:70%;animation-delay:.2s">✧</i><i style="left:85%;top:65%;animation-delay:1s">✦</i></div><div class="lbig" id="lockE">🌙</div><div class="lt" id="lockT">おやすみの じかん</div><div class="ls" id="lockS"></div><button id="lockGo" style="display:none;margin-top:24px;background:#fff;color:#e05f9e;border:none;border-radius:999px;padding:14px 30px;font-size:20px;font-weight:800;font-family:inherit;box-shadow:0 5px 0 rgba(0,0,0,.15)">👋 いってきます！</button>
 <button id="lockParent"><span id="lockBar"></span>👪 おうちのひと（3びょう ながおし）</button></div>
+<button id="bgmBtn" aria-label="おんがく">🎵</button>
 <nav class="nav" aria-label="メニュー"><div id="navIn"></div></nav>
 <script>
 const $=id=>document.getElementById(id);
@@ -653,9 +669,9 @@ const SND={
 const VB={};
 function loadV(k){if(VB[k]||!ac())return;VB[k]='loading';fetch('audio/'+k+'.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((res,rej)=>AC.decodeAudioData(b,res,rej))).then(buf=>VB[k]=buf).catch(()=>{delete VB[k]})}
 let vSrc=null;
-function voice(k){if(!soundOn||!S||S.stage!==4)return;if(S.form===3)k='k_'+k.slice(2);const a=ac();if(!a)return;const b=VB[k];if(!b||b==='loading'){loadV(k);return}
+function voice(k){if(!soundOn||!S||S.stage!==4)return;k='k_'+k.slice(2);const a=ac();if(!a)return;const b=VB[k];if(!b||b==='loading'){loadV(k);return}
   try{if(vSrc)vSrc.stop()}catch(e){}const s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start();vSrc=s}
-function preloadV(){if(S&&S.stage===4)['eat','toilet','scold','sick','call','wake','sleep','evolve','win','lose','no','deed','sad'].forEach(k=>loadV((S.form===3?'k_':'v_')+k))}
+function preloadV(){if(S&&S.stage===4)['eat','toilet','scold','sick','call','wake','sleep','evolve','win','lose','no','deed','sad'].forEach(k=>loadV('k_'+k))}
 const vAudio={pause(){try{if(vSrc)vSrc.stop()}catch(e){}}};
 /* ---------- display ---------- */
 const cv=$('lcd'),cx=cv.getContext('2d');
@@ -802,7 +818,7 @@ function statusText(){
   if(S.att==='fake')return'なにかよんでいるけど……わがままかも？';
   if(S.poops)return'うんちが落ちている。トイレで流そう';
   if((S.size||1)<1)return nm+'が小さくなっている（大きさ '+Math.round(S.size*100)+'%）。いいことをすると大きくなるよ';
-  return nm+'（'+STAGE_N[S.stage]+'）　Aでメニュー';
+  return (S.stage===4?nm+'（おとな）':nm)+'　したの ボタンで おせわしてね';
 }
 function ev(e){
   if(e==='call'){SND.call();if(S.att==='sick'){voice('v_sick')}else if(S.att==='light')voice('v_sleep');else voice('v_call')}
@@ -1053,7 +1069,7 @@ function tapWear(k){ac();markDay();const it=WEAR[k];if(!S||S.gone)return;
 /* ---------- greetings ---------- */
 const GT={ohayo:['おはようございます','おはようございます！きょうもいっしょにがんばろうね'],konnichiwa:['こんにちは','こんにちは！あそびにきてくれてありがとう'],konbanwa:['こんばんは','こんばんは。きょうもいちにちおつかれさま'],oyasumi:['おやすみなさい','おやすみなさい。また、あしたね']};
 let gSrc=null;
-function gVoice(k){if(!soundOn)return;const a=ac();if(!a||a.state!=='running'){try{const el=new Audio('audio/'+k+'.mp3');el.setAttribute('playsinline','');el.play().catch(()=>{})}catch(e){}return}const b=VB[k];if(!b||b==='loading'){loadV(k);try{const el=new Audio('audio/'+k+'.mp3');el.setAttribute('playsinline','');el.play().catch(()=>{})}catch(e){}return}
+function gVoice(k){if(!soundOn)return;if(typeof bgmDuck==='function')bgmDuck();const a=ac();if(!a||a.state!=='running'){try{const el=new Audio('audio/'+k+'.mp3');el.setAttribute('playsinline','');el.play().catch(()=>{})}catch(e){}return}const b=VB[k];if(!b||b==='loading'){loadV(k);try{const el=new Audio('audio/'+k+'.mp3');el.setAttribute('playsinline','');el.play().catch(()=>{})}catch(e){}return}
   try{if(gSrc)gSrc.stop()}catch(e){}const s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start();gSrc=s}
 function greetType(){const h=new Date().getHours();if(S.sleeping||h>=20||h<5)return'oyasumi';if(h<10)return'ohayo';if(h<17)return'konnichiwa';return'konbanwa'}
 function renderGreet(){if(!S)return;const t=greetType();$('greet').textContent=({ohayo:'🌅',konnichiwa:'☀️',konbanwa:'🌆',oyasumi:'🌙'}[t])+' 「'+GT[t][0]+'」'}
@@ -1379,7 +1395,7 @@ $('fMama').onclick=()=>callFam('mama');$('fPapa').onclick=()=>callFam('papa');
 const BD={m:11,d:22};
 function daysToBD(){const n=new Date();const t=new Date(n.getFullYear(),n.getMonth(),n.getDate());let b=new Date(n.getFullYear(),BD.m-1,BD.d);if(b<t)b=new Date(n.getFullYear()+1,BD.m-1,BD.d);return Math.round((b-t)/86400000)}
 function isBD(){return daysToBD()===0}
-function confetti(n){const em=['🎉','🎊','🎈','🎂','💖','⭐','🌸'];for(let i=0;i<(n||30);i++){const e=document.createElement('i');e.className='confetti';e.textContent=em[i%em.length];e.style.left=(Math.random()*100)+'vw';e.style.animationDuration=(2.5+Math.random()*2.5)+'s';e.style.animationDelay=(Math.random()*1.2)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),6000)}}
+function confetti(n){const em=['🎉','🎊','🎈','🎂','💖','⭐','🌸'];for(let i=0;i<(n||30);i++){const e=document.createElement('i');e.className='confetti';e.textContent=em[i%em.length];e.style.left=(Math.random()*92)+'vw';e.style.animationDuration=(2.5+Math.random()*2.5)+'s';e.style.animationDelay=(Math.random()*1.2)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),6000)}}
 function renderBD(){const el=$('bdb');if(!el)return;const d=daysToBD();el.className='bdbanner';
   if(d===0){el.classList.add('show');el.innerHTML='🎂 かのちゃん おたんじょうび おめでとう！ 🎉<br><small>タップで みんなで おいわい！</small>';el.onclick=()=>bdParty(false)}
   else if(d<=7){el.classList.add('show','soon');el.textContent='🎁 かのちゃんの おたんじょうびまで あと '+d+'にち！';el.onclick=()=>{ac();gVoice('bd_soon');say('もうすぐ かのちゃんの おたんじょうび！ たのしみだね 🎂',3000)}}
@@ -1427,10 +1443,23 @@ function chatTick(){if(!S||S.gone||S.stage<1||S.sleeping||S.eaten||anim||mode!==
   if(Date.now()<msgLock-2000)return;if(Date.now()-lastChat<nextChat)return;nextChat=45000+Math.random()*45000;const c=chatPick();chatSay(c[0],c[1])}
 setInterval(chatTick,3000);
 
+/* ---------- BGM: おくたま たまたま ---------- */
+let bgmOn=true,bgmSrc=null,bgmGain=null,bgmCur='',bgmDuckT=0;
+try{bgmOn=localStorage.getItem('okg-bgm')!=='off'}catch(e){}
+function bgmWant(){if(!bgmOn||!soundOn||introOpen&&false)return'';if(lockWhy==='time'||lockWhy==='school')return'';return(S&&(S.sleeping||isNight()))||lockWhy==='night'?'bgm_night':'bgm_day'}
+function bgmUpdate(){const a=AC;if(!a||a.state!=='running')return;const w=bgmWant();if(w===bgmCur)return;
+  if(bgmSrc){const old=bgmSrc,og=bgmGain;try{og.gain.setTargetAtTime(0,a.currentTime,0.3);setTimeout(()=>{try{old.stop()}catch(e){}},1500)}catch(e){}bgmSrc=null}
+  bgmCur=w;if(!w)return;const b=VB[w];if(!b||b==='loading'){loadV(w);bgmCur='';return}
+  const src=a.createBufferSource();src.buffer=b;src.loop=true;const g=a.createGain();g.gain.value=0;g.gain.setTargetAtTime(w==='bgm_night'?0.18:0.22,a.currentTime,0.6);src.connect(g);g.connect(a.destination);src.start();bgmSrc=src;bgmGain=g}
+function bgmDuck(){if(!bgmGain||!AC)return;const base=bgmCur==='bgm_night'?0.18:0.22;try{bgmGain.gain.setTargetAtTime(base*0.3,AC.currentTime,0.05);clearTimeout(bgmDuckT);bgmDuckT=setTimeout(()=>{try{bgmGain.gain.setTargetAtTime(base,AC.currentTime,0.5)}catch(e){}},3200)}catch(e){}}
+setInterval(bgmUpdate,1000);
+$('bgmBtn').onclick=()=>{ac();bgmOn=!bgmOn;try{localStorage.setItem('okg-bgm',bgmOn?'on':'off')}catch(e){}$('bgmBtn').classList.toggle('off',!bgmOn);bgmUpdate();say(bgmOn?'🎵 おんがく「おくたま たまたま」 オン':'おんがく オフ',2000)};
+$('bgmBtn').classList.toggle('off',!bgmOn);
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();renderBD();bdCheck();renderSchool();drawMini('cMama',SPR.mama1);drawMini('cPapa',SPR.papa1);showIntro();loadV('welcome');
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();loadV('bgm_day');loadV('bgm_night');renderBD();bdCheck();renderSchool();drawMini('cMama',SPR.mama1);drawMini('cPapa',SPR.papa1);showIntro();loadV('welcome');
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
 setInterval(()=>{tick++;quickHot();if(tick%60===0){renderBD();bdCheck()}renderRescue();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
@@ -1443,6 +1472,6 @@ setInterval(()=>{tick++;quickHot();if(tick%60===0){renderBD();bdCheck()}renderRe
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 14:16</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 14:32</p>
 </body>
 </html>
