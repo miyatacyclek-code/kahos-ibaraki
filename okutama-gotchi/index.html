@@ -290,6 +290,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 <p>おとなの姿：お世話ミスが少なく、しつけが75%以上だと、こわい「山の主」になります。ワサビ好きなら「ワサビ坊」、お世話が足りないと「ぐうたら坊」に。</p>
 <p>きょうの英語：毎日ひとつ、5さいでもわかるかんたんな英語が、絵といっしょに出ます。「きく」「ゆっくり」「ぶんで」で発音を聞いて、まねして言えたら「言えた！」を押してね。ごきげんとやさしさが上がります。</p>
 <p>やさしさ：「きょうのいいこと」や、ちゃんとしたお世話でやさしさが上がります。やさしさ70%以上でおとなになると「やさしい山の神」に。おとなになってからでも80%になると、やさしい姿に変わります。お世話ミスや、わけもなくしかるとやさしさが下がり、30%を切るとこわい姿にもどります。</p>
+<p>ひらいたとき：アプリをひらくと、オクタマ坊のほうから「かのちゃん、おはよー！」「かのちゃん、こんにちはー！」と声をかけてくれます（朝・昼・夜それぞれ1日1回。画面をさわると声が出ます）。</p>
 <p>おはなし：あかちゃんのうちは「ばぶー」「あうー」としか言えません。こどもになると「かのちゃ、おあよー！」と少しずつことばをおぼえて、おにいさんになると「かのちゃん、おはよう！」、おとなになると「かのちゃん、おはようございます！」とちゃんとおはなしできるようになります。「おはなし」ボタンで話しかけてくれます。</p>
 <p>あいさつ：時間に合わせて「おはようございます」「こんにちは」「こんばんは」「おやすみなさい」のボタンが出ます。押すと声でこたえてくれます（1日1回ずつ、やさしさとどんぐりがもらえます）。夜8時にねむくなると「おやすみなさい」、朝7時におきると「おはようございます」と話しかけてきます。</p>
 <p>水戸の丸いばあちゃん：ときどき、ライバルの「水戸の丸いばあちゃん」があらわれます（こどもになってから）。Bでしょうぶ、Cでにげる。メーターがまんなかに来たときにAかBでワサビアタック！ばあちゃんは「なっとうネバネバこうげき」と「ほしいもビーム」でやりかえしてきます。かつとどんぐり+5。ほうっておくと、どんぐりを1こ持って帰ってしまいます。「しょうぶ」ボタンで自分からも1日3回までたたかえます。</p>
@@ -947,7 +948,7 @@ function navCur(){let cur=0;NAV.forEach((n,i)=>{const t=$(n[0]);if(t&&t.getBound
 window.addEventListener('scroll',navCur,{passive:true});
 
 /* ---------- stage talk ---------- */
-const TALK={"s1_a": "ばぶー！", "s1_b": "あうー、あー？", "s1_c": "きゃっきゃっ！", "s1_d": "んまー、んまー。", "s1_e": "ふえぇ。", "s2_ohayo": "かのちゃ、おあよー！", "s2_konnichiwa": "かのちゃ、こんちは！", "s2_konbanwa": "かのちゃ、こんばんわー。", "s2_oyasumi": "かのちゃ、おやちゅみ。", "s2_t1": "かのちゃ、しゅきー！", "s2_t2": "あしょぼ、あしょぼ！", "s2_t3": "おなか、しゅいたー。", "s2_t4": "かのちゃ、だっこー。", "s2_sleepy": "ねむねむ。おやちゅみ。", "s2_wake": "おあよー！おきたー！", "s3_ohayo": "かのちゃん、おはよう！", "s3_konnichiwa": "かのちゃん、こんにちは！きょうもあそぼうね。", "s3_konbanwa": "かのちゃん、こんばんは！", "s3_oyasumi": "かのちゃん、おやすみ。また、あしたね。", "s3_t1": "かのちゃん、きょうは、なにしてあそぶ？", "s3_t2": "かのちゃん、えいご、いっしょにいおう！", "s3_t3": "かのちゃんのこと、だいすきだよ。", "s3_t4": "かのちゃん、はみがき、した？", "s3_sleepy": "ねむくなってきた。かのちゃん、おやすみ。", "s3_wake": "かのちゃん、おはよう！あさだよ！", "s4_ohayo": "かのちゃん、おはようございます！きょうも、いっしょにがんばろうね。", "s4_konnichiwa": "かのちゃん、こんにちは！あいにきてくれて、ありがとう。", "s4_konbanwa": "かのちゃん、こんばんは。きょうも、いちにち、おつかれさま。", "s4_oyasumi": "かのちゃん、おやすみなさい。いいゆめを、みてね。", "s4_t1": "かのちゃん、いつもおせわしてくれて、ありがとう。", "s4_t2": "かのちゃん、こまったことがあったら、なんでもいってね。", "s4_t3": "かのちゃん、おおきくなったね。うれしいな。", "s4_t4": "かのちゃん、きょうは、どんないいことをしたの？", "s4_sleepy": "かのちゃん、そろそろねるじかんだよ。おやすみなさい。", "s4_wake": "かのちゃん、おはようございます！あさだよ。"};
+const TALK={"s1_a": "ばぶー！", "s1_b": "あうー、あー？", "s1_c": "きゃっきゃっ！", "s1_d": "んまー、んまー。", "s1_e": "ふえぇ。", "s2_ohayo": "かのちゃ、おあよー！", "s2_konnichiwa": "かのちゃ、こんちは！", "s2_konbanwa": "かのちゃ、こんばんわー。", "s2_oyasumi": "かのちゃ、おやちゅみ。", "s2_t1": "かのちゃ、しゅきー！", "s2_t2": "あしょぼ、あしょぼ！", "s2_t3": "おなか、しゅいたー。", "s2_t4": "かのちゃ、だっこー。", "s2_sleepy": "ねむねむ。おやちゅみ。", "s2_wake": "おあよー！おきたー！", "s3_ohayo": "かのちゃん、おはよー！", "s3_konnichiwa": "かのちゃん、こんにちはー！あそぼー！", "s3_konbanwa": "かのちゃん、こんばんはー！", "s3_oyasumi": "かのちゃん、おやすみー。またあしたね。", "s3_t1": "かのちゃん、きょうは、なにしてあそぶ？", "s3_t2": "かのちゃん、えいご、いっしょにいおう！", "s3_t3": "かのちゃんのこと、だいすきだよ。", "s3_t4": "かのちゃん、はみがき、した？", "s3_sleepy": "ねむくなってきた。かのちゃん、おやすみ。", "s3_wake": "かのちゃん、おはよー！あさだよー！", "s4_ohayo": "かのちゃん、おはよー！きょうも、いっしょにがんばろうね！", "s4_konnichiwa": "かのちゃん、こんにちはー！あいにきてくれて、ありがとう！", "s4_konbanwa": "かのちゃん、こんばんはー！きょうも、おつかれさま。", "s4_oyasumi": "かのちゃん、おやすみー。いいゆめみてね。", "s4_t1": "かのちゃん、いつもおせわしてくれて、ありがとう。", "s4_t2": "かのちゃん、こまったことがあったら、なんでもいってね。", "s4_t3": "かのちゃん、おおきくなったね。うれしいな。", "s4_t4": "かのちゃん、きょうは、どんないいことをしたの？", "s4_sleepy": "かのちゃん、そろそろねるじかんだよ。おやすみなさい。", "s4_wake": "かのちゃん、おはよー！あさだよー！"};
 const BABY=['s1_a','s1_b','s1_c','s1_d'];
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
 function talkKey(kind){const st=S.stage;if(st<=1)return kind==='sleepy'?'s1_e':pick(BABY);return's'+Math.min(4,st)+'_'+kind}
@@ -985,10 +986,19 @@ function propose(){ac();if(!qReady())return;const L=S.love;L.married=today();if(
   gVoice('r_propose');seq([523,659,784,1046,0,1046,1318,1568,2093,0,1568,2093],0.16);play('wedding',7000,{},()=>{gVoice('r_wedding');say('おめでとう！'+bfName()+'とけっこんしたよ！💍 これからは毎日いっしょ',6000)});
   say('けっこんしき！🔔 '+bfName()+'「ずっといっしょにいてね」',7000);save();renderLove();renderShop();render()}
 
+/* ---------- hello on open ---------- */
+let helloPending=null;
+function helloOnOpen(){if(!S||S.gone||S.stage<1)return;const t=greetType();if(!S.hello||S.hello.d!==today())S.hello={d:today(),l:[]};if(S.hello.l.indexOf(t)>=0)return;
+  S.hello.l.push(t);saveLocal();const k=talkKey(t==='oyasumi'&&!S.sleeping?'konbanwa':t);helloPending=k;loadV(k);
+  const cur=Date.now()<msgLock?' '+$('msg').textContent:'';say('「'+talkText(k)+'」'+(S.stage<=1?'（あかちゃんだから、まだおはなしできないみたい）':'')+cur,9000);anim=null;play('happy',1800)}
+function helloPlay(){if(!helloPending)return;const k=helloPending;helloPending=null;ac();setTimeout(()=>gVoice(k),120)}
+document.addEventListener('pointerdown',helloPlay,{once:false,capture:true});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(helloOnOpen,400)});
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
 setInterval(()=>{tick++;quickHot();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
@@ -1001,6 +1011,6 @@ setInterval(()=>{tick++;quickHot();if(tick%20===0){checkMeet();renderLove()}if(t
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 12:58</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:01</p>
 </body>
 </html>
