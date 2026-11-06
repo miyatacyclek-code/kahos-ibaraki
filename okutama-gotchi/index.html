@@ -232,6 +232,9 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 .stamprow div{width:34px;height:34px;border-radius:50%;border:2px dashed #b3e2c6;display:flex;align-items:center;justify-content:center;font-size:20px;filter:grayscale(1);opacity:.35}
 .stamprow div.got{border:2px solid #7cc79a;filter:none;opacity:1;background:#f0fbf5}
 .season{display:inline-block;background:#f0fbf5;border:1px solid #b3e2c6;color:#3f7d63;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800;margin-bottom:6px}
+
+.rescue{display:none;width:100%;margin-top:10px;border:none;border-radius:22px;padding:16px;font-size:19px;font-weight:800;font-family:inherit;color:#fff;background:linear-gradient(90deg,#7cd6a0,#5fb8e8);box-shadow:0 5px 0 #4f9fbf;animation:blinkA 1s steps(2) infinite}
+.rescue.show{display:block}
 </style>
 </head>
 <body>
@@ -263,6 +266,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 </div>
 
 <div class="msg" id="msg">Aボタンを押してはじめよう</div>
+<button class="rescue" id="rescue">🙏 ごめんなさい！（たすける）</button>
 <div class="quick" id="quick"></div>
 <div class="daily" id="daily"></div>
 <button class="ok" id="greet" style="margin-top:10px">あいさつする</button>
@@ -346,6 +350,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 <p>ヤマメ：🐟ヤマメのしおやきは、おなかが いっぱいになる おくたまの ごちそうです。</p>
 <p>こいびと：おとな（150日目〜）になって、やさしさが50%いじょうになると、すてきなひと（さいしょは「ゆうくん」。なまえはかえられます）に出会えます。「デート」（1日2回）や「おはなをあげる」（どんぐり3こ）で、なかよしがアップ。なかよし100%で、出会って14日たつと「けっこん！」ボタンが出て、けっこんしきができます。けっこんすると「ウエディングベール」がもらえて、毎日いっしょにくらします。</p>
 <p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
+<p>オクタマモンスター：「わるいこと」をすると、おくたまの やまから オクタマモンスターが やってきて、ぱくっと たべられちゃいます！「🙏ごめんなさい」ボタンか、「いいこと」をすると、ぺっと はきだして かえしてくれます（1じかんたつと、かってに はきだします）。たべられているあいだは、おせわが できません。</p>
 <p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
 <p>病気やおなかぺこぺこを長くほうっておくと、小さくなってしまいます。お出かけのときは「時間」を止めておけます。</p>
 </details>
@@ -374,6 +379,8 @@ const W=40,H=26,DOT=8;
 const P=a=>a.map(r=>r.padEnd(16,'.').slice(0,16));
 const Q=a=>a.map(r=>r.padEnd(8,'.').slice(0,8));
 const SPR={
+mon1:P(["..h...gg.....h..", "..hh.gGGg...hh..", "...hhooooooohh..", "..ooggggggggggo.", ".oggGggggggGggo.", ".oggoyyoggoyyogo", ".ogggyeyggyeyggo", "oggggyyggggyyggo", "ogggggggggggggo.", "ogggoooooooogggo", "oggoWoWoWoWoWggo", "ogggoooooooogggo", "oggggggggggggggo", ".ogggGgggggGggo.", "..oggo....oggo..", "..ooo......ooo.."]),
+mon2:P(["..h...gg.....h..", "..hh.gGGg...hh..", "...hhooooooohh..", "..ooggggggggggo.", ".oggGggggggGggo.", ".oggoyyoggoyyogo", ".ogggyeyggyeyggo", "oggggyyggggyyggo", "ogggoooooooogggo", "oggoWoWoWoWoWggo", "oggoeeeeeeeeoggo", "oggoeeeerreeoggo", "oggoWoWoWoWoWggo", ".ogggooooooogggo", "..oggo....oggo..", "..ooo......ooo.."]),
 bf2:P(["....o.ooooo.o...", "....ooHhhhho....", "...oHHHhhhhho...", "..ohhhhhhhhhho..", ".ohhhhhhhhhhhho.", ".osssssssssssso.", ".osssssssssssso.", ".ossewssssewsso.", ".osseesssseesso.", ".osssssssssssso.", "..ossssmmsssso..", "...osssmmssso...", "....osssssso....", "..oogggWWgggoo..", "..oggggggggggo..", "..oooooooooooo.."]),
 bf1:P(["....o.ooooo.o...", "....ooHhhhho....", "...oHHHhhhhho...", "..ohhhhhhhhhho..", ".ohhhhhhhhhhhho.", ".osssssssssssso.", ".osssssssssssso.", ".ossewssssewsso.", ".osseesssseesso.", ".osssssssssssso.", "..ossssmmsssso..", "...osssssssso...", "....osssssso....", "..oogggWWgggoo..", "..oggggggggggo..", "..oooooooooooo.."]),
 baa1:P([".......##.......", "......####......", "....########....", "...##########...", "..###......###..", "..#..........#..", ".#.###....###.#.", ".#.#.#.##.#.#.#.", ".#.###....###.#.", ".#............#.", ".#....####....#.", ".#.....##.....#.", "..#..........#..", "...##########...", "....#..##..#....", "...##......##..."]),
@@ -555,11 +562,13 @@ function drawMain(){
   if(S.gone){
     for(let x=0;x<W;x++){const h=Math.max(0,10-Math.abs(x-20)*0.6|0);for(let y=H-1;y>=H-1-h;y--)px(x,y)}
     if(tick%4<2)blit(ICO.note,4,3);return}
+  if(S&&S.eaten)return'オクタマモンスターの おなかの なかで「たすけてー！」🙏「ごめんなさい」で たすけよう';
   if(S.stage===0){const p=eggProg();let sp,wob;
     if(p<2){sp=SPR.eggS;wob=tick%8===0?1:0}else if(p<4){sp=SPR.eggM;wob=tick%6===0?1:tick%6===3?-1:0}else if(p<5.2){sp=tick%5===0?SPR.eggc:SPR.egg;wob=tick%4===1?1:tick%4===3?-1:0}else{sp=tick%2?SPR.eggc2:SPR.eggc;wob=tick%2?1:-1}
     blit(sp,12+wob,9);drawWear(12+wob,9,16,p<2?'eS':p<4?'eM':'eL');
     const bars=Math.min(6,Math.floor(p));for(let i=0;i<6;i++){const x=8+i*4;px(x,1);px(x+1,1);if(i<bars){px(x,2);px(x+1,2)}else px(x,2)}
     if(p>=5.2&&tick%2)blit(ICO.excl,30,6);return}
+  if(S.eaten){blit(fr?SPR.mon1:SPR.mon2,12,9+(fr?1:0));if(tick%4<2){blit(ICO.excl,4,2,false,16)}blit(ICO.heart0,30,2,false,15);if(Date.now()-S.eaten.t>3600000){rescue('オクタマモンスターが ねむくなって、ぺっと はきだした！もどってこれたよ')}return}
   if(S.sleeping){dark=!S.light;blitPet(petSpr(0),12,9);if(S.light&&tick%2)blit(ICO.zz,30,1);return}
   const maxX=W-16-(S.poops?(S.poops>=2?16:8):0);
   if(tick%2===0&&!S.need){if(Math.random()<0.25)petDir*=-1;petX+=petDir*2;if(petX<0){petX=0;petDir=1}if(petX>maxX){petX=maxX;petDir=-1}}
@@ -606,6 +615,13 @@ function drawAnim(){
     for(let i=0;i<3;i++){const sx=14+i*5,sy=Math.max(0,y-2-((k+i)%4));px(sx,sy,18);px(sx+1,sy-1,18)}
     if(k%2)blit(ICO.excl,32,1,false,16);blit(ICO.wasabi,2,3,false,12)}
   else if(a.type==='trip'){tripScene(a.data.spot,t,fr)}
+  else if(a.type==='monEat'){const mx=Math.round(W-t/0.45*16);const ph=t<0.45?0:t<0.62?1:t<0.8?2:3;
+    if(ph<2)blitPet(petSpr(fr),4,9);
+    if(ph===2){const sx=Math.round(4+(t-0.62)/0.18*14);blitPet(petSpr(0),sx,9)}
+    const X=Math.max(20,mx);blit(ph===1||ph===2?SPR.mon2:SPR.mon1,X,9+(ph===3&&fr?1:0));
+    if(ph===0&&fr)blit(ICO.excl,2,1,false,16);if(ph===3){blit(ICO.anger,30,1,false,16)}}
+  else if(a.type==='monSpit'){const ph=t<0.35?0:t<0.65?1:2;const X=ph<2?20:Math.round(20+(t-0.65)/0.35*24);
+    blit(ph===1?SPR.mon2:SPR.mon1,X,9);if(ph>=1){const px0=Math.round(18-(Math.min(t,0.65)-0.35)/0.3*14);blitPet(petSpr(fr),Math.max(2,px0),9-(ph===1?3:0))}if(ph===2&&fr)blit(ICO.sun,2,1,false,14)}
   else if(a.type==='call'){blitPet(petSpr(fr),petX,9,petDir<0);if(fr)blit(ICO.bell,W-8,0)}
   if(t>=1){const f=a.onEnd;anim=null;f&&f()}
 }
@@ -763,7 +779,7 @@ function doDeed(k,label){
   ac();markDay();if(scaring||!S||S.gone)return;
   if(!S.deeds||S.deeds.d!==today())S.deeds={d:today(),l:[]};
   if(S.deeds.l.indexOf(k)>=0)return;
-  S.deeds.l.push(k);logT('good',k);mission('good');earn(3);S.kind=Math.min(100,(S.kind||0)+10);const grew=grow(0.1);S.happy=Math.min(4,S.happy+1);
+  if(S.eaten){setTimeout(()=>rescue('いいことを したから、オクタマモンスターが ゆるしてくれた！もどってこれたよ'),300)}S.deeds.l.push(k);logT('good',k);mission('good');earn(3);S.kind=Math.min(100,(S.kind||0)+10);const grew=grow(0.1);S.happy=Math.min(4,S.happy+1);
   preloadV();
   seq([1318,1568,2093,2637],0.1);
   anim=null;mode='main';menu=-1;
@@ -823,7 +839,7 @@ function doBad(k){
   S.bad.l.push(k);logT('bad',k);S.kind=Math.max(0,(S.kind||0)-5);S.happy=Math.max(0,S.happy-1);
   anim=null;mode='main';menu=-1;
   if(S.stage===0){say('たまごがしょんぼりしている……',3000);SND.lose()}
-  else shrink(0.1,'わるいことをしたから、オクタマ坊が小さくなってしまった……');
+  else{S.size=Math.max(0.5,Math.round(((S.size||1)-0.1)*100)/100);if(S.eaten){say('まだ オクタマモンスターの おなかの なか……「ごめんなさい」しよう',3000)}else monsterEat('「'+(BADS.find(d=>d[0]===k)||['',''])[1]+'」…… オクタマモンスターが やってきた！')}
   checkKind();save();renderBads();render()}
 
 /* ---------- dress up ---------- */
@@ -915,6 +931,7 @@ function doGreet(){ac();markDay();if(!S||S.gone)return;anim=null;const t=greetTy
   if(first)say($('msg').textContent+'　どんぐり +1',4500);
   save();renderGreet();render()}
 $('greet').onclick=doGreet;
+$('rescue').onclick=()=>{ac();markDay();if(!S||!S.eaten)return;rescue()};
 $('fight').onclick=()=>{ac();markDay();if(!S||S.gone)return;if(S.stage<2){say('もうすこし大きくなったら、たたかえるよ（こどもになってから）',3000);return}if(S.sleeping){say('ねているよ',2000);return}if(mode==='battle')return;
   if(!S.fights||S.fights.d!==today())S.fights={d:today(),n:0};if(S.fights.n>=3){say('きょうはもう3かいたたかったよ。ばあちゃんもつかれたって',3000);return}S.fights.n++;save();startBattle(true)};
 
@@ -1004,7 +1021,7 @@ function renderRecap(){const el=$('recap');if(!el||!S)return;const y=dstr(-1),L=
 
 /* ---------- quick buttons ---------- */
 const QUICK=[['🍙','ごはん',()=>qFeed(0)],['🍡','おやつ',()=>qFeed(1)],['🚽','トイレ',()=>qAct('toilet')],['⚽','あそぶ',()=>qAct('game')],['🤚','なでなで',()=>qPet()],['💬','おはなし',()=>doTalk()],['💊','くすり',()=>qAct('med')],['💡','でんき',()=>qAct('light')],['🌿','ワサビ',()=>qFeed(2)],['🐟','ヤマメ',()=>qFeed(3)],['😠','しかる',()=>qAct('scold')],['🧹','おそうじ',()=>doClean()]];
-function qReady(){ac();markDay();if(!S||S.gone||scaring)return false;if(mode==='battle'){say('いまはばあちゃんとしょうぶ中！',1500);return false}if(anim)anim=null;if(mode==='game'){game=null}mode='main';menu=-1;
+function qReady(){ac();markDay();if(!S||S.gone||scaring)return false;if(S.eaten){SND.no();say('オクタマモンスターに たべられちゃってるよ！ 🙏「ごめんなさい」で たすけよう',3000);return false}if(mode==='battle'){say('いまはばあちゃんとしょうぶ中！',1500);return false}if(anim)anim=null;if(mode==='game'){game=null}mode='main';menu=-1;
   if(S.stage===0){S.eggBonus=(S.eggBonus||0)+1/6;play('wobble',500);tone(1900,0.04,0);say('まだたまごだよ。あたためてあげたよ',2000);if(eggProg()>=EVO[0])setTimeout(hatchNow,500);saveLocal();render();return false}return true}
 function qFeed(i){if(!qReady())return;if(S.sleeping){refuse('ねむっているよ');render();return}feed(i);render()}
 function qAct(k){if(!qReady())return;act(k);render()}
@@ -1152,12 +1169,21 @@ function tripScene(spot,t,fr){const wx=Math.round(-14+t*30);
   else if(spot==='tsuri'){fill(0,0,6,25,17);fill(33,0,39,25,17);fill(7,20,32,25,18);for(let x=6;x<=33;x++){const y=11+Math.round(Math.sin((x-6)/27*Math.PI)*3);px(x,y,2);if(x%3===0){for(let k=1;k<4;k++)px(x,y-k,1)}}}
   const py=spot==='tsuri'?-1:spot==='kumotori'?-8:0;blitPet(petSpr(fr),Math.max(-2,Math.min(24,wx)),9+py+(fr?0:1))}
 
+/* ---------- Okutama monster eats ---------- */
+function monsterEat(msg){if(!S||S.stage<1||S.gone)return false;S.eaten={t:Date.now()};anim=null;mode='main';menu=-1;gVoice('m_eat');
+  const a=ac();if(a&&soundOn){[110,90,70].forEach((f,i)=>tone(f,0.25,0.2+i*0.25,'sawtooth',0.09))}
+  setTimeout(()=>{SND.eat();tone(60,0.4,0,'square',0.12)},2400);
+  play('monEat',4200,{},()=>{gVoice('m_help');say('たいへん！オクタマモンスターに たべられちゃった！ 🙏「ごめんなさい」で たすけてあげよう',8000);renderRescue()});
+  say(msg||'わるいことを したから、オクタマモンスターが やってきた……！',4200);save();renderRescue();window.scrollTo({top:0,behavior:'smooth'});return true}
+function rescue(why){if(!S||!S.eaten)return;S.eaten=null;anim=null;mode='main';gVoice('m_spit');play('monSpit',3200,{},()=>{seq([1046,1318,1568,2093],0.1);say(why||'ぺっ！オクタマモンスターが ゆるしてくれた！もどってこれたよ。もう わるいことは しないでね',6000)});save();renderRescue();render()}
+function renderRescue(){const r=$('rescue');if(!r||!S)return;r.classList.toggle('show',!!S.eaten&&(!anim||anim.type!=='monEat'))}
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
 renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
-setInterval(()=>{tick++;quickHot();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
+setInterval(()=>{tick++;quickHot();renderRescue();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
   if(!window.claude||!window.claude.use)return;
   const [d,u]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
@@ -1168,6 +1194,6 @@ setInterval(()=>{tick++;quickHot();if(tick%20===0){checkMeet();renderLove()}if(t
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:28</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:31</p>
 </body>
 </html>
