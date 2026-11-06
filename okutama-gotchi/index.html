@@ -328,6 +328,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 <p>きのうのふりかえり：その日の「いいこと」「わるいこと」「英語」「あいさつ」などが記録されて、次の日に「きのうのふりかえり」として見られます。朝ひらくと、オクタマ坊がきのうのことを話しかけてくれます。1週間分の ◎（いいことが多い）○ △（わるいことが多い）も出ます。</p>
 <p>まいにちボーナス：毎日ひらくと、スタンプがたまってどんぐりがもらえます（7日目はシールつき）。「きょうのおやくそく」（3つ）をぜんぶクリアすると、どんぐり5こと、ガチャがもう1回。「おくたまガチャ」は1日1回で、奥多摩や水戸のシール（ぜんぶで24しゅるい・レアもあり）があつまります。ぜんぶあつめると「でんせつのおうかん」！</p>
 <p>おそうじ：うんちをしたら🧹おそうじボタンか、画面のうんちをタップするときれいにできます（どんぐり+1）。あかちゃんはまだトイレができないので、よくうんちをします。</p>
+<p>ワサビ：🌿ワサビをあげると、かおがまっかになって、なみだとゆげが出て、ぴょんぴょんはねます。あかちゃんは「ふえぇ」と泣いちゃうけど、大きくなると「ツーン！でも、おくたまのワサビは、おいしいね！」。たくさん食べると「ワサビ名人」になって、おとなのとき「ワサビ坊」になれるかも。</p>
 <p>こいびと：おとな（150日目〜）になって、やさしさが50%いじょうになると、すてきなひと（さいしょは「ゆうくん」。なまえはかえられます）に出会えます。「デート」（1日2回）や「おはなをあげる」（どんぐり3こ）で、なかよしがアップ。なかよし100%で、出会って14日たつと「けっこん！」ボタンが出て、けっこんしきができます。けっこんすると「ウエディングベール」がもらえて、毎日いっしょにくらします。</p>
 <p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
 <p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
@@ -580,6 +581,11 @@ function drawAnim(){
   else if(a.type==='date'){blitPet(petSpr(fr),3,9);blit(fr?SPR.bf2:SPR.bf1,21,9,true);if(fr)blit(ICO.heart,16,2,false,16);else blit(ICO.heart,16,4,false,15)}
   else if(a.type==='wedding'){blitPet(petSpr(fr),3,9);blit(fr?SPR.bf2:SPR.bf1,21,9,true);const k=Math.floor(t*12);blit(ICO.bell,16,1,false,14);for(let i=0;i<6;i++){const x=(i*7+k*3)%W,y=(i*5+k)%8;px(x,y,[15,7,14,16][i%4])}}
   else if(a.type==='clean'){const bx=Math.round(-4+t*(W+4));for(let i=0;i<S.poops;i++){const px0=poopX(i);if(px0>bx)blit(ICO.poop,px0,i<2?17:9,false,2)}blitPet(petSpr(fr),petX>16?2:petX,9);blit(ICO.broom,Math.min(bx,W-8),15,false,3);if(t>0.5){for(let i=0;i<5;i++){const x=(i*9+Math.floor(t*20))%W,y=(i*5)%14+2;if((i+tick)%2)px(x,y,14)}}}
+  else if(a.type==='wasabi'){const k=Math.floor(t*14);const y=9-(k%4<2&&t<0.7?2:0);blitPet(petSpr(k%2),12+((k%2)?1:-1),y);
+    for(let r=y;r<y+16;r++)for(let c=12;c<30;c++){const v=G[r*W+c];if(v===4)G[r*W+c]=t<0.75?19:4}
+    const ex=[15,24];ex.forEach((x,j)=>{for(let d=0;d<3;d++){const yy=y+9+((k+d+j)%4)*2;if(yy<H)px(x+(j?1:0),yy,9)}});
+    for(let i=0;i<3;i++){const sx=14+i*5,sy=Math.max(0,y-2-((k+i)%4));px(sx,sy,18);px(sx+1,sy-1,18)}
+    if(k%2)blit(ICO.excl,32,1,false,16);blit(ICO.wasabi,2,3,false,12)}
   else if(a.type==='call'){blitPet(petSpr(fr),petX,9,petDir<0);if(fr)blit(ICO.bell,W-8,0)}
   if(t>=1){const f=a.onEnd;anim=null;f&&f()}
 }
@@ -672,10 +678,13 @@ function feed(i){
     if(i===2){S.hunger=Math.min(4,S.hunger+1);S.happy=Math.min(4,S.happy+1);S.weight+=1;S.wasabi++;S.pending++}
     if(S.pending&&S.pendT<=0)S.pendT=20+Math.floor(rng(S)*20);
     if(S.pending===1&&!S.need)S.pendT=20+Math.floor(rng(S)*20);
-    S.att=needsAtt(S);voice('v_eat');
-    if(i===2){say('ツーン！！ワサビがきいた！',2500);document.getElementById('dev').animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:300,iterations:3})}
-    else say(i===0?'おにぎりをもぐもぐ食べた':'おだんごをぺろり！',2500);
-    play('happy',900);save()})}
+    S.att=needsAtt(S);if(i!==2)voice('v_eat');
+    if(i===2){const st=S.stage,wk=st<=1?'s1_e':st===2?'w_2':st===3?'w_3':'w_4';gVoice(wk);
+      const a=ac();if(a&&soundOn){const o=a.createOscillator(),g=a.createGain();o.type='triangle';o.frequency.setValueAtTime(2400,a.currentTime);o.frequency.exponentialRampToValueAtTime(4200,a.currentTime+0.5);g.gain.setValueAtTime(0.06,a.currentTime);g.gain.linearRampToValueAtTime(0,a.currentTime+0.7);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+0.75)}
+      document.getElementById('dev').animate([{transform:'translateX(0) rotate(0)'},{transform:'translateX(-7px) rotate(-2deg)'},{transform:'translateX(7px) rotate(2deg)'},{transform:'translateX(0) rotate(0)'}],{duration:260,iterations:5});
+      say(st<=1?'「ふえぇ……」あかちゃんにはワサビはからすぎた！😭（ワサビ '+S.wasabi+'かいめ）':'「'+(st===2?'からーい！ツーン！':st===3?'ツーン！はなに、きたー！':'ツーン！でも、おくたまのワサビは、おいしいね！')+'」🌿💦（ワサビ '+S.wasabi+'かいめ'+(S.wasabi>=5?'・ワサビ名人！':'')+'）',4500);
+      play('wasabi',2600);save()}
+    else{say(i===0?'おにぎりをもぐもぐ食べた':'おだんごをぺろり！',2500);play('happy',900);save()}})}
 function gameGuess(d){mission('game');
   const g=game;if(g.phase!=='ask')return;
   g.dir=rng(S)<0.5?-1:1;g.ok=(g.dir===d);g.res.push(g.ok);g.round++;g.phase='show';
@@ -1098,6 +1107,6 @@ setInterval(()=>{tick++;quickHot();if(tick%20===0){checkMeet();renderLove()}if(t
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:13</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:19</p>
 </body>
 </html>
