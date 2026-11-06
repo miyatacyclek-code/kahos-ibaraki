@@ -235,6 +235,17 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 
 .rescue{display:none;width:100%;margin-top:10px;border:none;border-radius:22px;padding:16px;font-size:19px;font-weight:800;font-family:inherit;color:#fff;background:linear-gradient(90deg,#7cd6a0,#5fb8e8);box-shadow:0 5px 0 #4f9fbf;animation:blinkA 1s steps(2) infinite}
 .rescue.show{display:block}
+
+#lock{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background:linear-gradient(180deg,#3b3170 0%,#6c5aa8 55%,#b9a3e8 100%);color:#fff}
+#lock.show{display:flex}
+#lock .lbig{font-size:90px;animation:wig 2s ease-in-out infinite}
+#lock .lt{font-size:24px;font-weight:800;margin:10px 0;text-shadow:0 2px 0 rgba(0,0,0,.2)}
+#lock .ls{font-size:16px;line-height:1.7;opacity:.95}
+#lock .stars{position:absolute;inset:0;pointer-events:none}
+#lock .stars i{position:absolute;color:#ffe9a8;font-style:normal;animation:twk 1.6s ease-in-out infinite}
+#lockParent{margin-top:40px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.5);color:#fff;border-radius:999px;padding:10px 18px;font-size:13px;font-family:inherit;font-weight:700;position:relative;overflow:hidden}
+#lockParent span{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(255,255,255,.35)}
+.timer{font-size:12px;color:#a58bc8;text-align:center;margin-top:6px;font-weight:700}
 </style>
 </head>
 <body>
@@ -268,6 +279,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 <div class="msg" id="msg">Aボタンを押してはじめよう</div>
 <button class="rescue" id="rescue">🙏 ごめんなさい！（たすける）</button>
 <div class="quick" id="quick"></div>
+<div class="timer" id="timer"></div>
 <div class="daily" id="daily"></div>
 <button class="ok" id="greet" style="margin-top:10px">あいさつする</button>
 <button class="ok fight" id="fight">👵 みとの まるい ばあちゃんと しょうぶ！</button>
@@ -318,6 +330,8 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 <button class="g" id="sPause">時間：うごいている</button>
 <button class="g" id="sReset">たまごから</button>
 </div>
+<div class="slot" style="margin-top:12px">⏳ 1日に あそべる じかん（よる9じ〜あさ6じは つかえません）</div>
+<div class="row" id="limitSel"><button class="g" data-lim="30">30ぷん</button><button class="g" data-lim="60">1じかん</button><button class="g" data-lim="90">1じかん半</button><button class="g" data-lim="0">なし</button></div>
 <div class="row" style="display:none">
 </div>
 
@@ -350,6 +364,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 <p>ヤマメ：🐟ヤマメのしおやきは、おなかが いっぱいになる おくたまの ごちそうです。</p>
 <p>こいびと：おとな（150日目〜）になって、やさしさが50%いじょうになると、すてきなひと（さいしょは「ゆうくん」。なまえはかえられます）に出会えます。「デート」（1日2回）や「おはなをあげる」（どんぐり3こ）で、なかよしがアップ。なかよし100%で、出会って14日たつと「けっこん！」ボタンが出て、けっこんしきができます。けっこんすると「ウエディングベール」がもらえて、毎日いっしょにくらします。</p>
 <p>きせかえ：いいこと（+3）、英語の「言えた！」（+3）、ゲームのかち（+2）、ひとりでトイレ（+1）で「どんぐり」がたまります。どんぐりで、ぼうし・めがね・ネクタイ・はいけいを買って、つけかえられます。もう一度押すとはずせます。</p>
+<p>あそぶ じかん：1日1じかん（おうちのひとへ で かえられます）あそぶと「きょうは もう おしまい」に なって、つかえなくなります。のこり10ぷんで おしらせします。よる9じを すぎると「ねないと オクタマモンスターが くるよ！」と おしらせ、1ぷんたっても あそんでいると モンスターが きて、あさ6じまで つかえなくなります。おうちのひとは「👪 おうちのひと」ボタンを 3びょう ながおしすると、15ふん（よるは30ぷん）だけ のばせます。</p>
 <p>オクタマモンスター：「わるいこと」をすると、おくたまの やまから オクタマモンスターが やってきて、ぱくっと たべられちゃいます！「🙏ごめんなさい」ボタンか、「いいこと」をすると、ぺっと はきだして かえしてくれます（1じかんたつと、かってに はきだします）。たべられているあいだは、おせわが できません。</p>
 <p>わるいこと：「きょうのわるいこと」を押すと、オクタマ坊が小さくなります。小さくなりすぎると、ひとつ前のすがたにもどってしまいます。いいことや英語の「言えた！」で、また大きくなります。お世話をほうっておいたときも、すこし小さくなります。</p>
 <p>病気やおなかぺこぺこを長くほうっておくと、小さくなってしまいます。お出かけのときは「時間」を止めておけます。</p>
@@ -372,6 +387,7 @@ p[style*="#8f8a78"]{color:#a58bc8!important;text-align:center}
 
 
 <div class="modal" id="modal"><div class="mcard" id="mcard"></div></div>
+<div id="lock"><div class="stars"><i style="left:10%;top:12%">✦</i><i style="left:80%;top:8%;animation-delay:.4s">✦</i><i style="left:60%;top:25%;animation-delay:.8s">✧</i><i style="left:20%;top:70%;animation-delay:.2s">✧</i><i style="left:85%;top:65%;animation-delay:1s">✦</i></div><div class="lbig" id="lockE">🌙</div><div class="lt" id="lockT">おやすみの じかん</div><div class="ls" id="lockS"></div><button id="lockParent"><span id="lockBar"></span>👪 おうちのひと（3びょう ながおし）</button></div>
 <nav class="nav" aria-label="メニュー"><div id="navIn"></div></nav>
 <script>
 const $=id=>document.getElementById(id);
@@ -931,6 +947,7 @@ function doGreet(){ac();markDay();if(!S||S.gone)return;anim=null;const t=greetTy
   if(first)say($('msg').textContent+'　どんぐり +1',4500);
   save();renderGreet();render()}
 $('greet').onclick=doGreet;
+document.querySelectorAll('[data-lim]').forEach(b=>b.onclick=()=>{S.limit=+b.dataset.lim;save();renderLimit();say(S.limit?'1日 '+S.limit+'ぷんに したよ':'じかんの せいげんを なしに したよ',2500)});
 $('rescue').onclick=()=>{ac();markDay();if(!S||!S.eaten)return;rescue()};
 $('fight').onclick=()=>{ac();markDay();if(!S||S.gone)return;if(S.stage<2){say('もうすこし大きくなったら、たたかえるよ（こどもになってから）',3000);return}if(S.sleeping){say('ねているよ',2000);return}if(mode==='battle')return;
   if(!S.fights||S.fights.d!==today())S.fights={d:today(),n:0};if(S.fights.n>=3){say('きょうはもう3かいたたかったよ。ばあちゃんもつかれたって',3000);return}S.fights.n++;save();startBattle(true)};
@@ -1178,10 +1195,38 @@ function monsterEat(msg){if(!S||S.stage<1||S.gone)return false;S.eaten={t:Date.n
 function rescue(why){if(!S||!S.eaten)return;S.eaten=null;anim=null;mode='main';gVoice('m_spit');play('monSpit',3200,{},()=>{seq([1046,1318,1568,2093],0.1);say(why||'ぺっ！オクタマモンスターが ゆるしてくれた！もどってこれたよ。もう わるいことは しないでね',6000)});save();renderRescue();render()}
 function renderRescue(){const r=$('rescue');if(!r||!S)return;r.classList.toggle('show',!!S.eaten&&(!anim||anim.type!=='monEat'))}
 
+/* ---------- play time limit & bedtime ---------- */
+let lockWhy='',nightWarnAt=0;
+function playInit(){if(!S.play||S.play.d!==today())S.play={d:today(),sec:0,extra:0};if(S.limit===undefined)S.limit=60}
+function isNight(){const h=new Date().getHours();return h>=21||h<6}
+function lockShow(why){lockWhy=why;const L=$('lock');
+  if(why==='time'){$('lockE').textContent='⏰';$('lockT').textContent='きょうは もう おしまい！';$('lockS').innerHTML='いっぱい あそんだね。<br>オクタマ坊も つかれて ねむっちゃった。<br>また あした あそぼうね！';gVoice('t_end')}
+  else{$('lockE').textContent='🌙';$('lockT').textContent='おやすみの じかん';$('lockS').innerHTML='よる9じを すぎたよ。<br>オクタマ坊も オクタマモンスターも<br>もう ねているよ。<br>あさ6じに また あおうね。おやすみなさい！'}
+  L.classList.add('show');mq=[];$('modal').classList.remove('show')}
+function lockHide(){lockWhy='';$('lock').classList.remove('show')}
+function playTick(){if(!S||document.visibilityState!=='visible')return;playInit();const now=Date.now();
+  if(isNight()&&!(S.nightOK&&S.nightOK>now)){
+    if(lockWhy==='night')return;
+    if(!nightWarnAt){nightWarnAt=now;gVoice('n_warn');modal('<div class="mtitle">もう よる9じ だよ！</div><div class="mbig">🌙</div><div class="mtext">はやく ねないと……<br><b>オクタマモンスターが くるよ！</b><br><small>1ぷんで おしまいに なるよ</small></div>','はーい、ねます');say('よる9じを すぎたよ。ねないと オクタマモンスターが くるよ！',60000);return}
+    if(now-nightWarnAt>60000&&lockWhy!=='nightEat'){lockWhy='nightEat';if(S.stage>=1&&!S.eaten){gVoice('n_eat');S.eaten={t:Date.now()};anim=null;mode='main';play('monEat',4200);say('ねないで あそんでいたから、オクタマモンスターが きちゃった……！',5000);save();setTimeout(()=>lockShow('night'),4600)}else lockShow('night')}
+    return}
+  if(lockWhy==='night'||lockWhy==='nightEat'){lockHide();nightWarnAt=0}
+  if(lockWhy==='time')return;
+  S.play.sec++;if(S.play.sec%10===0)saveLocal();
+  const lim=S.limit?S.limit*60+S.play.extra*60:Infinity,left=lim-S.play.sec;
+  $('timer').textContent=S.limit?'⏳ きょう あそべるのは あと '+Math.max(0,Math.ceil(left/60))+'ぷん':'';
+  if(S.limit&&left===600){say('あと10ぷんで きょうは おしまいだよ',4000);tone(1500,0.1,0);tone(1500,0.1,0.2)}
+  if(S.limit&&left<=0){save();lockShow('time')}}
+setInterval(playTick,1000);
+(function(){let ht=null,st=0;const b=$('lockParent');const start=e=>{e.preventDefault();st=Date.now();ht=setInterval(()=>{const p=Math.min(1,(Date.now()-st)/3000);$('lockBar').style.width=(p*100)+'%';if(p>=1){clearInterval(ht);ht=null;$('lockBar').style.width='0';
+  if(lockWhy==='time'){S.play.extra+=15;say('おうちのひとが 15ふん のばしてくれたよ',3000)}else{S.nightOK=Date.now()+30*60000;nightWarnAt=0;if(S.eaten)S.eaten=null;say('おうちのひとが 30ぷんだけ いいよって',3000)}save();lockHide();renderRescue();render()}},50)};
+  const end=()=>{if(ht){clearInterval(ht);ht=null}$('lockBar').style.width='0'};b.addEventListener('pointerdown',start);b.addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.addEventListener('pointercancel',end)})();
+function renderLimit(){const el=$('limitSel');if(!el)return;el.querySelectorAll('[data-lim]').forEach(b=>b.classList.toggle('on',+b.dataset.lim===(S.limit||0)))}
+
 S=loadLocal();if(!S||S.v!==2)S=fresh();else S=Object.assign(fresh(),S);
 advance(S,Date.now());live=true;
 $('sPause').textContent=S.paused?'時間：止めている':'時間：うごいている';$('sPause').classList.toggle('on',S.paused);
-renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();
+renderDeeds();renderBads();renderEng();renderShop();renderGreet();renderJourney();checkMiles();renderQuick();renderNav();navCur();renderLove();render();renderRecap();setTimeout(helloOnOpen,600);dailyRoll();renderDaily();renderTrips();playInit();renderLimit();
 try{const di=engIdx()%WORDS.length;['w','s','x'].forEach(t=>eUrl(pad3(di)+t).catch(()=>{}))}catch(e){}
 setInterval(()=>{tick++;quickHot();renderRescue();if(tick%20===0){checkMeet();renderLove()}if(tick%20===0){renderGreet();renderJourney();checkMiles()}if(S.deeds&&S.deeds.d!==today()){renderDeeds();renderBads();renderEng();renderRecap();dailyRoll();renderDaily()}const st=S.stage,b=S.last;advance(S,Date.now());if(S.last!==b)saveLocal();render()},500);
 (async()=>{try{
@@ -1194,6 +1239,6 @@ setInterval(()=>{tick++;quickHot();renderRescue();if(tick%20===0){checkMeet();re
 }catch(e){}})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")r.update()})}).catch(()=>{}));let rl=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl)return;rl=true;location.reload()})}</script>
-<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:31</p>
+<p style="text-align:center;font-size:11px;color:#c3a8e0;padding:0 0 90px">バージョン 11/06 13:34</p>
 </body>
 </html>
