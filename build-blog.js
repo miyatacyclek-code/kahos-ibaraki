@@ -51,6 +51,7 @@ article ul{padding-left:22px;margin:0 0 14px}article li{margin-bottom:6px}
 .list{display:grid;gap:12px;padding:0;margin:0;list-style:none}
 .list a{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:10px 12px;box-shadow:3px 3px 0 var(--ink)}
 .list .em{flex:none;width:48px;height:48px;border-radius:10px;border:2px solid var(--ink);display:grid;place-items:center;font-size:26px}
+img.em{object-fit:cover;width:48px;height:48px}
 .list b{font-family:"Fraunces",Georgia,serif;display:block;line-height:1.2}
 .list span{font-size:13px;color:var(--muted)}
 footer{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}`;
@@ -69,6 +70,7 @@ const head = ({ title, desc, url, image, type, extra = "" }) => `<!DOCTYPE html>
 <meta property="og:url" content="${url}">
 <meta property="og:site_name" content="Kaho's Ibaraki Guide">
 ${image ? `<meta property="og:image" content="${image}">\n<meta name="twitter:card" content="summary_large_image">` : `<meta name="twitter:card" content="summary">`}
+<meta name="author" content="Kaho">
 <meta name="theme-color" content="#1f3b35">
 <link rel="icon" href="../icon-192.png">
 <link rel="alternate" type="application/rss+xml" title="Kaho's Ibaraki Blog" href="${SITE}blog/feed.xml">
@@ -78,7 +80,8 @@ ${extra}</head>`;
 
 const topbar = `<div class="top"><a class="brand" href="../">Kaho's Ibaraki Guide</a><a href="./">All blog posts</a></div>`;
 const footer = `<footer>Written by Kaho · Ibaraki, Japan · <a href="${YT}" rel="noopener">YouTube</a></footer>`;
-const item = p => `<li><a href="${p.id}.html"><span class="em" style="background:${p.bg}">${p.emoji}</span><span><b>${esc(plain(p.title))}</b><span>${esc(p.cat)} · ${esc(p.date)} · ${esc(plain(p.sum))}</span></span></a></li>`;
+const thumb = p => p.photo ? `<img class="em" src="../${p.photo}" alt="${esc(p.alt || plain(p.title))}" width="48" height="48" loading="lazy">` : `<span class="em" style="background:${p.bg}">${p.emoji}</span>`;
+const item = p => `<li><a href="${p.id}.html">${thumb(p)}<span><b>${esc(plain(p.title))}</b><span>${esc(p.cat)} · ${esc(p.date)} · ${esc(plain(p.sum))}</span></span></a></li>`;
 
 const bodyHtml = body => body.map(([t, v]) =>
   t === "p" ? `<p>${v}</p>` :
@@ -103,15 +106,21 @@ for (const p of POSTS) {
     author: { "@type": "Person", name: "Kaho", url: SITE }, mainEntityOfPage: url, inLanguage: "en",
     articleSection: p.cat, ...(pubDate(p) ? { datePublished: pubDate(p), dateModified: p.updated || pubDate(p) } : {}), ...(image ? { image } : {})
   };
+  const crumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Kaho's Ibaraki Guide", item: SITE },
+    { "@type": "ListItem", position: 2, name: "Blog", item: SITE + "blog/" },
+    { "@type": "ListItem", position: 3, name: title, item: url }] };
   const related = [...POSTS.filter(x => x.id !== p.id && x.cat === p.cat), ...POSTS.filter(x => x.id !== p.id && x.cat !== p.cat)].slice(0, 3);
   const html = head({
     title: p.seo || `${title} | Kaho's Ibaraki Guide`, desc: plain(p.desc || p.sum), url, image, type: "article",
-    extra: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>\n`
+    extra: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>
+<script type="application/ld+json">${JSON.stringify(crumbs).replace(/</g, "\\u003c")}</script>
+${pubDate(p) && pubDate(p).length === 10 ? `<meta property="article:published_time" content="${pubDate(p)}">\n` : ""}`
   }) + `
 <body><div class="wrap">
 ${topbar}
 <div class="cardx">
-${p.photo ? `<img class="hero" src="../${p.photo}" alt="${esc(p.alt || title)}" width="680" height="260">` : `<div class="hero" style="background:${p.bg}">${p.emoji}</div>`}
+${p.photo ? `<img class="hero" src="../${p.photo}" alt="${esc(p.alt || title)}" width="680" height="260" fetchpriority="high">` : `<div class="hero" style="background:${p.bg}">${p.emoji}</div>`}
 <div class="inner">
 <div class="meta">${esc(p.cat)} · ${showDate(p)} · ${p.min} min read</div>
 <h1>${p.title}</h1>
@@ -130,7 +139,10 @@ ${footer}
 }
 
 const indexDesc = "Stories about Ibaraki, Japan by Kaho, a local: places, food, travel tips and real life in rural Japan.";
-fs.writeFileSync(path.join(outDir, "index.html"), head({ title: "Kaho's Ibaraki Blog | Food, travel and life in Ibaraki, Japan", desc: indexDesc, url: SITE + "blog/", image: SITE + "photos/seaside-nemophila.jpg", type: "website" }) + `
+fs.writeFileSync(path.join(outDir, "index.html"), head({ title: "Kaho's Ibaraki Blog | Food, travel and life in Ibaraki, Japan", desc: indexDesc, url: SITE + "blog/", image: SITE + "photos/seaside-nemophila.jpg", type: "website",
+  extra: `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Blog", name: "Kaho's Ibaraki Blog", url: SITE + "blog/", description: indexDesc, inLanguage: "en",
+    author: { "@type": "Person", name: "Kaho", url: SITE, sameAs: [YT] },
+    blogPost: POSTS.map(p => ({ "@type": "BlogPosting", headline: plain(p.title), url: `${SITE}blog/${p.id}.html`, ...(pubDate(p) ? { datePublished: pubDate(p) } : {}), ...(p.photo ? { image: SITE + p.photo } : {}) })) }).replace(/</g, "\\u003c")}</script>\n` }) + `
 <body><div class="wrap">
 ${topbar}
 <h1>Kaho's Ibaraki Blog</h1>
