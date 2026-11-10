@@ -288,6 +288,7 @@ fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Video Cal
 <h2>Good to know</h2>
 <ul>
 <li>Video calls only for now. I don't meet in person.</li>
+<li><b>My English is not perfect</b>, but I try my best! Please speak a little slowly and be patient with me. 😊</li>
 <li><b>This is not a date.</b> Please keep it friendly and respectful.</li>
 <li><b>Please don't ask about my private life</b> (where I live, my relationships, my personal contacts or social accounts). Questions about Ibaraki and life in rural Japan are very welcome!</li>
 <li>I may say no to a request, or end the call early, if these rules are not kept.</li>
