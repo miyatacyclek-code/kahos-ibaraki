@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://miyatacyclek-code.github.io/kahos-ibaraki/sitemap.xml
