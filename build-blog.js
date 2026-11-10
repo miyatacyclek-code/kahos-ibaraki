@@ -224,7 +224,7 @@ ${footer}
 // ---- Guide request page (root: guide-request.html) ----
 // Requests are sent by email (mailto). The address is put together in JS so it is not plain text in the HTML.
 const GR_URL = SITE + "guide-request.html";
-const grDesc = "Want a local to show you Ibaraki, Japan? Send Kaho a guide request: Hitachi Seaside Park, Fukuroda Falls, seafood, shrines and real rural life, 1 hour from Tokyo.";
+const grDesc = "Planning a trip to Ibaraki, Japan, or curious about rural life? Request a video call with Kaho, a local: trip ideas for Hitachi Seaside Park, Fukuroda Falls, food and real life in the Japanese countryside.";
 const grCSS = `
 form{display:grid;gap:14px;margin-top:6px}
 label{font-weight:700;font-size:14px;display:grid;gap:6px}
@@ -244,11 +244,16 @@ button.btn{cursor:pointer;font:inherit;font-weight:700;font-size:16px}
 .ok code{background:#fff;border-radius:6px;padding:2px 6px;font-size:14px}
 .ideas{display:grid;gap:10px;margin:10px 0 4px;padding:0;list-style:none}
 .ideas li{background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.5}
-.ideas b{font-family:"Fraunces",Georgia,serif}`;
-const grLd = { "@context": "https://schema.org", "@type": "WebPage", name: "Request a local guide in Ibaraki", url: GR_URL, description: grDesc, inLanguage: "en",
+.ideas b{font-family:"Fraunces",Georgia,serif}
+table.price{width:100%;border-collapse:separate;border-spacing:0;border:2px solid var(--ink);border-radius:14px;overflow:hidden;margin:6px 0 8px;background:#fff}
+table.price th,table.price td{padding:12px 14px;font-size:17px;border-bottom:1.5px solid var(--line)}
+table.price tr:last-child th,table.price tr:last-child td{border-bottom:0}
+table.price th{text-align:left;font-weight:500}
+table.price td{text-align:right;font-family:"Fraunces",Georgia,serif;font-weight:800;font-size:20px}`;
+const grLd = { "@context": "https://schema.org", "@type": "WebPage", name: "Video call with a local in Ibaraki", url: GR_URL, description: grDesc, inLanguage: "en",
   about: { "@type": "Place", name: "Ibaraki Prefecture, Japan" }, author: { "@type": "Person", name: "Kaho", url: SITE } };
-const interests = ["Flowers & nature", "Seafood & local food", "Shrines & temples", "Real rural life", "Festivals & events", "Hiking", "Pottery (Kasama)", "Photo spots"];
-fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Request a Local Guide in Ibaraki, Japan | Kaho's Ibaraki Guide", desc: grDesc, url: GR_URL, image: SITE + "photos/seaside-nemophila.jpg", type: "website",
+const interests = ["Trip planning", "Flowers & nature", "Local food", "Shrines & temples", "Real rural life", "Working in Japan", "Festivals & events", "Japanese culture"];
+fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Video Call with a Local in Ibaraki, Japan | Kaho's Ibaraki Guide", desc: grDesc, url: GR_URL, image: SITE + "photos/seaside-nemophila.jpg", type: "website",
   extra: `<style>${grCSS}</style>\n<script type="application/ld+json">${JSON.stringify(grLd).replace(/</g, "\\u003c")}</script>\n` })
   .replace('href="../icon-192.png"', 'href="icon-192.png"') + `
 <body><div class="wrap">
@@ -256,30 +261,33 @@ fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Request a
 <div class="cardx">
 <img class="hero" src="photos/seaside-nemophila.jpg" alt="Blue nemophila flowers at Hitachi Seaside Park, Ibaraki" width="680" height="260" fetchpriority="high">
 <div class="inner">
-<div class="meta">Guide request · Ibaraki, Japan</div>
-<h1>Want a local to show you Ibaraki?</h1>
+<div class="meta">Video call · Ibaraki, Japan</div>
+<h1>Video call with a local in Ibaraki</h1>
 <div class="by">by <b>Kaho</b> · I live in Ibaraki, 1 hour from Tokyo</div>
 <article>
-<p>Hi! I'm Kaho. I share real life in rural Japan on YouTube and TikTok. Many of you ask me, “Can you show me around?” So here is a page for that.</p>
-<p>Tell me when you want to come and what you like. I'll read every request and reply by email. Sending a request is free and is not a booking yet.</p>
-<h2>Ideas for your day</h2>
+<p>Hi! I'm Kaho. I share real life in rural Japan on YouTube and TikTok. Many of you ask me questions about Ibaraki and life in Japan. So now you can talk with me on a video call!</p>
+<p>Tell me what you want to talk about. I'll read every request and reply by email. Sending a request is free and is not a booking yet.</p>
+<h2>What we can talk about</h2>
 <ul class="ideas">
-<li><b>Blue hills &amp; ocean torii</b><br>Hitachi Seaside Park, seafood at Nakaminato, sunset at Oarai.</li>
-<li><b>Waterfall &amp; autumn leaves</b><br>Fukuroda Falls, Ryujin Suspension Bridge, countryside food.</li>
-<li><b>Real rural life</b><br>Local supermarket, farm stands, natto and hoshiimo. Ask me anything about life here!</li>
+<li><b>Plan your Ibaraki trip</b><br>Best season, how to get there from Tokyo, where to eat. Hitachi Seaside Park, Fukuroda Falls, Oarai and more.</li>
+<li><b>Real life in rural Japan</b><br>Work, food, houses, unwritten rules. Things you saw in my videos.</li>
+<li><b>Japanese culture Q&amp;A</b><br>Anything you're curious about, from omiyage to onsen manners.</li>
 </ul>
+<h2>Prices</h2>
+<table class="price"><tr><th>30 minutes</th><td>$35</td></tr><tr><th>60 minutes</th><td>$60</td></tr></table>
+<p style="font-size:14px;color:var(--muted)">Price per call (USD).</p>
 <h2>How it works</h2>
 <ol>
-<li><b>Send a request</b> with this form. I'll reply by email with ideas and the price for your plan.</li>
-<li><b>Short video call.</b> We say hi and decide the plan together.</li>
-<li><b>Pay in advance</b> to confirm your day. I'll send you a payment link.</li>
-<li><b>Meet me at a train station</b> in Ibaraki, in the daytime. Let's go!</li>
+<li><b>Send a request</b> with this form. I'll reply by email with some times that work for me.</li>
+<li><b>Pay in advance</b> to confirm. I'll send you a payment link.</li>
+<li><b>We talk on a video call.</b> I'll send you the call link before the day.</li>
 </ol>
 <h2>Good to know</h2>
 <ul>
-<li>We travel by <b>train, bus or taxi</b>. I don't drive guests in my car.</li>
-<li>Train and bus fares, tickets and meals are not included. Please also cover my fares, tickets and meals on the day.</li>
-<li>Small groups only (up to 4 people), so everyone can talk and ask questions.</li>
+<li>Video calls only for now. I don't meet in person.</li>
+<li><b>This is not a date.</b> Please keep it friendly and respectful.</li>
+<li><b>Please don't ask about my private life</b> (where I live, my relationships, my personal contacts or social accounts). Questions about Ibaraki and life in rural Japan are very welcome!</li>
+<li>I may say no to a request, or end the call early, if these rules are not kept.</li>
 </ul>
 </article>
 <form id="gr" novalidate>
@@ -288,17 +296,17 @@ fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Request a
 <label>Your email<input name="email" type="email" autocomplete="email" required></label>
 </div>
 <div class="row">
-<label>Preferred date<small>Or a rough time, like “late April”</small><input name="date" placeholder="e.g. May 3 or late April"></label>
-<label>Number of people<select name="people"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
+<label>Preferred days &amp; times<small>Please include your time zone</small><input name="date" placeholder="e.g. weekends, 8–10pm New York time"></label>
+<label>Your country<input name="country" autocomplete="country-name"></label>
 </div>
 <div class="row">
-<label>Length<select name="length"><option>Half day</option><option selected>1 day</option><option>Not sure yet</option></select></label>
-<label>Coming from<select name="from"><option selected>Tokyo</option><option>Already in Ibaraki</option><option>Somewhere else</option></select></label>
+<label>Length<select name="length"><option>30 minutes ($35)</option><option selected>60 minutes ($60)</option></select></label>
+<label>Visiting Ibaraki?<select name="from"><option selected>Yes, planning a trip</option><option>Maybe someday</option><option>No, just curious</option></select></label>
 </div>
-<fieldset><legend>What do you like?</legend><div class="checks">
+<fieldset><legend>What do you want to talk about?</legend><div class="checks">
 ${interests.map(x => `<label><input type="checkbox" name="like" value="${esc(x)}">${esc(x)}</label>`).join("\n")}
 </div></fieldset>
-<label>Places you want to see, or questions<textarea name="msg" placeholder="Anything is OK! Places you saw in my videos, food you want to try, kids or seniors in your group…"></textarea></label>
+<label>Your questions<textarea name="msg" placeholder="Anything about Ibaraki or life in Japan! Your travel dates, places you saw in my videos, food you want to try…"></textarea></label>
 <button class="btn" type="submit">✉️ Send my request</button>
 <p style="font-size:13px;color:var(--muted);margin:0">Your email app will open with your request. Just press send there.</p>
 </form>
@@ -307,7 +315,7 @@ ${interests.map(x => `<label><input type="checkbox" name="like" value="${esc(x)}
 If nothing opened, email me at <code id="addr"></code> <button type="button" class="btn" id="copy" style="display:inline-block;width:auto;padding:4px 10px;margin:4px 0 0;font-size:13px">Copy my request</button>
 </div>
 </div></div>
-<div class="btns"><a class="btn" href="./#tours">See my tour plans</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
+<div class="btns"><a class="btn" href="./">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 ${footer}
 </div>
 <script>
@@ -320,8 +328,8 @@ ${footer}
     var d=new FormData(f),name=(d.get("name")||"").trim(),mail=(d.get("email")||"").trim();
     if(!name||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(mail)){alert("Please write your name and email.");return}
     var likes=d.getAll("like").join(", ")||"-";
-    last="Hi Kaho!\\n\\nName: "+name+"\\nEmail: "+mail+"\\nDate: "+(d.get("date")||"-")+"\\nPeople: "+d.get("people")+"\\nLength: "+d.get("length")+"\\nComing from: "+d.get("from")+"\\nI like: "+likes+"\\n\\n"+(d.get("msg")||"");
-    location.href="mailto:"+a+"?subject="+encodeURIComponent("Guide request from "+name)+"&body="+encodeURIComponent(last);
+    last="Hi Kaho!\\n\\nName: "+name+"\\nEmail: "+mail+"\\nCountry: "+(d.get("country")||"-")+"\\nDays & times: "+(d.get("date")||"-")+"\\nLength: "+d.get("length")+"\\nVisiting Ibaraki: "+d.get("from")+"\\nTopics: "+likes+"\\n\\n"+(d.get("msg")||"");
+    location.href="mailto:"+a+"?subject="+encodeURIComponent("Video call request from "+name)+"&body="+encodeURIComponent(last);
     document.getElementById("ok").classList.add("on");
   });
   document.getElementById("copy").addEventListener("click",function(){
