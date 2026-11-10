@@ -276,6 +276,7 @@ fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Video Cal
 <h2>Prices</h2>
 <table class="price"><tr><th>30 minutes</th><td>$35</td></tr><tr><th>60 minutes</th><td>$60</td></tr></table>
 <p style="font-size:14px;color:var(--muted)">Price per call (USD).</p>
+<div class="ok on" style="background:#fff6d9;margin:6px 0 4px"><b>🎁 Bonus with every call:</b> my <b>Secret Restaurant List</b> (PDF). 11 places I really eat at in Mito &amp; Hitachinaka, with my tips and maps.</div>
 <h2>How it works</h2>
 <ol>
 <li><b>Send a request</b> with this form. I'll reply by email with some times that work for me.</li>
