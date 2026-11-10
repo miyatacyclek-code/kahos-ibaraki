@@ -282,6 +282,9 @@ fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Video Cal
 <li><b>Pay in advance</b> to confirm. I'll send you a payment link.</li>
 <li><b>We talk on Google Meet.</b> I'll send you the Meet link before the day. You can join from your phone or computer.</li>
 </ol>
+<h2>Cancellation</h2>
+<table class="price"><tr><th>3+ days before</th><td>Free</td></tr><tr><th>2 days before</th><td>30%</td></tr><tr><th>1 day before</th><td>50%</td></tr><tr><th>On the day / no-show</th><td>100%</td></tr></table>
+<p style="font-size:14px;color:var(--muted)">Cancellation fee as a percentage of the call price.</p>
 <h2>Good to know</h2>
 <ul>
 <li>Video calls only for now. I don't meet in person.</li>
