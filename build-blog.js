@@ -149,25 +149,25 @@ const fmtAmt = n => { const f = { 0.25: "¼", 0.5: "½", 0.75: "¾" }; const w =
 const ingText = g => `${g[1] ? fmtAmt(g[1]) + (g[2] ? " " + g[2] : "") + " " : ""}${g[0]}`.trim();
 const rTime = r => typeof r.time === "number" ? `${r.time} min` : r.time;
 const isoDur = r => typeof r.time === "number" ? `PT${r.time}M` : null;
-const rItem = r => `<li><a href="${rUrl(r)}"><span class="em" style="background:${r.bg}">${r.emoji}</span><span><b>${esc(r.name)} Recipe</b><span>${esc(r.jp)} · ⏱ ${esc(rTime(r))} · ${esc(r.level)}</span></span></a></li>`;
+const rItem = r => `<li><a href="${rUrl(r)}">${r.photo ? `<img class="em" src="../${r.photo}" alt="${esc(r.name)}" width="48" height="48" loading="lazy">` : `<span class="em" style="background:${r.bg}">${r.emoji}</span>`}<span><b>${esc(r.name)} Recipe</b><span>${esc(r.jp)} · ⏱ ${esc(rTime(r))} · ${esc(r.level)}</span></span></a></li>`;
 for (const r of RECIPES) {
   if (!/^[a-z0-9-]+$/.test(r.id)) throw new Error("Bad recipe id: " + r.id);
   const url = `${SITE}blog/${rUrl(r)}`;
   const desc = `How to make ${r.name} (${r.jp}) at home: easy Japanese home cooking from Kaho in Ibaraki. ${rTime(r)}, ${r.base} serving${r.base > 1 ? "s" : ""}, with tips for cooking outside Japan.`;
   const ld = { "@context": "https://schema.org", "@type": "Recipe", name: r.name, alternateName: r.jp, description: plain(r.kaho), author: { "@type": "Person", name: "Kaho", url: SITE },
     recipeCuisine: "Japanese", recipeCategory: "Japanese home cooking", recipeYield: `${r.base} serving${r.base > 1 ? "s" : ""}`, ...(isoDur(r) ? { totalTime: isoDur(r) } : {}),
-    recipeIngredient: r.ing.map(ingText), recipeInstructions: r.steps.map(t => ({ "@type": "HowToStep", text: plain(t) })), inLanguage: "en", mainEntityOfPage: url };
+    recipeIngredient: r.ing.map(ingText), recipeInstructions: r.steps.map(t => ({ "@type": "HowToStep", text: plain(t) })), ...(r.photo ? { image: SITE + r.photo } : {}), inLanguage: "en", mainEntityOfPage: url };
   const crumbs = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: "Kaho's Ibaraki Guide", item: SITE },
     { "@type": "ListItem", position: 2, name: "Recipes", item: SITE + "blog/recipes.html" },
     { "@type": "ListItem", position: 3, name: r.name, item: url }] };
   const others = RECIPES.filter(x => x.id !== r.id).slice(0, 3);
-  fs.writeFileSync(path.join(outDir, rUrl(r)), head({ title: `${r.name} Recipe (${r.jp}): Easy Japanese Home Cooking`, desc, url, image: null, type: "article",
+  fs.writeFileSync(path.join(outDir, rUrl(r)), head({ title: `${r.name} Recipe (${r.jp}): Easy Japanese Home Cooking`, desc, url, image: r.photo ? SITE + r.photo : null, type: "article",
     extra: `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>\n<script type="application/ld+json">${JSON.stringify(crumbs).replace(/</g, "\\u003c")}</script>\n` }) + `
 <body><div class="wrap">
 <div class="top"><a class="brand" href="../">Kaho's Ibaraki Guide</a><a href="recipes.html">All recipes</a></div>
 <div class="cardx">
-<div class="hero" style="background:${r.bg}">${r.emoji}</div>
+${r.photo ? `<img class="hero" src="../${r.photo}" alt="Homemade ${esc(r.name)}" width="680" height="260" fetchpriority="high">` : `<div class="hero" style="background:${r.bg}">${r.emoji}</div>`}
 <div class="inner">
 <div class="meta">Recipe · ⏱ ${esc(rTime(r))} · ${esc(r.level)}${r.ib ? " · Ibaraki special" : ""}</div>
 <h1>${esc(r.name)} <span style="font-size:20px;color:var(--muted)">${esc(r.jp)}</span></h1>
