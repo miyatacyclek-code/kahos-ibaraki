@@ -220,8 +220,121 @@ ${footer}
 </html>
 `);
 
+
+// ---- Guide request page (root: guide-request.html) ----
+// Requests are sent by email (mailto). The address is put together in JS so it is not plain text in the HTML.
+const GR_URL = SITE + "guide-request.html";
+const grDesc = "Want a local to show you Ibaraki, Japan? Send Kaho a guide request: Hitachi Seaside Park, Fukuroda Falls, seafood, shrines and real rural life, 1 hour from Tokyo.";
+const grCSS = `
+form{display:grid;gap:14px;margin-top:6px}
+label{font-weight:700;font-size:14px;display:grid;gap:6px}
+label small{font-weight:400;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:16px;padding:11px 12px;border:2px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);width:100%}
+textarea{min-height:110px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+fieldset{border:2px solid var(--ink);border-radius:12px;padding:10px 12px;margin:0}
+legend{font-weight:700;font-size:14px;padding:0 6px}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:flex;align-items:center;gap:6px;font-weight:500;background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+.checks input{width:auto;margin:0}
+button.btn{cursor:pointer;font:inherit;font-weight:700;font-size:16px}
+.ok{display:none;background:#dcefe3;border:2px solid var(--ink);border-radius:14px;padding:14px;font-size:15px;line-height:1.6}
+.ok.on{display:block}
+.ok code{background:#fff;border-radius:6px;padding:2px 6px;font-size:14px}
+.ideas{display:grid;gap:10px;margin:10px 0 4px;padding:0;list-style:none}
+.ideas li{background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.5}
+.ideas b{font-family:"Fraunces",Georgia,serif}`;
+const grLd = { "@context": "https://schema.org", "@type": "WebPage", name: "Request a local guide in Ibaraki", url: GR_URL, description: grDesc, inLanguage: "en",
+  about: { "@type": "Place", name: "Ibaraki Prefecture, Japan" }, author: { "@type": "Person", name: "Kaho", url: SITE } };
+const interests = ["Flowers & nature", "Seafood & local food", "Shrines & temples", "Real rural life", "Festivals & events", "Hiking", "Pottery (Kasama)", "Photo spots"];
+fs.writeFileSync(path.join(root, "guide-request.html"), head({ title: "Request a Local Guide in Ibaraki, Japan | Kaho's Ibaraki Guide", desc: grDesc, url: GR_URL, image: SITE + "photos/seaside-nemophila.jpg", type: "website",
+  extra: `<style>${grCSS}</style>\n<script type="application/ld+json">${JSON.stringify(grLd).replace(/</g, "\\u003c")}</script>\n` })
+  .replace('href="../icon-192.png"', 'href="icon-192.png"') + `
+<body><div class="wrap">
+<div class="top"><a class="brand" href="./">Kaho's Ibaraki Guide</a><a href="blog/">Blog</a></div>
+<div class="cardx">
+<img class="hero" src="photos/seaside-nemophila.jpg" alt="Blue nemophila flowers at Hitachi Seaside Park, Ibaraki" width="680" height="260" fetchpriority="high">
+<div class="inner">
+<div class="meta">Guide request · Ibaraki, Japan</div>
+<h1>Want a local to show you Ibaraki?</h1>
+<div class="by">by <b>Kaho</b> · I live in Ibaraki, 1 hour from Tokyo</div>
+<article>
+<p>Hi! I'm Kaho. I share real life in rural Japan on YouTube and TikTok. Many of you ask me, “Can you show me around?” So here is a page for that.</p>
+<p>Tell me when you want to come and what you like. I'll read every request and reply by email. Sending a request is free and is not a booking yet.</p>
+<h2>Ideas for your day</h2>
+<ul class="ideas">
+<li><b>Blue hills &amp; ocean torii</b><br>Hitachi Seaside Park, seafood at Nakaminato, sunset at Oarai.</li>
+<li><b>Waterfall &amp; autumn leaves</b><br>Fukuroda Falls, Ryujin Suspension Bridge, countryside food.</li>
+<li><b>Real rural life</b><br>Local supermarket, farm stands, natto and hoshiimo. Ask me anything about life here!</li>
+</ul>
+<h2>How it works</h2>
+<ol>
+<li><b>Send a request</b> with this form. I'll reply by email with ideas and the price for your plan.</li>
+<li><b>Short video call.</b> We say hi and decide the plan together.</li>
+<li><b>Pay in advance</b> to confirm your day. I'll send you a payment link.</li>
+<li><b>Meet me at a train station</b> in Ibaraki, in the daytime. Let's go!</li>
+</ol>
+<h2>Good to know</h2>
+<ul>
+<li>We travel by <b>train, bus or taxi</b>. I don't drive guests in my car.</li>
+<li>Train and bus fares, tickets and meals are not included. Please also cover my fares, tickets and meals on the day.</li>
+<li>Small groups only (up to 4 people), so everyone can talk and ask questions.</li>
+</ul>
+</article>
+<form id="gr" novalidate>
+<div class="row">
+<label>Your name<input name="name" autocomplete="name" required></label>
+<label>Your email<input name="email" type="email" autocomplete="email" required></label>
+</div>
+<div class="row">
+<label>Preferred date<small>Or a rough time, like “late April”</small><input name="date" placeholder="e.g. May 3 or late April"></label>
+<label>Number of people<select name="people"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
+</div>
+<div class="row">
+<label>Length<select name="length"><option>Half day</option><option selected>1 day</option><option>Not sure yet</option></select></label>
+<label>Coming from<select name="from"><option selected>Tokyo</option><option>Already in Ibaraki</option><option>Somewhere else</option></select></label>
+</div>
+<fieldset><legend>What do you like?</legend><div class="checks">
+${interests.map(x => `<label><input type="checkbox" name="like" value="${esc(x)}">${esc(x)}</label>`).join("\n")}
+</div></fieldset>
+<label>Places you want to see, or questions<textarea name="msg" placeholder="Anything is OK! Places you saw in my videos, food you want to try, kids or seniors in your group…"></textarea></label>
+<button class="btn" type="submit">✉️ Send my request</button>
+<p style="font-size:13px;color:var(--muted);margin:0">Your email app will open with your request. Just press send there.</p>
+</form>
+<div class="ok" id="ok">
+<b>Almost done! 🎉</b><br>Your email app should be open now. Please press <b>send</b> there.<br>
+If nothing opened, email me at <code id="addr"></code> <button type="button" class="btn" id="copy" style="display:inline-block;width:auto;padding:4px 10px;margin:4px 0 0;font-size:13px">Copy my request</button>
+</div>
+</div></div>
+<div class="btns"><a class="btn" href="./#tours">See my tour plans</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
+${footer}
+</div>
+<script>
+(function(){
+  var a=["miyatacyclek","gmail.com"].join("@");
+  document.getElementById("addr").textContent=a;
+  var f=document.getElementById("gr"),last="";
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var d=new FormData(f),name=(d.get("name")||"").trim(),mail=(d.get("email")||"").trim();
+    if(!name||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(mail)){alert("Please write your name and email.");return}
+    var likes=d.getAll("like").join(", ")||"-";
+    last="Hi Kaho!\\n\\nName: "+name+"\\nEmail: "+mail+"\\nDate: "+(d.get("date")||"-")+"\\nPeople: "+d.get("people")+"\\nLength: "+d.get("length")+"\\nComing from: "+d.get("from")+"\\nI like: "+likes+"\\n\\n"+(d.get("msg")||"");
+    location.href="mailto:"+a+"?subject="+encodeURIComponent("Guide request from "+name)+"&body="+encodeURIComponent(last);
+    document.getElementById("ok").classList.add("on");
+  });
+  document.getElementById("copy").addEventListener("click",function(){
+    if(navigator.clipboard)navigator.clipboard.writeText(last).then(function(){alert("Copied! Paste it into an email to "+a)});
+  });
+})();
+</script>
+</body>
+</html>
+`);
+
 const today = new Date().toISOString().slice(0, 10);
-const urls = [[SITE, today], [SITE + "blog/", today], ...POSTS.map(p => [`${SITE}blog/${p.id}.html`, p.updated || pubDate(p)]), [SITE + "blog/recipes.html", today], ...RECIPES.map(r => [`${SITE}blog/${rUrl(r)}`, null])];
+const urls = [[SITE, today], [SITE + "guide-request.html", null], [SITE + "blog/", today], ...POSTS.map(p => [`${SITE}blog/${p.id}.html`, p.updated || pubDate(p)]), [SITE + "blog/recipes.html", today], ...RECIPES.map(r => [`${SITE}blog/${rUrl(r)}`, null])];
 fs.writeFileSync(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(([u, d]) => `  <url><loc>${u}</loc>${d ? `<lastmod>${d}</lastmod>` : ""}</url>`).join("\n")}
