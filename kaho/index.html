@@ -96,6 +96,34 @@ h2 + .sub{margin:0 0 14px;color:var(--muted);font-size:14px}
 .ch h3{margin:0 0 6px;font-size:17px;display:flex;align-items:baseline;gap:10px;color:var(--indigo)}
 .ch h3 i{font:500 13px "Jost",sans-serif;font-style:normal;letter-spacing:.12em;color:var(--nemo)}
 .ch .photo{margin:12px 0 0}
+
+.lifemap .route{list-style:none;margin:6px 0 0;padding:0 0 0 22px;position:relative}
+.lifemap .route::before{content:"";position:absolute;left:7px;top:10px;bottom:24px;border-left:3px dotted #c7d3ea}
+.lifemap .stage{position:relative;margin-bottom:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.lifemap .stage::before{content:"";position:absolute;left:-22px;top:16px;width:14px;height:14px;border-radius:50%;background:var(--nemo);border:3px solid var(--bg)}
+.lifemap .tag{margin:0;font:500 11px "Jost",sans-serif;letter-spacing:.18em;color:var(--muted);display:flex;align-items:center;gap:6px}
+.lifemap h3{margin:2px 0 8px;font-size:17px;color:var(--indigo)}
+.lifemap .stops{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:14.5px}
+.lifemap .stops li{display:flex;gap:8px;align-items:baseline}
+.lifemap .stops li::before{content:"・";color:var(--nemo)}
+.lifemap .stops b{font:500 13px "Jost",sans-serif;color:var(--indigo);min-width:34px}
+.lifemap .gains{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+.lifemap .lbl{margin:0 0 6px;font-size:12px;color:var(--muted);font-weight:700}
+.lifemap .gains div{display:flex;flex-wrap:wrap;gap:6px}
+.lifemap .gains span{font-size:13px;background:var(--nemo-soft);color:var(--indigo);border-radius:99px;padding:3px 10px;font-weight:700}
+.lifemap .here{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.lifemap .here::before{background:#f6c08a;width:18px;height:18px;left:-24px;top:14px}
+.lifemap .here .tag{color:#f6c08a;font-weight:500}
+.lifemap .here h3{color:#fff}
+.lifemap .pin{display:inline-block;width:10px;height:10px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#f6c08a}
+.lifemap .links{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.lifemap .links li{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;font-size:13.5px;line-height:1.5}
+.lifemap .links .from{opacity:.8}
+.lifemap .links i{font-style:normal;color:#f6c08a;font-weight:700}
+.lifemap .links .to{font-weight:700}
+.lifemap .note{margin:12px 0 0;font-size:13.5px;opacity:.9}
+.lifemap .next::before{background:#f2a7b8}
+.lifemap .dreamline{margin:0;font-size:14.5px;font-weight:700}
 footer{margin-top:28px;text-align:center;font:400 12px "Jost",sans-serif;letter-spacing:.14em;color:var(--muted)}
 footer a{color:var(--indigo)}
 button:focus-visible,a:focus-visible{outline:2px solid var(--nemo);outline-offset:2px}
@@ -209,18 +237,29 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--nemo);outline-offse
     </div>
   </section>
 
-  <section>
-    <h2 class="ja-only">これまでと、これから</h2><h2 class="en-only">So far, and next</h2>
-    <ul class="time">
-      <li class="era"><b><span class="ja-only">20代　挑戦の10年</span><span class="en-only">My 20s: ten years of trying things</span></b></li>
-      <li><span class="ja-only">体育学部を卒業</span><span class="en-only">Graduated in Physical Education</span></li>
-      <li><b>2019</b><span class="ja-only">オーストラリアでワーキングホリデー</span><span class="en-only">Working holiday in Australia</span></li>
-      <li><span class="ja-only">フィリピンに留学</span><span class="en-only">Studied English in the Philippines</span></li>
-      <li><span class="ja-only">英会話講師</span><span class="en-only">Taught English conversation</span></li>
-      <li><span class="ja-only">自分で海外にものを売ってみる</span><span class="en-only">Started selling to customers overseas on my own</span></li>
-      <li><b>2025</b><span class="ja-only">ふたたびオーストラリアへ</span><span class="en-only">Back in Australia</span></li>
-      <li class="era now"><b><span class="ja-only">30代　茨城に恩返しを</span><span class="en-only">My 30s: giving back to Ibaraki</span></b><span class="ja-only">茨城を拠点に、世界とつながる仕事を</span><span class="en-only">Working with the world, from Ibaraki</span></li>
-    </ul>
+  <section class="lifemap">
+    <h2 class="ja-only">人生の現在地</h2><h2 class="en-only">Where I am now</h2>
+    <p class="sub ja-only">20代で外に出て集めたものを、茨城に持ち帰ったところです。</p>
+    <p class="sub en-only">I went out into the world in my 20s, and I've just brought what I gathered home to Ibaraki.</p>
+    <ol class="route">
+      <li class="stage">
+        <p class="tag"><span class="ja-only">これまで</span><span class="en-only">SO FAR</span></p>
+        <h3><span class="ja-only">20代　挑戦の10年</span><span class="en-only">My 20s: ten years of trying</span></h3>
+        <ul class="stops"><li><span class="ja-only">体育学部を卒業</span><span class="en-only">Graduated in Physical Education</span></li><li><b>2019</b><span class="ja-only">英語ができないまま、オーストラリアへワーキングホリデー</span><span class="en-only">Working holiday in Australia, with no English</span></li><li><span class="ja-only">フィリピンに留学</span><span class="en-only">Studied English in the Philippines</span></li><li><span class="ja-only">英会話講師</span><span class="en-only">Taught English conversation</span></li><li><span class="ja-only">自分で海外にものを売ってみる</span><span class="en-only">Started selling overseas on my own</span></li><li><b>2025</b><span class="ja-only">ふたたびオーストラリアへ</span><span class="en-only">Back in Australia</span></li></ul>
+        <div class="gains"><p class="lbl"><span class="ja-only">手に入れたもの</span><span class="en-only">What I gained</span></p><div><span><span class="ja-only">英語（ゼロから、教えられるまで）</span><span class="en-only">English, from zero to teaching it</span></span><span><span class="ja-only">海外にものを売る経験</span><span class="en-only">Selling to the world</span></span><span><span class="ja-only">人生を楽しむために働く</span><span class="en-only">Work to enjoy life</span></span><span><span class="ja-only">外から見た日本</span><span class="en-only">Japan, seen from outside</span></span></div></div>
+      </li>
+      <li class="stage here">
+        <p class="tag"><b class="pin" aria-hidden="true"></b><span class="ja-only">現在地</span><span class="en-only">YOU ARE HERE</span></p>
+        <h3><span class="ja-only">いま　茨城から、世界へ</span><span class="en-only">Now: from Ibaraki, to the world</span></h3>
+        <ul class="links"><li><span class="from"><span class="ja-only">海外にものを売る経験</span><span class="en-only">Selling overseas</span></span><i aria-hidden="true">→</i><span class="to"><span class="ja-only">ヴィンテージ時計を世界へ</span><span class="en-only">Vintage watches to the world</span></span></li><li><span class="from"><span class="ja-only">英語 ＋ 外から見た日本</span><span class="en-only">English + an outside view of Japan</span></span><i aria-hidden="true">→</i><span class="to"><span class="ja-only">茨城の魅力を英語で発信</span><span class="en-only">Sharing Ibaraki in English</span></span></li><li><span class="from"><span class="ja-only">オーストラリアで見た生産性</span><span class="en-only">Productivity I saw in Australia</span></span><i aria-hidden="true">→</i><span class="to"><span class="ja-only">宮田財務で法人向けDX化支援</span><span class="en-only">Business DX at Miyata Zaimu</span></span></li></ul>
+        <p class="note"><span class="ja-only">バラバラに見える仕事が、全部20代の経験からつながっています。</span><span class="en-only">Three jobs that look unrelated, all grown from my 20s.</span></p>
+      </li>
+      <li class="stage next">
+        <p class="tag"><span class="ja-only">これから</span><span class="en-only">NEXT</span></p>
+        <h3><span class="ja-only">30代　茨城に恩返しを</span><span class="en-only">My 30s: giving back to Ibaraki</span></h3>
+        <p class="dreamline"><span class="ja-only">夢：イギリスで、プレミアリーグを観ること</span><span class="en-only">Dream: watching the Premier League in England</span></p>
+      </li>
+    </ol>
   </section>
 
   <section>
