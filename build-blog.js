@@ -59,6 +59,7 @@ article ul,article ol{padding-left:22px;margin:0 0 14px}article li{margin-bottom
 img.em{object-fit:cover;width:48px;height:48px}
 .list b{font-family:"Fraunces",Georgia,serif;display:block;line-height:1.2}
 .list span{font-size:13px;color:var(--muted)}
+img.inl{display:block;width:100%;border:2px solid var(--ink);border-radius:12px;margin:4px 0 14px}
 footer{margin-top:30px;font-size:13px;color:var(--muted);text-align:center}`;
 
 const head = ({ title, desc, url, image, type, extra = "" }) => `<!DOCTYPE html>
@@ -88,7 +89,8 @@ const footer = `<footer>Written by Kaho · Ibaraki, Japan · <a href="${YT}" rel
 const thumb = p => p.photo ? `<img class="em" src="../${p.photo}" alt="${esc(p.alt || plain(p.title))}" width="48" height="48" loading="lazy">` : `<span class="em" style="background:${p.bg}">${p.emoji}</span>`;
 const item = p => `<li><a href="${p.id}.html">${thumb(p)}<span><b>${esc(plain(p.title))}</b><span>${esc(p.cat)} · ${esc(p.date)} · ${esc(plain(p.sum))}</span></span></a></li>`;
 
-const bodyHtml = body => body.map(([t, v]) =>
+const bodyHtml = body => body.map(([t, v, a]) =>
+  t === "img" ? `<img class="inl" src="../${v}" alt="${esc(a || "")}" loading="lazy">` :
   t === "p" ? `<p>${v}</p>` :
   t === "h" ? `<h2>${v}</h2>` :
   t === "pull" ? `<p class="pull">${v}</p>` :
