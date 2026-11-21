@@ -188,6 +188,13 @@ section.view.on{display:block;animation:fade .25s}
 .article li{margin-bottom:6px}
 .likebar{display:flex;gap:10px;margin-top:16px}
 .likebar button{flex:1}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 6px}
+.quick a{display:flex;flex-direction:column;gap:2px;background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:12px 10px;box-shadow:3px 3px 0 var(--ink);text-decoration:none;color:var(--ink);min-width:0}
+.quick a.q-guide{background:#1f3b35;color:#fff}
+.quick .e{font-size:24px;line-height:1}
+.quick b{font-family:"Fraunces";font-size:15px;line-height:1.15;margin-top:4px}
+.quick span:not(.e){font-size:12px;color:var(--muted);line-height:1.25}
+.quick a.q-guide span:not(.e){color:#cfe0da}
 .tours-banner{display:flex;align-items:center;gap:12px;background:var(--gold-soft);border:2px solid var(--ink);border-radius:18px;padding:13px 14px;box-shadow:4px 4px 0 var(--ink);text-decoration:none;color:var(--ink);margin-top:18px}
 .tours-banner .e{font-size:30px}
 .tours-banner b{font-family:"Fraunces";font-size:17px;display:block}
@@ -396,29 +403,25 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
       <div class="season" id="pmSeason"></div>
       <button class="roll" id="pmRoll">🎲 Pick one for me</button>
     </div>
-
-    <div class="about" id="about">
-      <div class="ph"><img src="photos/kaho.jpg" alt="Kaho at Hitachi Seaside Park" loading="lazy"><span class="nm">Hi, I'm Kaho! 👋</span></div>
-      <div class="in">
-        <h3>About me</h3>
-        <p>I live in Ibaraki, Japan. On YouTube and TikTok I share real life in rural Japan — my work, overtime, food, and the nature around me.</p>
-        <h3>Why I share Ibaraki</h3>
-        <p>Ibaraki is often called Japan’s “least attractive” prefecture. Honestly, that makes me a little sad. Because here we have hills of flowers, a giant waterfall, the ocean and mountains — only about one hour from Tokyo. Most people just don’t know it yet.</p>
-        <p>So I want to change Ibaraki’s image, and show people all over the world how beautiful it is.</p>
-        <div class="dream"><b>My dream</b><span class="hand">To grow little by little with my followers — and one day, show you around Ibaraki myself!</span></div>
-        <div class="hero-btns" style="margin-top:14px"><a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ YouTube</a><a class="pill" href="https://www.tiktok.com/@kahofromjapanjp" target="_blank" rel="noopener">TikTok</a><a class="pill" href="https://www.instagram.com/kahorealjapan" target="_blank" rel="noopener">Instagram</a></div>
-      </div>
-    </div>
-    <div class="roulette">
-      <div class="q hand">Can't decide? Let Kaho choose!</div>
-      <div class="res" id="rRes">🎲</div>
-      <div class="why hand" id="rWhy" style="font-size:19px"></div>
-      <button class="btn dark" id="rBtn">Spin the Ibaraki roulette</button>
+    <div class="quick">
+      <a href="#guide" class="q-guide"><span class="e">📖</span><b>Free guidebook</b><span>The places I really go</span></a>
+      <a href="#events"><span class="e">📅</span><b>This month</b><span>Ibaraki events</span></a>
+      <a href="#tours"><span class="e">🚐</span><b>Tours</b><span>Coming soon</span></a>
     </div>
 
+    <div class="sec"><h2>My favorite spots</h2><span class="hand" id="monthNote"></span></div>
+    <div class="chips" id="chips"></div>
+    <div id="spotList"></div>
 
-    <a class="tours-banner" href="#events" style="margin-top:18px;margin-bottom:12px"><span class="e">📅</span><div><b>What's on this month?</b><span>Ibaraki event calendar →</span></div></a>
-    <a class="guide-banner" href="#guide"><div class="mini-cover"><i></i><span>Ibaraki<br>by Kaho</span></div><div><b>My Ibaraki guidebook 📖 FREE</b><span class="s">The places I really go. Read it now →</span></div></a>
+    <div class="sec"><h2>Eat like a local</h2><span class="hand">be brave!</span></div>
+    <div class="food">
+      <div><span class="e">🍠</span><b>Hoshiimo</b>Dried sweet potato. Ibaraki makes most of Japan's. My winter snack.</div>
+      <div><span class="e">🫘</span><b>Natto</b>Mito's famous sticky beans. Rate it 1–10 after you try!</div>
+      <div><span class="e">🍲</span><b>Ankō nabe</b>Monkfish hotpot. Looks scary, tastes amazing.</div>
+      <div><span class="e">🍈</span><b>Melon</b>Ibaraki is Japan's top melon producer. Early summer.</div>
+      <div><span class="e">🥢</span><b>Hitachi Aki Soba</b>Ibaraki's famous buckwheat noodles from the northern mountains. Fresh “shin-soba” in autumn!</div>
+      <div><span class="e">🍜</span><b>Stamina ramen</b>Ibaraki's soul food: sweet-spicy sauce with pumpkin and liver. Try it cold!</div>
+    </div>
     <div class="sec"><h2>Getting here from Tokyo</h2><span class="hand">easier than you think!</span></div>
     <div class="kaho-says" style="margin:0 0 12px"><div class="mini" id="av4" style="width:40px;height:40px"></div><div class="txt hand" style="font-size:20px">Everyone thinks Ibaraki is far. It's not! Pick your style 👇</div></div>
     <div class="route"><div class="ic" style="background:var(--blue-soft)">🚄</div><div>
@@ -442,20 +445,18 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
       <div class="stats"><span class="tag">⏱ ~1.5–2 h to Mito</span><span class="best">Best for countryside</span></div>
       <p>Fukuroda Falls, Ryujin Bridge and Hananuki Gorge are much easier by car. You need an International Driving Permit.</p></div></div>
     <p class="note">💡 Suica/PASMO cards work on JR trains and most buses. Local buses are not frequent — check times on Google Maps before you go. Times and prices are approximate.</p>
-    <div class="sec"><h2>My favorite spots</h2><span class="hand" id="monthNote"></span></div>
-    <div class="chips" id="chips"></div>
-    <div id="spotList"></div>
-
-    <div class="sec"><h2>Eat like a local</h2><span class="hand">be brave!</span></div>
-    <div class="food">
-      <div><span class="e">🍠</span><b>Hoshiimo</b>Dried sweet potato. Ibaraki makes most of Japan's. My winter snack.</div>
-      <div><span class="e">🫘</span><b>Natto</b>Mito's famous sticky beans. Rate it 1–10 after you try!</div>
-      <div><span class="e">🍲</span><b>Ankō nabe</b>Monkfish hotpot. Looks scary, tastes amazing.</div>
-      <div><span class="e">🍈</span><b>Melon</b>Ibaraki is Japan's top melon producer. Early summer.</div>
-      <div><span class="e">🥢</span><b>Hitachi Aki Soba</b>Ibaraki's famous buckwheat noodles from the northern mountains. Fresh “shin-soba” in autumn!</div>
-      <div><span class="e">🍜</span><b>Stamina ramen</b>Ibaraki's soul food: sweet-spicy sauce with pumpkin and liver. Try it cold!</div>
+    <div class="about" id="about">
+      <div class="ph"><img src="photos/kaho.jpg" alt="Kaho at Hitachi Seaside Park" loading="lazy"><span class="nm">Hi, I'm Kaho! 👋</span></div>
+      <div class="in">
+        <h3>About me</h3>
+        <p>I live in Ibaraki, Japan. On YouTube and TikTok I share real life in rural Japan — my work, overtime, food, and the nature around me.</p>
+        <h3>Why I share Ibaraki</h3>
+        <p>Ibaraki is often called Japan’s “least attractive” prefecture. Honestly, that makes me a little sad. Because here we have hills of flowers, a giant waterfall, the ocean and mountains — only about one hour from Tokyo. Most people just don’t know it yet.</p>
+        <p>So I want to change Ibaraki’s image, and show people all over the world how beautiful it is.</p>
+        <div class="dream"><b>My dream</b><span class="hand">To grow little by little with my followers — and one day, show you around Ibaraki myself!</span></div>
+        <div class="hero-btns" style="margin-top:14px"><a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ YouTube</a><a class="pill" href="https://www.tiktok.com/@kahofromjapanjp" target="_blank" rel="noopener">TikTok</a><a class="pill" href="https://www.instagram.com/kahorealjapan" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
     </div>
-    <a class="tours-banner" href="#tours"><span class="e">🚐</span><div><b>Tours with Kaho — coming soon</b><span>Peek at the plans →</span></div></a>
   </section>
 
   <!-- MAP -->
@@ -793,14 +794,14 @@ function inFilter(s){if(filter==="all")return true;if(filter==="now")return s.mo
 /* ---------- pop-up map ---------- */
 const IBK=[[140.25,36.95],[140.45,36.93],[140.62,36.88],[140.8,36.88],[140.72,36.75],[140.65,36.6],[140.6,36.45],[140.58,36.33],[140.62,36.22],[140.7,36.05],[140.8,35.9],[140.86,35.74],[140.7,35.78],[140.4,35.85],[140.15,35.88],[139.95,35.95],[139.8,36.05],[139.72,36.15],[139.85,36.25],[140,36.35],[140.08,36.55],[140.2,36.75]];
 const PMW=290,PMH=375,pmX=lon=>(lon-139.68)/(140.9-139.68)*PMW,pmY=lat=>(36.98-lat)/(36.98-35.72)*PMH;
-const PMSHORT={seaside:"Seaside Park",fukuroda:"Fukuroda Falls",kairakuen:"Kairakuen",oarai:"Oarai",tsukuba:"Mt. Tsukuba",ryujin:"Ryujin Bridge",ushiku:"Ushiku Daibutsu",kasama:"Kasama",kashima:"Kashima",hananuki:"Hananuki"};
+const PMSHORT={seaside:"Seaside Park",fukuroda:"Fukuroda Falls",kairakuen:"Kairakuen",oarai:"Oarai",tsukuba:"Mt. Tsukuba",ryujin:"Ryujin Bridge",ushiku:"Ushiku Daibutsu",kasama:"Kasama",kashima:"Kashima",hananuki:"Hananuki",momijidera:"Momiji-dera"};
 const PMH_STEM={seaside:44,fukuroda:30,kairakuen:20,oarai:16,tsukuba:30,ryujin:52,ushiku:24,kasama:34,kashima:22,hananuki:22};
 let pmPick=0;
 function renderPopMap(){
   const pts=IBK.map(([lo,la])=>`${pmX(lo).toFixed(1)},${pmY(la).toFixed(1)}`).join(" ");
   const now=SPOTS.filter(x=>x.months.includes(MONTH));
   const col=["#ff5d8f","#ffb547","#7dffcb"];
-  const STEM={fukuroda:62,ryujin:18,hananuki:40,tsukuba:34,kasama:24,seaside:30,kairakuen:20,oarai:16,ushiku:24,kashima:22};
+  const STEM={fukuroda:62,ryujin:18,hananuki:40,tsukuba:34,kasama:24,seaside:30,kairakuen:20,oarai:16,ushiku:24,kashima:22,momijidera:14};
   const pins=SPOTS.map(x=>{const isNow=now.includes(x);const c=col[now.indexOf(x)%3];
     return isNow?`<button class="ppin now" style="left:${pmX(x.lon)}px;top:${pmY(x.lat)}px;z-index:${Math.round(pmY(x.lat))+5}" data-pm="${x.id}" aria-label="${x.name}"><b style="background:${c}">${PMSHORT[x.id]||x.name}</b><i style="height:${STEM[x.id]||24}px"></i></button>`
       :`<button class="ppin dot" style="left:${pmX(x.lon)}px;top:${pmY(x.lat)}px" data-pm="${x.id}" aria-label="${x.name}" title="${x.name}"><u></u></button>`}).join("");
@@ -831,7 +832,7 @@ function renderHome(){
 
 /* roulette */
 const RLINES=["Go here. Trust me!","Kaho's choice. No complaints 😆","Perfect day trip. Igappe!","Bring snacks. And your camera!"];
-document.getElementById("rBtn").addEventListener("click",()=>{
+document.getElementById("rBtn")?.addEventListener("click",()=>{
   const pool=SPOTS.filter(s=>s.allYear||s.months.includes(MONTH));const btn=document.getElementById("rBtn");btn.disabled=true;
   let i=0,n=14+Math.floor(Math.random()*6);const res=document.getElementById("rRes"),why=document.getElementById("rWhy");why.textContent="";
   const tick=()=>{res.textContent=pool[i%pool.length].name;i++;if(i<n)setTimeout(tick,50+i*12);else{const s=pool[(i-1)%pool.length];why.textContent=RLINES[Math.floor(Math.random()*RLINES.length)];btn.disabled=false;btn.textContent="Spin again";res.onclick=()=>openSpot(s.id);res.style.cursor="pointer";res.title="Tap for details"}};tick();
