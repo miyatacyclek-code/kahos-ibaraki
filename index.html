@@ -733,7 +733,7 @@ const SPOTS=[
  {id:"hananuki",name:"Hananuki Gorge",area:"Takahagi",lat:36.75,lon:140.6,months:[11],season:"Autumn",theme:["#c8452f","#ffd2a8"],shape:"bridge",love:5,crowd:3,
   short:"A red-leaf valley with a small suspension bridge. Like a painting in autumn.",kaho:"My secret autumn spot. Please don't tell too many people 🤫",
   best:"Autumn leaves: mid–late November",tip:"Weekends in leaf season get busy — go early.",access:"JR Joban Line to Takahagi, then car or seasonal bus"},
- {id:"momijidera",name:"Eigenji “Momiji-dera” (Maple Temple)",area:"Daigo",lat:36.771,lon:140.352,months:[11],season:"Autumn",theme:["#b8322a","#ffd6b0"],shape:"forest",love:5,crowd:1,
+ {id:"momijidera",pmDot:true,name:"Eigenji “Momiji-dera” (Maple Temple)",area:"Daigo",lat:36.771,lon:140.352,months:[11],season:"Autumn",theme:["#b8322a","#ffd6b0"],shape:"forest",love:5,crowd:1,
   short:"A small hilltop temple covered in red maples, with a view over Daigo town and the mountains.",kaho:"I've lived in Ibaraki my whole life and only just found it. It felt like Kyoto, with no tourists!",
   best:"Autumn leaves: usually early–late November",tip:"Free to enter. Pair it with Fukuroda Falls and Daigo apples for a full autumn day.",access:"JR Suigun Line to Hitachi-Daigo, then 10 min walk"},
 ];
@@ -799,7 +799,7 @@ const PMH_STEM={seaside:44,fukuroda:30,kairakuen:20,oarai:16,tsukuba:30,ryujin:5
 let pmPick=0;
 function renderPopMap(){
   const pts=IBK.map(([lo,la])=>`${pmX(lo).toFixed(1)},${pmY(la).toFixed(1)}`).join(" ");
-  const now=SPOTS.filter(x=>x.months.includes(MONTH));
+  const now=SPOTS.filter(x=>x.months.includes(MONTH)&&!x.pmDot);
   const col=["#ff5d8f","#ffb547","#7dffcb"];
   const STEM={fukuroda:62,ryujin:18,hananuki:40,tsukuba:34,kasama:24,seaside:30,kairakuen:20,oarai:16,ushiku:24,kashima:22,momijidera:14};
   const pins=SPOTS.map(x=>{const isNow=now.includes(x);const c=col[now.indexOf(x)%3];
