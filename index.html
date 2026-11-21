@@ -188,6 +188,14 @@ section.view.on{display:block;animation:fade .25s}
 .article li{margin-bottom:6px}
 .likebar{display:flex;gap:10px;margin-top:16px}
 .likebar button{flex:1}
+.fold{background:var(--card);border:2px solid var(--ink);border-radius:18px;box-shadow:3px 3px 0 var(--ink);margin:12px 0;overflow:hidden}
+.fold>summary{list-style:none;cursor:pointer;padding:14px 16px;font-family:"Fraunces";font-weight:800;font-size:18px;display:flex;align-items:baseline;gap:8px}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary span{font-family:"DM Sans";font-weight:500;font-size:13px;color:var(--muted)}
+.fold>summary:after{content:"+";margin-left:auto;font-family:"DM Sans";font-size:22px;line-height:1}
+.fold[open]>summary:after{content:"–"}
+.fold-in{padding:0 12px 12px}
+.fold .about{margin:0;box-shadow:none}
 .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 6px}
 .quick a{display:flex;flex-direction:column;gap:2px;background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:12px 10px;box-shadow:3px 3px 0 var(--ink);text-decoration:none;color:var(--ink);min-width:0}
 .quick a.q-guide{background:#1f3b35;color:#fff}
@@ -349,7 +357,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
 .popmap{background:#10183a;color:#fff;border-radius:28px;padding:22px 18px 18px;margin:0 0 18px;overflow:hidden;position:relative;font-family:"Bricolage Grotesque","DM Sans",sans-serif}
 .popmap .k{font-weight:700;font-size:12px;letter-spacing:.14em;color:#aab4e0}
 .popmap h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:42px;line-height:1;margin:6px 0 0;color:#fff}
-.popmap .stage{height:430px;display:flex;align-items:center;justify-content:center;perspective:900px;margin-top:-6px}
+.popmap .stage{height:360px;display:flex;align-items:center;justify-content:center;perspective:900px;margin-top:-6px}
 .popmap .land{width:290px;height:375px;scale:1.12;position:relative;transform:rotateX(40deg) rotateZ(-10deg);transform-style:preserve-3d;animation:pmfloat 6s ease-in-out infinite}
 @keyframes pmfloat{0%,100%{transform:rotateX(40deg) rotateZ(-10deg) translateZ(0)}50%{transform:rotateX(40deg) rotateZ(-7deg) translateZ(12px)}}
 .popmap .land svg{position:absolute;inset:0;overflow:visible}
@@ -387,7 +395,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     </div>
     <div class="hero-btns">
       <a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ My YouTube</a>
-      <a class="pill gold" href="#about" onclick="event.preventDefault();document.getElementById('about').scrollIntoView({behavior:'smooth'})">About me</a>
+      <a class="pill gold" href="#about" onclick="event.preventDefault();const a=document.getElementById('about');a.open=true;a.scrollIntoView({behavior:'smooth'})">About me</a>
     </div>
   </header>
 
@@ -399,7 +407,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
       <div class="k">KAHO'S IBARAKI</div>
       <h2>Where to <br>next?</h2>
       <div class="stage"><div class="land" id="pmLand"></div></div>
-      <div class="legend"><span style="--c:#ff5d8f">In season now</span><span style="--c:#ffd23f">Kaho's home (Mito)</span><span style="--c:#fff">More spots · tap!</span></div>
+      <div class="legend"><span style="--c:#ff5d8f">Best this month</span><span style="--c:#fff">Tap a dot for more</span></div>
       <div class="season" id="pmSeason"></div>
       <button class="roll" id="pmRoll">🎲 Pick one for me</button>
     </div>
@@ -413,7 +421,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
     <div class="chips" id="chips"></div>
     <div id="spotList"></div>
 
-    <div class="sec"><h2>Eat like a local</h2><span class="hand">be brave!</span></div>
+    <details class="fold"><summary>🍠 Eat like a local <span>be brave!</span></summary><div class="fold-in">
     <div class="food">
       <div><span class="e">🍠</span><b>Hoshiimo</b>Dried sweet potato. Ibaraki makes most of Japan's. My winter snack.</div>
       <div><span class="e">🫘</span><b>Natto</b>Mito's famous sticky beans. Rate it 1–10 after you try!</div>
@@ -422,7 +430,8 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
       <div><span class="e">🥢</span><b>Hitachi Aki Soba</b>Ibaraki's famous buckwheat noodles from the northern mountains. Fresh “shin-soba” in autumn!</div>
       <div><span class="e">🍜</span><b>Stamina ramen</b>Ibaraki's soul food: sweet-spicy sauce with pumpkin and liver. Try it cold!</div>
     </div>
-    <div class="sec"><h2>Getting here from Tokyo</h2><span class="hand">easier than you think!</span></div>
+    </div></details>
+    <details class="fold"><summary>🚄 Getting here from Tokyo <span>easier than you think!</span></summary><div class="fold-in">
     <div class="kaho-says" style="margin:0 0 12px"><div class="mini" id="av4" style="width:40px;height:40px"></div><div class="txt hand" style="font-size:20px">Everyone thinks Ibaraki is far. It's not! Pick your style 👇</div></div>
     <div class="route"><div class="ic" style="background:var(--blue-soft)">🚄</div><div>
       <h3>Limited Express “Hitachi” / “Tokiwa”</h3>
@@ -445,7 +454,9 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
       <div class="stats"><span class="tag">⏱ ~1.5–2 h to Mito</span><span class="best">Best for countryside</span></div>
       <p>Fukuroda Falls, Ryujin Bridge and Hananuki Gorge are much easier by car. You need an International Driving Permit.</p></div></div>
     <p class="note">💡 Suica/PASMO cards work on JR trains and most buses. Local buses are not frequent — check times on Google Maps before you go. Times and prices are approximate.</p>
-    <div class="about" id="about">
+    </div></details>
+    <details class="fold" id="about"><summary>👋 About Kaho <span>who I am</span></summary><div class="fold-in">
+    <div class="about">
       <div class="ph"><img src="photos/kaho.jpg" alt="Kaho at Hitachi Seaside Park" loading="lazy"><span class="nm">Hi, I'm Kaho! 👋</span></div>
       <div class="in">
         <h3>About me</h3>
@@ -457,6 +468,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
         <div class="hero-btns" style="margin-top:14px"><a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ YouTube</a><a class="pill" href="https://www.tiktok.com/@kahofromjapanjp" target="_blank" rel="noopener">TikTok</a><a class="pill" href="https://www.instagram.com/kahorealjapan" target="_blank" rel="noopener">Instagram</a></div>
       </div>
     </div>
+    </div></details>
   </section>
 
   <!-- MAP -->
@@ -802,10 +814,11 @@ function renderPopMap(){
   const now=SPOTS.filter(x=>x.months.includes(MONTH)&&!x.pmDot);
   const col=["#ff5d8f","#ffb547","#7dffcb"];
   const STEM={fukuroda:62,ryujin:18,hananuki:40,tsukuba:34,kasama:24,seaside:30,kairakuen:20,oarai:16,ushiku:24,kashima:22,momijidera:14};
-  const pins=SPOTS.map(x=>{const isNow=now.includes(x);const c=col[now.indexOf(x)%3];
+  const lab=[...now].sort((a,b)=>b.love-a.love).slice(0,3);
+  const pins=SPOTS.map(x=>{const isNow=lab.includes(x);const c=col[lab.indexOf(x)%3];
     return isNow?`<button class="ppin now" style="left:${pmX(x.lon)}px;top:${pmY(x.lat)}px;z-index:${Math.round(pmY(x.lat))+5}" data-pm="${x.id}" aria-label="${x.name}"><b style="background:${c}">${PMSHORT[x.id]||x.name}</b><i style="height:${STEM[x.id]||24}px"></i></button>`
       :`<button class="ppin dot" style="left:${pmX(x.lon)}px;top:${pmY(x.lat)}px" data-pm="${x.id}" aria-label="${x.name}" title="${x.name}"><u></u></button>`}).join("");
-  const home=`<button class="ppin home" style="left:${pmX(140.47)}px;top:${pmY(36.37)}px" data-pmhome="1"><b>🏠 Kaho</b><i style="height:8px"></i></button>`;
+  const home="";
   document.getElementById("pmLand").innerHTML=`<svg viewBox="0 0 ${PMW} ${PMH}" width="${PMW}" height="${PMH}"><polygon points="${pts}" fill="#0a0f26" transform="translate(0 22)"/><polygon points="${pts}" fill="#3d5af1" stroke="#7d93ff" stroke-width="2" stroke-linejoin="round"/>${[[36.75,140.4],[36.2,140.1]].map(([la,lo])=>`<circle cx="${pmX(lo)}" cy="${pmY(la)}" r="26" fill="#5a73ff" opacity=".45"/>`).join("")}<text x="${pmX(140.75)}" y="${pmY(36.1)}" fill="#7d93ff" font-size="11" font-weight="700" transform="rotate(62 ${pmX(140.75)} ${pmY(36.1)})">PACIFIC OCEAN</text></svg>${pins}${home}`;
   const list=now.length?now:SPOTS;const sp=list[pmPick%list.length];
   document.getElementById("pmSeason").innerHTML=`<div><div class="l">${now.length?"IN SEASON NOW · "+MONTHS[MONTH].toUpperCase():"KAHO'S PICK"}</div><div class="n">${sp.name}</div><div class="w">${sp.best||sp.short}</div></div><button data-pm="${sp.id}">Go</button>`;
