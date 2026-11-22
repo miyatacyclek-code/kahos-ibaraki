@@ -1086,7 +1086,7 @@ function openPost(id){
    <div class="inner"><div class="qnum">${p.cat} · ${p.date} · ${p.min} min read</div><h2 style="margin:6px 0 12px;line-height:1.15">${p.title}</h2>
    <div class="kaho-says" style="margin:0 0 16px"><div class="mini" style="width:36px;height:36px">${AVATAR}</div><div style="font-size:13px;color:var(--muted);align-self:center">by <b style="color:var(--ink)">Kaho</b> · Ibaraki, Japan</div></div>
    <div class="article">${html}</div>
-   <div class="likebar"><button class="btn ${lk?"":"gold"}" data-like="${p.id}" style="margin:0">${lk?"♥ Liked!":"♡ Like this post"}</button><a class="btn dark" style="margin:0" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ Watch videos</a></div><p style="text-align:center;font-size:13px;margin:14px 0 0"><a href="blog/${p.id}.html" style="color:var(--muted)">🔗 Open as a web page (easy to share)</a></p></div>`;
+   <div class="likebar"><button class="btn ${lk?"":"gold"}" data-like="${p.id}" style="margin:0">${lk?"♥ Liked!":"♡ Like this post"}</button><a class="btn dark" style="margin:0" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ Watch videos</a></div><a class="btn gold" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a><p style="text-align:center;font-size:13px;margin:14px 0 0"><a href="blog/${p.id}.html" style="color:var(--muted)">🔗 Open as a web page (easy to share)</a></p></div>`;
   document.getElementById("sheetBg").classList.add("on");document.getElementById("sheet").scrollTop=0;
 }
 document.addEventListener("click",e=>{
