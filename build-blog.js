@@ -140,7 +140,7 @@ ${bodyHtml(p.body)}
 </article>
 <div class="btns"><a class="btn" href="../#blog">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
-<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos · 🍣 and sometimes, a little treat for me</p>
 </div></div>
 <section class="more"><h2>More from Kaho</h2><ul class="list">${related.map(item).join("")}</ul></section>
 ${footer}
@@ -189,7 +189,7 @@ ${r.photo ? `<img class="hero" src="../${r.photo}" alt="Homemade ${esc(r.name)}"
 </article>
 <div class="btns"><a class="btn" href="../#cook">Open in Kaho's app (change servings)</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
-<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos · 🍣 and sometimes, a little treat for me</p>
 </div></div>
 <section class="more"><h2>More recipes</h2><ul class="list">${others.map(rItem).join("")}</ul></section>
 ${footer}
@@ -207,7 +207,7 @@ ${topbar}
 <ul class="list">${RECIPES.map(rItem).join("")}</ul>
 <div class="btns"><a class="btn" href="../#cook">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
-<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos · 🍣 and sometimes, a little treat for me</p>
 ${footer}
 </div></body>
 </html>
@@ -226,7 +226,7 @@ ${topbar}
 <section class="more"><h2>Recipes from Kaho's kitchen</h2><ul class="list">${RECIPES.map(rItem).join("")}</ul></section>
 <div class="btns"><a class="btn" href="../">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
-<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos · 🍣 and sometimes, a little treat for me</p>
 ${footer}
 </div></body>
 </html>
@@ -344,7 +344,7 @@ If nothing opened, email me at <code id="addr"></code> <button type="button" cla
 </div></div>
 <div class="btns"><a class="btn" href="./">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
-<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos · 🍣 and sometimes, a little treat for me</p>
 ${footer}
 </div>
 <script>
