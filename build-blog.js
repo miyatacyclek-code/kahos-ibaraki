@@ -53,6 +53,7 @@ article ul,article ol{padding-left:22px;margin:0 0 14px}article li{margin-bottom
 .btn{flex:1;min-width:150px;text-align:center;text-decoration:none;font-weight:700;padding:12px 14px;border:2px solid var(--ink);border-radius:14px;background:#e3a531;color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
 .btn.dark{background:var(--ink);color:#fff}
 .btn.sup{background:#ffdd00}
+.supnote{font-size:13px;line-height:1.5;color:var(--muted);text-align:center;margin:8px 4px 0}
 .more{margin-top:26px}.more h2{font-size:20px;margin:0 0 10px}
 .list{display:grid;gap:12px;padding:0;margin:0;list-style:none}
 .list a{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:10px 12px;box-shadow:3px 3px 0 var(--ink)}
@@ -139,6 +140,7 @@ ${bodyHtml(p.body)}
 </article>
 <div class="btns"><a class="btn" href="../#blog">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
 </div></div>
 <section class="more"><h2>More from Kaho</h2><ul class="list">${related.map(item).join("")}</ul></section>
 ${footer}
@@ -187,6 +189,7 @@ ${r.photo ? `<img class="hero" src="../${r.photo}" alt="Homemade ${esc(r.name)}"
 </article>
 <div class="btns"><a class="btn" href="../#cook">Open in Kaho's app (change servings)</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
 </div></div>
 <section class="more"><h2>More recipes</h2><ul class="list">${others.map(rItem).join("")}</ul></section>
 ${footer}
@@ -204,6 +207,7 @@ ${topbar}
 <ul class="list">${RECIPES.map(rItem).join("")}</ul>
 <div class="btns"><a class="btn" href="../#cook">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
 ${footer}
 </div></body>
 </html>
@@ -222,6 +226,7 @@ ${topbar}
 <section class="more"><h2>Recipes from Kaho's kitchen</h2><ul class="list">${RECIPES.map(rItem).join("")}</ul></section>
 <div class="btns"><a class="btn" href="../">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
 ${footer}
 </div></body>
 </html>
@@ -339,6 +344,7 @@ If nothing opened, email me at <code id="addr"></code> <button type="button" cla
 </div></div>
 <div class="btns"><a class="btn" href="./">Open Kaho's Ibaraki app</a><a class="btn dark" href="${YT}" rel="noopener">▶ Watch on YouTube</a></div>
 <div class="btns"><a class="btn sup" href="https://buymeacoffee.com/kahorealjapan" target="_blank" rel="noopener">☕ Support Kaho on Buy Me a Coffee</a></div>
+<p class="supnote">Your support goes to: 🚃 trips around Ibaraki to find new places for you · 📱 keeping this app, blog and free guidebook going · ⏰ less overtime, more time to make videos</p>
 ${footer}
 </div>
 <script>
