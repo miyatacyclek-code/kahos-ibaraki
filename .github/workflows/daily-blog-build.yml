@@ -1,0 +1,32 @@
+# Publishes scheduled blog posts (posts whose "pub" date is today in Japan time).
+# Runs every day just after midnight JST, rebuilds the blog pages and commits them.
+name: Daily blog build
+
+on:
+  schedule:
+    - cron: "10 15 * * *" # 00:10 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node build-blog.js
+      - name: Commit if anything changed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "kaho-blog-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add -A
+            git commit -m "Publish scheduled blog posts ($(TZ=Asia/Tokyo date +%F))"
+            git push
+          else
+            echo "Nothing new to publish today."
+          fi

@@ -14,7 +14,10 @@ const start = src.indexOf("const POSTS=[");
 if (start < 0) throw new Error("POSTS not found in index.html");
 const end = src.indexOf("\n];", start);
 if (end < 0) throw new Error("End of POSTS not found");
-const POSTS = vm.runInNewContext(src.slice(start + "const POSTS=".length, end + 3).replace(/;\s*$/, ""));
+const ALL_POSTS = vm.runInNewContext(src.slice(start + "const POSTS=".length, end + 3).replace(/;\s*$/, ""));
+// Scheduled posts: only publish posts whose pub date (Japan time) is today or earlier.
+const TODAY_JST = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+const POSTS = ALL_POSTS.filter(p => !p.pub || p.pub <= TODAY_JST);
 
 // Recipes (the Recipes tab inside Blog in the app)
 const rs = src.indexOf("const RECIPES=[");
