@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1f3b35">
+<meta name="theme-color" content="#0c0e13">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -481,26 +481,123 @@ html.reflow::view-transition-group(*){animation-duration:.5s;animation-timing-fu
  @keyframes tileIn{from{opacity:0;transform:translateY(40px) rotate(4deg)}}
 }
 @media (prefers-reduced-motion:reduce){.rank,.rank h1 em .w,.sticker,.hero .avatar,.hero .bubble,#spotList .card,#spotList .card .art img,#spotList .card .art svg,.quick a,.stampfx,.stampfx .s,nav.tabs a.on .e{animation:none!important}.rank h1 s{background-size:100% 4px;animation:none}nav.tabs.hide{transform:none}}
+
+/* ===== Design B "Night" (2026-11-24): dark, bold, photo-first — chosen by Kaho ===== */
+:root{--ink:#eef0f5;--muted:#9aa0b0;--bg:#0c0e13;--card:#171a22;--card2:#1f232d;--line:rgba(255,255,255,.09);
+ --gold:#ffc94a;--gold-soft:#3a2f14;--red:#ff6b57;--red-soft:#3a201c;--blue:#7aa2ff;--blue-soft:#1b2540;--green:#3fcf8e;--green-soft:#14302a;--pink:#ff6b9a}
+html,body{background:var(--bg);color:var(--ink)}
+body{background-image:none}
+h1,h2,h3,.quick b,.roulette .res,.ev-n b{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.025em}
+.app{max-width:560px}
+/* flat dark surfaces: no thick borders, no offset shadows */
+.app *,.sheet,.sheet *,nav.tabs,nav.tabs *,.toast{box-shadow:none!important}
+:is(.roulette,.card,.rankcard,.mapwrap,.quiz,.dialect,.tour,.rcard,.post,.fold,.quick a,.route,.pricebox,.peek,.faq details,.info,.plan,.toc,.install,.ev-n,.cal,.evc,.about,.why div,.seasons div,.tier,.swap,.tours-banner,.food div,.fc .f,.fc .b,.opt,.mo,.ktip,.gch){background:var(--card)!important;color:var(--ink);border:1px solid var(--line)!important;border-radius:24px}
+:is(.chip,.badge,.tag,.serv button,.post .ph .cat,.route .best,.tbadge,.peek .tipbox,.about .dream,.about .ph .nm,.kaho-says .txt,.mo.cur){background:rgba(255,255,255,.08)!important;color:var(--ink);border:1px solid var(--line)!important}
+.kaho-says .txt{background:linear-gradient(135deg,#2a1f45,#1f232d)!important;color:#fff}
+.kaho-says .mini,.avatar{border:2px solid var(--gold)!important}
+.badge{backdrop-filter:blur(10px);color:#fff}
+.app .chip.on.on,.app .mo.on.on{background:var(--gold)!important;color:#111!important;border-color:var(--gold)!important}
+.app .post .ph .cat{background:rgba(0,0,0,.55)!important;color:#fff}
+.card:nth-child(odd),.card:nth-child(even){transform:none}
+.card{border-radius:28px!important;overflow:hidden}
+.card .art{height:230px;border-bottom:0;overflow:hidden}
+.card .art::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(12,14,19,.75));pointer-events:none}
+.card .art>.badge,.card .art>.vis{z-index:2}
+.card h3{font-size:24px}
+.vis{background:var(--green)!important;border:0!important;color:#06140d}
+.btn{background:rgba(255,255,255,.08);color:var(--ink);border:1px solid var(--line)!important;border-radius:18px;font-weight:800}
+.btn.dark,.btn.gold{background:var(--gold)!important;color:#111!important;border-color:var(--gold)!important}
+.btn.green{background:var(--green)!important;color:#06140d!important;border-color:var(--green)!important}
+.btn:active,.card:active,.post:active,.chip:active,.gmap:active{transform:scale(.96)}
+.gmap{background:rgba(122,162,255,.12)!important;color:var(--blue)!important;border:1px solid rgba(122,162,255,.3)!important}
+.close{background:rgba(0,0,0,.45)!important;color:#fff;border:1px solid var(--line)!important;backdrop-filter:blur(10px)}
+.feat,.steps li:before,.install button,.toast{background:var(--gold)!important;color:#111!important}
+.quick a.q-guide{background:linear-gradient(135deg,#3a2f14,#171a22)!important}
+.quick a.q-guide span:not(.e){color:var(--gold)}
+.sheet-bg{background:rgba(0,0,0,.6)}
+.sheet{background:var(--card2);border:1px solid var(--line);border-bottom:0;border-radius:28px 28px 0 0}
+.sheet .art,.rhead{border-bottom:0!important}
+.sheet::before{background:rgba(255,255,255,.35)}
+.sec h2{font-size:28px}
+.sec .hand{color:var(--gold)}
+.progress{background:rgba(255,255,255,.08)!important;border:0!important}
+#lvBar{background:linear-gradient(90deg,var(--gold),var(--pink))!important}
+.mapwrap{padding:10px!important}
+.fold summary span{color:var(--muted)}
+.note,.facts dt{color:var(--muted)}
+a{color:inherit}
+.install{border-radius:22px}
+/* hero B */
+.hero.hb{padding:0;height:min(92vh,660px);min-height:560px;overflow:hidden;position:relative;border-radius:0 0 34px 34px}
+.hb .hbimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:hbKb 16s ease-in-out infinite alternate}
+@keyframes hbKb{from{transform:scale(1.04)}to{transform:scale(1.18)}}
+.hb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,14,19,.35),transparent 30%,rgba(12,14,19,.45) 62%,var(--bg));pointer-events:none}
+.hb .top{position:absolute;z-index:2;top:16px;left:16px;right:16px;gap:10px}
+.hb .avatar{width:42px;height:42px;background:#fde7d4}
+.hb .bubble{font-size:18px;padding:7px 13px;background:rgba(255,255,255,.14)!important;color:#fff;border:1px solid rgba(255,255,255,.2)!important;backdrop-filter:blur(14px);border-radius:999px}
+.hb .bubble:before,.hb .bubble:after{display:none}
+.hb .hc{position:absolute;z-index:2;left:20px;right:20px;bottom:44px}
+.hb .k{font-size:12px;letter-spacing:.2em;color:var(--gold);font-weight:800}
+.hb h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:min(19vw,104px);line-height:.88;margin-top:10px;white-space:nowrap;letter-spacing:-.04em}
+.hb h1 span{display:inline-block;animation:hbUp 1s var(--spring) both}
+.hb h1 .o{color:transparent;-webkit-text-stroke:2px #fff;animation-delay:.14s}
+@keyframes hbUp{from{opacity:0;transform:translateY(70px) skewY(6deg)}}
+.hb p{color:#d3d7e0;font-size:16px;line-height:1.45;margin:14px 0 0;max-width:330px;animation:hbFade 1s .5s both}
+.hb .hero-btns{margin-top:18px;animation:hbFade 1s .7s both}
+@keyframes hbFade{from{opacity:0;transform:translateY(16px)}}
+.hb .pill{border:0!important;border-radius:16px;padding:15px;font-weight:800;font-size:15px}
+.hb .pill.gold{background:var(--gold);color:#111}
+.hb .pill.yt{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.18)!important;backdrop-filter:blur(12px)}
+.statsB{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 18px 0}
+.statsB div{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 14px}
+.statsB b{font-family:"Bricolage Grotesque",sans-serif;font-size:34px;display:block;line-height:1;letter-spacing:-.03em}
+.statsB div:first-child b{color:var(--gold)}
+.statsB span{color:var(--muted);font-size:12px}
+@supports (animation-timeline: scroll()){
+ .hb .hbimg{animation:hbKb 16s ease-in-out infinite alternate,hbPar linear both;animation-timeline:auto,scroll(root);animation-range:normal,0px 660px}
+ @keyframes hbPar{to{translate:0 140px;filter:brightness(.45)}}
+}
+/* tab bar B: dark glass, gold active */
+nav.tabs{background:rgba(30,33,42,.72)!important;-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);border:1px solid var(--line)!important;border-radius:28px}
+nav.tabs a{color:var(--muted)}
+nav.tabs a.on{color:var(--gold)}
+nav.tabs a .e{filter:grayscale(1) brightness(1.6);opacity:.55}
+nav.tabs a.on .e{filter:none;opacity:1}
+nav.tabs .ind{background:rgba(255,201,74,.14)!important;border:1px solid rgba(255,201,74,.35)!important;border-radius:20px}
+.art.ld{background:linear-gradient(100deg,#1a1d26 30%,#262a35 50%,#1a1d26 70%) 0 0/300% 100%}
+.stampfx{background:radial-gradient(circle,rgba(12,14,19,.8),rgba(12,14,19,0) 70%)}
+.stampfx .s{background:rgba(23,26,34,.95);border-color:var(--gold);color:var(--gold)}
+.stampfx .s i{color:#fff}
+
+/* dark text fixes */
+:is(.roulette .why,.tier p,.post p,.article,.route p,.gch p,.about p,.peek p,.gch li,.route li,.route ol,.tour li,.tour ul,.fold-in p,.fold-in li){color:#c9cdd8!important}
+:is(.peek h3,.gch h3.big,.gch h4){color:var(--gold)!important}
+.gch,.peek{background:var(--card)!important}
+.peek .fade{background:linear-gradient(transparent,var(--card))!important}
+.app [style*="color:#3d4454"]{color:#c9cdd8!important}
+.tpin:hover .tdot{fill:#9aa0b0}
+@media (prefers-reduced-motion:reduce){.hb .hbimg,.hb h1 span,.hb p,.hb .hero-btns{animation:none!important}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="hero">
+  <header class="hero hb">
+    <img class="hbimg" src="photos/oarai.jpg" alt="The torii gate on the rocks at Oarai Isosaki Shrine, Ibaraki">
     <div class="top">
       <div class="avatar" id="av1"></div>
       <div class="bubble hand" id="heroBubble">Hi, I'm Kaho! Welcome to my hometown prefecture</div>
     </div>
-    <div class="rank">
-      <span class="sticker">#KahoIbaraki</span>
-      <small>Ibaraki, Japan · ~1 hour from Tokyo</small>
-      <h1><s>Japan's least attractive prefecture</s><br><em>Japan's best-kept secret.</em></h1>
-      <p>Ibaraki often comes last in Japan's “most attractive prefecture” ranking. I live here and I think they're wrong. Let me prove it.</p>
-    </div>
-    <div class="hero-btns">
-      <a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ My YouTube</a>
-      <a class="pill gold" href="#about" onclick="event.preventDefault();const a=document.getElementById('about');a.open=true;a.scrollIntoView({behavior:'smooth'})">About me</a>
+    <div class="hc">
+      <div class="k">JAPAN'S BEST-KEPT SECRET</div>
+      <h1 aria-label="Ibaraki"><span>IBARA</span><span class="o">KI.</span></h1>
+      <p>Ranked Japan's “least attractive” prefecture. I live here, about one hour from Tokyo. They're wrong.</p>
+      <div class="hero-btns">
+        <button class="pill gold" data-go="chips">Explore →</button>
+        <a class="pill yt" href="https://www.youtube.com/@kahofromjapan" target="_blank" rel="noopener">▶ My YouTube</a>
+      </div>
     </div>
   </header>
+  <div class="statsB"><div><b>11</b><span>spots to stamp</span></div><div><b>70′</b><span>from Tokyo</span></div><div><b>#1</b><span>melon in Japan</span></div></div>
 
   <div class="install" id="install"><img src="icon-192.png" alt=""><div><b>Get the app</b><span id="instTxt">Add Kaho's Ibaraki to your home screen</span></div><button id="instBtn">Install</button><button class="x" id="instX" aria-label="Close">✕</button></div>
 
@@ -1110,16 +1207,16 @@ function renderMap(){
   const[tx,ty]=P(35.69,139.69);
   const td=T_OUTLINE.map((p,i)=>{const[x,y]=P(...p);return(i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)}).join(" ")+"Z";
   const[tlx,tly]=P(36.86,139.5);
-  let svg=`<rect x="-72" y="-34" width="472" height="514" fill="#e7f0fb"/>
-   <path d="${td}" fill="#eeece6" stroke="#a3a8b3" stroke-width="1.5" stroke-dasharray="5 4" stroke-linejoin="round"/>
-   <text x="${tlx}" y="${tly}" font-size="12" fill="#9aa0ab" font-weight="700" letter-spacing="3">TOCHIGI</text>
-   ${TOCHIGI.map((t,ti)=>{const[x,y]=P(t.lat,t.lon);return`<g class="tpin" data-tid="${t.id}" style="--i:${ti}"><circle cx="${x}" cy="${y}" r="13" fill="transparent"/><circle class="tdot" cx="${x}" cy="${y}" r="5.5" fill="#b8b2a4" stroke="#fff" stroke-width="1.8"/><text x="${x}" y="${t.id==="utsunomiya"?y+16:y-9}" font-size="9" fill="#7d828c" text-anchor="middle" paint-order="stroke" stroke="#eeece6" stroke-width="3">${t.name}</text></g>`}).join("")}${Array.from({length:8},(_,i)=>`<path d="M${340+(i%2)*20} ${60+i*55} q8 -6 16 0 t16 0" stroke="#a9c1e3" stroke-width="2" fill="none"/>`).join("")}
-   <path d="${d}" fill="#f6efdc" stroke="#1d2433" stroke-width="2.5" stroke-linejoin="round"/>
-   <text x="388" y="300" font-size="12" fill="#6d8db8" font-style="italic" transform="rotate(90 388 300)">Pacific Ocean</text>
-   <circle cx="${tx}" cy="${Math.min(ty,468)}" r="5" fill="#888"/><text x="${tx+9}" y="${Math.min(ty,468)+4}" font-size="12" fill="#666">↙ Tokyo (~1h)</text>`;
+  let svg=`<rect x="-72" y="-34" width="472" height="514" fill="#0f1626"/>
+   <path d="${td}" fill="#1a1d25" stroke="#3a3f4c" stroke-width="1.5" stroke-dasharray="5 4" stroke-linejoin="round"/>
+   <text x="${tlx}" y="${tly}" font-size="12" fill="#5d6372" font-weight="700" letter-spacing="3">TOCHIGI</text>
+   ${TOCHIGI.map((t,ti)=>{const[x,y]=P(t.lat,t.lon);return`<g class="tpin" data-tid="${t.id}" style="--i:${ti}"><circle cx="${x}" cy="${y}" r="13" fill="transparent"/><circle class="tdot" cx="${x}" cy="${y}" r="5.5" fill="#6b7080" stroke="#1a1d25" stroke-width="1.8"/><text x="${x}" y="${t.id==="utsunomiya"?y+16:y-9}" font-size="9" fill="#8a8f9d" text-anchor="middle" paint-order="stroke" stroke="#1a1d25" stroke-width="3">${t.name}</text></g>`}).join("")}${Array.from({length:8},(_,i)=>`<path d="M${340+(i%2)*20} ${60+i*55} q8 -6 16 0 t16 0" stroke="#22314f" stroke-width="2" fill="none"/>`).join("")}
+   <path d="${d}" fill="#24318a" stroke="#7aa2ff" stroke-width="2" stroke-linejoin="round"/>
+   <text x="388" y="300" font-size="12" fill="#4f6aa8" font-style="italic" transform="rotate(90 388 300)">Pacific Ocean</text>
+   <circle cx="${tx}" cy="${Math.min(ty,468)}" r="5" fill="#6b7080"/><text x="${tx+9}" y="${Math.min(ty,468)+4}" font-size="12" fill="#8a8f9d">↙ Tokyo (~1h)</text>`;
   SPOTS.forEach((s,idx)=>{const[x,y]=P(s.lat,s.lon);const v=stamps.includes(s.id);const lb=LB[s.id]||[13,4,"start"];const now=!v&&(s.allYear?false:s.months.includes(MONTH));
-   svg+=`<g class="pin" data-id="${s.id}" style="--i:${idx}">${now?`<circle class="ring" cx="${x}" cy="${y}" r="9" fill="none" stroke="${s.theme[0]}" stroke-width="2"/>`:""}<circle cx="${x}" cy="${y}" r="17" fill="transparent"/><circle cx="${x}" cy="${y}" r="${v?11:9}" fill="${v?"#3c7d5a":s.theme[0]}" stroke="#1d2433" stroke-width="2"/>${v?`<path d="M${x-4.5} ${y} l3 3.5 6-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>`:""}
-   <text x="${x+lb[0]}" y="${y+lb[1]}" font-size="11" font-weight="700" fill="#1d2433" text-anchor="${lb[2]}" paint-order="stroke" stroke="#f6efdc" stroke-width="3">${s.name.replace(/ (Garden|Shrine|& Pottery Town|Suspension Bridge)$/,"")}</text></g>`});
+   svg+=`<g class="pin" data-id="${s.id}" style="--i:${idx}">${now?`<circle class="ring" cx="${x}" cy="${y}" r="9" fill="none" stroke="${s.theme[0]}" stroke-width="2"/>`:""}<circle cx="${x}" cy="${y}" r="17" fill="transparent"/><circle cx="${x}" cy="${y}" r="${v?11:9}" fill="${v?"#3c7d5a":s.theme[0]}" stroke="#0c0e13" stroke-width="2"/>${v?`<path d="M${x-4.5} ${y} l3 3.5 6-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>`:""}
+   <text x="${x+lb[0]}" y="${y+lb[1]}" font-size="11" font-weight="700" fill="#ffffff" text-anchor="${lb[2]}" paint-order="stroke" stroke="#24318a" stroke-width="3">${s.name.replace(/ (Garden|Shrine|& Pottery Town|Suspension Bridge)$/,"")}</text></g>`});
   document.getElementById("map").innerHTML=svg;
   const n=stamps.length,[t,next]=level(n);
   document.getElementById("lvTitle").textContent=t;
