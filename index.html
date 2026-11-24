@@ -98,6 +98,9 @@ section.view.on{display:block;animation:fade .25s}
 .mapwrap{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:8px;box-shadow:4px 4px 0 var(--ink)}
 .mapwrap svg{width:100%;height:auto;display:block}
 .pin{cursor:pointer}
+.tpin{cursor:pointer}.tpin:hover .tdot{fill:#9c9584}
+.tbadge{display:inline-block;font-size:12px;font-weight:700;color:#6b6f78;background:#ecebe6;border-radius:999px;padding:4px 10px;margin:2px 0 6px}
+.tlist{padding-left:18px;font-size:15px;line-height:1.55}.tlist li{margin:6px 0}
 .note{font-size:12px;color:var(--muted);line-height:1.5;margin:8px 4px 0}
 
 /* play */
@@ -378,6 +381,43 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
 .popmap .season .w{font-size:12.5px;color:#5b647f;margin-top:2px}
 .popmap .season button{flex:none;background:#10183a;color:#fff;border:0;font-weight:800;font-size:15px;padding:12px 18px;border-radius:16px;cursor:pointer;font-family:inherit}
 .popmap .roll{margin-top:10px;width:100%;height:46px;border:2px solid #3d5af1;border-radius:16px;background:transparent;color:#fff;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit}
+
+/* ===== Motion layer (2026-11): ideas from Google/Apple Maps, iOS 26, Material 3 Expressive, Duolingo, Pinterest ===== */
+:root{--spring:linear(0,.009,.035 2.1%,.141,.281 6.7%,.723 12.9%,.938 16.7%,1.017,1.077,1.121 24.4%,1.149 27.4%,1.159,1.154 32.5%,1.129 36.4%,1.051 46.4%,1.017 51.8%,.991 61.4%,.996 72.4%,1);--soft:cubic-bezier(.2,.8,.2,1)}
+.btn,.card,.post,.chip,.tour,.gmap{transition:transform .45s var(--spring),box-shadow .25s var(--soft)}
+.btn:active,.card:active,.post:active,.chip:active,.gmap:active{transform:translate(2px,2px) scale(.985);box-shadow:1px 1px 0 var(--ink);transition-duration:.08s}
+@media (hover:hover){.card:hover,.post:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}}
+/* glass tab bar + sliding indicator */
+nav.tabs{background:color-mix(in oklab,var(--card) 74%,transparent);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);view-transition-name:tabs}
+nav.tabs .in{position:relative}
+nav.tabs a{position:relative;z-index:1}
+nav.tabs .ind{position:absolute;top:5px;left:0;width:58px;height:46px;border-radius:15px;background:var(--gold-soft);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);transform:translateX(var(--x,0));transition:transform .55s var(--spring);pointer-events:none}
+nav.tabs a .e{transition:transform .45s var(--spring),filter .2s,opacity .2s}
+/* page change */
+::view-transition-old(root){animation:vtOut .16s var(--soft) both}
+::view-transition-new(root){animation:vtIn .42s var(--spring) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-6px)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(14px) scale(.99)}}
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(18px) scale(.985)}
+.rv.in{opacity:1;transform:none;transition:opacity .5s var(--soft),transform .7s var(--spring);transition-delay:var(--d,0ms)}
+/* map: pins drop in, in-season spots pulse */
+#map .pin,#map .tpin{transform-box:fill-box;transform-origin:50% 100%}
+#map.drop .pin{animation:pinDrop .7s var(--spring) both;animation-delay:calc(var(--i,0)*55ms)}
+#map.drop .tpin{animation:fadeUp .6s var(--soft) both;animation-delay:calc(450ms + var(--i,0)*40ms)}
+@keyframes pinDrop{from{transform:translateY(-34px);opacity:0}}
+@keyframes fadeUp{from{transform:translateY(6px);opacity:0}}
+#map .ring{transform-box:fill-box;transform-origin:center;animation:ring 2.4s ease-out infinite;pointer-events:none}
+@keyframes ring{from{transform:scale(1);opacity:.55}to{transform:scale(2.7);opacity:0}}
+#lvBar{transition:width .9s var(--spring)}
+/* bottom sheet: spring up, drag down to close */
+.sheet-bg.on{animation:bgIn .25s var(--soft)}
+@keyframes bgIn{from{background:rgba(20,24,34,0)}}
+.sheet{position:relative;animation:sheetUp .6s var(--spring);touch-action:pan-y}
+.sheet::before{content:"";position:absolute;top:8px;left:50%;width:42px;height:5px;margin-left:-21px;border-radius:3px;background:rgba(29,36,51,.35);z-index:3}
+@keyframes sheetUp{from{transform:translateY(100%)}}
+.sheet.closing{transform:translateY(105%)!important;transition:transform .28s var(--soft)}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -580,8 +620,8 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
       <div class="progress"><i id="lvBar" style="width:0"></i></div>
       <div style="font-size:13px;color:var(--muted)" id="lvNext"></div>
     </div>
-    <div class="mapwrap"><svg id="map" viewBox="0 0 400 480"></svg></div>
-    <p class="note">Tap a pin → visit → tap “I've been here”. Post your photo with <b>#KahoIbaraki</b> so I can see it! (Simplified map, not to scale.)</p>
+    <div class="mapwrap"><svg id="map" viewBox="-72 -34 472 514"></svg></div>
+    <p class="note">Tap a pin → visit → tap “I've been here”. Post your photo with <b>#KahoIbaraki</b> so I can see it! Pulsing pins = best season right now. Grey pins on the left are my Tochigi favorites, about 1 hour next door (bonus, not in the rally). (Simplified map, not to scale.)</p>
   </section>
 
 
@@ -799,7 +839,7 @@ nav.tabs a.on .e{filter:none;opacity:1;transform:translateY(-2px) scale(1.12)}
   </section>
 </div>
 
-<nav class="tabs"><div class="in">
+<nav class="tabs"><div class="in"><span class="ind" aria-hidden="true"></span>
   <a href="#home" data-v="home"><span class="e">🏠</span>Home</a>
   <a href="#map" data-v="map"><span class="e">🗾</span>Stamps</a>
   <a href="#events" data-v="events"><span class="e">📅</span>Events</a>
@@ -953,19 +993,69 @@ document.getElementById("rBtn")?.addEventListener("click",()=>{
 });
 
 /* map */
+
+/* Tochigi (next door) — Kaho's picks, shown quieter than Ibaraki */
+const T_OUTLINE=[[36.93,140.4],[36.8,140.3],[36.65,140.25],[36.4,140.0],[36.2,139.8],[36.2,139.6],[36.27,139.45],[36.45,139.38],[36.65,139.3],[36.85,139.33],[37.0,139.45],[37.15,139.65],[37.15,139.9],[37.05,140.15]];
+const TOCHIGI=[
+ {id:"utsunomiya",name:"Utsunomiya",emoji:"🥟",lat:36.56,lon:139.88,
+  kaho:"If you ask me where to eat gyoza, I say Minmin. Simple and so good!",
+  items:["<b>Minmin</b> (宇都宮みんみん): gyoza since 1958 — pan-fried, boiled or deep-fried. Lines move fast.","<b>Oya History Museum</b> (大谷資料館): a huge old stone quarry 30 m underground. Around 8°C all year — bring a jacket!"],
+  q:"宇都宮みんみん 本店",post:"ibaraki-tochigi-road-trip-gyoza-strawberries"},
+ {id:"kanuma",name:"Kanuma",emoji:"🍯",lat:36.567,lon:139.745,
+  kaho:"Honey from one family since 1920, then homemade udon. My perfect morning.",
+  items:["<b>Kuroda Yohoen</b> (黒田養蜂園): taste 20+ kinds of honey. Honey gelato next door.","<b>Udon Chaya Ichouan</b> (うどん茶屋 いちょう庵): thick, chewy cold udon with tempura.","<b>Kanuma Satoyama Wine</b>: wine from their own grapes, even strawberry wine."],
+  q:"黒田養蜂園 鹿沼",post:"kuroda-yohoen-honey-shop-kanuma-tochigi"},
+ {id:"tochigicity",name:"Tochigi City",emoji:"🩷",lat:36.382,lon:139.734,
+  kaho:"A whole pink museum for one pickle. Only in Japan!",
+  items:["<b>Iwashita New Ginger Museum</b>: free, all pink, with a Ginger Shrine and all-you-can-eat ginger.","<b>Buheisaku</b> (武平作): fresh dango made every day."],
+  q:"岩下の新生姜ミュージアム",post:"iwashita-new-ginger-museum-tochigi"},
+ {id:"ichikai",name:"Ichikai",emoji:"🌾",lat:36.546,lon:140.103,
+  kaho:"My favorite roadside station. Cold soba with crispy vegetable tempura!",
+  items:["<b>Michi-no-eki Sashiba no Sato Ichikai</b>: soba at そば処 手繰庵, plus fresh vegetables and strawberries in season."],
+  q:"道の駅サシバの里いちかい",post:"ibaraki-tochigi-road-trip-gyoza-strawberries"},
+ {id:"nikko",name:"Nikko",emoji:"⛩️",lat:36.75,lon:139.6,
+  kaho:"Shrines in the cedar forest — and my favorite steak house. Go early!",
+  items:["Shrines, mountains and lakes.","<b>Shino</b> (とんかつ ステーキ 篠): pork sauté and garlic steak. Long line at lunch, even on weekdays."],
+  q:"日光東照宮",post:"ibaraki-tochigi-road-trip-gyoza-strawberries"},
+ {id:"nasu",name:"Nasu",emoji:"🏕️",lat:37.02,lon:140.05,
+  kaho:"Where Japanese people go to escape the summer heat. Great for camping.",
+  items:["Cool highlands in north Tochigi. Japanese call this summer escape <i>hisho</i> (避暑)."],
+  q:"那須高原",post:"ibaraki-tochigi-road-trip-gyoza-strawberries"},
+ {id:"sano",name:"Sano",emoji:"🍜",lat:36.314,lon:139.578,
+  kaho:"Clear soy sauce soup and soft flat noodles. Easy to add on the way home.",
+  items:["<b>Sano ramen</b>: so many ramen shops in the city, near the Sano outlet mall."],
+  q:"佐野ラーメン",post:"ibaraki-tochigi-road-trip-gyoza-strawberries"},
+];
+function openTochigi(id){
+  const t=TOCHIGI.find(x=>x.id===id);
+  document.getElementById("sheet").innerHTML=`
+   <div class="rhead" style="background:#ecebe6">${t.emoji}<button class="close" data-close>✕</button></div>
+   <div class="inner"><div class="tbadge">Bonus · Tochigi, 1h from Ibaraki</div><h2>${t.name}</h2>
+   <div class="kaho-says"><div class="mini" style="width:40px;height:40px">${AVATAR}</div><div class="txt hand" style="font-size:21px">${t.kaho}</div></div>
+   <ul class="tlist">${t.items.map(x=>`<li>${x}</li>`).join("")}</ul>
+   <a class="gmap" href="${gmapUrl(t.q)}" target="_blank" rel="noopener">📍 Open in Google Maps</a>
+   ${(()=>{const fb=["iwashita-new-ginger-museum-tochigi","ibaraki-tochigi-road-trip-gyoza-strawberries"];const d=new Date(Date.now()+9*36e5).toISOString().slice(0,10);const ok=id=>{const q=POSTS.find(x=>x.id===id);return q&&(!q.pub||q.pub<=d)};const id=[t.post,...fb].find(ok);return id?`<a class="btn" href="blog/${id}.html">📖 Read my Tochigi post</a>`:`<a class="btn" href="#guide" data-close>📖 My Ibaraki + Tochigi road trip plan</a>`})()}
+   <p class="note">Many shops close on Tuesdays — check before you go.</p></div>`;
+  document.getElementById("sheetBg").classList.add("on");
+}
 const OUTLINE=[[36.93,140.57],[36.79,140.73],[36.6,140.7],[36.4,140.66],[36.3,140.64],[36.1,140.67],[35.9,140.85],[35.74,140.85],[35.83,140.55],[35.9,140.3],[35.85,140.0],[35.95,139.85],[36.1,139.7],[36.2,139.8],[36.4,140.0],[36.65,140.25],[36.8,140.3],[36.93,140.4]];
 const P=(lat,lon)=>[(lon-139.62)*300,(37.0-lat)*300*1.24+12];
-const LB={fukuroda:[-13,4,"end"],seaside:[-13,-8,"end"],kairakuen:[0,22,"middle"],kasama:[-13,4,"end"],kashima:[0,22,"middle"],ushiku:[-13,4,"end"],oarai:[13,5,"start"]};
+const LB={momijidera:[0,-15,"middle"],fukuroda:[-13,4,"end"],seaside:[-13,-8,"end"],kairakuen:[0,22,"middle"],kasama:[-13,4,"end"],kashima:[0,22,"middle"],ushiku:[-13,4,"end"],oarai:[13,5,"start"]};
 function level(n){let t=LEVELS[0];let next=null;for(const l of LEVELS){if(n>=l[0])t=l;else{next=l;break}}return[t[1],next]}
 function renderMap(){
   const d=OUTLINE.map((p,i)=>{const[x,y]=P(...p);return(i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)}).join(" ")+"Z";
   const[tx,ty]=P(35.69,139.69);
-  let svg=`<rect width="400" height="480" fill="#e7f0fb"/>${Array.from({length:8},(_,i)=>`<path d="M${340+(i%2)*20} ${60+i*55} q8 -6 16 0 t16 0" stroke="#a9c1e3" stroke-width="2" fill="none"/>`).join("")}
+  const td=T_OUTLINE.map((p,i)=>{const[x,y]=P(...p);return(i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)}).join(" ")+"Z";
+  const[tlx,tly]=P(36.86,139.5);
+  let svg=`<rect x="-72" y="-34" width="472" height="514" fill="#e7f0fb"/>
+   <path d="${td}" fill="#eeece6" stroke="#a3a8b3" stroke-width="1.5" stroke-dasharray="5 4" stroke-linejoin="round"/>
+   <text x="${tlx}" y="${tly}" font-size="12" fill="#9aa0ab" font-weight="700" letter-spacing="3">TOCHIGI</text>
+   ${TOCHIGI.map((t,ti)=>{const[x,y]=P(t.lat,t.lon);return`<g class="tpin" data-tid="${t.id}" style="--i:${ti}"><circle cx="${x}" cy="${y}" r="13" fill="transparent"/><circle class="tdot" cx="${x}" cy="${y}" r="5.5" fill="#b8b2a4" stroke="#fff" stroke-width="1.8"/><text x="${x}" y="${t.id==="utsunomiya"?y+16:y-9}" font-size="9" fill="#7d828c" text-anchor="middle" paint-order="stroke" stroke="#eeece6" stroke-width="3">${t.name}</text></g>`}).join("")}${Array.from({length:8},(_,i)=>`<path d="M${340+(i%2)*20} ${60+i*55} q8 -6 16 0 t16 0" stroke="#a9c1e3" stroke-width="2" fill="none"/>`).join("")}
    <path d="${d}" fill="#f6efdc" stroke="#1d2433" stroke-width="2.5" stroke-linejoin="round"/>
    <text x="388" y="300" font-size="12" fill="#6d8db8" font-style="italic" transform="rotate(90 388 300)">Pacific Ocean</text>
    <circle cx="${tx}" cy="${Math.min(ty,468)}" r="5" fill="#888"/><text x="${tx+9}" y="${Math.min(ty,468)+4}" font-size="12" fill="#666">↙ Tokyo (~1h)</text>`;
-  SPOTS.forEach(s=>{const[x,y]=P(s.lat,s.lon);const v=stamps.includes(s.id);const lb=LB[s.id]||[13,4,"start"];
-   svg+=`<g class="pin" data-id="${s.id}"><circle cx="${x}" cy="${y}" r="17" fill="transparent"/><circle cx="${x}" cy="${y}" r="${v?11:9}" fill="${v?"#3c7d5a":s.theme[0]}" stroke="#1d2433" stroke-width="2"/>${v?`<path d="M${x-4.5} ${y} l3 3.5 6-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>`:""}
+  SPOTS.forEach((s,idx)=>{const[x,y]=P(s.lat,s.lon);const v=stamps.includes(s.id);const lb=LB[s.id]||[13,4,"start"];const now=!v&&(s.allYear?false:s.months.includes(MONTH));
+   svg+=`<g class="pin" data-id="${s.id}" style="--i:${idx}">${now?`<circle class="ring" cx="${x}" cy="${y}" r="9" fill="none" stroke="${s.theme[0]}" stroke-width="2"/>`:""}<circle cx="${x}" cy="${y}" r="17" fill="transparent"/><circle cx="${x}" cy="${y}" r="${v?11:9}" fill="${v?"#3c7d5a":s.theme[0]}" stroke="#1d2433" stroke-width="2"/>${v?`<path d="M${x-4.5} ${y} l3 3.5 6-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>`:""}
    <text x="${x+lb[0]}" y="${y+lb[1]}" font-size="11" font-weight="700" fill="#1d2433" text-anchor="${lb[2]}" paint-order="stroke" stroke="#f6efdc" stroke-width="3">${s.name.replace(/ (Garden|Shrine|& Pottery Town|Suspension Bridge)$/,"")}</text></g>`});
   document.getElementById("map").innerHTML=svg;
   const n=stamps.length,[t,next]=level(n);
@@ -1286,6 +1376,7 @@ document.addEventListener("click",e=>{
   const chip=e.target.closest(".chip[data-k]");if(chip){filter=chip.dataset.k;renderHome();return}
   const card=e.target.closest(".card[data-id]");if(card){openSpot(card.dataset.id);return}
   const pin=e.target.closest(".pin");if(pin){openSpot(pin.dataset.id);return}
+  const tp=e.target.closest(".tpin");if(tp){openTochigi(tp.dataset.tid);return}
   const go=e.target.closest("[data-go]");if(go){document.getElementById(go.dataset.go).scrollIntoView({behavior:"smooth"});return}
   const st=e.target.closest("[data-stamp]");if(st){const id=st.dataset.stamp,was=stamps.includes(id);
     stamps=was?stamps.filter(x=>x!==id):[...stamps,id];save("kahoStamps",stamps);
@@ -1295,6 +1386,38 @@ document.addEventListener("click",e=>{
 });
 document.getElementById("sheetBg").addEventListener("click",e=>{if(e.target.id==="sheetBg")closeSheet()});
 window.addEventListener("hashchange",route);route();
+
+/* ===== Motion layer JS ===== */
+(()=>{
+const RM=matchMedia("(prefers-reduced-motion: reduce)");
+// sliding tab indicator
+const nav=document.querySelector("nav.tabs .in"),ind=nav&&nav.querySelector(".ind");
+function moveInd(){const a=nav&&nav.querySelector("a.on");if(!a||!ind){if(ind)ind.style.opacity=0;return}ind.style.opacity=1;ind.style.setProperty("--x",(a.offsetLeft+(a.offsetWidth-ind.offsetWidth)/2)+"px")}
+addEventListener("resize",moveInd);
+// page change with view transition + map pin drop
+window.removeEventListener("hashchange",route);
+function go(){const h=location.hash.slice(1);const run=()=>{route();moveInd();if(h==="map"){const m=document.getElementById("map");m.classList.remove("drop");void m.getBoundingClientRect();m.classList.add("drop");setTimeout(()=>m.classList.remove("drop"),1600)}};
+  if(document.startViewTransition&&!RM.matches)document.startViewTransition(run);else run()}
+window.addEventListener("hashchange",go);
+moveInd();if(location.hash==="#map"){const m=document.getElementById("map");m.classList.add("drop");setTimeout(()=>m.classList.remove("drop"),1600)}
+// reveal cards as they scroll in (also for cards added later)
+if("IntersectionObserver" in window&&!RM.matches){
+  const SEL=".card,.post,.tour,.rankcard,.mapwrap,.roulette,.fold,.kaho-says";
+  const io=new IntersectionObserver(es=>{let k=0;es.forEach(e=>{if(e.isIntersecting){e.target.style.setProperty("--d",(k++%6)*60+"ms");e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -6% 0px"});
+  const scan=root=>root.querySelectorAll(SEL).forEach(el=>{if(el.closest(".sheet")||el.dataset.rv)return;el.dataset.rv=1;el.classList.add("rv");io.observe(el)});
+  scan(document);
+  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches?.(SEL))scan(n.parentNode);else scan(n)}}))).observe(document.querySelector("main")||document.body,{childList:true,subtree:true});
+}
+// bottom sheet: animated close + drag down to close
+const bg=document.getElementById("sheetBg"),sh=document.getElementById("sheet");
+const _close=closeSheet;
+closeSheet=function(){if(RM.matches||!bg.classList.contains("on")){sh.style.transform="";return _close()}sh.classList.add("closing");setTimeout(()=>{sh.classList.remove("closing");sh.style.transform="";_close()},260)};
+let y0=null,dy=0,t0=0;
+sh.addEventListener("pointerdown",e=>{if(sh.scrollTop>0||e.target.closest("a,button,input"))return;y0=e.clientY;dy=0;t0=performance.now()});
+sh.addEventListener("pointermove",e=>{if(y0===null)return;dy=Math.max(0,e.clientY-y0);if(dy>4){sh.style.transition="none";sh.style.transform=`translateY(${dy}px)`}});
+const up=()=>{if(y0===null)return;const v=dy/Math.max(1,performance.now()-t0);y0=null;sh.style.transition="";if(dy>120||v>.6)closeSheet();else{sh.style.transition="transform .45s var(--spring)";sh.style.transform="";setTimeout(()=>sh.style.transition="",450)}};
+sh.addEventListener("pointerup",up);sh.addEventListener("pointercancel",up);
+})();
 /* PWA: offline + install */
 (function(){
   try{if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{})}catch(e){}
