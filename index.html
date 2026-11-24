@@ -569,6 +569,25 @@ nav.tabs .ind{background:rgba(255,201,74,.14)!important;border:1px solid rgba(25
 .stampfx .s{background:rgba(23,26,34,.95);border-color:var(--gold);color:var(--gold)}
 .stampfx .s i{color:#fff}
 
+
+/* Right now row */
+.nowB{margin:0 -18px 6px}
+.nowB .sec{padding:0 20px}
+.nowrow{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 18px 8px;scrollbar-width:none}
+.nowrow::-webkit-scrollbar{display:none}
+.nc{flex:none;width:232px;height:320px;border-radius:28px;overflow:hidden;position:relative;scroll-snap-align:start;border:0;padding:0;background:var(--card);cursor:pointer;text-align:left;color:#fff;text-decoration:none;display:block;font:inherit;transition:transform .45s var(--spring);animation:ncIn .8s var(--spring) both;animation-delay:calc(.15s + var(--i)*.08s)}
+@keyframes ncIn{from{opacity:0;transform:translateX(60px) scale(.92)}}
+.nc:active{transform:scale(.95)}
+.nc>img,.nc .ncart,.nc .emo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.nc .ncart svg,.nc .ncart img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.nc .ncart .credit{display:none}
+.nc .emo{display:grid;place-items:center;font-size:96px}
+.nc::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.85));pointer-events:none}
+.nc .in{position:absolute;z-index:2;left:16px;right:16px;bottom:16px}
+.nc .nb{display:inline-block;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:800;letter-spacing:.04em;margin-bottom:8px}
+.nc .nb.go{background:var(--pink);color:#fff}.nc .nb.eat{background:var(--gold);color:#111}
+.nc h3{font-size:22px;line-height:1.05;color:#fff}.nc p{color:#d6dae3;font-size:13px;line-height:1.35;margin:4px 0 0}
+@media (prefers-reduced-motion:reduce){.nc{animation:none}}
 /* dark text fixes */
 :is(.roulette .why,.tier p,.post p,.article,.route p,.gch p,.about p,.peek p,.gch li,.route li,.route ol,.tour li,.tour ul,.fold-in p,.fold-in li){color:#c9cdd8!important}
 :is(.peek h3,.gch h3.big,.gch h4){color:var(--gold)!important}
@@ -603,6 +622,7 @@ nav.tabs .ind{background:rgba(255,201,74,.14)!important;border:1px solid rgba(25
 
   <!-- HOME -->
   <section class="view" id="v-home">
+    <div class="nowB"><div class="sec"><h2>Right now 🔥</h2><span class="hand" id="nowMonth"></span></div><div class="nowrow" id="nowRow"></div></div>
     <div class="popmap" id="popmap">
       <div class="k">KAHO'S IBARAKI</div>
       <h2>Where to <br>next?</h2>
@@ -1130,7 +1150,30 @@ document.getElementById("pmRoll").onclick=()=>{pmPick=Math.floor(Math.random()*S
   document.getElementById("pmSeason").innerHTML=`<div><div class="l">KAHO PICKED FOR YOU 🎲</div><div class="n">${sp.name}</div><div class="w">${sp.short}</div></div><button data-pm="${sp.id}">Go</button>`;
   const b=document.querySelector(`.ppin[data-pm="${sp.id}"] b`);if(b){b.animate([{transform:"scale(1)"},{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:700})}};
 
+/* Right now: in-season spots + seasonal food (top of home) */
+const SEASON_FOOD=[
+ {name:"Hoshiimo",sub:"Dried sweet potato. Ibaraki makes most of Japan's",photo:"photos/hoshiimo.jpg",months:[11,12,1,2,3],post:"hoshiimo"},
+ {name:"Ankō nabe",sub:"Monkfish hotpot, the taste of Ibaraki winter",photo:"photos/winter-nabe-pot.jpg",months:[11,12,1,2,3],post:"ankou-nabe-ibaraki-anglerfish-hot-pot"},
+ {name:"New soba",sub:"Fresh Hitachi Aki soba, autumn's new harvest",photo:"photos/soba.jpg",months:[10,11,12],post:"hitachi-aki-soba"},
+ {name:"Tochigi strawberries",sub:"Japan's No.1 strawberry prefecture, next door",emoji:"🍓",bg:"linear-gradient(135deg,#ff5d7a,#7a1030)",months:[12,1,2,3,4,5],post:"ibaraki-tochigi-road-trip-gyoza-strawberries",fold:"tochigi"},
+ {name:"Ibaraki melon",sub:"Japan's top melon producer",emoji:"🍈",bg:"linear-gradient(135deg,#9be15d,#1e5a2c)",months:[5,6,7]},
+ {name:"Chestnuts",sub:"Kasama chestnut sweets season",emoji:"🌰",bg:"linear-gradient(135deg,#c98b4b,#4a2a12)",months:[9,10]},
+];
+function postLive(id){const d=new Date(Date.now()+9*36e5).toISOString().slice(0,10);const q=POSTS.find(x=>x.id===id);return!!(q&&(!q.pub||q.pub<=d))}
+function renderNow(){
+  const row=document.getElementById("nowRow");if(!row)return;
+  document.getElementById("nowMonth").textContent=MONTHS[MONTH];
+  const spots=SPOTS.filter(s=>!s.allYear&&s.months.includes(MONTH)).map(s=>({k:"go",s}));
+  const food=SEASON_FOOD.filter(f=>f.months.includes(MONTH)).map(f=>({k:"eat",f}));
+  const items=[];while(spots.length||food.length){if(spots.length)items.push(spots.shift());if(food.length)items.push(food.shift())}
+  row.innerHTML=items.map((it,i)=>{
+    if(it.k==="go"){const s=it.s;return`<button class="nc" data-now-spot="${s.id}" style="--i:${i}"><div class="ncart">${art(s)}</div><div class="in"><span class="nb go">GO NOW</span><h3>${s.name.replace(/ [(“].*$/,"")}</h3><p>📍 ${s.area}</p></div></button>`}
+    const f=it.f,live=f.post&&postLive(f.post);
+    const bgx=f.photo?`<img src="${f.photo}" alt="${f.name}" loading="lazy">`:`<div class="emo" style="background:${f.bg}">${f.emoji}</div>`;
+    return`<a class="nc" ${live?`href="blog/${f.post}.html"`:`href="#home" data-go="${f.fold||"chips"}"`} style="--i:${i}">${bgx}<div class="in"><span class="nb eat">EAT NOW</span><h3>${f.name}</h3><p>${f.sub}</p></div></a>`}).join("");
+}
 function renderHome(){
+  try{renderNow()}catch(e){console.error(e)}
   try{renderPopMap()}catch(e){console.error(e)}
   document.getElementById("monthNote").textContent=`it's ${MONTHS[MONTH]}!`;
   document.getElementById("chips").innerHTML=CHIPS.map(c=>`<button class="chip ${filter===c.k?"on":""}" data-k="${c.k}">${c.l}</button>`).join("");
@@ -1533,6 +1576,8 @@ function route(){
   if(h!=="home")document.getElementById("v-"+h).scrollIntoView({behavior:"smooth"});else window.scrollTo(0,0);
 }
 document.addEventListener("click",e=>{
+  const ns=e.target.closest("[data-now-spot]");if(ns){openSpot(ns.dataset.nowSpot);return}
+  const fd=e.target.closest(".nc[data-go]");if(fd){e.preventDefault();const t=document.getElementById(fd.dataset.go);if(t){if(t.tagName==="DETAILS")t.open=true;t.scrollIntoView({behavior:"smooth"})}return}
   const chip=e.target.closest(".chip[data-k]");if(chip){filter=chip.dataset.k;renderHome();return}
   const card=e.target.closest(".card[data-id]");if(card){openSpot(card.dataset.id);return}
   const pin=e.target.closest(".pin");if(pin){openSpot(pin.dataset.id);return}
