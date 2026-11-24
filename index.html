@@ -418,6 +418,69 @@ nav.tabs a .e{transition:transform .45s var(--spring),filter .2s,opacity .2s}
 @keyframes sheetUp{from{transform:translateY(100%)}}
 .sheet.closing{transform:translateY(105%)!important;transition:transform .28s var(--soft)}
 @media (prefers-reduced-motion:reduce){*,::before,::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+
+/* ===== Motion 2 (2026-11-24) — from a real look at ~100 apps & sites:
+   Airbnb (view transitions, scroll-linked, spring), Apple (scroll-linked hero), Pinterest (skeleton shimmer, press scale),
+   Naver/Kakao/Instagram (floating tab bar), Duolingo (celebration), Klook (lots of small motion) ===== */
+/* floating pill tab bar */
+nav.tabs{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:536px;margin:0 auto;border:2px solid var(--ink);border-radius:26px;box-shadow:4px 4px 0 var(--ink);transition:transform .55s var(--spring)}
+nav.tabs .in{padding:0 4px}
+nav.tabs a{padding:8px 0 10px}
+nav.tabs.hide{transform:translateY(calc(100% + 30px))}
+nav.tabs a.on .e{animation:tabPop .6s var(--spring)}
+@keyframes tabPop{from{transform:scale(.55) rotate(-12deg)}}
+/* hero: card swings in, line strikes through, words jump up, sticker slaps on */
+.rank{animation:rankIn 1s var(--spring) both}
+@keyframes rankIn{from{opacity:0;transform:rotate(-7deg) translateY(36px) scale(.9)}}
+.rank h1 s{text-decoration:none;opacity:.75;background:linear-gradient(var(--red),var(--red)) no-repeat 0 58%/0% 4px;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:strike .75s .7s var(--soft) forwards}
+@keyframes strike{to{background-size:100% 4px}}
+.rank h1 em .w{display:inline-block;animation:wordUp .8s var(--spring) both;animation-delay:calc(1.3s + var(--i)*110ms)}
+@keyframes wordUp{from{opacity:0;transform:translateY(.7em) rotate(8deg) scale(.8)}}
+.sticker{animation:slap .7s 2s var(--spring) both}
+@keyframes slap{from{opacity:0;transform:scale(2.4) rotate(-25deg)}}
+.hero .avatar{animation:bob 3.2s ease-in-out 2.4s infinite}
+@keyframes bob{50%{transform:translateY(-4px) rotate(-3deg)}}
+.hero .bubble{animation:pop .6s .25s var(--spring) both;transform-origin:0 50%}
+@keyframes pop{from{opacity:0;transform:scale(.6)}}
+/* skeleton shimmer while photos load */
+.art.ld{background:linear-gradient(100deg,#ece4d3 30%,#f8f3e8 50%,#ece4d3 70%) 0 0/300% 100%;animation:shim 1.2s linear infinite}
+.art.ld img{opacity:0}
+.art img{transition:opacity .5s var(--soft)}
+@keyframes shim{to{background-position:-150% 0}}
+/* press: squish like Pinterest */
+.quick a,.popmap .roll,.popmap .season button,.pill{transition:transform .45s var(--spring)}
+.quick a:active,.popmap .roll:active,.popmap .season button:active,.pill:active{transform:scale(.94);transition-duration:.08s}
+/* stamp celebration */
+.stampfx{position:fixed;inset:0;z-index:60;display:grid;place-items:center;pointer-events:none;background:radial-gradient(circle,rgba(255,248,230,.85),rgba(255,248,230,0) 70%);animation:fxBg 1.9s var(--soft) both}
+@keyframes fxBg{0%{opacity:0}12%{opacity:1}75%{opacity:1}100%{opacity:0}}
+.stampfx .s{width:210px;height:210px;border-radius:50%;border:6px double var(--red);color:var(--red);display:grid;place-items:center;text-align:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;line-height:1.05;background:rgba(255,253,247,.92);animation:slam .65s var(--spring) both;box-shadow:0 10px 40px rgba(212,83,47,.25)}
+.stampfx .s b{display:block;font-size:44px}.stampfx .s span{display:block;font-size:15px;letter-spacing:.12em;text-transform:uppercase}.stampfx .s i{display:block;font-style:normal;font-size:13px;color:var(--ink);margin-top:6px;max-width:150px}
+@keyframes slam{0%{transform:scale(3) rotate(-30deg);opacity:0}60%{transform:scale(.92) rotate(-10deg);opacity:1}100%{transform:scale(1) rotate(-12deg)}}
+/* tap card -> photo grows into the sheet (Airbnb) / filter -> cards glide to new places */
+::view-transition-group(hero-art){animation-duration:.55s;animation-timing-function:cubic-bezier(.2,.9,.1,1)}
+::view-transition-old(hero-art),::view-transition-new(hero-art){height:100%;object-fit:cover}
+html.morph::view-transition-old(root){animation:none}
+html.morph::view-transition-new(root){animation:fadeQ .3s var(--soft) both}
+@keyframes fadeQ{from{opacity:0}}
+html.morph .sheet{animation:none}
+html.reflow #spotList .card{view-transition-name:var(--vt)}
+html.reflow .chip.on{view-transition-name:chipon}
+html.reflow::view-transition-old(root){animation:none;display:none}
+html.reflow::view-transition-new(root){animation:none}
+html.reflow::view-transition-group(*){animation-duration:.5s;animation-timing-function:cubic-bezier(.2,.9,.1,1)}
+/* scroll-linked (Apple, Airbnb): hero sinks away, cards rise in, photos drift */
+@supports (animation-timeline: view()){
+ .hero .rank{animation:rankIn 1s var(--spring) both,heroOut linear both;animation-timeline:auto,scroll(root);animation-range:normal,0px 460px}
+ @keyframes heroOut{to{transform:rotate(-1deg) translateY(50px) scale(.88);opacity:.3;filter:blur(2px)}}
+ #spotList .card{animation:cardIn linear both;animation-timeline:view();animation-range:entry 0% entry 85%}
+ @keyframes cardIn{from{opacity:0;transform:translateY(70px) scale(.88) rotate(-3deg)}}
+ #spotList .card .art img,#spotList .card .art svg{animation:drift linear both;animation-timeline:view();scale:1.18}
+ @keyframes drift{from{translate:0 -9%}to{translate:0 9%}}
+ .quick a{animation:tileIn linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+ .quick a:nth-child(2){animation-range:entry 10% entry 100%}.quick a:nth-child(3){animation-range:entry 20% entry 100%}
+ @keyframes tileIn{from{opacity:0;transform:translateY(40px) rotate(4deg)}}
+}
+@media (prefers-reduced-motion:reduce){.rank,.rank h1 em .w,.sticker,.hero .avatar,.hero .bubble,#spotList .card,#spotList .card .art img,#spotList .card .art svg,.quick a,.stampfx,.stampfx .s,nav.tabs a.on .e{animation:none!important}.rank h1 s{background-size:100% 4px;animation:none}nav.tabs.hide{transform:none}}
 </style>
 </head>
 <body>
@@ -976,7 +1039,7 @@ function renderHome(){
   document.getElementById("chips").innerHTML=CHIPS.map(c=>`<button class="chip ${filter===c.k?"on":""}" data-k="${c.k}">${c.l}</button>`).join("");
   let list=SPOTS.filter(inFilter);if(!list.length){filter="all";list=SPOTS}
   document.getElementById("spotList").innerHTML=list.map(s=>`
-   <div class="card" data-id="${s.id}">
+   <div class="card" data-id="${s.id}" style="--vt:c-${s.id}">
     <div class="art">${art(s)}<span class="badge">${s.season}</span>${stamps.includes(s.id)?'<span class="vis">✓ Been here!</span>':""}</div>
     <div class="body"><h3>${s.name}</h3><div class="area">📍 ${s.area}</div>
      <div class="kaho-says"><div class="mini">${AVATAR}</div><div class="txt hand">${s.kaho}</div></div>
@@ -1417,6 +1480,45 @@ sh.addEventListener("pointerdown",e=>{if(sh.scrollTop>0||e.target.closest("a,but
 sh.addEventListener("pointermove",e=>{if(y0===null)return;dy=Math.max(0,e.clientY-y0);if(dy>4){sh.style.transition="none";sh.style.transform=`translateY(${dy}px)`}});
 const up=()=>{if(y0===null)return;const v=dy/Math.max(1,performance.now()-t0);y0=null;sh.style.transition="";if(dy>120||v>.6)closeSheet();else{sh.style.transition="transform .45s var(--spring)";sh.style.transform="";setTimeout(()=>sh.style.transition="",450)}};
 sh.addEventListener("pointerup",up);sh.addEventListener("pointercancel",up);
+})();
+/* ===== Motion 2 JS ===== */
+(()=>{
+const RM=matchMedia("(prefers-reduced-motion: reduce)"),VT=!!document.startViewTransition;
+// hero: split "best-kept secret" into words that jump up one by one
+const em=document.querySelector(".rank h1 em");
+if(em&&!em.dataset.split){em.dataset.split=1;em.innerHTML=em.textContent.split(" ").map((w,i)=>`<span class="w" style="--i:${i}">${w}</span>`).join(" ")}
+// tab bar hides when you scroll down, comes back when you scroll up
+const tabs=document.querySelector("nav.tabs");let lastY=scrollY,acc=0;
+addEventListener("scroll",()=>{const y=scrollY,d=y-lastY;lastY=y;if(RM.matches||!tabs)return;acc=(Math.sign(d)===Math.sign(acc))?acc+d:d;
+  if(y<80||acc<-24)tabs.classList.remove("hide");else if(acc>40&&!document.getElementById("sheetBg").classList.contains("on"))tabs.classList.add("hide")},{passive:true});
+// skeleton shimmer until each photo is loaded
+function shimmer(root){(root||document).querySelectorAll(".art img").forEach(img=>{const a=img.parentElement;if(img.complete&&img.naturalWidth)return;a.classList.add("ld");const done=()=>a.classList.remove("ld");img.addEventListener("load",done,{once:true});img.addEventListener("error",done,{once:true})})}
+shimmer();
+const list=document.getElementById("spotList");
+if(list)new MutationObserver(()=>shimmer(list)).observe(list,{childList:true});
+// filter chips: cards glide to their new places
+document.addEventListener("click",e=>{
+  const chip=e.target.closest(".chip[data-k]");if(!chip||!chip.closest("#chips")||!VT||RM.matches)return;
+  e.stopPropagation();const k=chip.dataset.k;const de=document.documentElement;de.classList.add("reflow");
+  const t=document.startViewTransition(()=>{filter=k;renderHome()});t.finished.finally(()=>de.classList.remove("reflow"));
+},true);
+// tap a spot card: its photo grows into the detail sheet
+document.addEventListener("click",e=>{
+  const card=e.target.closest("#spotList .card[data-id]");if(!card||!VT||RM.matches)return;
+  e.stopPropagation();const art=card.querySelector(".art"),de=document.documentElement;
+  art.style.viewTransitionName="hero-art";de.classList.add("morph");
+  const t=document.startViewTransition(()=>{art.style.viewTransitionName="";openSpot(card.dataset.id);const sa=document.querySelector("#sheet .art");if(sa)sa.style.viewTransitionName="hero-art"});
+  t.finished.finally(()=>{de.classList.remove("morph");const sa=document.querySelector("#sheet .art");if(sa)sa.style.viewTransitionName=""});
+},true);
+// stamp get: big stamp slams down (plus the old confetti)
+document.addEventListener("click",e=>{
+  const st=e.target.closest("[data-stamp]");if(!st||stamps.includes(st.dataset.stamp))return;
+  const s=SPOTS.find(x=>x.id===st.dataset.stamp);if(!s)return;
+  if(navigator.vibrate)try{navigator.vibrate([18,40,30])}catch(_){}
+  if(RM.matches)return;
+  const fx=document.createElement("div");fx.className="stampfx";fx.innerHTML=`<div class="s"><div><span>Stamp</span><b>GET!</b><i>${s.name}</i></div></div>`;
+  document.body.appendChild(fx);setTimeout(()=>fx.remove(),1950);
+},true);
 })();
 /* PWA: offline + install */
 (function(){
