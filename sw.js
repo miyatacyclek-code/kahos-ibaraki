@@ -1,6 +1,6 @@
 // Offline support: keeps the app working without internet.
 // When you update the app, change the version number below.
-const CACHE = "kaho-ibaraki-v80";
+const CACHE = "kaho-ibaraki-v81";
 const FILES = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./photos/seaside-nemophila.jpg", "./photos/kochia.jpg", "./photos/fukuroda.jpg", "./photos/nakaminato.jpg", "./photos/tsukubasan.jpg", "./photos/oarai.jpg", "./photos/ushiku.jpg", "./photos/kasama.jpg", "./photos/kaho.jpg", "./photos/marukuni.jpg"];
 
 self.addEventListener("install", e => {
@@ -16,7 +16,7 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   e.respondWith(
-    fetch(e.request)
+    fetch(e.request, (e.request.mode === "navigate" || e.request.destination === "document") ? {cache: "no-cache"} : undefined)
       .then(res => {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
